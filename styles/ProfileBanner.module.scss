@@ -1,0 +1,37 @@
+@import "_variables.scss";
+
+.container {
+  width: 100%;
+  position: relative;
+  height: 350px;
+}
+
+.banner {
+  height: 275px;
+  width: 100%;
+  object-fit: cover;
+  display: inline-block;
+  position: relative;
+  z-index: -1;
+  &::after {
+    content: "";
+    background-color: red;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+  }
+}
+
+.profilePhoto {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -75px;
+  left: 0;
+  outline: 4px solid $background;
+}

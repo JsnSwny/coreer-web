@@ -1,0 +1,19 @@
+@import "_variables.scss";
+
+.container {
+  margin-top: 1.5rem;
+}
+
+.title {
+  font-size: 28px;
+}
+
+.subtitle {
+  margin-top: 0.25rem;
+}
+
+.bio {
+  margin-top: 1rem;
+  max-width: 550px;
+  color: $dark-light;
+}

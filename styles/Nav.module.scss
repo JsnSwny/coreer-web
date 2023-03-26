@@ -8,11 +8,12 @@
     margin-top: 3rem;
   }
   &__item {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
   }
   &__link {
     display: flex;
     align-items: center;
+    font-size: 14px;
   }
 }
 
@@ -20,8 +21,16 @@
   font-weight: bold;
 }
 
+.iconWrapper {
+  width: 45px;
+}
+
 .icon {
-  height: 24px;
+  height: 25px;
+  color: rgba($black, 0.75);
+  margin-right: 1.25rem;
+}
+
+.iconActive {
   color: $black;
-  margin-right: 1.5rem;
 }

@@ -1,6 +1,10 @@
 import React from "react";
 import { Profile } from "../../../interfaces/profile.model";
 import { server } from "@/config";
+import Image from "next/image";
+import ProfileBanner from "@/components/ProfileBanner";
+import Container from "@/components/Container";
+import ProfileBio from "@/components/ProfileBio";
 
 interface ProfileProps {
   profile: Profile;
@@ -9,7 +13,13 @@ interface ProfileProps {
 const profile = ({ profile }: ProfileProps) => {
   return (
     <div>
-      {profile.first_name} {profile.last_name}
+      <ProfileBanner />
+      <Container>
+        <ProfileBio
+          first_name={profile.first_name}
+          last_name={profile.last_name}
+        />
+      </Container>
     </div>
   );
 };
