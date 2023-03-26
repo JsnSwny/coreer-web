@@ -1,0 +1,12 @@
+@import "./variables";
+
+.title {
+  color: $primary;
+}
+
+.header {
+  background-color: white;
+  padding: 1rem 0;
+  flex: 1;
+  height: 60px;
+}

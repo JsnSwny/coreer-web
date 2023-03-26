@@ -1,0 +1,13 @@
+@import "./variables";
+
+.sidebar {
+  width: 275px;
+  background-color: white;
+  padding: 1.75rem;
+  border-right: 1px solid $stroke;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
