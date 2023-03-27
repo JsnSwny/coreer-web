@@ -1,0 +1,34 @@
+@import "@/styles/_variables.scss";
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  transition: 0.4s ease background-color;
+  &:hover {
+    background-color: darken(#f4f7ff, 1.5%);
+  }
+}
+
+.image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+}
+
+.leftWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  background: $primary;
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  font-weight: bold;
+}

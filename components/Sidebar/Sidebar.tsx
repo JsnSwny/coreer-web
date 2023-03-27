@@ -1,9 +1,9 @@
-import styles from "@/styles/Sidebar.module.scss";
+import styles from "./Sidebar.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { faComment } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import NavLinks from "./NavLinks";
+import NavLinks from "../Header/NavLinks/NavLinks";
 
 const Sidebar = () => {
   return (

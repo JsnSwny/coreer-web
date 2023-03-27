@@ -1,5 +1,5 @@
-import styles from "@/styles/ProfileBanner.module.scss";
-import Container from "./Container";
+import styles from "./ProfileBanner.module.scss";
+import Container from "../../Container/Container";
 
 const ProfileBanner = () => {
   return (

@@ -1,0 +1,12 @@
+@import "@/styles/_variables.scss";
+
+.topContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.divider {
+  border: none;
+  border-bottom: 1px solid $stroke;
+  margin: 1.5rem 0;
+}

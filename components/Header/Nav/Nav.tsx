@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "@/styles/Nav.module.scss";
-import NavLinks from "./NavLinks";
+import styles from "./Nav.module.scss";
+import NavLinks from "../NavLinks/NavLinks";
 
 interface NavProps {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ interface NavProps {
 
 const Nav = ({ children }: NavProps) => {
   return (
-    <nav className={styles.nav}>
+    <nav className={styles.container}>
       {children}
       <NavLinks />
     </nav>

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import styles from "@/styles/Nav.module.scss";
+import styles from "./NavItem.module.scss";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -17,10 +17,10 @@ const NavItem = ({ link, icon, activeIcon, title }: NavItemProps) => {
   const isActive = router.asPath == link;
 
   return (
-    <li className={styles.nav__item}>
+    <li className={styles.container}>
       <Link
         href={link}
-        className={`${styles.nav__link} ${isActive ? styles.active : ""}`}
+        className={`${styles.link} ${isActive ? styles.active : ""}`}
       >
         <div className={styles.iconWrapper}>
           <FontAwesomeIcon

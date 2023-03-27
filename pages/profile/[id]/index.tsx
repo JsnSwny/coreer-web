@@ -2,12 +2,13 @@ import React from "react";
 import { Profile } from "../../../interfaces/profile.model";
 import { server } from "@/config";
 import Image from "next/image";
-import ProfileBanner from "@/components/ProfileBanner";
-import Container from "@/components/Container";
-import ProfileBio from "@/components/ProfileBio";
-import Suggestions from "@/components/Suggestions";
-import styles from "@/styles/Profile.module.scss";
-import ProfileSection from "@/components/ProfileSection";
+import ProfileBanner from "@/components/Profile/Banner/ProfileBanner";
+import Container from "@/components/Container/Container";
+import ProfileBio from "@/components/Profile/Bio/ProfileBio";
+import Suggestions from "@/components/Suggestions/Suggestions/Suggestions";
+import styles from "@/components/Profile/Profile.module.scss";
+import ProfileSection from "@/components/Profile/Section/ProfileSection";
+import Head from "next/head";
 
 interface ProfileProps {
   profile: Profile;
@@ -15,19 +16,24 @@ interface ProfileProps {
 
 const profile = ({ profile }: ProfileProps) => {
   return (
-    <div>
-      <ProfileBanner />
-      <Container>
-      <div className={styles.topContainer}>
-        <ProfileBio
-          user={profile}
-        />
-        <Suggestions user={profile} />
+    <>
+      <Head>
+        <title>{`${profile.first_name} ${profile.last_name} | coreer`}</title>
+      </Head>
+      <div>
+        <ProfileBanner />
+        <Container>
+          <div className={styles.topContainer}>
+            <ProfileBio user={profile} />
+            <Suggestions user={profile} />
+          </div>
+          <hr className={styles.divider} />
+          <ProfileSection title={"Projects"}>
+            <h3>Projects</h3>
+          </ProfileSection>
+        </Container>
       </div>
-      <hr className={styles.divider} />
-      <ProfileSection title={"Projects"}><h3>Projects</h3></ProfileSection>
-      </Container>
-    </div>
+    </>
   );
 };
 
