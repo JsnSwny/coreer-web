@@ -1,27 +1,39 @@
 @import "@/styles/_variables.scss";
 
 .container {
-  margin-bottom: 2rem;
+  margin: 0 1rem;
+
+  margin-bottom: 0.25rem;
 }
 
 .link {
+  padding: 1rem 1rem;
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 14px;
+  transition: 0.2s ease background-color;
+  border-radius: 15px;
+  &:hover {
+    background-color: lighten(rgb(239, 239, 239), 2.5%);
+  }
 }
 
 .active {
   font-weight: bold;
+  background-color: rgb(239, 239, 239);
 }
 
 .iconWrapper {
-  width: 45px;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.75rem;
 }
 
 .icon {
-  height: 25px;
+  height: 20px;
   color: rgba($black, 0.75);
-  margin-right: 1.25rem;
 }
 
 .iconActive {

@@ -17,7 +17,7 @@ const NavItem = ({ link, icon, activeIcon, title }: NavItemProps) => {
   const isActive = router.asPath == link;
 
   return (
-    <li className={styles.container}>
+    <li className={`${styles.container}`}>
       <Link
         href={link}
         className={`${styles.link} ${isActive ? styles.active : ""}`}

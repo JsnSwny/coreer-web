@@ -8,7 +8,7 @@ import NavLinks from "../Header/NavLinks/NavLinks";
 const Sidebar = () => {
   return (
     <div className={styles.sidebar}>
-      <p className={styles.title}>coreer</p>
+      <p className={styles.title}>coreer.</p>
       <NavLinks />
     </div>
   );
