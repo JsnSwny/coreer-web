@@ -1,0 +1,25 @@
+@import "@/styles/_variables.scss";
+
+.container {
+  width: calc(100% / 3);
+}
+
+.image {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.title {
+  margin-top: 0.5rem;
+  font-size: 18px;
+}
+
+.date {
+  color: $dark-light;
+  font-size: 14px;
+  margin-top: 0.25rem;
+}
+
+.description {
+  margin-top: 0.5rem;
+}

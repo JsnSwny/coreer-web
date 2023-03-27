@@ -11,7 +11,7 @@ const ProfileBanner = () => {
       <Container>
         <img
           className={styles.profilePhoto}
-          src="https://images.pexels.com/photos/5119214/pexels-photo-5119214.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          src="https://media.licdn.com/dms/image/C5603AQGIOaYx13z5qg/profile-displayphoto-shrink_800_800/0/1636068317262?e=1685577600&v=beta&t=TtixrGFDFMlOst8NsDdxMFii0w_dEPyNSucaUPfFQqo"
         />
       </Container>
     </div>

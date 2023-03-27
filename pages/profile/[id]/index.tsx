@@ -9,6 +9,7 @@ import Suggestions from "@/components/Suggestions/Suggestions/Suggestions";
 import styles from "@/components/Profile/Profile.module.scss";
 import ProfileSection from "@/components/Profile/Section/ProfileSection";
 import Head from "next/head";
+import Projects from "@/components/Profile/Projects/Projects/Projects";
 
 interface ProfileProps {
   profile: Profile;
@@ -29,7 +30,7 @@ const profile = ({ profile }: ProfileProps) => {
           </div>
           <hr className={styles.divider} />
           <ProfileSection title={"Projects"}>
-            <h3>Projects</h3>
+            <Projects />
           </ProfileSection>
         </Container>
       </div>
