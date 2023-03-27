@@ -3,11 +3,12 @@
 .container {
   background: $primary;
   border: none;
-  padding: 0.9rem 3rem;
+  padding: 0.8rem 3rem;
   border-radius: 10px;
   color: white;
   font: inherit;
   font-weight: bold;
+  font-size: 14px;
   transition: 0.2s ease background;
   cursor: pointer;
   &:hover {

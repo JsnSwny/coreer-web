@@ -1,0 +1,12 @@
+@import "@/styles/_variables.scss";
+
+.container {
+  list-style-type: none;
+  border: 1px solid $primary;
+  background: rgba($primary, 0.05);
+  padding: 0.5rem 1rem;
+  font-size: 10px;
+  border-radius: 5px;
+  color: $primary;
+  font-family: "Consolas";
+}

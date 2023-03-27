@@ -1,6 +1,7 @@
 import styles from "./Project.module.scss";
 import { Project } from "@/interfaces/project.model";
 import { format } from "date-fns";
+import TagsList from "@/components/Tags/TagsList/TagsList";
 
 interface ProjectProps {
   project: Project;
@@ -19,6 +20,7 @@ const Project = ({ project }: ProjectProps) => {
         {format(project.end_date, "dd/mm/yyyy")}
       </p>
       <p className={styles.description}>{project.description}</p>
+      <TagsList tags={project.tags} />
     </div>
   );
 };

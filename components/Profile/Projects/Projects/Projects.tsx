@@ -9,6 +9,7 @@ const Projects = () => {
     end_date: new Date(),
     description:
       "Lorem ipsum dolor sit amet consectetur. Tempor dui vulputate netus facilisis vel.",
+    tags: [{ text: "Python" }, { text: "JavaScript" }, { text: "React" }],
   };
 
   return (
