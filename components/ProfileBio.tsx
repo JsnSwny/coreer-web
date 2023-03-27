@@ -2,23 +2,23 @@ import styles from "@/styles/ProfileBio.module.scss";
 import Head from "next/head";
 import Button from "./Button";
 import Link from "next/link";
+import { Profile } from "@/interfaces/profile.model";
 
 interface ProfileBioProps {
-  first_name: string;
-  last_name: string;
+  user: Profile;
 }
 
-const ProfileBio = ({ first_name, last_name }: ProfileBioProps) => {
+const ProfileBio = ({user}: ProfileBioProps) => {
   return (
     <>
       <Head>
         <title>
-          {first_name} {last_name} | coreer
+          {user.first_name} {user.last_name} | coreer
         </title>
       </Head>
       <section className={styles.container}>
         <h1 className={styles.title}>
-          {first_name} {last_name}
+          {user.first_name} {user.last_name}
         </h1>
         <p className={styles.subtitle}>Web Developer</p>
         <div className={styles.bio}>
@@ -33,7 +33,6 @@ const ProfileBio = ({ first_name, last_name }: ProfileBioProps) => {
         <Link href={`/message/1`} className={styles.cta}>
           <Button text={"Message"} />
         </Link>
-        
       </section>
     </>
   );

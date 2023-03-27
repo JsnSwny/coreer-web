@@ -5,6 +5,8 @@ import Image from "next/image";
 import ProfileBanner from "@/components/ProfileBanner";
 import Container from "@/components/Container";
 import ProfileBio from "@/components/ProfileBio";
+import Suggestions from "@/components/Suggestions";
+import styles from "@/styles/Profile.module.scss";
 
 interface ProfileProps {
   profile: Profile;
@@ -15,10 +17,14 @@ const profile = ({ profile }: ProfileProps) => {
     <div>
       <ProfileBanner />
       <Container>
+      <div className={styles.topContainer}>
         <ProfileBio
-          first_name={profile.first_name}
-          last_name={profile.last_name}
+          user={profile}
         />
+        <Suggestions user={profile} />
+      </div>
+      <hr className={styles.divider} />
+
       </Container>
     </div>
   );
