@@ -1,19 +1,25 @@
 @import "_variables.scss";
 
 .container {
-  margin-top: 1.5rem;
+	margin-top: 1.5rem;
 }
 
 .title {
-  font-size: 28px;
+	font-size: 28px;
 }
 
 .subtitle {
-  margin-top: 0.25rem;
+	margin-top: 0.25rem;
 }
 
 .bio {
-  margin-top: 1rem;
-  max-width: 550px;
-  color: $dark-light;
+	margin-top: 1rem;
+	max-width: 550px;
+	color: $dark-light;
+}
+
+.cta {
+	margin-top: 2rem;
+	display: inline-block;
+	font: inherit;
 }

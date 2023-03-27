@@ -1,5 +1,7 @@
 import styles from "@/styles/ProfileBio.module.scss";
 import Head from "next/head";
+import Button from "./Button";
+import Link from "next/link";
 
 interface ProfileBioProps {
   first_name: string;
@@ -28,6 +30,10 @@ const ProfileBio = ({ first_name, last_name }: ProfileBioProps) => {
             duis phasellus. Commodo.
           </p>
         </div>
+        <Link href={`/message/1`} className={styles.cta}>
+          <Button text={"Message"} />
+        </Link>
+        
       </section>
     </>
   );
