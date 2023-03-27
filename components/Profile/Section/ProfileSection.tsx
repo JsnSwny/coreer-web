@@ -8,7 +8,7 @@ interface ProfileSectionProps {
 
 const ProfileSection = ({ title, children }: ProfileSectionProps) => {
   return (
-    <section>
+    <section className={styles.container}>
       <h2 className={styles.title}>{title}</h2>
       {children}
     </section>

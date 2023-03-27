@@ -1,0 +1,31 @@
+@import "@/styles/_variables.scss";
+
+.card {
+  display: flex;
+  gap: 0.75rem;
+  width: calc(100% / 3);
+}
+
+.date {
+  color: $dark-light;
+  font-size: 12px;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  margin-top: 0.4rem;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.image {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+}
+
+.body {
+  margin-top: 1rem;
+  line-height: 1.3rem;
+  font-size: 14px;
+}
