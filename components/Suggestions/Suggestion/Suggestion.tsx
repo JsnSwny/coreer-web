@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./Suggestion.module.scss";
+import Button from "@/components/Button/Button";
 
 const Suggestion = () => {
   return (
@@ -14,7 +15,7 @@ const Suggestion = () => {
           <p className={styles.subtitle}>Web Developer</p>
         </div>
       </div>
-      <button className={styles.button}>View</button>
+      <Button text={"View"} variant="pill" />
     </Link>
   );
 };

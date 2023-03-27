@@ -1,9 +1,5 @@
 @import "@/styles/_variables.scss";
 
-.container {
-  margin-top: 1.5rem;
-}
-
 .title {
   font-size: 28px;
 }
@@ -15,14 +11,14 @@
 }
 
 .bio {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   max-width: 550px;
   color: $dark-light;
   line-height: 1.4rem;
 }
 
 .cta {
-  margin-top: 3rem;
+  margin-top: 2.25rem;
   display: inline-block;
   font: inherit;
 }
