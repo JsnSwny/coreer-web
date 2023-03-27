@@ -10,8 +10,8 @@ const Suggestion = () => {
           src="https://images.pexels.com/photos/5119214/pexels-photo-5119214.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         />
         <div className={styles.content}>
-          <h4>Jane Doe</h4>
-          <p>Web Developer</p>
+          <h4 className={styles.title}>Jane Doe</h4>
+          <p className={styles.subtitle}>Web Developer</p>
         </div>
       </div>
       <button className={styles.button}>View</button>
