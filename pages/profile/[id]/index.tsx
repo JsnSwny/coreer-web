@@ -7,6 +7,7 @@ import Container from "@/components/Container";
 import ProfileBio from "@/components/ProfileBio";
 import Suggestions from "@/components/Suggestions";
 import styles from "@/styles/Profile.module.scss";
+import ProfileSection from "@/components/ProfileSection";
 
 interface ProfileProps {
   profile: Profile;
@@ -24,7 +25,7 @@ const profile = ({ profile }: ProfileProps) => {
         <Suggestions user={profile} />
       </div>
       <hr className={styles.divider} />
-
+      <ProfileSection title={"Projects"}><h3>Projects</h3></ProfileSection>
       </Container>
     </div>
   );
