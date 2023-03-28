@@ -12,23 +12,26 @@ import Head from "next/head";
 import Projects from "@/components/Profile/Projects/Projects/Projects";
 import CardList from "@/components/Card/CardList/CardList";
 import Card from "@/components/Card/Card/Card";
+import LanguageList from "@/components/Profile/Languages/LanguageList/LanguageList";
+import Language from "@/components/Profile/Languages/Language/Language";
 
 interface ProfileProps {
   profile: Profile;
+  recommend: Profile[];
 }
 
-const profile = ({ profile }: ProfileProps) => {
+const profile = ({ profile, recommend }: ProfileProps) => {
   return (
     <>
       <Head>
         <title>{`${profile.first_name} ${profile.last_name} | coreer`}</title>
       </Head>
       <div>
-        <ProfileBanner />
+        <ProfileBanner photo={profile.profile_photo} />
         <Container>
           <div className={styles.topContainer}>
             <ProfileBio user={profile} />
-            <Suggestions user={profile} />
+            <Suggestions user={profile} suggestions={recommend} />
           </div>
           <hr className={styles.divider} />
           <ProfileSection title={"Projects"}>
@@ -64,15 +67,59 @@ const profile = ({ profile }: ProfileProps) => {
 
           <hr className={styles.divider} />
 
-          <ProfileSection title={"Languages and Tools"}>
-            {/* <LanguageList>
-              <Language
+          <ProfileSection title={"Skills"}>
+            <LanguageList
+              languages={[
+                {
+                  type: "language",
+                  image:
+                    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+                  text: "React",
+                },
+                {
+                  type: "language",
+                  image:
+                    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+                  text: "JavaScript",
+                },
+                {
+                  type: "language",
+                  image:
+                    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+                  text: "JavaScript",
+                },
+                {
+                  type: "language",
+                  image:
+                    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+                  text: "JavaScript",
+                },
+                {
+                  type: "language",
+                  image:
+                    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+                  text: "JavaScript",
+                },
+                {
+                  type: "language",
+                  image:
+                    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+                  text: "JavaScript",
+                },
+              ]}
+            />
+          </ProfileSection>
+
+          <hr className={styles.divider} />
+          <ProfileSection title={"Reviews"}>
+            <CardList>
+              <Card
                 image="http://www.gurunepal.com/wp-content/uploads/2020/05/heriot-watt-1-1.png"
-                title="Heriot-Watt University"
-                subtitle="BSc Computer Science"
-                body="Lorem ipsum dolor sit amet consectetur. Tempor dui vulputate netus facilisis vel."
+                title="Sarah Wilson"
+                subtitle="Web Developer @ Microsoft"
+                body="John is a brilliant machine learning engineer who consistently delivers high-quality work. He is an excellent team player who is always willing to help his colleagues and share his knowledge with them.”"
               />
-            </LanguageList> */}
+            </CardList>
           </ProfileSection>
         </Container>
       </div>
@@ -80,30 +127,60 @@ const profile = ({ profile }: ProfileProps) => {
   );
 };
 
-export const getStaticProps = async (context: any) => {
+export const getServerSideProps = async (context: any) => {
   const res = await fetch(`${server}/api/profiles/${context?.params?.id}`);
-
   const profile = await res.json();
+
+  const recommendationsRes = await fetch(
+    `${server}/recommend/${context?.params?.id}/4`
+  );
+
+  let recommend = await recommendationsRes.json();
 
   return {
     props: {
       profile,
+      recommend: recommend.recommendations,
     },
   };
 };
 
-export const getStaticPaths = async () => {
-  const res = await fetch(`${server}/api/profiles`);
+// export const getStaticProps = async (context: any) => {
+//   const res = await fetch(`${server}/api/profiles/${context?.params?.id}`);
+//   const profile = await res.json();
 
-  const profiles = await res.json();
+//   const recommendationsRes = await fetch(
+//     `${server}/recommend/${context?.params?.id}`
+//   );
 
-  const ids = profiles.map((profile: Profile) => profile.id);
-  const paths = ids.map((id: number) => ({ params: { id: id.toString() } }));
+//   let recommend = await recommendationsRes.json();
 
-  return {
-    paths,
-    fallback: false,
-  };
-};
+//   return {
+//     props: {
+//       profile,
+//       recommend: recommend.recommendations,
+//     },
+//   };
+// };
+
+// export const getStaticPaths = async () => {
+//   console.log("Getting profiles");
+//   const res = await fetch(`${server}/api/profiles`);
+
+//   const profiles = await res.json();
+
+//   console.log("Got profiles");
+
+//   const ids = profiles.map((profile: Profile) => profile.id);
+
+//   console.log(ids.length);
+
+//   const paths = ids.map((id: number) => ({ params: { id: id.toString() } }));
+
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// };
 
 export default profile;

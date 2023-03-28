@@ -15,15 +15,9 @@ const ProfileBio = ({ user }: ProfileBioProps) => {
         <h1 className={styles.title}>
           {user.first_name} {user.last_name}
         </h1>
-        <p className={styles.subtitle}>Web Developer</p>
+        <p className={styles.subtitle}>{user.job}</p>
         <div className={styles.bio}>
-          <p>
-            Lorem ipsum dolor sit amet consectetur. Elementum blandit aliquam
-            ante sed aliquam risus ut tempus sapien. Quam sit enim tellus leo
-            parturient lacus at cursus fusce. Nam lectus vestibulum porta
-            porttitor facilisi dolor et amet. Ac vel cum sollicitudin varius
-            duis phasellus. Commodo.
-          </p>
+          <p>{user.bio}</p>
         </div>
         <Link href={`/message/1`} className={styles.cta}>
           <Button text={"Message"} />

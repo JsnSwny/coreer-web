@@ -4,15 +4,18 @@ import { Profile } from "@/interfaces/profile.model";
 
 interface SuggestionsProps {
   user: Profile;
+  suggestions: Profile[];
 }
 
-const Suggestions = ({ user }: SuggestionsProps) => {
+const Suggestions = ({ user, suggestions = [] }: SuggestionsProps) => {
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>Similar to {user.first_name}</h3>
-      <Suggestion />
-      <Suggestion />
-      <Suggestion />
+      <ul>
+        {suggestions.slice(0, 3).map((item) => (
+          <Suggestion profile={item} />
+        ))}
+      </ul>
     </div>
   );
 };

@@ -1,15 +1,18 @@
 import styles from "./Language.module.scss";
+import { Skill } from "@/interfaces/language.model";
 
 interface LanguageProps {
-  image: string;
-  text: string;
+  language: Skill;
 }
 
-const Language = ({ image, text }: LanguageProps) => {
+const Language = ({ language }: LanguageProps) => {
   return (
-    <div>
-      <img src={image} />
-      <h4>{text}</h4>
+    <div className={styles.skill}>
+      <div className={styles.imageContainer}>
+        <img className={styles.image} src={language.image} />
+      </div>
+
+      <h4 className={styles.text}>{language.text}</h4>
     </div>
   );
 };
