@@ -12,7 +12,7 @@ const LanguageList = ({ languages }: LanguageListProps) => {
     <div>
       <ul className={styles.skills}>
         {languages.map((item) => (
-          <Language key={item.text} language={item} />
+          <Language key={item.name} language={item} />
         ))}
       </ul>
     </div>

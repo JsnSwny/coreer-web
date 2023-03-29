@@ -6,6 +6,8 @@ interface TagsListProps {
 }
 
 const TagsList = ({ tags }: TagsListProps) => {
+  console.log(`Tags`)
+  console.log(tags)
   return (
     <ul className={styles.container}>
       {tags.map((tag) => (

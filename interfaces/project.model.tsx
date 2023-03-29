@@ -1,4 +1,5 @@
 import { Tag } from "./tag.model";
+import { Skill } from "./language.model";
 
 export interface Project {
   id: number;
@@ -6,5 +7,6 @@ export interface Project {
   start_date: Date;
   end_date: Date;
   description: string;
-  tags: Tag[];
+  languages: Skill[];
+  image: string;
 }

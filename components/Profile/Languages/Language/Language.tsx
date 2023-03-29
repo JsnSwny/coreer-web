@@ -12,7 +12,7 @@ const Language = ({ language }: LanguageProps) => {
         <img className={styles.image} src={language.image} />
       </div>
 
-      <h4 className={styles.text}>{language.text}</h4>
+      <h4 className={styles.text}>{language.name}</h4>
     </div>
   );
 };

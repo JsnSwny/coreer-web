@@ -1,22 +1,16 @@
 import styles from "./Projects.module.scss";
 import Project from "../Project/Project";
+import { Project as ProjectModel } from "@/interfaces/project.model";
 
-const Projects = () => {
-  const project = {
-    id: 1,
-    title: "coreer",
-    start_date: new Date(),
-    end_date: new Date(),
-    description:
-      "Lorem ipsum dolor sit amet consectetur. Tempor dui vulputate netus facilisis vel.",
-    tags: [{ text: "Python" }, { text: "JavaScript" }, { text: "React" }],
-  };
+interface ProjectsProps {
+  projects: ProjectModel[]
+}
 
+const Projects = ({projects}: ProjectsProps) => {
+  console.log(projects)
   return (
     <div className={styles.container}>
-      <Project project={project} />
-      <Project project={project} />
-      <Project project={project} />
+      {projects.map(project => <Project project={project} />)}
     </div>
   );
 };

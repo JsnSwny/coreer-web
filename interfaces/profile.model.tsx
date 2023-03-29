@@ -1,3 +1,5 @@
+import { Project } from "./project.model";
+
 export interface Profile {
   id: number;
   first_name: string;
@@ -5,4 +7,5 @@ export interface Profile {
   bio: string;
   job: string;
   profile_photo: string;
+  projects: Project[];
 }

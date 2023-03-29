@@ -35,7 +35,7 @@ const profile = ({ profile, recommend }: ProfileProps) => {
           </div>
           <hr className={styles.divider} />
           <ProfileSection title={"Projects"}>
-            <Projects />
+            <Projects projects={profile.projects} />
           </ProfileSection>
           <hr className={styles.divider} />
           <ProfileSection title={"Work Experience"}>
@@ -71,40 +71,34 @@ const profile = ({ profile, recommend }: ProfileProps) => {
             <LanguageList
               languages={[
                 {
-                  type: "language",
                   image:
                     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-                  text: "React",
+                    name: "React",
                 },
                 {
-                  type: "language",
                   image:
                     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-                  text: "JavaScript",
+                    name: "JavaScript",
                 },
                 {
-                  type: "language",
                   image:
                     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-                  text: "JavaScript",
+                    name: "JavaScript",
                 },
                 {
-                  type: "language",
                   image:
                     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-                  text: "JavaScript",
+                    name: "JavaScript",
                 },
                 {
-                  type: "language",
                   image:
                     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-                  text: "JavaScript",
+                    name: "JavaScript",
                 },
                 {
-                  type: "language",
                   image:
                     "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-                  text: "JavaScript",
+                  name: "JavaScript",
                 },
               ]}
             />
@@ -131,9 +125,12 @@ export const getServerSideProps = async (context: any) => {
   const res = await fetch(`${server}/api/profiles/${context?.params?.id}`);
   const profile = await res.json();
 
+
   const recommendationsRes = await fetch(
     `${server}/recommend/${context?.params?.id}/4`
   );
+
+  console.log(profile)
 
   let recommend = await recommendationsRes.json();
 
