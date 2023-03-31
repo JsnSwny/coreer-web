@@ -56,12 +56,14 @@ const profile = ({ profile, recommend }: ProfileProps) => {
           <hr className={styles.divider} />
           <ProfileSection title={"Education"}>
             <CardList>
-              <Card
-                image="http://www.gurunepal.com/wp-content/uploads/2020/05/heriot-watt-1-1.png"
-                title="Heriot-Watt University"
-                subtitle="BSc Computer Science"
-                body="Lorem ipsum dolor sit amet consectetur. Tempor dui vulputate netus facilisis vel."
-              />
+              {profile.educations.map(education => 
+                <Card
+                  image={education.school.logo}
+                  title={education.school.name}
+                  subtitle={education.degree}
+                  body="Lorem ipsum dolor sit amet consectetur. Tempor dui vulputate netus facilisis vel."
+                />
+              )}
             </CardList>
           </ProfileSection>
 
@@ -69,38 +71,7 @@ const profile = ({ profile, recommend }: ProfileProps) => {
 
           <ProfileSection title={"Skills"}>
             <LanguageList
-              languages={[
-                {
-                  image:
-                    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-                    name: "React",
-                },
-                {
-                  image:
-                    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-                    name: "JavaScript",
-                },
-                {
-                  image:
-                    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-                    name: "JavaScript",
-                },
-                {
-                  image:
-                    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-                    name: "JavaScript",
-                },
-                {
-                  image:
-                    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-                    name: "JavaScript",
-                },
-                {
-                  image:
-                    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-                  name: "JavaScript",
-                },
-              ]}
+              languages={profile.languages}
             />
           </ProfileSection>
 
@@ -129,8 +100,6 @@ export const getServerSideProps = async (context: any) => {
   const recommendationsRes = await fetch(
     `${server}/recommend/${context?.params?.id}/4`
   );
-
-  console.log(profile)
 
   let recommend = await recommendationsRes.json();
 

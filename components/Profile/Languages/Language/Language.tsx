@@ -8,10 +8,7 @@ interface LanguageProps {
 const Language = ({ language }: LanguageProps) => {
   return (
     <div className={styles.skill}>
-      <div className={styles.imageContainer}>
-        <img className={styles.image} src={language.image} />
-      </div>
-
+      <img className={styles.image} src={`https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/${language.icon_name.toLowerCase()}/${language.icon_name.toLowerCase()}-original.svg`} />
       <h4 className={styles.text}>{language.name}</h4>
     </div>
   );
