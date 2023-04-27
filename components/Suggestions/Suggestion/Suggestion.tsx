@@ -15,6 +15,7 @@ const Suggestion = ({ profile }: SuggestionProps) => {
         <div className={styles.content}>
           <h4 className={styles.title}>{profile.first_name}</h4>
           <p className={styles.subtitle}>{profile.job}</p>
+          <p className={styles.bio}>{profile.bio}</p>
         </div>
       </div>
       <Button text={"View"} variant="pill" />

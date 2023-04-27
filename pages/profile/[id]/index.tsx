@@ -34,6 +34,14 @@ const profile = ({ profile, recommend }: ProfileProps) => {
             <Suggestions user={profile} suggestions={recommend} />
           </div>
           <hr className={styles.divider} />
+
+          <ProfileSection title={"Skills"}>
+            <LanguageList
+              languages={profile.languages}
+            />
+          </ProfileSection>
+
+          <hr className={styles.divider} />
           <ProfileSection title={"Projects"}>
             <Projects projects={profile.projects} />
           </ProfileSection>
@@ -67,13 +75,7 @@ const profile = ({ profile, recommend }: ProfileProps) => {
             </CardList>
           </ProfileSection>
 
-          <hr className={styles.divider} />
-
-          <ProfileSection title={"Skills"}>
-            <LanguageList
-              languages={profile.languages}
-            />
-          </ProfileSection>
+          
 
           <hr className={styles.divider} />
           <ProfileSection title={"Reviews"}>
@@ -98,7 +100,7 @@ export const getServerSideProps = async (context: any) => {
 
 
   const recommendationsRes = await fetch(
-    `${server}/recommend/${context?.params?.id}/4`
+    `${server}/recommend/${context?.params?.id}/6`
   );
 
   let recommend = await recommendationsRes.json();

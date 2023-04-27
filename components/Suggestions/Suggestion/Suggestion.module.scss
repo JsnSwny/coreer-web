@@ -1,35 +1,44 @@
 @import "@/styles/_variables.scss";
 
 .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.6rem 1rem;
-  transition: 0.4s ease background-color;
-  &:hover {
-    background-color: darken(#f4f7ff, 1.5%);
-  }
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.6rem 1rem;
+	transition: 0.4s ease background-color;
+	&:hover {
+		background-color: darken(#f4f7ff, 1.5%);
+	}
 }
 
 .image {
-  width: 55px;
-  height: 55px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-right: 0.75rem;
+	width: 55px;
+	height: 55px;
+	object-fit: cover;
+	border-radius: 50%;
+	margin-right: 0.75rem;
 }
 
 .leftWrapper {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .title {
-  font-size: 16px;
+	font-size: 16px;
 }
 
 .subtitle {
-  color: $dark-light;
-  font-size: 12px;
-  margin-top: 0.25rem;
+	font-size: 12px;
+	margin-top: 0.2rem;
+}
+
+.bio {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 200px;
+	color: $dark-light;
+	font-size: 12px;
+	margin-top: 0.5rem;
 }

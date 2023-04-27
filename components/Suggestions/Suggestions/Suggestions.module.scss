@@ -1,15 +1,16 @@
 @import "@/styles/_variables.scss";
 
 .container {
-  background: #f4f7ff;
-  border: 1px solid $stroke;
-  min-width: 400px;
-  border-radius: 10px;
-  padding: 1rem 0;
+	background: #f4f7ff;
+	border: 1px solid $stroke;
+	max-width: 400px;
+	width: 100%;
+	border-radius: 10px;
+	padding: 1rem 0;
 }
 
 .title {
-  font-size: 18px;
-  margin-bottom: 1rem;
-  padding: 0 1rem;
+	font-size: 18px;
+	margin-bottom: 1rem;
+	padding: 0 1rem;
 }
