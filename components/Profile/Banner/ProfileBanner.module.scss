@@ -4,11 +4,10 @@
 	width: 100%;
 	position: relative;
 	height: 350px;
-	margin-top: 2rem;
 }
 
 .details {
-	margin-left: calc(150px + 1.5rem);
+	margin-left: calc(150px + 3rem);
 	margin-top: 0.75rem;
 }
 
@@ -20,6 +19,10 @@
 	text-transform: capitalize;
 	margin-top: 0.25rem;
 	color: $dark-light;
+}
+
+.bannerContainer {
+	position: relative;
 }
 
 .banner {

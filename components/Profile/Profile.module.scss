@@ -1,13 +1,24 @@
 @import "@/styles/_variables.scss";
 
+.container {
+	padding: 0 2rem;
+}
+
 .topContainer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1.5rem;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 1.5rem;
 }
 
 .divider {
-  border: none;
-  border-bottom: 1px solid $stroke;
-  margin: 1.5rem 0;
+	border: none;
+	border-bottom: 1px solid $stroke;
+	margin: 1.5rem 0;
+}
+
+.wrapper {
+	display: flex;
+	justify-content: space-between;
+	gap: 3rem;
+	margin-top: 2rem;
 }

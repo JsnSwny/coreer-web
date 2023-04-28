@@ -26,70 +26,74 @@ const profile = ({ profile, recommend }: ProfileProps) => {
       <Head>
         <title>{`${profile.first_name} ${profile.last_name} | coreer`}</title>
       </Head>
-      <div>
-        <ProfileBanner user={profile} />
-        <Container>
-          <div className={styles.topContainer}>
-            <ProfileBio user={profile} />
-            <Suggestions user={profile} suggestions={recommend} />
-          </div>
-          <hr className={styles.divider} />
+      <Container>
+        <div className={styles.wrapper}>
+          <div>
+          <ProfileBanner user={profile} />
+          <div className={styles.container}>
+            <div className={styles.topContainer}>
+              <ProfileBio user={profile} />
+            </div>
+            <hr className={styles.divider} />
 
-          <ProfileSection title={"Skills"}>
-            <LanguageList
-              languages={profile.languages}
-            />
-          </ProfileSection>
-
-          <hr className={styles.divider} />
-          <ProfileSection title={"Projects"}>
-            <Projects projects={profile.projects} />
-          </ProfileSection>
-          <hr className={styles.divider} />
-          <ProfileSection title={"Work Experience"}>
-            <CardList>
-              <Card
-                image="http://www.gurunepal.com/wp-content/uploads/2020/05/heriot-watt-1-1.png"
-                title="Apple"
-                subtitle="iOS Developer"
-                body="Develop and maintain iOS applications
-                  Ensure high quality and meet company standards
-                  Work on both internal and external applications
-                  Work with programming languages such as Swift and Objective-C"
-                start_date={new Date()}
-                end_date="Present"
+            <ProfileSection title={"Skills"}>
+              <LanguageList
+                languages={profile.languages}
               />
-            </CardList>
-          </ProfileSection>
-          <hr className={styles.divider} />
-          <ProfileSection title={"Education"}>
-            <CardList>
-              {profile.educations.map(education => 
+            </ProfileSection>
+
+            <hr className={styles.divider} />
+            <ProfileSection title={"Projects"}>
+              <Projects projects={profile.projects} />
+            </ProfileSection>
+            <hr className={styles.divider} />
+            <ProfileSection title={"Work Experience"}>
+              <CardList>
                 <Card
-                  image={education.school.logo}
-                  title={education.school.name}
-                  subtitle={education.degree}
-                  body="Lorem ipsum dolor sit amet consectetur. Tempor dui vulputate netus facilisis vel."
+                  image="http://www.gurunepal.com/wp-content/uploads/2020/05/heriot-watt-1-1.png"
+                  title="Apple"
+                  subtitle="iOS Developer"
+                  body="Develop and maintain iOS applications
+                    Ensure high quality and meet company standards
+                    Work on both internal and external applications
+                    Work with programming languages such as Swift and Objective-C"
+                  start_date={new Date()}
+                  end_date="Present"
                 />
-              )}
-            </CardList>
-          </ProfileSection>
+              </CardList>
+            </ProfileSection>
+            <hr className={styles.divider} />
+            <ProfileSection title={"Education"}>
+              <CardList>
+                {profile.educations.map(education => 
+                  <Card
+                    image={education.school.logo}
+                    title={education.school.name}
+                    subtitle={education.degree}
+                    body="Lorem ipsum dolor sit amet consectetur. Tempor dui vulputate netus facilisis vel."
+                  />
+                )}
+              </CardList>
+            </ProfileSection>
 
-          
+            
 
-          <hr className={styles.divider} />
-          <ProfileSection title={"Reviews"}>
-            <CardList>
-              <Card
-                image="http://www.gurunepal.com/wp-content/uploads/2020/05/heriot-watt-1-1.png"
-                title="Sarah Wilson"
-                subtitle="Web Developer @ Microsoft"
-                body="John is a brilliant machine learning engineer who consistently delivers high-quality work. He is an excellent team player who is always willing to help his colleagues and share his knowledge with them.”"
-              />
-            </CardList>
-          </ProfileSection>
-        </Container>
-      </div>
+            <hr className={styles.divider} />
+            <ProfileSection title={"Reviews"}>
+              <CardList>
+                <Card
+                  image="http://www.gurunepal.com/wp-content/uploads/2020/05/heriot-watt-1-1.png"
+                  title="Sarah Wilson"
+                  subtitle="Web Developer @ Microsoft"
+                  body="John is a brilliant machine learning engineer who consistently delivers high-quality work. He is an excellent team player who is always willing to help his colleagues and share his knowledge with them.”"
+                />
+              </CardList>
+            </ProfileSection>
+            </div>
+          </div>
+          <Suggestions user={profile} suggestions={recommend} />
+        </div>
+      </Container>
     </>
   );
 };

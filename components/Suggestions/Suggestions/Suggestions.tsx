@@ -11,7 +11,7 @@ const Suggestions = ({ user, suggestions = [] }: SuggestionsProps) => {
   return (
     <div className={styles.container}>
       <h3 className={styles.title}>Similar to {user.first_name}</h3>
-      <ul>
+      <ul className={styles.list}>
         {suggestions.slice(0, 3).map((item) => (
           <Suggestion profile={item} />
         ))}

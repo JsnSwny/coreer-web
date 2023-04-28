@@ -2,6 +2,8 @@ import Link from "next/link";
 import styles from "./Suggestion.module.scss";
 import Button from "@/components/Button/Button";
 import { Profile } from "@/interfaces/profile.model";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 interface SuggestionProps {
   profile: Profile;
@@ -18,7 +20,7 @@ const Suggestion = ({ profile }: SuggestionProps) => {
           <p className={styles.bio}>{profile.bio}</p>
         </div>
       </div>
-      <Button text={"View"} variant="pill" />
+      <FontAwesomeIcon icon={faAngleRight} className={styles.button} />
     </Link>
   );
 };
