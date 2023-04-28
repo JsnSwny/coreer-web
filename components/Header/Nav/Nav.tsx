@@ -10,7 +10,7 @@ const Nav = ({ children }: NavProps) => {
   return (
     <nav className={styles.container}>
       {children}
-      <NavLinks />
+      {/* <NavLinks /> */}
     </nav>
   );
 };

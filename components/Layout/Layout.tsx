@@ -20,7 +20,7 @@ const Layout = ({ children }: LayoutProps) => {
             rel="stylesheet"
           />
         </Head>
-        <Sidebar />
+        {/* <Sidebar /> */}
         <div className={styles.content}>
           <Header />
           <main>{children}</main>

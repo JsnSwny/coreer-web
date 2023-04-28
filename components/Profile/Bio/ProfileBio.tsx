@@ -12,15 +12,12 @@ const ProfileBio = ({ user }: ProfileBioProps) => {
   return (
     <>
       <section className={styles.container}>
-        <h1 className={styles.title}>
-          {user.first_name} {user.last_name}
-        </h1>
-        <p className={styles.subtitle}>{user.job}</p>
+        <h4>About</h4>
         <div className={styles.bio}>
           <p>{user.bio}</p>
         </div>
         <Link href={`/message/1`} className={styles.cta}>
-          <Button text={"Message"} />
+          <Button text={`Message ${user.first_name}`} />
         </Link>
       </section>
     </>

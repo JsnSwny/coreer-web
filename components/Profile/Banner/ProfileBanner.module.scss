@@ -1,37 +1,59 @@
 @import "@/styles/_variables.scss";
 
 .container {
-  width: 100%;
-  position: relative;
-  height: 350px;
+	width: 100%;
+	position: relative;
+	height: 350px;
+	margin-top: 2rem;
+}
+
+.details {
+	margin-left: calc(150px + 1.5rem);
+	margin-top: 0.75rem;
+}
+
+.title {
+	font-size: 28px;
+}
+
+.subtitle {
+	text-transform: capitalize;
+	margin-top: 0.25rem;
+	color: $dark-light;
 }
 
 .banner {
-  height: 275px;
-  width: 100%;
-  object-fit: cover;
-  display: inline-block;
-  position: relative;
-  z-index: -1;
-  &::after {
-    content: "";
-    background-color: red;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 5;
-  }
+	height: 275px;
+	width: 100%;
+	object-fit: cover;
+	display: inline-block;
+	position: relative;
+	z-index: -1;
+	&::after {
+		content: "";
+		background-color: red;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 5;
+	}
+	border-radius: 30px;
 }
 
 .profilePhoto {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
-  position: absolute;
-  bottom: -75px;
-  left: 0;
-  outline: 6px solid $background;
+	width: 150px;
+	height: 150px;
+	object-fit: cover;
+	border-radius: 50%;
+	outline: 5px solid $background;
+}
+
+.content {
+	position: absolute;
+	bottom: -90px;
+	left: 2rem;
+	display: flex;
+	align-items: flex-end;
 }

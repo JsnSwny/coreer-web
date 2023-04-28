@@ -27,7 +27,7 @@ const profile = ({ profile, recommend }: ProfileProps) => {
         <title>{`${profile.first_name} ${profile.last_name} | coreer`}</title>
       </Head>
       <div>
-        <ProfileBanner photo={profile.profile_photo} />
+        <ProfileBanner user={profile} />
         <Container>
           <div className={styles.topContainer}>
             <ProfileBio user={profile} />

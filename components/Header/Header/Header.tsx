@@ -8,6 +8,10 @@ const Header = () => {
     <header className={styles.header}>
       <Container>
         <div className={styles.wrapper}>
+          
+          <Nav>
+            <p className={styles.title}>coreer.</p>
+          </Nav>
           <Search />
         </div>
       </Container>
