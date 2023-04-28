@@ -1,17 +1,16 @@
 @import "@/styles/_variables.scss";
 
 .container {
-	max-width: 400px;
-	width: 100%;
+  width: 400px;
 }
 
 .title {
-	font-size: 20px;
-	margin-bottom: 1.5rem;
+  font-size: 20px;
+  margin-bottom: 1.5rem;
 }
 
 .list {
-	display: flex;
-	flex-direction: column;
-	gap: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
