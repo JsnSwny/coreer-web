@@ -12,7 +12,7 @@ const Suggestions = ({ user, suggestions = [] }: SuggestionsProps) => {
     <div className={styles.container}>
       <h3 className={styles.title}>Similar to {user.first_name}</h3>
       <ul className={styles.list}>
-        {suggestions.slice(0, 3).map((item) => (
+        {suggestions.slice(0, 5).map((item) => (
           <Suggestion profile={item} />
         ))}
       </ul>

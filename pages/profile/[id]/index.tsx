@@ -29,66 +29,62 @@ const profile = ({ profile, recommend }: ProfileProps) => {
       <Container>
         <div className={styles.wrapper}>
           <div>
-          <ProfileBanner user={profile} />
-          <div className={styles.container}>
-            <div className={styles.topContainer}>
-              <ProfileBio user={profile} />
-            </div>
-            <hr className={styles.divider} />
+            <ProfileBanner user={profile} />
+            <div className={styles.container}>
+              <div className={styles.topContainer}>
+                <ProfileBio user={profile} />
+              </div>
+              <hr className={styles.divider} />
 
-            <ProfileSection title={"Skills"}>
-              <LanguageList
-                languages={profile.languages}
-              />
-            </ProfileSection>
+              <ProfileSection title={"Skills"}>
+                <LanguageList languages={profile.languages} />
+              </ProfileSection>
 
-            <hr className={styles.divider} />
-            <ProfileSection title={"Projects"}>
-              <Projects projects={profile.projects} />
-            </ProfileSection>
-            <hr className={styles.divider} />
-            <ProfileSection title={"Work Experience"}>
-              <CardList>
-                <Card
-                  image="http://www.gurunepal.com/wp-content/uploads/2020/05/heriot-watt-1-1.png"
-                  title="Apple"
-                  subtitle="iOS Developer"
-                  body="Develop and maintain iOS applications
+              <hr className={styles.divider} />
+              <ProfileSection title={"Projects"}>
+                <Projects projects={profile.projects} />
+              </ProfileSection>
+              <hr className={styles.divider} />
+              <ProfileSection title={"Work Experience"}>
+                <CardList>
+                  <Card
+                    image="http://www.gurunepal.com/wp-content/uploads/2020/05/heriot-watt-1-1.png"
+                    title="Apple"
+                    subtitle="iOS Developer"
+                    body="Develop and maintain iOS applications
                     Ensure high quality and meet company standards
                     Work on both internal and external applications
                     Work with programming languages such as Swift and Objective-C"
-                  start_date={new Date()}
-                  end_date="Present"
-                />
-              </CardList>
-            </ProfileSection>
-            <hr className={styles.divider} />
-            <ProfileSection title={"Education"}>
-              <CardList>
-                {profile.educations.map(education => 
-                  <Card
-                    image={education.school.logo}
-                    title={education.school.name}
-                    subtitle={education.degree}
-                    body="Lorem ipsum dolor sit amet consectetur. Tempor dui vulputate netus facilisis vel."
+                    start_date={new Date()}
+                    end_date="Present"
                   />
-                )}
-              </CardList>
-            </ProfileSection>
+                </CardList>
+              </ProfileSection>
+              <hr className={styles.divider} />
+              <ProfileSection title={"Education"}>
+                <CardList>
+                  {profile.educations.map((education) => (
+                    <Card
+                      image={education.school.logo}
+                      title={education.school.name}
+                      subtitle={education.degree}
+                      body="Lorem ipsum dolor sit amet consectetur. Tempor dui vulputate netus facilisis vel."
+                    />
+                  ))}
+                </CardList>
+              </ProfileSection>
 
-            
-
-            <hr className={styles.divider} />
-            <ProfileSection title={"Reviews"}>
-              <CardList>
-                <Card
-                  image="http://www.gurunepal.com/wp-content/uploads/2020/05/heriot-watt-1-1.png"
-                  title="Sarah Wilson"
-                  subtitle="Web Developer @ Microsoft"
-                  body="John is a brilliant machine learning engineer who consistently delivers high-quality work. He is an excellent team player who is always willing to help his colleagues and share his knowledge with them.”"
-                />
-              </CardList>
-            </ProfileSection>
+              <hr className={styles.divider} />
+              <ProfileSection title={"Reviews"}>
+                <CardList>
+                  <Card
+                    image="http://www.gurunepal.com/wp-content/uploads/2020/05/heriot-watt-1-1.png"
+                    title="Sarah Wilson"
+                    subtitle="Web Developer @ Microsoft"
+                    body="John is a brilliant machine learning engineer who consistently delivers high-quality work. He is an excellent team player who is always willing to help his colleagues and share his knowledge with them.”"
+                  />
+                </CardList>
+              </ProfileSection>
             </div>
           </div>
           <Suggestions user={profile} suggestions={recommend} />
@@ -101,7 +97,6 @@ const profile = ({ profile, recommend }: ProfileProps) => {
 export const getServerSideProps = async (context: any) => {
   const res = await fetch(`${server}/api/profiles/${context?.params?.id}`);
   const profile = await res.json();
-
 
   const recommendationsRes = await fetch(
     `${server}/recommend/${context?.params?.id}/6`
@@ -116,43 +111,5 @@ export const getServerSideProps = async (context: any) => {
     },
   };
 };
-
-// export const getStaticProps = async (context: any) => {
-//   const res = await fetch(`${server}/api/profiles/${context?.params?.id}`);
-//   const profile = await res.json();
-
-//   const recommendationsRes = await fetch(
-//     `${server}/recommend/${context?.params?.id}`
-//   );
-
-//   let recommend = await recommendationsRes.json();
-
-//   return {
-//     props: {
-//       profile,
-//       recommend: recommend.recommendations,
-//     },
-//   };
-// };
-
-// export const getStaticPaths = async () => {
-//   console.log("Getting profiles");
-//   const res = await fetch(`${server}/api/profiles`);
-
-//   const profiles = await res.json();
-
-//   console.log("Got profiles");
-
-//   const ids = profiles.map((profile: Profile) => profile.id);
-
-//   console.log(ids.length);
-
-//   const paths = ids.map((id: number) => ({ params: { id: id.toString() } }));
-
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// };
 
 export default profile;

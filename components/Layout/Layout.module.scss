@@ -1,9 +1,9 @@
 .container {
-	display: flex;
-	min-height: 100dvh;
+  display: flex;
+  min-height: 100dvh;
 }
 
 .content {
-	flex: 1;
-	margin-top: 65px;
+  flex: 1;
+  margin-top: calc(65px + 2rem);
 }
