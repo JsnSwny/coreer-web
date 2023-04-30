@@ -3,11 +3,22 @@ import React from "react";
 
 interface CardListProps {
   children: React.ReactNode;
-  className: string;
+  className?: string;
+  large?: boolean;
 }
 
-const ProfileCardList = ({ children, className }: CardListProps) => {
-  return <div className={`${styles.cards} ${className}`}>{children}</div>;
+const ProfileCardList = ({
+  children,
+  className,
+  large = false,
+}: CardListProps) => {
+  return (
+    <div
+      className={`${styles.cards} ${className} ${large ? styles.large : ""}`}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default ProfileCardList;

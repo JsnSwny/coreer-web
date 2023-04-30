@@ -34,12 +34,15 @@ const ProfileCard = ({ profile }: CardProps) => {
           <span className={styles.miles}>3000 miles away</span>
         </p>
       </div>
-      <hr className={styles.divider} />
+
       {profile.languages.length > 0 && (
-        <TagsList
-          tags={profile.languages.map((item) => ({ text: item.name }))}
-          className={styles.tags}
-        />
+        <>
+          <hr className={styles.divider} />
+          <TagsList
+            tags={profile.languages.map((item) => ({ text: item.name }))}
+            className={styles.tags}
+          />
+        </>
       )}
     </Link>
   );

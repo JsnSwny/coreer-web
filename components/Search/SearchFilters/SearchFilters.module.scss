@@ -1,7 +1,7 @@
 @import "@/styles/_variables.scss";
 
 .container {
-  width: 350px;
+  min-width: 350px;
   background-color: white;
   border: 0.5px solid $stroke;
   height: 500px;

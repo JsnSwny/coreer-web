@@ -2,10 +2,20 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
+import Container from "@/components/Container/Container";
+import ProfileCardList from "@/components/Card/ProfileCardList/ProfileCardList";
+import ProfileCard from "@/components/Card/ProfileCard/ProfileCard";
+import { server } from "@/config";
+import { useRouter } from "next/router";
+import { Profile } from "@/interfaces/profile.model";
+import Section from "@/components/Layout/Section/Section";
 
-const inter = Inter({ subsets: ["latin"] });
+interface HomeProps {
+  recommend: Profile[];
+}
 
-export default function Home() {
+const Home = ({ recommend }: HomeProps) => {
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -14,7 +24,32 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>Hello</main>
+
+      <main className={styles.main}>
+        <Container>
+          <Section title={"Top Picks"}>
+            <ProfileCardList large={true}>
+              {recommend.map((item) => (
+                <ProfileCard profile={item} />
+              ))}
+            </ProfileCardList>
+          </Section>
+        </Container>
+      </main>
     </>
   );
-}
+};
+
+export const getServerSideProps = async (context: any) => {
+  const recommendationsRes = await fetch(`${server}/recommend/34991625/5`);
+
+  let recommend = await recommendationsRes.json();
+
+  return {
+    props: {
+      recommend: recommend.recommendations,
+    },
+  };
+};
+
+export default Home;
