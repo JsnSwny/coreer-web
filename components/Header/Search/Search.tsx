@@ -15,7 +15,7 @@ const Search = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    router.push(`/search/${search}`);
+    router.push(`/search?query=${search}`);
   };
 
   return (

@@ -3,10 +3,11 @@ import React from "react";
 
 interface CardListProps {
   children: React.ReactNode;
+  className: string;
 }
 
-const ProfileCardList = ({ children }: CardListProps) => {
-  return <div className={styles.cards}>{children}</div>;
+const ProfileCardList = ({ children, className }: CardListProps) => {
+  return <div className={`${styles.cards} ${className}`}>{children}</div>;
 };
 
 export default ProfileCardList;

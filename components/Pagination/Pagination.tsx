@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import styles from "./Pagination.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 interface PaginationProps {
   pageCount: number;
@@ -16,7 +18,16 @@ const Pagination = ({
   console.log(initialPage);
   return (
     <ReactPaginate
-      nextLabel="next >"
+      previousLabel={
+        <span className={styles.label}>
+          <FontAwesomeIcon icon={faAngleLeft} className={styles.icon} />
+        </span>
+      }
+      nextLabel={
+        <span className={styles.label}>
+          <FontAwesomeIcon icon={faAngleRight} className={styles.icon} />
+        </span>
+      }
       onPageChange={onPageChange}
       pageRangeDisplayed={5}
       pageCount={pageCount}

@@ -40,7 +40,7 @@ const results = ({ searchData, currentPage, perPage }: ResultsProps) => {
   const [currentPageState, setCurrentPage] = useState(currentPage);
   const [results, setResults] = useState(searchData);
 
-  const pageCount = Math.ceil(searchData.count / 10);
+  const pageCount = Math.ceil(searchData.count / 9);
 
   const handlePageChange = async (pageNumber: any) => {
     const currentPath = router.pathname;
@@ -62,7 +62,7 @@ const results = ({ searchData, currentPage, perPage }: ResultsProps) => {
 
     const apiUrl = `${server}/api/user/?search=${currentQuery.query}&page=${
       pageNumber.selected + 1
-    }&perPage=10`;
+    }&perPage=9`;
 
     const response = await fetch(apiUrl);
     const searchData = await response.json();
@@ -80,7 +80,8 @@ const results = ({ searchData, currentPage, perPage }: ResultsProps) => {
           <SearchFilters />
 
           <div className={styles.right}>
-            <ProfileCardList>
+            <h3 className={styles.title}>{results.count} Profiles Found</h3>
+            <ProfileCardList className={styles.cardList}>
               {results.results.map((item: Profile) => (
                 <ProfileCard profile={item} />
               ))}
@@ -98,13 +99,11 @@ const results = ({ searchData, currentPage, perPage }: ResultsProps) => {
 };
 
 results.getInitialProps = async (context: any) => {
-  const { query, page = 1, perPage = 10 } = context.query;
-
-  console.log(query, page, perPage);
+  const { query, page = 1, perPage = 9 } = context.query;
 
   const encodedQuery = encodeURIComponent(query);
 
-  const apiUrl = `${server}/api/user/?search=Test&page=10&perPage=10`;
+  const apiUrl = `${server}/api/user/?search=${query}&page=10&perPage=9`;
 
   const response = await fetch(apiUrl);
   const searchData = await response.json();
