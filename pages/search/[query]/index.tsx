@@ -3,6 +3,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import { server } from "@/config";
 import Container from "@/components/Container/Container";
+import ProfileCardList from "@/components/Card/ProfileCardList/ProfileCardList";
+import ProfileCard from "@/components/Card/ProfileCard/ProfileCard";
+import { Profile } from "@/interfaces/profile.model";
+import SearchFilters from "@/components/Search/SearchFilters/SearchFilters";
+import styles from "./index.module.scss";
 
 interface resultsProps {
   searchData: any;
@@ -12,8 +17,6 @@ const results = ({ searchData }: resultsProps) => {
   const router = useRouter();
   const { query } = router.query;
 
-  console.log(searchData);
-
   const [results, setResults] = useState([]);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
@@ -21,14 +24,14 @@ const results = ({ searchData }: resultsProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasMoreResults, setHasMoreResults] = useState(false);
 
-  const loadResults = () => {
-    setIsLoading(true);
-  };
-
   return (
-    <Container>
-      <h1>Search Results for "{query}"</h1>
-      {/* Render search results */}
+    <Container flex={true}>
+      <SearchFilters />
+      <ProfileCardList>
+        {searchData.results.map((item: Profile) => (
+          <ProfileCard profile={item} />
+        ))}
+      </ProfileCardList>
     </Container>
   );
 };

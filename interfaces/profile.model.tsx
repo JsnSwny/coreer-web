@@ -12,4 +12,5 @@ export interface Profile {
   projects: Project[];
   educations: Education[];
   languages: Skill[];
+  location: string;
 }
