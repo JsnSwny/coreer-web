@@ -58,7 +58,7 @@
 }
 
 .tags {
-  flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
   overflow: hidden;
   position: relative;
   &::after {
