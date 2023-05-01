@@ -15,7 +15,6 @@ const Pagination = ({
   onPageChange,
   initialPage,
 }: PaginationProps) => {
-  console.log(initialPage);
   return (
     <ReactPaginate
       previousLabel={

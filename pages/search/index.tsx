@@ -8,6 +8,7 @@ import { Profile } from "@/interfaces/profile.model";
 import SearchFilters from "@/components/Search/SearchFilters/SearchFilters";
 import styles from "./index.module.scss";
 import Pagination from "@/components/Pagination/Pagination";
+import Head from "next/head";
 
 interface SearchResult {
   results: Profile[];
@@ -18,9 +19,10 @@ interface ResultsProps {
   searchData: SearchResult;
   currentPage: number;
   perPage: number;
+  query: string;
 }
 
-const results = ({ searchData, currentPage, perPage }: ResultsProps) => {
+const results = ({ searchData, currentPage, perPage, query }: ResultsProps) => {
   const router = useRouter();
   const [isLoading, setLoading] = useState(false);
   const [currentPageState, setCurrentPage] = useState(currentPage);
@@ -63,6 +65,9 @@ const results = ({ searchData, currentPage, perPage }: ResultsProps) => {
 
   return (
     <Container flex={true}>
+      <Head>
+        <title>"{query}" | Search</title>
+      </Head>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
@@ -103,6 +108,7 @@ export const getServerSideProps = async (context: any) => {
       searchData,
       currentPage: parseInt(page),
       perPage: parseInt(perPage),
+      query,
     },
   };
 };
