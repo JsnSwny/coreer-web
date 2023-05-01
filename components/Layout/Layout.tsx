@@ -3,12 +3,24 @@ import Header from "../Header/Header/Header";
 import Head from "next/head";
 import Sidebar from "../Sidebar/Sidebar";
 import styles from "./Layout.module.scss";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const router = useRouter();
+  const [showHeader, setShowHeader] = useState(
+    router.pathname !== "/login" && router.pathname !== "/register"
+  );
+
+  useEffect(() => {
+    setShowHeader(
+      router.pathname !== "/login" && router.pathname !== "/register"
+    );
+  }, [router]);
   return (
     <>
       <div className={styles.container}>
@@ -21,8 +33,8 @@ const Layout = ({ children }: LayoutProps) => {
           />
         </Head>
         {/* <Sidebar /> */}
-        <div className={styles.content}>
-          <Header />
+        <div className={showHeader ? styles.content : styles.contentAlt}>
+          {showHeader && <Header />}
           <main>{children}</main>
         </div>
       </div>

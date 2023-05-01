@@ -9,6 +9,9 @@ import { server } from "@/config";
 import { useRouter } from "next/router";
 import { Profile } from "@/interfaces/profile.model";
 import Section from "@/components/Layout/Section/Section";
+import { useAuth } from "@/contexts/AuthContext";
+import { useEffect } from "react";
+import withAuth from "@/components/Route/withAuth";
 
 interface HomeProps {
   recommend: Profile[];
@@ -16,6 +19,19 @@ interface HomeProps {
 
 const Home = ({ recommend }: HomeProps) => {
   const router = useRouter();
+  const { user } = useAuth();
+  useEffect(() => {
+    // Check if user is not authenticated and redirect to login page
+    if (!user) {
+      router.push("/login");
+    }
+  }, [user, router]);
+
+  if (!user) {
+    // User is not authenticated, return null to prevent rendering of the home page
+    return null;
+  }
+
   return (
     <>
       <Head>
@@ -52,4 +68,4 @@ export const getServerSideProps = async (context: any) => {
   };
 };
 
-export default Home;
+export default withAuth(Home);

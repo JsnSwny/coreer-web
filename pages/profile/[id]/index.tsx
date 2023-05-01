@@ -14,6 +14,7 @@ import CardList from "@/components/Card/CardList/CardList";
 import Card from "@/components/Card/Card/Card";
 import LanguageList from "@/components/Profile/Languages/LanguageList/LanguageList";
 import Language from "@/components/Profile/Languages/Language/Language";
+import withAuth from "@/components/Route/withAuth";
 
 interface ProfileProps {
   profile: Profile;
@@ -112,4 +113,4 @@ export const getServerSideProps = async (context: any) => {
   };
 };
 
-export default profile;
+export default withAuth(profile);
