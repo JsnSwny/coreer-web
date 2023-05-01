@@ -8,6 +8,7 @@ import React, {
 import axios from "axios";
 import { Profile } from "@/interfaces/profile.model";
 import { server } from "@/config";
+import cookie from "cookie";
 
 interface AuthContextType {
   user: Profile | null;
@@ -44,8 +45,14 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       setUser(user);
 
       localStorage.setItem("token", response.data.token);
+      document.cookie = cookie.serialize("token", response.data.token, {
+        maxAge: 3600, // expires after 1 hour
+        path: "/",
+      });
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -71,6 +78,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       axios
         .get(`${server}/api/auth/user`, config)
         .then((res) => {
+          console.log(res.data);
           setUser(res.data);
         })
         .catch((err) => {
@@ -79,6 +87,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         .finally(() => {
           setLoading(false);
         });
+    } else {
+      setLoading(false);
     }
   }, []);
 

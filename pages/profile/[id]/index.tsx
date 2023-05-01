@@ -100,7 +100,7 @@ export const getServerSideProps = async (context: any) => {
   const profile = await res.json();
 
   const recommendationsRes = await fetch(
-    `${server}/recommend/${context?.params?.id}/6`
+    `${server}/recommend/6/${context?.params?.id}`
   );
 
   let recommend = await recommendationsRes.json();

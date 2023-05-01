@@ -12,6 +12,8 @@ import Section from "@/components/Layout/Section/Section";
 import { useAuth } from "@/contexts/AuthContext";
 import { useEffect } from "react";
 import withAuth from "@/components/Route/withAuth";
+import axios from "axios";
+import cookie from "cookie";
 
 interface HomeProps {
   recommend: Profile[];
@@ -57,13 +59,28 @@ const Home = ({ recommend }: HomeProps) => {
 };
 
 export const getServerSideProps = async (context: any) => {
-  const recommendationsRes = await fetch(`${server}/recommend/34991625/5`);
+  const { req } = context;
+  const cookies = cookie.parse(req.headers.cookie || "");
+  const token = cookies.token;
 
-  let recommend = await recommendationsRes.json();
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  let recommend = [];
+
+  if (token) {
+    config.headers["Authorization"] = `Token ${token}`;
+    const recommendationsRes = await fetch(`${server}/recommend/5`, config);
+
+    recommend = await recommendationsRes.json();
+  }
 
   return {
     props: {
-      recommend: recommend.recommendations,
+      recommend: token ? recommend.recommendations : [],
     },
   };
 };
