@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { server } from "@/config";
 import Container from "@/components/Container/Container";
 import ProfileCardList from "@/components/Card/ProfileCardList/ProfileCardList";
@@ -23,11 +23,14 @@ interface ResultsProps {
 const results = ({ searchData, currentPage, perPage }: ResultsProps) => {
   const router = useRouter();
   const [isLoading, setLoading] = useState(false);
-
   const [currentPageState, setCurrentPage] = useState(currentPage);
   const [results, setResults] = useState(searchData);
 
-  const pageCount = Math.ceil(searchData.count / 12);
+  const pageCount = Math.ceil(searchData.count / 15);
+
+  useEffect(() => {
+    setResults(searchData);
+  }, [searchData]);
 
   const handlePageChange = async (pageNumber: any) => {
     const currentPath = router.pathname;
@@ -49,7 +52,7 @@ const results = ({ searchData, currentPage, perPage }: ResultsProps) => {
 
     const apiUrl = `${server}/api/user/?search=${currentQuery.query}&page=${
       pageNumber.selected + 1
-    }&perPage=12`;
+    }&perPage=15`;
 
     const response = await fetch(apiUrl);
     const searchData = await response.json();
@@ -64,11 +67,11 @@ const results = ({ searchData, currentPage, perPage }: ResultsProps) => {
         <p>Loading...</p>
       ) : (
         <>
-          <SearchFilters />
+          {/* <SearchFilters /> */}
 
           <div className={styles.right}>
             <h3 className={styles.title}>{results.count} Profiles Found</h3>
-            <ProfileCardList className={styles.cardList}>
+            <ProfileCardList className={styles.cardList} large={true}>
               {results.results.map((item: Profile) => (
                 <ProfileCard profile={item} />
               ))}
@@ -85,20 +88,22 @@ const results = ({ searchData, currentPage, perPage }: ResultsProps) => {
   );
 };
 
-results.getInitialProps = async (context: any) => {
-  const { query, page = 1, perPage = 12 } = context.query;
-
+export const getServerSideProps = async (context: any) => {
+  const { query, page = 1, perPage = 15 } = context.query;
+  console.log("Page");
   const encodedQuery = encodeURIComponent(query);
 
-  const apiUrl = `${server}/api/user/?search=${query}&page=10&perPage=12`;
+  const apiUrl = `${server}/api/user/?search=${query}&page=${page}&perPage=15`;
 
   const response = await fetch(apiUrl);
   const searchData = await response.json();
 
   return {
-    searchData,
-    currentPage: parseInt(page),
-    perPage: parseInt(perPage),
+    props: {
+      searchData,
+      currentPage: parseInt(page),
+      perPage: parseInt(perPage),
+    },
   };
 };
 

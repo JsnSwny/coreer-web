@@ -13,11 +13,9 @@ const ProfileCardList = ({
   large = false,
 }: CardListProps) => {
   return (
-    <div
-      className={`${styles.cards} ${className} ${large ? styles.large : ""}`}
-    >
+    <ul className={`${styles.cards} ${className} ${large ? styles.large : ""}`}>
       {children}
-    </div>
+    </ul>
   );
 };
 

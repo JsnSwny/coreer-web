@@ -1,17 +1,18 @@
 import styles from "./Search.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 const Search = () => {
   const router = useRouter();
-  const [search, setSearch] = useState("");
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === "Enter") {
-      console.log(search);
+  const [search, setSearch] = useState<string | string[]>("");
+
+  useEffect(() => {
+    if (router?.query?.query) {
+      setSearch(router.query.query);
     }
-  };
+  }, []);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
