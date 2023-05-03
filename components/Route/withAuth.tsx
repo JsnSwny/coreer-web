@@ -13,8 +13,7 @@ const withAuth = <P extends object>(
       if (!loading && !user) {
         router.push("/login");
       }
-    }, [loading]);
-    console.log(loading);
+    }, [loading, user, router]);
     if (loading) {
       return <h1>LOADING</h1>;
     }

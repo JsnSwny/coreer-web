@@ -3,6 +3,7 @@ import styles from "./Header.module.scss";
 import Container from "../../Container/Container";
 import Search from "../Search/Search";
 import Link from "next/link";
+import NavProfile from "../NavProfile/NavProfile";
 
 const Header = () => {
   return (
@@ -14,7 +15,10 @@ const Header = () => {
               <p className={styles.title}>coreer.</p>
             </Link>
           </Nav>
-          <Search />
+          <div className={styles.right}>
+            <Search />
+            <NavProfile />
+          </div>
         </div>
       </Container>
     </header>

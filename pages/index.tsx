@@ -22,17 +22,6 @@ interface HomeProps {
 const Home = ({ recommend }: HomeProps) => {
   const router = useRouter();
   const { user } = useAuth();
-  useEffect(() => {
-    // Check if user is not authenticated and redirect to login page
-    if (!user) {
-      router.push("/login");
-    }
-  }, [user, router]);
-
-  if (!user) {
-    // User is not authenticated, return null to prevent rendering of the home page
-    return null;
-  }
 
   return (
     <>

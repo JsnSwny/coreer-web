@@ -57,10 +57,26 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const signOut = () => {
-    setUser(null);
-    localStorage.removeItem("token");
-
-    axios.post(`${server}/api/auth/logout`);
+    const token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    if (token) {
+      config.headers["Authorization"] = `Token ${token}`;
+      axios
+        .post(`${server}/api/auth/logout`, null, config)
+        .then((res) => {
+          localStorage.removeItem("token");
+          document.cookie = cookie.serialize("token", "", {
+            maxAge: 0,
+            path: "/",
+          });
+          setUser(null);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const fetchUser = useCallback(() => {

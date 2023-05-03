@@ -9,6 +9,7 @@ import SearchFilters from "@/components/Search/SearchFilters/SearchFilters";
 import styles from "./index.module.scss";
 import Pagination from "@/components/Pagination/Pagination";
 import Head from "next/head";
+import withAuth from "@/components/Route/withAuth";
 
 interface SearchResult {
   results: Profile[];
@@ -72,8 +73,6 @@ const results = ({ searchData, currentPage, perPage, query }: ResultsProps) => {
         <p>Loading...</p>
       ) : (
         <>
-          {/* <SearchFilters /> */}
-
           <div className={styles.right}>
             <h3 className={styles.title}>{results.count} Profiles Found</h3>
             <ProfileCardList className={styles.cardList} large={true}>
@@ -113,4 +112,4 @@ export const getServerSideProps = async (context: any) => {
   };
 };
 
-export default results;
+export default withAuth(results);

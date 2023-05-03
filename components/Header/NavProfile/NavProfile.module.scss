@@ -1,0 +1,47 @@
+.profile {
+  position: relative;
+  height: calc(65px - 1.5rem);
+  width: calc(65px - 1.5rem);
+}
+
+.profileButton {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.profileImage {
+  border-radius: 50%;
+  height: calc(65px - 1.5rem);
+  width: calc(65px - 1.5rem);
+}
+
+.menu {
+  position: absolute;
+  width: 175px;
+  top: 100%;
+  right: -20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0;
+  margin: 5px 0 0;
+  list-style: none;
+}
+
+.menuItem {
+  display: block;
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #333;
+  text-align: left;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
