@@ -46,11 +46,41 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
       localStorage.setItem("token", response.data.token);
       document.cookie = cookie.serialize("token", response.data.token, {
-        maxAge: 3600, // expires after 1 hour
+        maxAge: 3600,
         path: "/",
       });
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const signUp = async (
+    email: string,
+    password: string,
+    passwordConfirm: string
+  ) => {
+    try {
+      await axios
+        .post(`${server}/api/auth/register`, {
+          email,
+          password,
+          passwordConfirm,
+        })
+        .then((res) => {
+          console.log(res);
+          const user = res.data.user;
+          setUser(user);
+
+          localStorage.setItem("token", res.data.token);
+          document.cookie = cookie.serialize("token", res.data.token, {
+            maxAge: 3600,
+            path: "/",
+          });
+        });
+    } catch (error) {
+      console.error(error.response);
     } finally {
       setLoading(false);
     }
@@ -113,7 +143,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   }, [fetchUser]);
 
   return (
-    <AuthContext.Provider value={{ loading, user, signIn, signOut }}>
+    <AuthContext.Provider value={{ loading, user, signIn, signOut, signUp }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,0 +1,38 @@
+@import "@/styles/_variables.scss";
+
+.navItem {
+  width: 200px;
+  border: 0.5px solid #b4b4b4;
+  border-radius: 5px;
+  padding: 8px 12px;
+  color: #b4b4b4;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  color: #b4b4b4;
+  width: 28px;
+  margin-right: 1rem;
+}
+
+.step {
+  font-size: 12px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 0.1rem;
+}
+
+.active {
+  color: $primary;
+  border: 0.5px solid $primary;
+  .icon {
+    color: $primary;
+  }
+}

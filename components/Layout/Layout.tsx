@@ -5,21 +5,19 @@ import Sidebar from "../Sidebar/Sidebar";
 import styles from "./Layout.module.scss";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const { user } = useAuth();
   const router = useRouter();
-  const [showHeader, setShowHeader] = useState(
-    router.pathname !== "/login" && router.pathname !== "/register"
-  );
+  const [showHeader, setShowHeader] = useState(user && user.onboarded);
 
   useEffect(() => {
-    setShowHeader(
-      router.pathname !== "/login" && router.pathname !== "/register"
-    );
+    setShowHeader(user && user.onboarded);
   }, [router]);
   return (
     <>

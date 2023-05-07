@@ -1,28 +1,28 @@
-import styles from "./LoginForm.module.scss";
+import styles from "./SignupForm.module.scss";
 import axios from "axios";
 import { server } from "@/config";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
-import globalStyles from "@/styles/globalStyles.module.scss";
 
-const LoginForm = () => {
-  const { signIn } = useAuth();
+const SignupForm = () => {
+  const { signUp } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    await signIn(email, password);
+    await signUp(email, password, passwordConfirm);
 
     router.push("/");
   };
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <label htmlFor="email" className={globalStyles.label}>
+      <label htmlFor="email" className={styles.label}>
         Email
         <input
           type="email"
@@ -30,11 +30,11 @@ const LoginForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className={globalStyles.input}
+          className={styles.input}
         />
       </label>
 
-      <label htmlFor="password" className={globalStyles.label}>
+      <label htmlFor="password" className={styles.label}>
         Password
         <input
           type="password"
@@ -42,15 +42,27 @@ const LoginForm = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className={globalStyles.input}
+          className={styles.input}
         />
       </label>
 
-      <button type="submit" className={globalStyles.button}>
-        Login
+      <label htmlFor="password" className={styles.label}>
+        Confirm Password
+        <input
+          type="password"
+          name="password"
+          value={passwordConfirm}
+          onChange={(e) => setPasswordConfirm(e.target.value)}
+          required
+          className={styles.input}
+        />
+      </label>
+
+      <button type="submit" className={styles.button}>
+        Signup
       </button>
     </form>
   );
 };
 
-export default LoginForm;
+export default SignupForm;

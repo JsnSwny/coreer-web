@@ -52,6 +52,8 @@ export const getServerSideProps = async (context: any) => {
   const cookies = cookie.parse(req.headers.cookie || "");
   const token = cookies.token;
 
+  console.log("GETTING RECS");
+
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -62,7 +64,7 @@ export const getServerSideProps = async (context: any) => {
 
   if (token) {
     config.headers["Authorization"] = `Token ${token}`;
-    const recommendationsRes = await fetch(`${server}/recommend/5`, config);
+    const recommendationsRes = await fetch(`${server}/recommend/5/389`, config);
 
     recommend = await recommendationsRes.json();
   }

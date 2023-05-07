@@ -1,0 +1,33 @@
+@import "./variables";
+
+.input {
+  display: block;
+  width: 100%;
+  height: 44px;
+  border-radius: 5px;
+  border: 0.5px solid $stroke;
+  margin-top: 0.5rem;
+  padding: 0 1rem;
+  font-size: 16px;
+  box-shadow: 0 5px 20px -10px rgba(24, 21, 41, 0.1);
+}
+
+.label {
+  color: $dark-light;
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.button {
+  color: white;
+  background: $primary;
+  width: 100%;
+  height: 44px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}

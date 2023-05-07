@@ -13,4 +13,5 @@ export interface Profile {
   educations: Education[];
   languages: Skill[];
   location: string;
+  onboarded: boolean;
 }
