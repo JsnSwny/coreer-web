@@ -17,12 +17,13 @@ const OnboardingWrapper = ({
       <h3 className={styles.logo}>Coreer.</h3>
       <OnboardingNav />
       <div className={styles.content}>
-        <div className={styles.header}></div>
-        <h1 className={styles.title}>{title}</h1>
-        <p className={styles.description}>
-          Lorem ipsum dolor sit amet consectetur. Imperdiet pulvinar eget id sed
-          risus. A netus.
-        </p>
+        <div className={styles.header}>
+          <h1 className={styles.title}>{title}</h1>
+          <p className={styles.description}>
+            Lorem ipsum dolor sit amet consectetur. Imperdiet pulvinar eget id
+            sed risus. A netus.
+          </p>
+        </div>
         {children}
       </div>
     </div>

@@ -2,6 +2,7 @@ import globalStyles from "@/styles/globalStyles.module.scss";
 import { FormEvent, useState } from "react";
 import styles from "./PersonalDetails.module.scss";
 import { useRouter } from "next/router";
+import Actions from "../Actions/Actions";
 
 const PersonalDetails = () => {
   const router = useRouter();
@@ -41,15 +42,7 @@ const PersonalDetails = () => {
           />
         </label>
       </div>
-
-      <div className={styles.actions}>
-        <button
-          type="submit"
-          className={`${globalStyles.button} ${styles.button}`}
-        >
-          Next Step
-        </button>
-      </div>
+      <Actions />
     </form>
   );
 };

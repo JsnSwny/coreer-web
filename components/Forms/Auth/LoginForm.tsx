@@ -22,7 +22,10 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <label htmlFor="email" className={globalStyles.label}>
+      <label
+        htmlFor="email"
+        className={`${globalStyles.label} ${styles.label}`}
+      >
         Email
         <input
           type="email"
@@ -30,11 +33,14 @@ const LoginForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className={globalStyles.input}
+          className={`${globalStyles.input} ${styles.input}`}
         />
       </label>
 
-      <label htmlFor="password" className={globalStyles.label}>
+      <label
+        htmlFor="password"
+        className={`${globalStyles.label} ${styles.label}`}
+      >
         Password
         <input
           type="password"
@@ -42,7 +48,7 @@ const LoginForm = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className={globalStyles.input}
+          className={`${globalStyles.input} ${styles.input}`}
         />
       </label>
 

@@ -14,6 +14,7 @@ interface AuthContextType {
   user: Profile | null;
   signIn: (email: string, password: string) => void;
   signOut: () => void;
+  signUp: () => void;
   loading: boolean;
 }
 
@@ -21,6 +22,7 @@ export const AuthContext = createContext<AuthContextType>({
   user: null,
   signIn: () => {},
   signOut: () => {},
+  signUp: () => {},
   loading: false,
 });
 
@@ -111,7 +113,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const fetchUser = useCallback(() => {
     let token = localStorage.getItem("token");
-
     const config = {
       headers: {
         "Content-Type": "application/json",

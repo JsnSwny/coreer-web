@@ -6,6 +6,7 @@ import AuthBanner from "@/components/Auth/AuthBanner";
 import withGuest from "@/components/Route/withGuest";
 import OnboardingWrapper from "@/components/Auth/Onboarding/OnboardingWrapper/OnboardingWrapper";
 import PersonalDetails from "@/components/Auth/Onboarding/PersonalDetails/PersonalDetails";
+import Interests from "@/components/Auth/Onboarding/Interests/Interest";
 
 const interests = () => {
   return (
@@ -14,7 +15,7 @@ const interests = () => {
         <title>Onboarding | Interests</title>
       </Head>
       <OnboardingWrapper title={"Interests"} description={"fasfasf asas asd"}>
-        <PersonalDetails />
+        <Interests />
       </OnboardingWrapper>
     </>
   );

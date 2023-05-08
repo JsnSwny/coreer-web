@@ -1,0 +1,16 @@
+@import "@/styles/_variables.scss";
+
+.tag {
+  border: 0.5px solid #b4b4b4;
+  color: #b4b4b4;
+  font-size: 14px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 5px;
+  background-color: rgba(#b4b4b4, 0.05);
+}
+
+.active {
+  border: 0.5px solid $primary;
+  color: $primary;
+  background-color: rgba($primary, 0.05);
+}

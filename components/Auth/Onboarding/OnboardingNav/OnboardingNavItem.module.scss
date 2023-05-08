@@ -6,6 +6,7 @@
   border-radius: 5px;
   padding: 8px 12px;
   color: #b4b4b4;
+  background: rgba(#b4b4b4, 0.05);
 }
 
 .link {
@@ -32,6 +33,7 @@
 .active {
   color: $primary;
   border: 0.5px solid $primary;
+  background: rgba($primary, 0.05);
   .icon {
     color: $primary;
   }
