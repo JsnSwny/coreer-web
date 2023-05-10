@@ -14,4 +14,5 @@ export interface Profile {
   languages: Skill[];
   location: string;
   onboarded: boolean;
+  following: Profile[];
 }

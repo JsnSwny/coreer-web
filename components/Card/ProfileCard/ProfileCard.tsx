@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationPin } from "@fortawesome/free-solid-svg-icons";
 import TagsList from "@/components/Tags/TagsList/TagsList";
 import Link from "next/link";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 
 type EndDate = Date | "Present";
 
@@ -23,6 +25,7 @@ const ProfileCard = ({ profile }: CardProps) => {
   return (
     <Link href={`/profile/${profile.id}`} className={styles.card}>
       <img className={styles.image} src={profile.profile_photo} />
+      <FontAwesomeIcon icon={farStar} className={styles.like} />
       <div className={styles.content}>
         <h3 className={styles.title}>
           {profile.first_name} {profile.last_name}

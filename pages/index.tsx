@@ -64,7 +64,7 @@ export const getServerSideProps = async (context: any) => {
 
   if (token) {
     config.headers["Authorization"] = `Token ${token}`;
-    const recommendationsRes = await fetch(`${server}/recommend/5/389`, config);
+    const recommendationsRes = await fetch(`${server}/recommend/5`, config);
 
     recommend = await recommendationsRes.json();
   }

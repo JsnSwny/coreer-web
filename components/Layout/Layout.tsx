@@ -18,7 +18,8 @@ const Layout = ({ children }: LayoutProps) => {
 
   useEffect(() => {
     setShowHeader(user && user.onboarded);
-  }, [router]);
+  }, [user, router]);
+
   return (
     <>
       <div className={styles.container}>
