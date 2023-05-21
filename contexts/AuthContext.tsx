@@ -12,6 +12,7 @@ import cookie from "cookie";
 
 interface AuthContextType {
   user: Profile | null;
+  userToken: string | null;
   signIn: (email: string, password: string) => void;
   signOut: () => void;
   signUp: () => void;
@@ -20,6 +21,7 @@ interface AuthContextType {
 
 export const AuthContext = createContext<AuthContextType>({
   user: null,
+  userToken: null,
   signIn: () => {},
   signOut: () => {},
   signUp: () => {},
@@ -34,6 +36,7 @@ interface AuthProviderProps {
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<Profile | null>(null);
+  const [userToken, setUserToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   const signIn = async (email: string, password: string) => {
@@ -45,6 +48,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
       const user = response.data.user;
       setUser(user);
+      setUserToken(response.data.token);
 
       localStorage.setItem("token", response.data.token);
       document.cookie = cookie.serialize("token", response.data.token, {
@@ -74,6 +78,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
           console.log(res);
           const user = res.data.user;
           setUser(user);
+          setUserToken(res.data.token);
 
           localStorage.setItem("token", res.data.token);
           document.cookie = cookie.serialize("token", res.data.token, {
@@ -106,6 +111,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
             path: "/",
           });
           setUser(null);
+          setUserToken(null);
         })
         .catch((err) => console.log(err));
     }
@@ -125,11 +131,12 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       axios
         .get(`${server}/api/auth/user`, config)
         .then((res) => {
-          console.log(res.data);
           setUser(res.data);
+          setUserToken(token);
         })
         .catch((err) => {
           setUser(null);
+          setUserToken(null);
         })
         .finally(() => {
           setLoading(false);
@@ -144,7 +151,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   }, [fetchUser]);
 
   return (
-    <AuthContext.Provider value={{ loading, user, signIn, signOut, signUp }}>
+    <AuthContext.Provider
+      value={{ loading, user, userToken, signIn, signOut, signUp }}
+    >
       {children}
     </AuthContext.Provider>
   );

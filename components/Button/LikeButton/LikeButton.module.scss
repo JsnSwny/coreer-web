@@ -1,0 +1,14 @@
+@import "@/styles/_variables.scss";
+
+.likeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 30px;
+  color: $black;
+  transition: 0.3s ease color;
+}
+
+.solid {
+  color: $primary;
+}
