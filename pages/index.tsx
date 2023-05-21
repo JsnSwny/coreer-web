@@ -14,6 +14,9 @@ import { useEffect } from "react";
 import withAuth from "@/components/Route/withAuth";
 import axios from "axios";
 import cookie from "cookie";
+import SectionList from "@/components/Layout/SectionList/SectionList";
+import ExploreHeading from "@/components/Layout/ExploreHeading/ExploreHeading";
+import TopMatchBanner from "@/components/Banner/TopMatchBanner/TopMatchBanner";
 
 interface HomeProps {
   recommend: Profile[];
@@ -34,13 +37,22 @@ const Home = ({ recommend }: HomeProps) => {
 
       <main className={styles.main}>
         <Container>
-          <Section title={"Top Picks"}>
-            <ProfileCardList large={true}>
-              {recommend.map((item) => (
-                <ProfileCard profile={item} />
-              ))}
-            </ProfileCardList>
-          </Section>
+          <ExploreHeading />
+          <SectionList>
+            <Section title={"Your top match"}>
+              {recommend.length > 0 && (
+                <TopMatchBanner profile={recommend[0]} />
+              )}
+            </Section>
+
+            <Section title={"Recommended for you"}>
+              <ProfileCardList large={true}>
+                {recommend.slice(1, 5).map((item) => (
+                  <ProfileCard profile={item} />
+                ))}
+              </ProfileCardList>
+            </Section>
+          </SectionList>
         </Container>
       </main>
     </>

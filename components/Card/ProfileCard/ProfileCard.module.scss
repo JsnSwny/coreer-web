@@ -7,7 +7,7 @@
   background-color: white;
   border: 1px solid $stroke;
   border-radius: 15px;
-  padding: 2.5rem 1.75rem 1rem 1.75rem;
+  padding: 2rem 1.75rem 1rem 1.75rem;
   box-shadow: 0 25px 25px -30px rgba(24, 21, 41, 0.2);
   transform: scale(1);
   transition: box-shadow 0.15s ease-in-out, border 0.15s ease-in-out,
@@ -28,7 +28,7 @@
 
 .content {
   text-align: center;
-  margin: 1.25rem 0 2.5rem 0;
+  margin: 1.25rem 0 2rem 0;
   flex: 1;
 }
 
@@ -39,10 +39,11 @@
 }
 
 .image {
-  width: 105px;
-  height: 105px;
-  border-radius: 100px;
-  outline: 4px solid #0083b74a;
+  width: 115px;
+  height: 115px;
+  border-radius: 50%;
+  outline: none;
+  border: 4px solid #0083b74a;
   margin: 0 auto;
 }
 

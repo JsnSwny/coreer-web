@@ -1,0 +1,18 @@
+@import "@/styles/_variables.scss";
+.header {
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 40px;
+}
+
+.subtitle {
+  font-size: 18px;
+  margin-top: 0.25rem;
+}
+
+.bold {
+  font-weight: bold;
+  color: $primary;
+}
