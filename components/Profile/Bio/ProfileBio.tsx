@@ -3,21 +3,27 @@ import styles from "./ProfileBio.module.scss";
 import Button from "../../Button/Button";
 import Link from "next/link";
 import { Profile } from "@/interfaces/profile.model";
+import { chatHrefConstructor } from "@/utils/chatHrefConstructor";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface ProfileBioProps {
-  user: Profile;
+  profile: Profile;
 }
 
-const ProfileBio = ({ user }: ProfileBioProps) => {
+const ProfileBio = ({ profile }: ProfileBioProps) => {
+  const { user } = useAuth();
   return (
     <>
       <section className={styles.container}>
         <h4>About</h4>
         <div className={styles.bio}>
-          <p>{user.bio}</p>
+          <p>{profile.bio}</p>
         </div>
-        <Link href={`/message/1`} className={styles.cta}>
-          <Button text={`Message ${user.first_name}`} />
+        <Link
+          href={`/messages/${chatHrefConstructor(user, profile)}`}
+          className={styles.cta}
+        >
+          <Button text={`Message ${profile.first_name}`} />
         </Link>
       </section>
     </>

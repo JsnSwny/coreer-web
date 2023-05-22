@@ -1,0 +1,15 @@
+@import "@/styles/_variables.scss";
+
+.sidebar {
+  width: 350px;
+  height: 100vh;
+  background: white;
+  border-right: 1px solid $stroke;
+  padding: 0 2rem;
+}
+
+.conversations {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

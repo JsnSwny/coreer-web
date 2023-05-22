@@ -33,7 +33,7 @@ const profile = ({ profile, recommend }: ProfileProps) => {
             <ProfileBanner user={profile} />
             <div className={styles.container}>
               <div className={styles.topContainer}>
-                <ProfileBio user={profile} />
+                <ProfileBio profile={profile} />
               </div>
               <hr className={styles.divider} />
 

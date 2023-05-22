@@ -3,12 +3,15 @@ import styles from "./TopMatchBanner.module.scss";
 import Link from "next/link";
 import TagsList from "@/components/Tags/TagsList/TagsList";
 import LikeButton from "@/components/Button/LikeButton/LikeButton";
+import { chatHrefConstructor } from "@/utils/chatHrefConstructor";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface TopMatchBannerProps {
   profile: Profile;
 }
 
 const TopMatchBanner = ({ profile }: TopMatchBannerProps) => {
+  const { user } = useAuth();
   return (
     <div className={styles.banner}>
       <img className={styles.image} src={profile.profile_photo} />
@@ -27,7 +30,10 @@ const TopMatchBanner = ({ profile }: TopMatchBannerProps) => {
         </div>
         <div className={styles.buttonWrapper}>
           <button className={styles.button}>
-            <Link className={styles.buttonLink} href={`/profile/${profile.id}`}>
+            <Link
+              className={styles.buttonLink}
+              href={`/messages/${chatHrefConstructor(user, profile)}`}
+            >
               Message {profile.first_name}
             </Link>
           </button>

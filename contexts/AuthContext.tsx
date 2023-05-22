@@ -75,7 +75,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
           passwordConfirm,
         })
         .then((res) => {
-          console.log(res);
           const user = res.data.user;
           setUser(user);
           setUserToken(res.data.token);
