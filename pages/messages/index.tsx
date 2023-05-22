@@ -1,4 +1,5 @@
 import Head from "next/head";
+import MessagesSidebar from "@/components/Messages/MessagesSidebar/MessagesSidebar";
 
 const messages = () => {
   return (
@@ -6,7 +7,7 @@ const messages = () => {
       <Head>
         <title>Messages</title>
       </Head>
-      <h1>Messages</h1>
+      <MessagesSidebar />
     </>
   );
 };

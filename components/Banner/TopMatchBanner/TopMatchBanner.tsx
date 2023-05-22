@@ -36,6 +36,7 @@ const TopMatchBanner = ({ profile }: TopMatchBannerProps) => {
               View Profile
             </Link>
           </button>
+          <LikeButton profile={profile} className={styles.likeButton} />
         </div>
       </div>
     </div>

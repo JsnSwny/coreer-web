@@ -10,9 +10,11 @@ import { Profile } from "@/interfaces/profile.model";
 
 interface LikeButtonProps {
   profile: Profile;
+  className?: string;
+  alt?: boolean;
 }
 
-const LikeButton = ({ profile }: LikeButtonProps) => {
+const LikeButton = ({ profile, className, alt }: LikeButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const handleClick = (event) => {
     event.preventDefault();
@@ -65,7 +67,7 @@ const LikeButton = ({ profile }: LikeButtonProps) => {
   return (
     <FontAwesomeIcon
       icon={isHovered || user.following.includes(profile.id) ? faStar : farStar}
-      className={`${styles.likeButton} ${
+      className={`${className} ${styles.likeButton} ${
         isHovered || user.following.includes(profile.id)
           ? styles.solid
           : styles.regular
