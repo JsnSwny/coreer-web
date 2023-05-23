@@ -13,15 +13,17 @@
 }
 
 .content {
-  background: $primary;
+  background: white;
   color: white;
   padding: 0.5rem 0.75rem;
   width: fit-content;
   border-radius: 10px;
+  border: 1px solid $stroke;
 }
 
 .contentText {
   line-height: 20px;
+  color: $black;
 }
 
 .fromUser {

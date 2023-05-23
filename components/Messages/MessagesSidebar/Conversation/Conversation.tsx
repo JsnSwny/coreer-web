@@ -23,9 +23,11 @@ const Conversation = ({
             {conversation.other_user.first_name}{" "}
             {conversation.other_user.last_name}
           </h4>
-          <p className={styles.last_message}>
-            {conversation.last_message?.content}
-          </p>
+          {conversation.last_message && (
+            <p className={styles.last_message}>
+              {conversation.last_message?.content}
+            </p>
+          )}
         </div>
       </Link>
     </li>

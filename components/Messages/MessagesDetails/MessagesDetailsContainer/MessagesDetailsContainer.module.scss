@@ -1,20 +1,10 @@
 @import "@/styles/_variables.scss";
 
-.sidebar {
+.container {
   width: 400px;
   height: 100%;
   background: white;
-  border-right: 1px solid $stroke;
-}
-
-.conversations {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.contentContainer {
-  padding: 0.5rem 1rem;
+  border-left: 1px solid $stroke;
 }
 
 .titleContainer {

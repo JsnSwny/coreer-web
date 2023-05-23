@@ -12,6 +12,7 @@ import SendMessage from "@/components/Messages/Chat/SendMessage/SendMessage";
 import { useAuth } from "@/contexts/AuthContext";
 import { Message } from "@/interfaces/message.model";
 import ChatContainer from "@/components/Messages/Chat/ChatContainer/ChatContainer";
+import MessagesDetailsContainer from "@/components/Messages/MessagesDetails/MessagesDetailsContainer/MessagesDetailsContainer";
 
 interface MessagesProps {
   conversations: Conversation[];
@@ -76,7 +77,9 @@ const messages = ({
         <ChatContainer
           sendMessage={sendMessage}
           messageHistory={messageHistory}
+          currentConversation={currentConversation}
         />
+        <MessagesDetailsContainer />
       </MessagesContainer>
     </>
   );

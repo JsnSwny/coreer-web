@@ -2,9 +2,10 @@
 
 .footer {
   width: 100%;
-  border-top: 1px solid $stroke;
   padding: 1rem 1rem;
   display: flex;
+  max-width: 750px;
+  margin: 0 auto;
 }
 
 .form {
@@ -14,11 +15,38 @@
 }
 
 .input {
-  flex: 1;
-  border: 0.5px solid $stroke;
-  border-radius: 50px;
-  padding: 0.5rem 1rem;
+  flex: 1 1;
+  border: none;
+  background: transparent;
+  color: #64646f;
+  font: inherit;
+  font-size: 14px;
+  padding: 1rem 1.5rem;
   &:focus {
     outline: none;
   }
+}
+
+.formWrapper {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: 1px solid $stroke;
+  width: 100%;
+  border-radius: 50px;
+  position: relative;
+}
+
+.icon {
+  height: 20px;
+  color: $primary;
+  position: absolute;
+  right: 1.5rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: 0.2s ease opacity;
+}
+
+.active {
+  opacity: 1;
 }
