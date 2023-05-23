@@ -31,4 +31,14 @@
 .right {
   display: flex;
   gap: 1.5rem;
+  align-items: center;
+  height: 100%;
+}
+
+.icon {
+  display: flex;
+  height: 22px;
+  svg {
+    height: 100%;
+  }
 }
