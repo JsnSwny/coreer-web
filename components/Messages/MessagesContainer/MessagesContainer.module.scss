@@ -1,4 +1,7 @@
 .container {
   display: flex;
   align-items: flex-start;
+  height: calc(100vh - 65px);
+  max-height: calc(100vh - 65px);
+  margin-top: -3rem;
 }

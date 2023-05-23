@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styles from "./SendMessage.module.scss";
 
 interface SendMessageProps {
   sendMessage: (e: any, message: string) => void;
@@ -7,20 +8,24 @@ interface SendMessageProps {
 const SendMessage = ({ sendMessage }: SendMessageProps) => {
   const [message, setMessage] = useState("");
   return (
-    <form
-      onSubmit={(e) => {
-        sendMessage(e, message);
-        setMessage("");
-      }}
-    >
-      <input
-        value={message}
-        onChange={(e) => {
-          setMessage(e.target.value);
+    <footer className={styles.footer}>
+      <form
+        onSubmit={(e) => {
+          sendMessage(e, message);
+          setMessage("");
         }}
-      />
-      <button type="submit">Send</button>
-    </form>
+        className={styles.form}
+      >
+        <input
+          value={message}
+          onChange={(e) => {
+            setMessage(e.target.value);
+          }}
+          className={styles.input}
+        />
+        <button type="submit">Send</button>
+      </form>
+    </footer>
   );
 };
 

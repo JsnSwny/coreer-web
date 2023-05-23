@@ -14,7 +14,7 @@ const MessagesSidebar = ({
   console.log(conversations);
   return (
     <div className={styles.sidebar}>
-      <h1>Messages</h1>
+      <h1 className={styles.title}>Messages</h1>
       <input />
       <ul className={styles.conversations}>
         {conversations.map((conversation) => (
