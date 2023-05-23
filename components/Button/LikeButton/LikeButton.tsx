@@ -24,7 +24,7 @@ const LikeButton = ({ profile, className, alt }: LikeButtonProps) => {
   const { userToken, user } = useAuth();
 
   const likeUser = () => {
-    const config = {
+    const config: any = {
       headers: {
         "Content-Type": "application/json",
       },

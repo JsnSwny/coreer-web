@@ -4,11 +4,18 @@ import Container from "../../Container/Container";
 import Search from "../Search/Search";
 import Link from "next/link";
 import NavProfile from "../NavProfile/NavProfile";
+import { useRouter } from "next/router";
 
 const Header = () => {
+  const router = useRouter();
+
+  console.log(router);
+
+  const largeContainer = router.pathname == "/messages/[id]";
+
   return (
     <header className={styles.header}>
-      <Container>
+      <Container size={largeContainer ? "large" : "medium"}>
         <div className={styles.wrapper}>
           <Nav>
             <Link href="/">

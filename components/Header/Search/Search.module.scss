@@ -16,8 +16,8 @@
 .wrapper {
   display: flex;
   align-items: center;
-  background-color: #f8f8f8;
-  border: 1px solid $stroke;
+  background-color: rgba($primary, 0.1);
+  // border: 1px solid $stroke;
   max-width: 320px;
   width: 100%;
   border-radius: 50px;
@@ -31,3 +31,19 @@
   left: 1.5rem;
   pointer-events: none;
 }
+
+// .input::placeholder {
+//   /* Chrome, Firefox, Opera, Safari 10.1+ */
+//   color: white;
+//   opacity: 1; /* Firefox */
+// }
+
+// .input:-ms-input-placeholder {
+//   /* Internet Explorer 10-11 */
+//   color: white;
+// }
+
+// .input::-ms-input-placeholder {
+//   /* Microsoft Edge */
+//   color: white;
+// }
