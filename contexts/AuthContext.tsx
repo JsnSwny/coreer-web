@@ -17,6 +17,7 @@ interface AuthContextType {
   signOut: () => void;
   signUp: () => void;
   loading: boolean;
+  updateProfilePicture: () => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -26,6 +27,7 @@ export const AuthContext = createContext<AuthContextType>({
   signOut: () => {},
   signUp: () => {},
   loading: false,
+  updateProfilePicture: () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -116,6 +118,30 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
+  const updateProfilePicture = async (file: File) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      config.headers["Authorization"] = `Token ${userToken}`;
+
+      const formData = new FormData();
+      formData.append("image", file);
+
+      await axios
+        .put(`${server}/api/user/${user.id}/`, formData, config)
+        .then((res) => setUser(res.data))
+        .catch((err) => console.log(err.response));
+    } catch (error) {
+      console.error(error.response);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const fetchUser = useCallback(() => {
     let token = localStorage.getItem("token");
     const config = {
@@ -151,7 +177,15 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
   return (
     <AuthContext.Provider
-      value={{ loading, user, userToken, signIn, signOut, signUp }}
+      value={{
+        loading,
+        user,
+        userToken,
+        signIn,
+        signOut,
+        signUp,
+        updateProfilePicture,
+      }}
     >
       {children}
     </AuthContext.Provider>

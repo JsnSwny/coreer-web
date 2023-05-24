@@ -5,6 +5,9 @@ import { Profile } from "@/interfaces/profile.model";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCameraRetro } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { server } from "@/config";
+import axios from "axios";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface ProfileBannerProps {
   user: Profile;
@@ -12,7 +15,8 @@ interface ProfileBannerProps {
 
 const ProfileBanner = ({ user }: ProfileBannerProps) => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(user.profile_photo);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(user.image);
+  const { userToken, updateProfilePicture } = useAuth();
 
   const photoUpload = (e) => {
     e.preventDefault();
@@ -20,7 +24,7 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
     const file = e.target.files[0];
     reader.onloadend = () => {
       setSelectedFile(file);
-      console.log(reader.result);
+      updateProfilePicture(file);
       setImagePreviewUrl(reader.result);
     };
     reader.readAsDataURL(file);

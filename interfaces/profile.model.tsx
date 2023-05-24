@@ -4,6 +4,7 @@ import { Skill } from "./language.model";
 
 export interface Profile {
   id: number;
+  image: string;
   first_name: string;
   last_name: string;
   bio: string;
