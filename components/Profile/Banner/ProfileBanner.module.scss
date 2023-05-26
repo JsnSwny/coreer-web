@@ -3,12 +3,16 @@
 .container {
   width: 100%;
   position: relative;
-  height: 350px;
+  margin-bottom: 4rem;
 }
 
 .details {
   margin-left: calc(150px + 3rem);
-  margin-top: 0.75rem;
+  margin-right: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 90px;
 }
 
 .title {
@@ -26,23 +30,11 @@
 }
 
 .banner {
-  height: 275px;
+  height: 225px;
   width: 100%;
   object-fit: cover;
   display: inline-block;
-  position: relative;
-  z-index: -1;
-  &::after {
-    content: "";
-    background-color: red;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 5;
-  }
-  border-radius: 30px;
+  border-radius: 15px;
 }
 
 .profilePhoto {
@@ -87,4 +79,9 @@
 
 .fileInput {
   display: none;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.75rem;
 }

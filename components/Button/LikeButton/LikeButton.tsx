@@ -7,6 +7,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import axios from "axios";
 import { server } from "@/config";
 import { Profile } from "@/interfaces/profile.model";
+import { likeUser } from "@/utils/likeUser";
 
 interface LikeButtonProps {
   profile: Profile;
@@ -18,51 +19,10 @@ const LikeButton = ({ profile, className, alt }: LikeButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const handleClick = (event) => {
     event.preventDefault();
-    likeUser();
+    likeUser(user, profile, userToken);
   };
 
   const { userToken, user } = useAuth();
-
-  const likeUser = () => {
-    const config: any = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    config.headers["Authorization"] = `Token ${userToken}`;
-    let newLikes = user.following;
-
-    user.following.includes(profile.id)
-      ? axios
-          .delete(`${server}/api/follow/`, {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Token ${userToken}`,
-            },
-            data: { following_id: profile.id },
-          })
-
-          .catch((err) => console.log(err.response))
-      : axios
-          .post(
-            `${server}/api/follow/`,
-            {
-              following_id: profile.id,
-            },
-            config
-          )
-
-          .catch((err) => console.log(err.response));
-
-    if (user.following.includes(profile.id)) {
-      newLikes = [...newLikes.filter((item) => item != profile.id)];
-    } else {
-      newLikes.push(profile.id);
-    }
-
-    user.following = newLikes;
-  };
 
   return (
     <FontAwesomeIcon

@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./ProfileSection.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
 
 interface ProfileSectionProps {
   title: string;
@@ -9,7 +11,10 @@ interface ProfileSectionProps {
 const ProfileSection = ({ title, children }: ProfileSectionProps) => {
   return (
     <section className={styles.container}>
-      <h2 className={styles.title}>{title}</h2>
+      <h2 className={styles.title}>
+        {title} <FontAwesomeIcon icon={faPencil} />
+      </h2>
+      <hr className={styles.divider} />
       {children}
     </section>
   );

@@ -8,15 +8,23 @@ import { useState } from "react";
 import { server } from "@/config";
 import axios from "axios";
 import { useAuth } from "@/contexts/AuthContext";
+import Link from "next/link";
+import { chatHrefConstructor } from "@/utils/chatHrefConstructor";
+import Button from "@/components/Button/Button";
+import { likeUser } from "@/utils/likeUser";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faStar } from "@fortawesome/free-regular-svg-icons";
 
 interface ProfileBannerProps {
-  user: Profile;
+  profile: Profile;
 }
 
-const ProfileBanner = ({ user }: ProfileBannerProps) => {
+const ProfileBanner = ({ profile }: ProfileBannerProps) => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(user.image);
-  const { userToken, updateProfilePicture } = useAuth();
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<
+    string | ArrayBuffer | null
+  >(profile.image);
+  const { user, updateProfilePicture, userToken } = useAuth();
 
   const photoUpload = (e) => {
     e.preventDefault();
@@ -54,10 +62,28 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
         </div>
       </div>
       <div className={styles.details}>
-        <h1 className={styles.title}>
-          {user.first_name} {user.last_name}
-        </h1>
-        <p className={styles.subtitle}>{user.job}</p>
+        <div>
+          <h1 className={styles.title}>
+            {profile.first_name} {profile.last_name}
+          </h1>
+          <p className={styles.subtitle}>{profile.job}</p>
+        </div>
+
+        <div className={styles.buttons}>
+          <Button
+            text="Message"
+            link={`/messages/${chatHrefConstructor(user, profile)}`}
+            size="small"
+            alt={true}
+            icon={faEnvelope}
+          />
+          <Button
+            text="Like"
+            onClick={() => likeUser(user, profile, userToken)}
+            size="small"
+            icon={faStar}
+          />
+        </div>
       </div>
     </div>
   );

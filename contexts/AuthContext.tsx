@@ -17,7 +17,7 @@ interface AuthContextType {
   signOut: () => void;
   signUp: () => void;
   loading: boolean;
-  updateProfilePicture: () => void;
+  updateProfilePicture: (file: File) => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({

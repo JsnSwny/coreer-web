@@ -3,7 +3,6 @@
 .btn {
   background: $primary;
   border: none;
-  padding: 0.8rem 3rem;
   border-radius: 10px;
   color: white;
   font: inherit;
@@ -18,4 +17,33 @@
     padding: 0.75rem 1.5rem;
     border-radius: 30px;
   }
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  svg {
+    width: 20px;
+  }
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 100%;
+}
+
+.small {
+  padding: 0 1.5rem;
+}
+
+.alt {
+  color: $primary;
+  background: white;
+  border: 1px solid $primary;
+  border-radius: 10px;
+}
+
+.noLink {
+  padding: 0 1.5rem;
 }

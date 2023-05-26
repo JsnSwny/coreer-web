@@ -16,7 +16,11 @@ const Conversation = ({
       <Link href={`/messages/${conversation.name}`} className={styles.link}>
         <img
           className={styles.image}
-          src={conversation.other_user.profile_photo}
+          src={
+            conversation.other_user.image
+              ? conversation.other_user.image
+              : conversation.other_user.profile_photo
+          }
         />
         <div className={styles.content}>
           <h4 className={styles.name}>
