@@ -6,7 +6,7 @@ import { faPencil } from "@fortawesome/free-solid-svg-icons";
 interface ProfileSectionProps {
   title: string;
   children: React.ReactNode;
-  action: () => void;
+  action?: () => void;
 }
 
 const ProfileSection = ({ title, children, action }: ProfileSectionProps) => {
@@ -14,11 +14,13 @@ const ProfileSection = ({ title, children, action }: ProfileSectionProps) => {
     <section className={styles.container}>
       <h2 className={styles.title}>
         {title}{" "}
-        <FontAwesomeIcon
-          icon={faPencil}
-          onClick={action}
-          className={styles.icon}
-        />
+        {action && (
+          <FontAwesomeIcon
+            icon={faPencil}
+            onClick={action}
+            className={styles.icon}
+          />
+        )}
       </h2>
       <hr className={styles.divider} />
       {children}

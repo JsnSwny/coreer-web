@@ -19,6 +19,8 @@ import AboutSection from "@/components/Profile/About/AboutSection/AboutSection";
 import Modal from "@/components/Modal/Modal/Modal";
 import { useAuth } from "@/contexts/AuthContext";
 import AboutModalForm from "@/components/Modal/AboutModalForm/AboutModalForm";
+import ProfileCardList from "@/components/Card/ProfileCardList/ProfileCardList";
+import ProfileCard from "@/components/Card/ProfileCard/ProfileCard";
 
 interface ProfileProps {
   profile: Profile | null;
@@ -104,6 +106,13 @@ const profile = ({ profile, recommend }: ProfileProps) => {
                 body="John is a brilliant machine learning engineer who consistently delivers high-quality work. He is an excellent team player who is always willing to help his colleagues and share his knowledge with them.”"
               />
             </CardList>
+          </ProfileSection>
+          <ProfileSection title={`Similar to ${profile.first_name}`}>
+            <ProfileCardList>
+              {recommend.slice(1, 5).map((item) => (
+                <ProfileCard profile={item} />
+              ))}
+            </ProfileCardList>
           </ProfileSection>
         </div>
         {/* </div>
