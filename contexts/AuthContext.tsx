@@ -18,6 +18,7 @@ interface AuthContextType {
   signUp: () => void;
   loading: boolean;
   updateProfilePicture: (file: File) => void;
+  updateUser: (data: object) => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -28,6 +29,7 @@ export const AuthContext = createContext<AuthContextType>({
   signUp: () => {},
   loading: false,
   updateProfilePicture: () => {},
+  updateUser: () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -142,6 +144,29 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
+  const updateUser = async (data: object) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      config.headers["Authorization"] = `Token ${userToken}`;
+
+      await axios
+        .put(`${server}/api/user/${user.id}/`, data, config)
+        .then((res) => {
+          setUser(res.data);
+        })
+        .catch((err) => console.log(err.response));
+    } catch (error) {
+      console.error(error.response);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const fetchUser = useCallback(() => {
     let token = localStorage.getItem("token");
     const config = {
@@ -185,6 +210,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         signOut,
         signUp,
         updateProfilePicture,
+        updateUser,
       }}
     >
       {children}

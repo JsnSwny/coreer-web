@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Profile } from "../../../interfaces/profile.model";
 import { server } from "@/config";
 import Image from "next/image";
@@ -16,13 +16,32 @@ import LanguageList from "@/components/Profile/Languages/LanguageList/LanguageLi
 import Language from "@/components/Profile/Languages/Language/Language";
 import withAuth from "@/components/Route/withAuth";
 import AboutSection from "@/components/Profile/About/AboutSection/AboutSection";
+import Modal from "@/components/Modal/Modal/Modal";
+import { useAuth } from "@/contexts/AuthContext";
+import AboutModalForm from "@/components/Modal/AboutModalForm/AboutModalForm";
 
 interface ProfileProps {
-  profile: Profile;
+  profile: Profile | null;
   recommend: Profile[];
 }
 
 const profile = ({ profile, recommend }: ProfileProps) => {
+  const { updateUser, user } = useAuth();
+
+  profile = user.id == profile.id ? user : profile;
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+
+  const openModal = (section: string) => {
+    setActiveSection(section);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <Head>
@@ -30,12 +49,19 @@ const profile = ({ profile, recommend }: ProfileProps) => {
       </Head>
       <Container>
         <ProfileBanner profile={profile} />
+
+        <Modal title={activeSection} isOpen={isModalOpen} onClose={closeModal}>
+          {activeSection === "about" && (
+            <AboutModalForm closeModal={closeModal} />
+          )}
+          {activeSection === "address" && <AddressSectionForm />}
+        </Modal>
         <div className={styles.container}>
-          <ProfileSection title="About">
+          <ProfileSection title="About" action={() => openModal("about")}>
             <AboutSection profile={profile} />
           </ProfileSection>
 
-          <ProfileSection title={"Skills"}>
+          <ProfileSection title={"Skills"} action={() => openModal("section")}>
             <LanguageList languages={profile.languages} />
           </ProfileSection>
 
@@ -58,7 +84,7 @@ const profile = ({ profile, recommend }: ProfileProps) => {
             </CardList>
           </ProfileSection>
           <ProfileSection title={"Education"}>
-            <CardList>
+            {/* <CardList>
               {profile.educations.map((education) => (
                 <Card
                   image={education.school.logo}
@@ -67,7 +93,7 @@ const profile = ({ profile, recommend }: ProfileProps) => {
                   body="Lorem ipsum dolor sit amet consectetur. Tempor dui vulputate netus facilisis vel."
                 />
               ))}
-            </CardList>
+            </CardList> */}
           </ProfileSection>
           <ProfileSection title={"Reviews"}>
             <CardList>

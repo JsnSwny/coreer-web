@@ -1,0 +1,76 @@
+@import "@/styles/_variables.scss";
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.modalContent {
+  background-color: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 15px;
+  position: relative;
+  max-width: 550px;
+  width: 100%;
+}
+
+.modalHeader {
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  //   &::after {
+  //     content: "";
+  //     width: calc(100% + 4rem);
+  //     height: 1px;
+  //     display: block;
+  //     background: $stroke;
+  //     flex: 1;
+  //     margin: 1.5rem -2rem;
+  //   }
+  p {
+    margin-top: 0.25rem;
+    color: $dark-light;
+  }
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: $black;
+  cursor: pointer;
+  svg {
+    width: 16px;
+  }
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.modalBody {
+  &::after {
+    content: "";
+    width: calc(100% + 4rem);
+    height: 1px;
+    display: block;
+    background: $stroke;
+    flex: 1;
+    margin: 2.5rem -2rem 1.5rem -2rem;
+  }
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.saveButton:hover {
+  background-color: #0056b3;
+}
