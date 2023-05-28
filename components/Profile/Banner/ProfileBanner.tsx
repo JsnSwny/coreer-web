@@ -23,7 +23,7 @@ const ProfileBanner = ({ profile }: ProfileBannerProps) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState<
     string | ArrayBuffer | null
-  >(profile.image);
+  >(profile.profile_photo ? profile.profile_photo : profile.image);
   const { user, updateProfilePicture, userToken } = useAuth();
 
   const photoUpload = (e) => {

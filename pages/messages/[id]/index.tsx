@@ -16,17 +16,15 @@ import MessagesDetailsContainer from "@/components/Messages/MessagesDetails/Mess
 
 interface MessagesProps {
   conversations: Conversation[];
-  currentConversation: Conversation;
+  currConversation: Conversation;
   id: number;
 }
 
-const messages = ({
-  conversations,
-  currentConversation,
-  id,
-}: MessagesProps) => {
+const messages = ({ conversations, currConversation, id }: MessagesProps) => {
   const [conversationsList, setConversationsList] = useState(conversations);
   const [messageHistory, setMessageHistory] = useState([]);
+  const [currentConversation, setCurrentConversation] =
+    useState(currConversation);
 
   const { userToken } = useAuth();
 
@@ -44,6 +42,14 @@ const messages = ({
             // console.log(data);
             // setConversationsList([data.conversation, ...conversationsList]);
             setMessageHistory(data.messages);
+            console.log(data.conversation);
+            if (
+              !conversationsList.some((item) => item.id == data.conversation.id)
+            ) {
+              setConversationsList([data.conversation, ...conversationsList]);
+            }
+
+            setCurrentConversation(data.conversation);
             break;
         }
       },
@@ -115,7 +121,7 @@ export const getServerSideProps = async (context: any) => {
   return {
     props: {
       conversations: conversations,
-      currentConversation: currentConversation ? currentConversation : null,
+      currConversation: currentConversation ? currentConversation : null,
       id: context.params.id,
     },
   };

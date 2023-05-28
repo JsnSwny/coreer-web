@@ -28,8 +28,10 @@
 
 .fromUser {
   justify-content: flex-end;
+
   .content {
     background: $primary;
+    border: 1px solid $primary;
   }
 
   .contentText {

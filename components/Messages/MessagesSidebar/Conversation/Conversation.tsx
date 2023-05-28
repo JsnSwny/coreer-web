@@ -17,9 +17,9 @@ const Conversation = ({
         <img
           className={styles.image}
           src={
-            conversation.other_user.image
-              ? conversation.other_user.image
-              : conversation.other_user.profile_photo
+            conversation.other_user.profile_photo
+              ? conversation.other_user.profile_photo
+              : conversation.other_user.image
           }
         />
         <div className={styles.content}>

@@ -18,16 +18,20 @@ const ChatContainer = ({
 }: ChatContainerProps) => {
   return (
     <section className={styles.container}>
-      <ChatHeader currentConversation={currentConversation} />
-      <div className={styles.messagesContainer}>
-        <ul className={styles.wrapper}>
-          {messageHistory.map((message) => (
-            <Message message={message} />
-          ))}
-        </ul>
-      </div>
+      {currentConversation && (
+        <>
+          <ChatHeader currentConversation={currentConversation} />
+          <div className={styles.messagesContainer}>
+            <ul className={styles.wrapper}>
+              {messageHistory.map((message) => (
+                <Message message={message} />
+              ))}
+            </ul>
+          </div>
 
-      <SendMessage sendMessage={sendMessage} />
+          <SendMessage sendMessage={sendMessage} />
+        </>
+      )}
     </section>
   );
 };

@@ -24,6 +24,7 @@ const SendMessage = ({ sendMessage }: SendMessageProps) => {
             onChange={(e) => {
               setMessage(e.target.value);
             }}
+            autoFocus
             className={styles.input}
             placeholder="Type your message here..."
           />

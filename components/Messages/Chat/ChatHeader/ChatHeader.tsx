@@ -22,7 +22,9 @@ const ChatHeader = ({ currentConversation }: ChatHeaderProps) => {
             {currentConversation.other_user.first_name}{" "}
             {currentConversation.other_user.last_name}
           </h4>
-          <p className={styles.job}>{currentConversation.other_user.job}</p>
+          {currentConversation.other_user.job && (
+            <p className={styles.job}>{currentConversation.other_user.job}</p>
+          )}
         </div>
       </Link>
     </header>
