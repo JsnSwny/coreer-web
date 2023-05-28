@@ -5,9 +5,14 @@ interface TagSelectorProps {
   active: boolean;
 }
 
-const TagSelector = ({ title, active }: TagSelectorProps) => {
+const TagSelector = ({ title, active, onClick }: TagSelectorProps) => {
   return (
-    <li className={`${styles.tag} ${active ? styles.active : ""}`}>{title}</li>
+    <li
+      className={`${styles.tag} ${active ? styles.active : ""}`}
+      onClick={onClick}
+    >
+      {title}
+    </li>
   );
 };
 

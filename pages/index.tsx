@@ -63,27 +63,29 @@ export const getServerSideProps = async (context: any) => {
   const { req } = context;
   const cookies = cookie.parse(req.headers.cookie || "");
   const token = cookies.token;
-
   console.log("GETTING RECS");
-
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
-
   let recommend = [];
-
+  let isOnboarded = false;
   if (token) {
     config.headers["Authorization"] = `Token ${token}`;
-    const recommendationsRes = await fetch(`${server}/recommend/5`, config);
 
-    recommend = await recommendationsRes.json();
+    await axios.get(`${server}/api/auth/user`, config).then((res) => {
+      isOnboarded = res.data.onboarded;
+    });
+
+    if (isOnboarded) {
+      const recommendationsRes = await fetch(`${server}/recommend/5`, config);
+      recommend = await recommendationsRes.json();
+    }
   }
-
   return {
     props: {
-      recommend: token ? recommend.recommendations : [],
+      recommend: isOnboarded ? recommend.recommendations : [],
     },
   };
 };

@@ -145,6 +145,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const updateUser = async (data: object) => {
+    setLoading(true);
     try {
       const config = {
         headers: {

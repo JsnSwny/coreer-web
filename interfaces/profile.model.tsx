@@ -13,6 +13,7 @@ export interface Profile {
   projects: Project[];
   educations: Education[];
   languages: Skill[];
+  interests: object[];
   location: string;
   onboarded: boolean;
   following: Profile[];

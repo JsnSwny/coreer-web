@@ -7,18 +7,60 @@ import withGuest from "@/components/Route/withGuest";
 import OnboardingWrapper from "@/components/Auth/Onboarding/OnboardingWrapper/OnboardingWrapper";
 import PersonalDetails from "@/components/Auth/Onboarding/PersonalDetails/PersonalDetails";
 import Interests from "@/components/Auth/Onboarding/Interests/Interest";
+import { server } from "@/config";
+import axios from "axios";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/router";
 
-const interests = () => {
+const interests = ({ interests }) => {
+  const { user } = useAuth();
+  const router = useRouter();
   return (
     <>
       <Head>
         <title>Onboarding | Interests</title>
       </Head>
-      <OnboardingWrapper title={"Interests"} description={"fasfasf asas asd"}>
-        <Interests />
-      </OnboardingWrapper>
+      {user && (
+        <OnboardingWrapper title={"Interests"} description={"fasfasf asas asd"}>
+          <Interests
+            options={interests}
+            defaultOptions={user.interests}
+            updateKey={"interests_id"}
+            onSubmit={async () => {
+              router.push("/onboarding/languages");
+            }}
+          />
+        </OnboardingWrapper>
+      )}
     </>
   );
+};
+
+export const getServerSideProps = async (context: any) => {
+  const { req } = context;
+  // const cookies = cookie.parse(req.headers.cookie || "");
+  // const token = cookies.token;
+  // console.log("GETTING RECS");
+  // const config = {
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // };
+  let interestsRes: any = [];
+  await axios
+    .get(`${server}/api/interests`)
+    .then((res) => {
+      interestsRes = res.data;
+    })
+    .catch((err) => {
+      console.log("error");
+      console.log(err.response);
+    });
+  return {
+    props: {
+      interests: interestsRes,
+    },
+  };
 };
 
 export default interests;

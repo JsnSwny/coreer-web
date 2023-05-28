@@ -8,18 +8,18 @@ const withAuth = (WrappedComponent: React.ComponentType<any>) => {
     const router = useRouter();
 
     useEffect(() => {
-      console.log("WITH AUTH");
       if (!loading && !user) {
         router.push("/login");
       }
     }, [loading, user, router]);
+
     if (loading) {
       return <h1>LOADING</h1>;
     }
     if (user) {
       console.log(user);
       if (!user.onboarded) {
-        router.push("/onboarding/details");
+        router.push("/onboarding/personal-details");
       } else {
         return <WrappedComponent {...props} />;
       }
