@@ -18,9 +18,11 @@ import withAuth from "@/components/Route/withAuth";
 import AboutSection from "@/components/Profile/About/AboutSection/AboutSection";
 import Modal from "@/components/Modal/Modal/Modal";
 import { useAuth } from "@/contexts/AuthContext";
-import AboutModalForm from "@/components/Modal/AboutModalForm/AboutModalForm";
+import AboutModalForm from "@/components/Modal/Forms/AboutModalForm/AboutModalForm";
 import ProfileCardList from "@/components/Card/ProfileCardList/ProfileCardList";
 import ProfileCard from "@/components/Card/ProfileCard/ProfileCard";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import AddProjectModalForm from "@/components/Modal/Forms/AddProjectModalForm/AddProjectModalForm";
 
 interface ProfileProps {
   profile: Profile | null;
@@ -53,15 +55,18 @@ const profile = ({ profile, recommend }: ProfileProps) => {
         <ProfileBanner profile={profile} />
 
         <Modal title={activeSection} isOpen={isModalOpen} onClose={closeModal}>
-          {activeSection === "about" && (
+          {activeSection === "About" && (
             <AboutModalForm closeModal={closeModal} />
+          )}
+          {activeSection === "Add Project" && (
+            <AddProjectModalForm closeModal={closeModal} />
           )}
           {activeSection === "address" && <AddressSectionForm />}
         </Modal>
         <div className={styles.container}>
           <ProfileSection
             title="About"
-            action={() => openModal("about")}
+            action={() => openModal("About")}
             profile={profile}
           >
             <AboutSection profile={profile} />
@@ -75,7 +80,12 @@ const profile = ({ profile, recommend }: ProfileProps) => {
             <LanguageList languages={profile.languages} />
           </ProfileSection>
 
-          <ProfileSection title={"Projects"} profile={profile}>
+          <ProfileSection
+            title={"Projects"}
+            profile={profile}
+            action={() => openModal("Add Project")}
+            actionIcon={faPlus}
+          >
             <Projects projects={profile.projects} />
           </ProfileSection>
           <ProfileSection title={"Work Experience"} profile={profile}>

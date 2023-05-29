@@ -21,7 +21,7 @@ const Project = ({ project }: ProjectProps) => {
             project.end_date ? `- ${project.end_date}` : ""
           }`}
         </p>
-        <h3 className={styles.title}>{project.title.split("/")[1]}</h3>
+        <h3 className={styles.title}>{project.title}</h3>
         <p className={styles.description}>{project.description}</p>
       </div>
       {project.languages.length > 0 && (

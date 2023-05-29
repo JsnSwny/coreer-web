@@ -168,6 +168,31 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
+  const addProject = async (data: object) => {
+    setLoading(true);
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      config.headers["Authorization"] = `Token ${userToken}`;
+
+      await axios
+        .post(`${server}/api/projects/`, data, config)
+        .then((res) => {
+          console.log(res.data);
+          setUser({ ...user, projects: [...user.projects, res.data] });
+        })
+        .catch((err) => console.log(err.response));
+    } catch (error) {
+      console.error(error.response);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const fetchUser = useCallback(() => {
     let token = localStorage.getItem("token");
     const config = {
@@ -212,6 +237,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         signUp,
         updateProfilePicture,
         updateUser,
+        addProject,
       }}
     >
       {children}

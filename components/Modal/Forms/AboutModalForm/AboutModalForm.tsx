@@ -1,5 +1,5 @@
 import globalStyles from "@/styles/globalStyles.module.scss";
-import Modal from "../Modal/Modal";
+import Modal from "../../Modal/Modal";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import Button from "@/components/Button/Button";
