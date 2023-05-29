@@ -12,7 +12,7 @@ const login = () => {
         <title>Signup | Coreer</title>
       </Head>
       <AuthWrapper>
-        <Auth title="Sign up">
+        <Auth title="Create an account">
           <SignupForm />
         </Auth>
         <AuthBanner />

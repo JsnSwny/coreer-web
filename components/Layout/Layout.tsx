@@ -6,6 +6,9 @@ import styles from "./Layout.module.scss";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -32,6 +35,7 @@ const Layout = ({ children }: LayoutProps) => {
           />
         </Head>
         {/* <Sidebar /> */}
+        <ToastContainer />
         <div className={showHeader ? styles.content : styles.contentAlt}>
           {showHeader && <Header />}
           <main>{children}</main>

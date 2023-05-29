@@ -1,6 +1,6 @@
 @import "@/styles/_variables.scss";
 .container {
-  width: 45%;
+  width: 50%;
   max-width: 900px;
   height: 100%;
   display: flex;
@@ -10,7 +10,7 @@
 }
 
 .content {
-  max-width: 60%;
+  max-width: 450px;
   width: 100%;
 }
 
@@ -21,6 +21,6 @@
 }
 
 .title {
-  font-size: 28px;
+  font-size: 32px;
   margin-bottom: 3rem;
 }

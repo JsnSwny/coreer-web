@@ -14,7 +14,7 @@ const withGuest = (WrappedComponent: React.ComponentType<any>) => {
     }, [user, router]);
 
     if (loading) {
-      return <h1>Loading GUEST...</h1>;
+      // return <h1>Loading GUEST...</h1>;
     }
 
     if (!user) {

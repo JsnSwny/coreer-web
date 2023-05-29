@@ -4,9 +4,21 @@
   width: 100%;
   .input {
     margin-top: 0.5rem;
+    height: 48px;
   }
 
   .label:not(:last-child) {
     margin-bottom: 2rem;
   }
+}
+
+.altLink {
+  color: $dark-light;
+  a {
+    color: $primary;
+    font-weight: bold;
+  }
+  margin-top: 2rem;
+  width: 100%;
+  text-align: center;
 }

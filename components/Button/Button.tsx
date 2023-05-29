@@ -29,7 +29,7 @@ const Button = ({
     <button
       data-variant={variant}
       onClick={onClick}
-      className={`${styles.btn} ${!link ? styles.noLink : ""}`}
+      className={`${styles.btn} ${!link ? styles.noLink : ""} ${styles[size]}`}
     >
       {link ? (
         <Link
