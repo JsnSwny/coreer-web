@@ -59,18 +59,26 @@ const profile = ({ profile, recommend }: ProfileProps) => {
           {activeSection === "address" && <AddressSectionForm />}
         </Modal>
         <div className={styles.container}>
-          <ProfileSection title="About" action={() => openModal("about")}>
+          <ProfileSection
+            title="About"
+            action={() => openModal("about")}
+            profile={profile}
+          >
             <AboutSection profile={profile} />
           </ProfileSection>
 
-          <ProfileSection title={"Skills"} action={() => openModal("section")}>
+          <ProfileSection
+            title={"Skills"}
+            action={() => openModal("section")}
+            profile={profile}
+          >
             <LanguageList languages={profile.languages} />
           </ProfileSection>
 
-          <ProfileSection title={"Projects"}>
+          <ProfileSection title={"Projects"} profile={profile}>
             <Projects projects={profile.projects} />
           </ProfileSection>
-          <ProfileSection title={"Work Experience"}>
+          <ProfileSection title={"Work Experience"} profile={profile}>
             <CardList>
               <Card
                 image="http://www.gurunepal.com/wp-content/uploads/2020/05/heriot-watt-1-1.png"
@@ -85,7 +93,7 @@ const profile = ({ profile, recommend }: ProfileProps) => {
               />
             </CardList>
           </ProfileSection>
-          <ProfileSection title={"Education"}>
+          <ProfileSection title={"Education"} profile={profile}>
             {/* <CardList>
               {profile.educations.map((education) => (
                 <Card
@@ -97,7 +105,7 @@ const profile = ({ profile, recommend }: ProfileProps) => {
               ))}
             </CardList> */}
           </ProfileSection>
-          <ProfileSection title={"Reviews"}>
+          <ProfileSection title={"Reviews"} profile={profile}>
             <CardList>
               <Card
                 image="http://www.gurunepal.com/wp-content/uploads/2020/05/heriot-watt-1-1.png"
@@ -107,7 +115,10 @@ const profile = ({ profile, recommend }: ProfileProps) => {
               />
             </CardList>
           </ProfileSection>
-          <ProfileSection title={`Similar to ${profile.first_name}`}>
+          <ProfileSection
+            title={`Similar to ${profile.first_name}`}
+            profile={profile}
+          >
             <ProfileCardList>
               {recommend.slice(1, 5).map((item) => (
                 <ProfileCard profile={item} />

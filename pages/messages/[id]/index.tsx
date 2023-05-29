@@ -73,7 +73,11 @@ const messages = ({ conversations, currConversation, id }: MessagesProps) => {
   return (
     <>
       <Head>
-        <title>Messages</title>
+        <title>
+          {currentConversation?.other_user &&
+            `${currentConversation.other_user.first_name} ${currentConversation.other_user.last_name}`}{" "}
+          | Messages
+        </title>
       </Head>
       <MessagesContainer>
         <MessagesSidebar

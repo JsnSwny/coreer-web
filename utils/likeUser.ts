@@ -2,6 +2,7 @@ import { server } from "@/config";
 import { useAuth } from "@/contexts/AuthContext";
 import { Profile } from "@/interfaces/profile.model";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const likeUser = (
   user: Profile,
@@ -9,6 +10,20 @@ export const likeUser = (
   userToken: string
 ) => {
   console.log("Liking user");
+  let toastMessage = !user.following.includes(profile.id)
+    ? `Added ${profile.first_name} ${profile.last_name} to your likes!`
+    : `Removed ${profile.first_name} ${profile.last_name} from your likes!`;
+
+  toast(toastMessage, {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  });
   const config: any = {
     headers: {
       "Content-Type": "application/json",

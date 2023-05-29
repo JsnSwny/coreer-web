@@ -4,7 +4,7 @@ import LargeContainer from "@/components/Container/LargeContainer";
 import { Profile } from "@/interfaces/profile.model";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCameraRetro } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { server } from "@/config";
 import axios from "axios";
 import { useAuth } from "@/contexts/AuthContext";
@@ -13,7 +13,9 @@ import { chatHrefConstructor } from "@/utils/chatHrefConstructor";
 import Button from "@/components/Button/Button";
 import { likeUser } from "@/utils/likeUser";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faStar } from "@fortawesome/free-regular-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
+import { toast } from "react-toastify";
 
 interface ProfileBannerProps {
   profile: Profile;
@@ -21,10 +23,17 @@ interface ProfileBannerProps {
 
 const ProfileBanner = ({ profile }: ProfileBannerProps) => {
   const [selectedFile, setSelectedFile] = useState(null);
+  const [isHovered, setIsHovered] = useState(false);
   const [imagePreviewUrl, setImagePreviewUrl] = useState<
     string | ArrayBuffer | null
   >(profile.profile_photo ? profile.profile_photo : profile.image);
   const { user, updateProfilePicture, userToken } = useAuth();
+
+  useEffect(() => {
+    setImagePreviewUrl(
+      profile.profile_photo ? profile.profile_photo : profile.image
+    );
+  }, [profile]);
 
   const photoUpload = (e) => {
     e.preventDefault();
@@ -47,18 +56,21 @@ const ProfileBanner = ({ profile }: ProfileBannerProps) => {
         />
         <div className={styles.content}>
           <img className={styles.profilePhoto} src={imagePreviewUrl} />
-          <label htmlFor="photo-upload" className={styles.changePhoto}>
-            <FontAwesomeIcon
-              icon={faCameraRetro}
-              className={styles.changePhotoImage}
-            />
-            <input
-              id="photo-upload"
-              className={styles.fileInput}
-              type="file"
-              onChange={photoUpload}
-            />
-          </label>
+          {profile.id == user.id && (
+            <label htmlFor="photo-upload" className={styles.changePhoto}>
+              <FontAwesomeIcon
+                icon={faCameraRetro}
+                className={styles.changePhotoImage}
+              />
+
+              <input
+                id="photo-upload"
+                className={styles.fileInput}
+                type="file"
+                onChange={photoUpload}
+              />
+            </label>
+          )}
         </div>
       </div>
       <div className={styles.details}>
@@ -68,22 +80,32 @@ const ProfileBanner = ({ profile }: ProfileBannerProps) => {
           </h1>
           <p className={styles.subtitle}>{profile.job}</p>
         </div>
-
-        <div className={styles.buttons}>
-          <Button
-            text="Message"
-            link={`/messages/${chatHrefConstructor(user, profile)}`}
-            size="small"
-            alt={true}
-            icon={faEnvelope}
-          />
-          <Button
-            text="Like"
-            onClick={() => likeUser(user, profile, userToken)}
-            size="small"
-            icon={faStar}
-          />
-        </div>
+        {profile.id != user.id && (
+          <div className={styles.buttons}>
+            <Button
+              text="Message"
+              link={`/messages/${chatHrefConstructor(user, profile)}`}
+              size="small"
+              alt={true}
+              icon={faEnvelope}
+            />
+            <Button
+              text={user.following.includes(profile.id) ? "Remove" : "Like"}
+              alt={!user.following.includes(profile.id)}
+              onClick={() => {
+                likeUser(user, profile, userToken);
+              }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              size="small"
+              icon={
+                isHovered || user.following.includes(profile.id)
+                  ? faStar
+                  : farStar
+              }
+            />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -2,13 +2,13 @@
 
 .btn {
   background: $primary;
-  border: none;
+  border: 1px solid $primary;
   border-radius: 10px;
   color: white;
   font: inherit;
   font-weight: bold;
   font-size: 14px;
-  transition: 0.2s ease background;
+  transition: 0.2s ease background, 0.2s ease color;
   cursor: pointer;
   &:hover {
     background: darken($primary, 10%);
@@ -28,6 +28,16 @@
   &.large {
     width: 100%;
   }
+  &.alt {
+    color: $primary;
+    background: white;
+    border: 1px solid $primary;
+    &:hover {
+      background: $primary;
+      border: 1px solid $primary;
+      color: white;
+    }
+  }
 }
 
 .link {
@@ -38,13 +48,6 @@
   &.small {
     padding: 0 1.5rem;
   }
-}
-
-.alt {
-  color: $primary;
-  background: white;
-  border: 1px solid $primary;
-  border-radius: 10px;
 }
 
 .noLink {

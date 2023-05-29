@@ -13,9 +13,9 @@ const withAuth = (WrappedComponent: React.ComponentType<any>) => {
       }
     }, [loading, user, router]);
 
-    if (loading) {
-      return <h1>LOADING</h1>;
-    }
+    // if (loading) {
+    //   return <h1>LOADING</h1>;
+    // }
     if (user) {
       console.log(user);
       if (!user.onboarded) {

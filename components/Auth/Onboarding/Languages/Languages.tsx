@@ -35,11 +35,6 @@ const Languages = ({ options, defaultOptions, updateKey }: LanguagesProps) => {
               active={selectedOptions.some((item) => item.id == option.id)}
               onClick={() => {
                 setSelectedOptions([...selectedOptions, option]);
-                updateUser({
-                  [updateKey]: [...selectedOptions, option].map(
-                    (item) => item.id
-                  ),
-                });
               }}
             />
           ))}

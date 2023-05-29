@@ -24,12 +24,18 @@ const Button = ({
   icon,
   alt,
   onClick,
+  onMouseEnter,
+  onMouseLeave,
 }: ButtonProps) => {
   return (
     <button
       data-variant={variant}
       onClick={onClick}
-      className={`${styles.btn} ${!link ? styles.noLink : ""} ${styles[size]}`}
+      className={`${styles.btn} ${!link ? styles.noLink : ""} ${styles[size]} ${
+        alt ? styles.alt : ""
+      }`}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       {link ? (
         <Link

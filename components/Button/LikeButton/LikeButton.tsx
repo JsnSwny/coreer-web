@@ -20,16 +20,6 @@ const LikeButton = ({ profile, className, alt }: LikeButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const handleClick = (event) => {
     event.preventDefault();
-    toast(`You liked ${profile.first_name} ${profile.last_name}!`, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
     likeUser(user, profile, userToken);
   };
 
