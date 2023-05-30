@@ -13,7 +13,7 @@ const Header = () => {
 
   console.log(router);
 
-  const largeContainer = router.pathname == "/messages/[id]";
+  const largeContainer = router.pathname.includes("/messages");
 
   return (
     <header className={styles.header}>
