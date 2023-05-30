@@ -15,7 +15,7 @@
 
 .modalContent {
   background-color: #fff;
-  padding: 1.5rem 2rem;
+  padding: 1.25rem 2rem;
   border-radius: 15px;
   position: relative;
   max-width: 550px;
@@ -52,18 +52,6 @@
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
-}
-
-.modalBody {
-  &::after {
-    content: "";
-    width: calc(100% + 4rem);
-    height: 1px;
-    display: block;
-    background: $stroke;
-    flex: 1;
-    margin: 2.5rem -2rem 1.5rem -2rem;
-  }
 }
 
 .modalFooter {

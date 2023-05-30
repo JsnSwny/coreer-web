@@ -21,7 +21,7 @@ const Search = () => {
 
   return (
     <div className={styles.wrapper}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <input
           className={styles.input}
           value={search}
