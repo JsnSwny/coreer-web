@@ -15,6 +15,7 @@
   height: 140px;
   border-radius: 50%;
   outline: none;
+  background: lighten($primary, 5%);
   //   border: 2px solid $primary;
 }
 
@@ -25,6 +26,26 @@
 
 .title {
   font-size: 32px;
+  width: 100%;
+}
+
+.titlePlaceholder {
+  height: 32px;
+  width: 200px;
+  background: lighten($primary, 5%);
+}
+
+.jobPlaceholder {
+  height: 18px;
+  width: 150px;
+  background: lighten($primary, 5%);
+  margin-top: 0.25rem;
+}
+
+.contentPlaceholder {
+  height: 16px;
+  width: 200px;
+  background: lighten($primary, 5%);
 }
 
 .subtitle {
@@ -38,6 +59,12 @@
   background: white;
   display: block;
   margin: 0 3rem;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  max-width: 40%;
 }
 
 .right {
@@ -78,5 +105,8 @@
 }
 
 .likeButton {
-  color: white;
+  color: white !important;
+}
+
+.placeholderImage {
 }

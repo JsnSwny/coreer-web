@@ -69,3 +69,37 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.placeholderBlue {
+  animation: placeholder-pulse-blue 2s infinite;
+  background: $primary;
+}
+
+.placeholderWhite {
+  animation: placeholder-pulse-white 2s infinite;
+  background: white;
+}
+
+@keyframes placeholder-pulse-blue {
+  0% {
+    background-color: lighten($primary, 3%);
+  }
+  50% {
+    background-color: lighten($primary, 8%);
+  }
+  100% {
+    background-color: lighten($primary, 3%);
+  }
+}
+
+@keyframes placeholder-pulse-white {
+  0% {
+    background-color: darken(white, 5%);
+  }
+  50% {
+    background-color: darken(white, 12%);
+  }
+  100% {
+    background-color: darken(white, 5%);
+  }
+}

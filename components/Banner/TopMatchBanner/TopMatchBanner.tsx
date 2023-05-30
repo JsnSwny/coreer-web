@@ -14,16 +14,18 @@ const TopMatchBanner = ({ profile }: TopMatchBannerProps) => {
   const { user } = useAuth();
   return (
     <div className={styles.banner}>
-      <img className={styles.image} src={profile.profile_photo} />
-      {/* <LikeButton profile={profile} /> */}
-      <div className={styles.details}>
-        <h3 className={styles.title}>
-          {profile.first_name} {profile.last_name}
-        </h3>
-        <p className={styles.subtitle}>{profile.job}</p>
-        <p className={styles.location}></p>
+      <div className={styles.left}>
+        <img className={styles.image} src={profile.profile_photo} />
+        {/* <LikeButton profile={profile} /> */}
+        <div className={styles.details}>
+          <h3 className={styles.title}>
+            {profile.first_name} {profile.last_name}
+          </h3>
+          <p className={styles.subtitle}>{profile.job}</p>
+          <p className={styles.location}></p>
+        </div>
+        <span className={styles.verticalRule}></span>
       </div>
-      <span className={styles.verticalRule}></span>
       <div className={styles.right}>
         <div className={styles.rightContent}>
           <p>{profile.bio}</p>

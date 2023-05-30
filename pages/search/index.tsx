@@ -55,7 +55,7 @@ const results = ({ searchData, currentPage, perPage, query }: ResultsProps) => {
 
     const apiUrl = `${server}/api/user/?search=${currentQuery.query}&page=${
       pageNumber.selected + 1
-    }&perPage=15`;
+    }&perPage=12`;
 
     const response = await fetch(apiUrl);
     const searchData = await response.json();
@@ -97,7 +97,7 @@ export const getServerSideProps = async (context: any) => {
   console.log("Page");
   const encodedQuery = encodeURIComponent(query);
 
-  const apiUrl = `${server}/api/user/?search=${query}&page=${page}&perPage=15`;
+  const apiUrl = `${server}/api/user/?search=${query}&page=${page}&perPage=12`;
 
   const response = await fetch(apiUrl);
   const searchData = await response.json();

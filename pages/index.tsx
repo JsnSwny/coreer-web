@@ -10,21 +10,44 @@ import { useRouter } from "next/router";
 import { Profile } from "@/interfaces/profile.model";
 import Section from "@/components/Layout/Section/Section";
 import { useAuth } from "@/contexts/AuthContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import withAuth from "@/components/Route/withAuth";
 import axios from "axios";
 import cookie from "cookie";
 import SectionList from "@/components/Layout/SectionList/SectionList";
 import ExploreHeading from "@/components/Layout/ExploreHeading/ExploreHeading";
 import TopMatchBanner from "@/components/Banner/TopMatchBanner/TopMatchBanner";
+import TopMatchBannerPlaceholder from "@/components/Banner/TopMatchBanner/TopMatchBannerPlaceholder";
+import ProfileCardPlaceholder from "@/components/Card/ProfileCard/ProfileCardPlaceholder";
 
-interface HomeProps {
-  recommend: Profile[];
-}
-
-const Home = ({ recommend }: HomeProps) => {
+const Home = () => {
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, userToken } = useAuth();
+
+  const [recommendations, setRecommendations] = useState([
+    null,
+    null,
+    null,
+    null,
+    null,
+  ]);
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (userToken) {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      config.headers["Authorization"] = `Token ${userToken}`;
+      axios.get(`${server}/recommend/5`, config).then((res) => {
+        setRecommendations(res.data.recommendations);
+        setLoading(false);
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -40,16 +63,24 @@ const Home = ({ recommend }: HomeProps) => {
           <ExploreHeading />
           <SectionList>
             <Section title={"Your top match"}>
-              {recommend.length > 0 && (
-                <TopMatchBanner profile={recommend[0]} />
+              {loading ? (
+                <TopMatchBannerPlaceholder />
+              ) : (
+                <TopMatchBanner profile={recommendations[0]} />
               )}
             </Section>
 
             <Section title={"Recommended for you"}>
               <ProfileCardList large={true}>
-                {recommend.slice(1, 5).map((item) => (
-                  <ProfileCard profile={item} />
-                ))}
+                {recommendations
+                  .slice(1, 5)
+                  .map((item) =>
+                    loading ? (
+                      <ProfileCardPlaceholder />
+                    ) : (
+                      <ProfileCard profile={item} />
+                    )
+                  )}
               </ProfileCardList>
             </Section>
           </SectionList>
@@ -57,37 +88,6 @@ const Home = ({ recommend }: HomeProps) => {
       </main>
     </>
   );
-};
-
-export const getServerSideProps = async (context: any) => {
-  const { req } = context;
-  const cookies = cookie.parse(req.headers.cookie || "");
-  const token = cookies.token;
-  console.log("GETTING RECS");
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  let recommend = [];
-  let isOnboarded = false;
-  if (token) {
-    config.headers["Authorization"] = `Token ${token}`;
-
-    await axios.get(`${server}/api/auth/user`, config).then((res) => {
-      isOnboarded = res.data.onboarded;
-    });
-
-    if (isOnboarded) {
-      const recommendationsRes = await fetch(`${server}/recommend/5`, config);
-      recommend = await recommendationsRes.json();
-    }
-  }
-  return {
-    props: {
-      recommend: isOnboarded ? recommend.recommendations : [],
-    },
-  };
 };
 
 export default withAuth(Home);

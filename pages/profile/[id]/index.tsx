@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Profile } from "../../../interfaces/profile.model";
 import { server } from "@/config";
 import Image from "next/image";
@@ -23,19 +23,20 @@ import ProfileCardList from "@/components/Card/ProfileCardList/ProfileCardList";
 import ProfileCard from "@/components/Card/ProfileCard/ProfileCard";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import AddProjectModalForm from "@/components/Modal/Forms/AddProjectModalForm/AddProjectModalForm";
+import axios from "axios";
 
 interface ProfileProps {
   profile: Profile | null;
-  recommend: Profile[];
 }
 
-const profile = ({ profile, recommend }: ProfileProps) => {
+const profile = ({ profile }: ProfileProps) => {
   const { updateUser, user } = useAuth();
 
   profile = user.id == profile.id ? user : profile;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [recommendations, setRecommendations] = useState([]);
 
   const openModal = (section: string) => {
     setActiveSection(section);
@@ -45,6 +46,12 @@ const profile = ({ profile, recommend }: ProfileProps) => {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    axios
+      .get(`${server}/recommend/6/${profile.id}`)
+      .then((res) => setRecommendations(res.data.recommendations));
+  }, []);
 
   return (
     <>
@@ -130,7 +137,7 @@ const profile = ({ profile, recommend }: ProfileProps) => {
             profile={profile}
           >
             <ProfileCardList>
-              {recommend.slice(1, 5).map((item) => (
+              {recommendations.slice(1, 5).map((item) => (
                 <ProfileCard profile={item} />
               ))}
             </ProfileCardList>
@@ -147,16 +154,9 @@ export const getServerSideProps = async (context: any) => {
   const res = await fetch(`${server}/api/profiles/${context?.params?.id}`);
   const profile = await res.json();
 
-  const recommendationsRes = await fetch(
-    `${server}/recommend/6/${context?.params?.id}`
-  );
-
-  let recommend = await recommendationsRes.json();
-
   return {
     props: {
       profile,
-      recommend: recommend.recommendations,
     },
   };
 };
