@@ -5,7 +5,7 @@ import styles from "./Card.module.scss";
 type EndDate = Date | "Present";
 
 interface CardProps {
-  image: string;
+  image: string | null;
   title: string;
   subtitle: string;
   body: string;
@@ -23,7 +23,7 @@ const Card = ({
 }: CardProps) => {
   return (
     <div className={styles.card}>
-      <img className={styles.image} src={image} />
+      {image && <img className={styles.image} src={image} />}
       <div className={styles.content}>
         {start_date && (
           <p className={styles.date}>

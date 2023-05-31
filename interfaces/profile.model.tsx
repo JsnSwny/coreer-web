@@ -1,6 +1,7 @@
 import { Project } from "./project.model";
 import { Education } from "./education.model";
 import { Skill } from "./language.model";
+import { WorkExperience } from "./work_experiences.model";
 
 export interface Profile {
   id: number;
@@ -17,4 +18,5 @@ export interface Profile {
   location: string;
   onboarded: boolean;
   following: Profile[];
+  work_experiences: WorkExperience[];
 }

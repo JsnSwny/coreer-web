@@ -24,6 +24,8 @@ import ProfileCard from "@/components/Card/ProfileCard/ProfileCard";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import AddProjectModalForm from "@/components/Modal/Forms/AddProjectModalForm/AddProjectModalForm";
 import axios from "axios";
+import EducationModalForm from "@/components/Modal/Forms/EducationModalForm/EducationModalForm";
+import WorkModalForm from "@/components/Modal/Forms/WorkModalForm/WorkModalForm";
 
 interface ProfileProps {
   profile: Profile | null;
@@ -68,7 +70,12 @@ const profile = ({ profile }: ProfileProps) => {
           {activeSection === "Add Project" && (
             <AddProjectModalForm closeModal={closeModal} />
           )}
-          {activeSection === "address" && <AddressSectionForm />}
+          {activeSection === "Education" && (
+            <EducationModalForm closeModal={closeModal} />
+          )}
+          {activeSection === "Experience" && (
+            <WorkModalForm closeModal={closeModal} />
+          )}
         </Modal>
         <div className={styles.container}>
           <ProfileSection
@@ -95,24 +102,33 @@ const profile = ({ profile }: ProfileProps) => {
           >
             <Projects projects={profile.projects} />
           </ProfileSection>
-          <ProfileSection title={"Work Experience"} profile={profile}>
+          <ProfileSection
+            title={"Work Experience"}
+            profile={profile}
+            action={() => openModal("Experience")}
+            actionIcon={faPlus}
+          >
             <CardList>
-              <Card
-                image="http://www.gurunepal.com/wp-content/uploads/2020/05/heriot-watt-1-1.png"
-                title="Apple"
-                subtitle="iOS Developer"
-                body="Develop and maintain iOS applications
-                    Ensure high quality and meet company standards
-                    Work on both internal and external applications
-                    Work with programming languages such as Swift and Objective-C"
-                start_date={new Date()}
-                end_date="Present"
-              />
+              {profile?.work_experiences.map((experience) => (
+                <Card
+                  image={null}
+                  title={experience.company}
+                  subtitle={experience.job_title}
+                  body={experience.description}
+                  start_date={new Date()}
+                  end_date="Present"
+                />
+              ))}
             </CardList>
           </ProfileSection>
-          <ProfileSection title={"Education"} profile={profile}>
-            {/* <CardList>
-              {profile.educations.map((education) => (
+          <ProfileSection
+            title={"Education"}
+            profile={profile}
+            action={() => openModal("Education")}
+            actionIcon={faPlus}
+          >
+            <CardList>
+              {profile?.educations.map((education) => (
                 <Card
                   image={education.school.logo}
                   title={education.school.name}
@@ -120,9 +136,9 @@ const profile = ({ profile }: ProfileProps) => {
                   body="Lorem ipsum dolor sit amet consectetur. Tempor dui vulputate netus facilisis vel."
                 />
               ))}
-            </CardList> */}
+            </CardList>
           </ProfileSection>
-          <ProfileSection title={"Reviews"} profile={profile}>
+          {/* <ProfileSection title={"Reviews"} profile={profile}>
             <CardList>
               <Card
                 image="http://www.gurunepal.com/wp-content/uploads/2020/05/heriot-watt-1-1.png"
@@ -131,7 +147,7 @@ const profile = ({ profile }: ProfileProps) => {
                 body="John is a brilliant machine learning engineer who consistently delivers high-quality work. He is an excellent team player who is always willing to help his colleagues and share his knowledge with them.”"
               />
             </CardList>
-          </ProfileSection>
+          </ProfileSection> */}
           <ProfileSection
             title={`Similar to ${profile.first_name}`}
             profile={profile}

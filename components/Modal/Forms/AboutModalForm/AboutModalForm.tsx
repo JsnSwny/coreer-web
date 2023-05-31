@@ -22,14 +22,16 @@ const AboutModalForm = ({ closeModal }) => {
   return (
     <>
       <div className={globalStyles.modalBody}>
-        <label className={globalStyles.label}>Bio</label>
-        <textarea
-          className={globalStyles.input}
-          type="text"
-          value={inputValue}
-          onChange={handleInputChange}
-          rows="4"
-        ></textarea>
+        <div className={globalStyles.formGroup}>
+          <label className={globalStyles.label}>Bio</label>
+          <textarea
+            className={globalStyles.input}
+            type="text"
+            value={inputValue}
+            onChange={handleInputChange}
+            rows="4"
+          ></textarea>
+        </div>
       </div>
       <div className={globalStyles.modalFooter}>
         <Button text="Save" onClick={handleSave} />
