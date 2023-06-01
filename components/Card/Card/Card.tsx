@@ -11,6 +11,7 @@ interface CardProps {
   body: string;
   start_date?: Date;
   end_date?: EndDate;
+  size?: string;
 }
 
 const Card = ({
@@ -20,9 +21,10 @@ const Card = ({
   body,
   start_date,
   end_date,
+  size,
 }: CardProps) => {
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} ${size && styles[size]}`}>
       {image && <img className={styles.image} src={image} />}
       <div className={styles.content}>
         {start_date && (

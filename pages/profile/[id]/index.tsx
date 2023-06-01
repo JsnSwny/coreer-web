@@ -117,6 +117,7 @@ const profile = ({ profile }: ProfileProps) => {
                   body={experience.description}
                   start_date={new Date()}
                   end_date="Present"
+                  size="large"
                 />
               ))}
             </CardList>
@@ -134,6 +135,7 @@ const profile = ({ profile }: ProfileProps) => {
                   title={education.school.name}
                   subtitle={education.degree}
                   body="Lorem ipsum dolor sit amet consectetur. Tempor dui vulputate netus facilisis vel."
+                  size="large"
                 />
               ))}
             </CardList>
