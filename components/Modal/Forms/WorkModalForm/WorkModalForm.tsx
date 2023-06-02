@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import Button from "@/components/Button/Button";
 import { WorkExperienceRequest } from "@/interfaces/work_experiences.model";
+import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
 
 interface ModalFormProps {
   closeModal: () => void;
@@ -16,6 +17,8 @@ const WorkModalForm = ({ closeModal }: ModalFormProps) => {
   const [company, setCompany] = useState("");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
 
   const handleSave = () => {
     let obj: WorkExperienceRequest = {
@@ -61,6 +64,12 @@ const WorkModalForm = ({ closeModal }: ModalFormProps) => {
             onChange={(e) => setLocation(e.target.value)}
           />
         </div>
+        <DateRangeInput
+          startDate={startDate}
+          endDate={endDate}
+          setStartDate={setStartDate}
+          setEndDate={setEndDate}
+        />
         <div className={globalStyles.formGroup}>
           <label className={globalStyles.label}>Description</label>
           <textarea

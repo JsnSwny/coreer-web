@@ -8,6 +8,7 @@ import { server } from "@/config";
 import axios from "axios";
 import { EducationRequest, School } from "@/interfaces/education.model";
 import { ActionMeta } from "react-select";
+import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
 
 interface ModalFormProps {
   closeModal: () => void;
@@ -24,6 +25,8 @@ const EducationModalForm = ({ closeModal }: ModalFormProps) => {
   const [school, setSchool] = useState<SchoolSelect | null>(null);
   const [degree, setDegree] = useState("");
   const [description, setDescription] = useState("");
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
 
   const handleSave = () => {
     if (school) {
@@ -77,6 +80,12 @@ const EducationModalForm = ({ closeModal }: ModalFormProps) => {
             onChange={(e) => setDegree(e.target.value)}
           />
         </div>
+        <DateRangeInput
+          startDate={startDate}
+          endDate={endDate}
+          setStartDate={setStartDate}
+          setEndDate={setEndDate}
+        />
         <div className={globalStyles.formGroup}>
           <label className={globalStyles.label}>Description</label>
           <textarea

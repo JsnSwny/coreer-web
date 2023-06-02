@@ -4,6 +4,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import Button from "@/components/Button/Button";
 import { ProjectRequest } from "@/interfaces/project.model";
+import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
 
 interface ModalFormProps {
   closeModal: () => void;
@@ -14,6 +15,8 @@ const ProjectModalForm = ({ closeModal }: ModalFormProps) => {
   const [image, setImage] = useState<File | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
 
   const handleSave = () => {
     let obj: ProjectRequest = {
@@ -60,6 +63,12 @@ const ProjectModalForm = ({ closeModal }: ModalFormProps) => {
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
+        <DateRangeInput
+          startDate={startDate}
+          endDate={endDate}
+          setStartDate={setStartDate}
+          setEndDate={setEndDate}
+        />
         <div className={globalStyles.formGroup}>
           <label className={globalStyles.label}>Description*</label>
           <textarea
