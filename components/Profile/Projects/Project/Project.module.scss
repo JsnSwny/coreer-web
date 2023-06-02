@@ -33,7 +33,7 @@
 }
 
 .title {
-  margin-top: 0.4rem;
+  margin-top: 1rem;
   font-size: 18px;
   color: #101015;
   text-transform: capitalize;
@@ -45,7 +45,7 @@
 }
 
 .description {
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
   color: #3c3c4b;
   font-size: 14px;
 }
@@ -55,9 +55,19 @@
   width: 100%;
   padding-top: 56.25%; /* 16:9 aspect ratio */
   border-radius: 10px;
+  background: linear-gradient(to right, #3366cc, #2d82cc);
   &:hover {
     .video {
       opacity: 1;
     }
   }
+}
+
+.placeholderIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 25%;
+  color: white;
 }

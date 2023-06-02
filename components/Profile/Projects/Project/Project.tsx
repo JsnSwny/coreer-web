@@ -3,6 +3,8 @@ import { Project } from "@/interfaces/project.model";
 import { format, parseISO } from "date-fns";
 import TagsList from "@/components/Tags/TagsList/TagsList";
 import { useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRobot } from "@fortawesome/free-solid-svg-icons";
 
 interface ProjectProps {
   project: Project;
@@ -41,7 +43,11 @@ const Project = ({ project }: ProjectProps) => {
         )}
 
         {project.image && <img className={styles.image} src={project.image} />}
+        {!project.image && (
+          <FontAwesomeIcon icon={faRobot} className={styles.placeholderIcon} />
+        )}
       </div>
+
       <h3 className={styles.title}>{project.title}</h3>
       <p className={styles.description}>{project.description}</p>
       {project.languages && project.languages.length > 0 && (
