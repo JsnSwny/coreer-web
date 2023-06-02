@@ -76,8 +76,8 @@ const profile = ({ profile }: ProfileProps) => {
         <Head>
           <title>{`${profile.first_name} ${profile.last_name} | coreer`}</title>
         </Head>
+        <ProfileBanner profile={profile} />
         <Container>
-          <ProfileBanner profile={profile} />
           {activeSection && (
             <Modal
               title={activeSection.title}

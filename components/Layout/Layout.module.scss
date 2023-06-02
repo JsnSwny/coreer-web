@@ -1,14 +1,14 @@
 .container {
-  display: flex;
-  min-height: 100dvh;
-  // padding-bottom: 2rem;
+	display: flex;
+	min-height: 100dvh;
+	// padding-bottom: 2rem;
 }
 
 .content {
-  flex: 1;
-  margin-top: calc(65px + 3rem);
+	flex: 1;
+	margin-top: calc(65px);
 }
 
 .contentAlt {
-  flex: 1;
+	flex: 1;
 }

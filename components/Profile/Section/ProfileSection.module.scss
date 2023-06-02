@@ -1,23 +1,25 @@
 @import "@/styles/_variables.scss";
 
 .container {
-  margin-bottom: 6rem;
+	margin-bottom: 6rem;
 }
 
 .title {
-  margin-bottom: 1rem;
-  svg {
-    width: 16px;
-    margin-left: 0.75rem;
-  }
+	margin-bottom: 1rem;
+	font-size: 28px;
+	svg {
+		width: 20px;
+		margin-left: 0.75rem;
+		color: $primary;
+	}
 }
 
 .divider {
-  border: none;
-  border-bottom: 1px solid $stroke;
-  margin-bottom: 1.5rem;
+	border: none;
+	border-bottom: 1px solid $stroke;
+	margin-bottom: 1.5rem;
 }
 
 .icon {
-  cursor: pointer;
+	cursor: pointer;
 }

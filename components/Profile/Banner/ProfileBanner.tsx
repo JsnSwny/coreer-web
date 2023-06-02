@@ -54,6 +54,9 @@ const ProfileBanner = ({ profile }: ProfileBannerProps) => {
           className={styles.banner}
           src="https://www.pixel4k.com/wp-content/uploads/2018/11/night-city-skyscraper-skyline-night-new-york-usa-4k_1541972184.jpg"
         />
+        <Container>
+
+        
         <div className={styles.content}>
           {imagePreviewUrl && (
             <img className={styles.profilePhoto} src={imagePreviewUrl} />
@@ -74,7 +77,9 @@ const ProfileBanner = ({ profile }: ProfileBannerProps) => {
             </label>
           )}
         </div>
+        </Container>
       </div>
+      <Container>
       <div className={styles.details}>
         <div>
           <h1 className={styles.title}>
@@ -109,6 +114,7 @@ const ProfileBanner = ({ profile }: ProfileBannerProps) => {
           </div>
         )}
       </div>
+      </Container>
     </div>
   );
 };
