@@ -9,7 +9,7 @@ interface ModalFormProps {
   closeModal: () => void;
 }
 
-const AddProjectModalForm = ({ closeModal }: ModalFormProps) => {
+const ProjectModalForm = ({ closeModal }: ModalFormProps) => {
   const { user, addProject } = useAuth();
   const [image, setImage] = useState<File | null>(null);
   const [title, setTitle] = useState("");
@@ -77,4 +77,4 @@ const AddProjectModalForm = ({ closeModal }: ModalFormProps) => {
   );
 };
 
-export default AddProjectModalForm;
+export default ProjectModalForm;

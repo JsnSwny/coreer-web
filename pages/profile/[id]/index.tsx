@@ -22,7 +22,7 @@ import AboutModalForm from "@/components/Modal/Forms/AboutModalForm/AboutModalFo
 import ProfileCardList from "@/components/Card/ProfileCardList/ProfileCardList";
 import ProfileCard from "@/components/Card/ProfileCard/ProfileCard";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import AddProjectModalForm from "@/components/Modal/Forms/AddProjectModalForm/AddProjectModalForm";
+import ProjectModalForm from "@/components/Modal/Forms/ProjectModalForm/ProjectModalForm";
 import axios from "axios";
 import EducationModalForm from "@/components/Modal/Forms/EducationModalForm/EducationModalForm";
 import WorkModalForm from "@/components/Modal/Forms/WorkModalForm/WorkModalForm";
@@ -78,7 +78,7 @@ const profile = ({ profile }: ProfileProps) => {
               <AboutModalForm closeModal={closeModal} />
             )}
             {activeSection === "Add Project" && (
-              <AddProjectModalForm closeModal={closeModal} />
+              <ProjectModalForm closeModal={closeModal} />
             )}
             {activeSection === "Education" && (
               <EducationModalForm closeModal={closeModal} />
