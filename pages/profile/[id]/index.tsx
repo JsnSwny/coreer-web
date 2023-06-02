@@ -32,17 +32,24 @@ interface ProfileProps {
   profile: Profile | null;
 }
 
+interface ActiveSectionProps {
+  title: string;
+  description?: string;
+}
+
 const profile = ({ profile }: ProfileProps) => {
   const { updateUser, user } = useAuth();
 
   profile = user!.id == profile?.id ? user : profile;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [activeSection, setActiveSection] = useState<ActiveSectionProps | null>(
+    null
+  );
   const [recommendations, setRecommendations] = useState([]);
 
-  const openModal = (section: string) => {
-    setActiveSection(section);
+  const openModal = (section: string, description: string = "") => {
+    setActiveSection({ title: section, description });
     setIsModalOpen(true);
   };
 
@@ -68,32 +75,37 @@ const profile = ({ profile }: ProfileProps) => {
         </Head>
         <Container>
           <ProfileBanner profile={profile} />
+          {activeSection && (
+            <Modal
+              title={activeSection.title}
+              description={activeSection.description}
+              isOpen={isModalOpen}
+              onClose={closeModal}
+            >
+              {activeSection.title === "About" && (
+                <AboutModalForm closeModal={closeModal} />
+              )}
+              {activeSection.title === "Add Project" && (
+                <ProjectModalForm closeModal={closeModal} />
+              )}
+              {activeSection.title === "Education" && (
+                <EducationModalForm closeModal={closeModal} />
+              )}
+              {activeSection.title === "Experience" && (
+                <WorkModalForm closeModal={closeModal} />
+              )}
+              {activeSection.title === "Skills" && (
+                <SkillsModalForm closeModal={closeModal} />
+              )}
+            </Modal>
+          )}
 
-          <Modal
-            title={activeSection}
-            isOpen={isModalOpen}
-            onClose={closeModal}
-          >
-            {activeSection === "About" && (
-              <AboutModalForm closeModal={closeModal} />
-            )}
-            {activeSection === "Add Project" && (
-              <ProjectModalForm closeModal={closeModal} />
-            )}
-            {activeSection === "Education" && (
-              <EducationModalForm closeModal={closeModal} />
-            )}
-            {activeSection === "Experience" && (
-              <WorkModalForm closeModal={closeModal} />
-            )}
-            {activeSection === "Skills" && (
-              <SkillsModalForm closeModal={closeModal} />
-            )}
-          </Modal>
           <div className={styles.container}>
             <ProfileSection
               title="About"
-              action={() => openModal("About")}
+              action={() =>
+                openModal("About", "Write a short summary about yourself")
+              }
               profile={profile}
             >
               <AboutSection profile={profile} />
@@ -101,7 +113,9 @@ const profile = ({ profile }: ProfileProps) => {
 
             <ProfileSection
               title={"Skills"}
-              action={() => openModal("Skills")}
+              action={() =>
+                openModal("Skills", "Select at least 5 programming languages")
+              }
               profile={profile}
             >
               <LanguageList languages={profile.languages} />
@@ -147,7 +161,7 @@ const profile = ({ profile }: ProfileProps) => {
                     image={education.school.logo}
                     title={education.school.name}
                     subtitle={education.degree}
-                    body="Lorem ipsum dolor sit amet consectetur. Tempor dui vulputate netus facilisis vel."
+                    body={education.description}
                     size="large"
                   />
                 ))}

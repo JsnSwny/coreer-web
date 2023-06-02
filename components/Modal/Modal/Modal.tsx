@@ -11,9 +11,16 @@ type ModalProps = {
   onClose: () => void;
   title: string;
   children: React.ReactNode;
+  description?: string;
 };
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  title,
+  description,
+  children,
+}) => {
   if (!isOpen) {
     return null;
   }
@@ -24,7 +31,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
         <div className={styles.modalHeader}>
           <div>
             <h2>{title}</h2>
-            <p>Description goes here</p>
+            {description && <p>{description}</p>}
           </div>
 
           <button className={styles.closeButton} onClick={onClose}>

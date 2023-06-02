@@ -31,6 +31,7 @@ const EducationModalForm = ({ closeModal }: ModalFormProps) => {
         school_id: parseInt(school.value),
         degree,
         start_date: "2023-05-29",
+        description,
         user: user!.id,
       };
       addEducation(obj);
