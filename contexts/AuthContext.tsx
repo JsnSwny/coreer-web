@@ -5,23 +5,29 @@ import React, {
   useEffect,
   useCallback,
 } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { Profile } from "@/interfaces/profile.model";
 import { server } from "@/config";
 import cookie from "cookie";
-import { WorkExperience } from "@/interfaces/work_experiences.model";
+import {
+  WorkExperience,
+  WorkExperienceRequest,
+} from "@/interfaces/work_experiences.model";
+import { Project, ProjectRequest } from "@/interfaces/project.model";
+import { EducationRequest } from "@/interfaces/education.model";
 
 interface AuthContextType {
   user: Profile | null;
   userToken: string | null;
   signIn: (email: string, password: string) => void;
   signOut: () => void;
-  signUp: () => void;
+  signUp: (email: string, password: string, passwordConfirm: string) => void;
   loading: boolean;
   updateProfilePicture: (file: File) => void;
   updateUser: (data: object) => void;
-  addEducation: (data: object) => void;
-  addWorkExperience: (data: WorkExperience) => void;
+  addEducation: (data: EducationRequest) => void;
+  addWorkExperience: (data: WorkExperienceRequest) => void;
+  addProject: (data: ProjectRequest) => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -35,6 +41,7 @@ export const AuthContext = createContext<AuthContextType>({
   updateUser: () => {},
   addEducation: () => {},
   addWorkExperience: () => {},
+  addProject: () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -94,7 +101,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
             path: "/",
           });
         });
-    } catch (error) {
+    } catch (error: any) {
       console.error(error.response);
     } finally {
       setLoading(false);
@@ -106,10 +113,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
       },
     };
     if (token) {
-      config.headers["Authorization"] = `Token ${token}`;
       axios
         .post(`${server}/api/auth/logout`, null, config)
         .then((res) => {
@@ -130,19 +137,18 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Token ${userToken}`,
         },
       };
-
-      config.headers["Authorization"] = `Token ${userToken}`;
 
       const formData = new FormData();
       formData.append("image", file);
 
       await axios
-        .put(`${server}/api/user/${user.id}/`, formData, config)
+        .put(`${server}/api/user/${user!.id}/`, formData, config)
         .then((res) => setUser(res.data))
         .catch((err) => console.log(err.response));
-    } catch (error) {
+    } catch (error: any) {
       console.error(error.response);
     } finally {
       setLoading(false);
@@ -155,118 +161,105 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       const config = {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Token ${userToken}`,
         },
       };
 
-      config.headers["Authorization"] = `Token ${userToken}`;
-
       await axios
-        .put(`${server}/api/user/${user.id}/`, data, config)
+        .put(`${server}/api/user/${user!.id}/`, data, config)
         .then((res) => {
           setUser(res.data);
         })
         .catch((err) => console.log(err.response));
-    } catch (error) {
+    } catch (error: any) {
       console.error(error.response);
     } finally {
       setLoading(false);
     }
   };
 
-  const addProject = async (data: object) => {
+  const addProject = async (data: ProjectRequest) => {
     setLoading(true);
 
     try {
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Token ${userToken}`,
         },
       };
 
-      config.headers["Authorization"] = `Token ${userToken}`;
-
       const formData = new FormData();
-      formData.append("image", data.image);
+      if (data.image) {
+        formData.append("image", data.image);
+      }
+
       formData.append("title", data.title);
       formData.append("description", data.description);
       formData.append("start_date", data.start_date);
-      formData.append("user", data.user);
+      formData.append("user", data.user.toString());
 
       await axios
         .post(`${server}/api/projects/`, formData, config)
         .then((res) => {
-          console.log(res.data);
-          setUser({ ...user, projects: [...user.projects, res.data] });
+          setUser({ ...user!, projects: [...user!.projects, res.data] });
         })
         .catch((err) => console.log(err.response));
-    } catch (error) {
+    } catch (error: any) {
       console.error(error.response);
     } finally {
       setLoading(false);
     }
   };
 
-  const addEducation = async (data: object) => {
+  const addEducation = async (data: EducationRequest) => {
     setLoading(true);
 
     try {
       const config = {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Token ${userToken}`,
         },
       };
 
-      config.headers["Authorization"] = `Token ${userToken}`;
-
-      console.log(data);
-
-      let schoolId = data.school;
-      let degree = data.degree;
-      let startDate = data.start_date;
-      let userId = data.user;
-
       await axios
-        .post(
-          `${server}/api/educations/`,
-          { school_id: schoolId, degree, start_date: startDate, user: userId },
-          config
-        )
+        .post(`${server}/api/educations/`, data, config)
         .then((res) => {
           console.log(res);
           console.log(res.data);
-          setUser({ ...user, educations: [...user.educations, res.data] });
+          setUser({ ...user!, educations: [...user!.educations, res.data] });
         })
-        .catch((err) => console.log(err.response));
-    } catch (error) {
+        .catch((err: any) => console.log(err.response));
+    } catch (error: any) {
       console.error(error.response);
     } finally {
       setLoading(false);
     }
   };
 
-  const addWorkExperience = async (data: object) => {
+  const addWorkExperience = async (data: WorkExperienceRequest) => {
     setLoading(true);
 
     try {
       const config = {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Token ${userToken}`,
         },
       };
-
-      config.headers["Authorization"] = `Token ${userToken}`;
-
-      console.log(data);
-
       await axios
         .post(`${server}/api/work-experiences/`, data, config)
         .then((res) => {
           console.log(res);
           console.log(res.data);
-          setUser({ ...user, educations: [...user.work, res.data] });
+          setUser({
+            ...user!,
+            work_experiences: [...user!.work_experiences, res.data],
+          });
         })
-        .catch((err) => console.log(err.response));
-    } catch (error) {
+        .catch((err: any) => console.log(err.response));
+    } catch (error: any) {
       console.error(error.response);
     } finally {
       setLoading(false);
@@ -278,6 +271,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Token ${userToken}`,
       },
     };
 

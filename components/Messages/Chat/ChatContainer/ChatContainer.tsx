@@ -7,8 +7,8 @@ import { Conversation } from "@/interfaces/conversation.model";
 
 interface ChatContainerProps {
   messageHistory: MessageType[];
-  sendMessage: (e: any, message: string) => void;
-  currentConversation: Conversation;
+  sendMessage?: (e: any, message: string) => void;
+  currentConversation?: Conversation;
 }
 
 const ChatContainer = ({
@@ -28,8 +28,7 @@ const ChatContainer = ({
               ))}
             </ul>
           </div>
-
-          <SendMessage sendMessage={sendMessage} />
+          {sendMessage && <SendMessage sendMessage={sendMessage} />}
         </>
       )}
     </section>

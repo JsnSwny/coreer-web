@@ -3,29 +3,30 @@ import Modal from "../../Modal/Modal";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import Button from "@/components/Button/Button";
-import AsyncSelect from "react-select/async";
-import { server } from "@/config";
-import axios from "axios";
-import { School } from "@/interfaces/education.model";
+import { WorkExperienceRequest } from "@/interfaces/work_experiences.model";
 
-const WorkModalForm = ({ closeModal }) => {
+interface ModalFormProps {
+  closeModal: () => void;
+}
+
+const WorkModalForm = ({ closeModal }: ModalFormProps) => {
   const { user, addWorkExperience } = useAuth();
 
   const [jobTitle, setJobTitle] = useState("");
   const [company, setCompany] = useState("");
   const [location, setLocation] = useState("");
-  const [degree, setDegree] = useState("");
   const [description, setDescription] = useState("");
 
   const handleSave = () => {
-    addWorkExperience({
-      user: user?.id,
+    let obj: WorkExperienceRequest = {
+      user: user!.id,
       job_title: jobTitle,
       company,
       location,
       start_date: "2023-05-29",
       description,
-    });
+    };
+    addWorkExperience(obj);
     closeModal();
   };
 
@@ -35,6 +36,7 @@ const WorkModalForm = ({ closeModal }) => {
         <div className={globalStyles.formGroup}>
           <label className={globalStyles.label}>Company*</label>
           <input
+            autoFocus
             className={globalStyles.input}
             type="text"
             value={company}
@@ -63,10 +65,9 @@ const WorkModalForm = ({ closeModal }) => {
           <label className={globalStyles.label}>Description</label>
           <textarea
             className={globalStyles.input}
-            type="text"
             value={description}
-            onChange={setDescription}
-            rows="4"
+            onChange={(e) => setDescription(e.target.value)}
+            rows={4}
           ></textarea>
         </div>
       </div>

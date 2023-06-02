@@ -12,11 +12,14 @@ import axios from "axios";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 import Languages from "@/components/Auth/Onboarding/Languages/Languages";
+import { Skill } from "@/interfaces/language.model";
 
-const languages = ({ languages }) => {
-  const { user, updateUser } = useAuth();
-  console.log(user);
-  const router = useRouter();
+interface LanguagesProps {
+  languages: { languages: Skill[] };
+}
+
+const languages = ({ languages }: LanguagesProps) => {
+  const { user } = useAuth();
   return (
     <>
       <Head>
@@ -36,7 +39,6 @@ const languages = ({ languages }) => {
 };
 
 export const getServerSideProps = async (context: any) => {
-  const { req } = context;
   let languagesRes: any = [];
   await axios
     .get(`${server}/most-popular-languages/`)

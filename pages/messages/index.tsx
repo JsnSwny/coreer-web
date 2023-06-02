@@ -17,9 +17,6 @@ import MessagesDetailsContainer from "@/components/Messages/MessagesDetails/Mess
 const messages = () => {
   const [conversationsList, setConversationsList] = useState([]);
   const [messageHistory, setMessageHistory] = useState([]);
-  // const [currentConversation, setCurrentConversation] =
-  //   useState(currConversation);
-
   const { userToken } = useAuth();
 
   useEffect(() => {
@@ -28,8 +25,6 @@ const messages = () => {
         "Content-Type": "application/json",
       },
     };
-
-    let conversations: Conversation[] | null = [];
 
     config.headers["Authorization"] = `Token ${userToken}`;
     axios
@@ -40,14 +35,6 @@ const messages = () => {
       .catch((err: any) => console.log(err));
   }, []);
 
-  const sendMessage = (e: any, message: any) => {
-    e.preventDefault();
-    sendJsonMessage({
-      type: "chat_message",
-      message,
-    });
-  };
-
   return (
     <>
       <Head>
@@ -55,10 +42,7 @@ const messages = () => {
       </Head>
       <MessagesContainer>
         <MessagesSidebar conversations={conversationsList} />
-        <ChatContainer
-          sendMessage={sendMessage}
-          messageHistory={messageHistory}
-        />
+        <ChatContainer messageHistory={messageHistory} />
         {/* <MessagesDetailsContainer /> */}
       </MessagesContainer>
     </>

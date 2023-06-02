@@ -6,25 +6,36 @@ import Button from "@/components/Button/Button";
 import AsyncSelect from "react-select/async";
 import { server } from "@/config";
 import axios from "axios";
-import { School } from "@/interfaces/education.model";
+import { EducationRequest, School } from "@/interfaces/education.model";
+import { ActionMeta } from "react-select";
 
-const EducationModalForm = ({ closeModal }) => {
+interface ModalFormProps {
+  closeModal: () => void;
+}
+
+const EducationModalForm = ({ closeModal }: ModalFormProps) => {
   const { user, updateUser, addEducation } = useAuth();
 
-  const [school, setSchool] = useState<School | null>(null);
+  type SchoolSelect = {
+    value: string;
+    label: string;
+  };
+
+  const [school, setSchool] = useState<SchoolSelect | null>(null);
   const [degree, setDegree] = useState("");
   const [description, setDescription] = useState("");
 
   const handleSave = () => {
     if (school) {
-      addEducation({
-        school: school.value,
+      let obj: EducationRequest = {
+        school_id: parseInt(school.value),
         degree,
         start_date: "2023-05-29",
-        user: user.id,
-      });
+        user: user!.id,
+      };
+      addEducation(obj);
       setDegree("");
-      setSchool("");
+      setSchool(null);
       closeModal();
     }
   };
@@ -39,7 +50,6 @@ const EducationModalForm = ({ closeModal }) => {
     return options.data.results.map((item: School) => ({
       value: item.id,
       label: item.name,
-      color: "red",
     }));
   };
   return (
@@ -52,7 +62,7 @@ const EducationModalForm = ({ closeModal }) => {
             name="school"
             defaultOptions
             loadOptions={loadSchoolOptions}
-            onChange={(e: any) => setSchool(e)}
+            onChange={(option: SchoolSelect | null) => setSchool(option)}
             placeholder="Search for a school..."
             autoFocus
           />
@@ -70,10 +80,9 @@ const EducationModalForm = ({ closeModal }) => {
           <label className={globalStyles.label}>Description</label>
           <textarea
             className={globalStyles.input}
-            type="text"
             value={description}
-            onChange={setDescription}
-            rows="4"
+            onChange={(e) => setDescription(e.target.value)}
+            rows={4}
           ></textarea>
         </div>
       </div>

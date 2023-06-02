@@ -18,18 +18,20 @@ interface LikeButtonProps {
 
 const LikeButton = ({ profile, className, alt }: LikeButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
-  const handleClick = (event) => {
-    event.preventDefault();
-    likeUser(user, profile, userToken);
-  };
-
   const { userToken, user } = useAuth();
+
+  const handleClick = (event: React.MouseEvent) => {
+    event.preventDefault();
+    likeUser(user!, profile, userToken!);
+  };
 
   return (
     <FontAwesomeIcon
-      icon={isHovered || user.following.includes(profile.id) ? faStar : farStar}
+      icon={
+        isHovered || user!.following.includes(profile.id) ? faStar : farStar
+      }
       className={`${className} ${styles.likeButton} ${
-        isHovered || user.following.includes(profile.id)
+        isHovered || user!.following.includes(profile.id)
           ? styles.solid
           : styles.regular
       }`}

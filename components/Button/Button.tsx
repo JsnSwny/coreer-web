@@ -14,6 +14,8 @@ interface ButtonProps {
   size?: string;
   alt?: boolean;
   icon?: IconProp;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
 const Button = ({

@@ -10,17 +10,10 @@ type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   title: string;
-  onSave: (value: string) => void;
   children: React.ReactNode;
 };
 
-const Modal: React.FC<ModalProps> = ({
-  isOpen,
-  onClose,
-  title,
-  onSave,
-  children,
-}) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
   if (!isOpen) {
     return null;
   }

@@ -26,6 +26,7 @@ import AddProjectModalForm from "@/components/Modal/Forms/AddProjectModalForm/Ad
 import axios from "axios";
 import EducationModalForm from "@/components/Modal/Forms/EducationModalForm/EducationModalForm";
 import WorkModalForm from "@/components/Modal/Forms/WorkModalForm/WorkModalForm";
+import SkillsModalForm from "@/components/Modal/Forms/SkillsModalForm/SkillsModalForm";
 
 interface ProfileProps {
   profile: Profile | null;
@@ -34,7 +35,7 @@ interface ProfileProps {
 const profile = ({ profile }: ProfileProps) => {
   const { updateUser, user } = useAuth();
 
-  profile = user.id == profile.id ? user : profile;
+  profile = user!.id == profile?.id ? user : profile;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -50,97 +51,109 @@ const profile = ({ profile }: ProfileProps) => {
   };
 
   useEffect(() => {
-    axios
-      .get(`${server}/recommend/6/${profile.id}`)
-      .then((res) => setRecommendations(res.data.recommendations));
+    if (profile) {
+      axios
+        .get(`${server}/recommend/6/${profile.id}`)
+        .then((res) => setRecommendations(res.data.recommendations));
+    }
   }, []);
 
-  return (
-    <>
-      <Head>
-        <title>{`${profile.first_name} ${profile.last_name} | coreer`}</title>
-      </Head>
-      <Container>
-        <ProfileBanner profile={profile} />
+  if (!profile) {
+    return <h1>Profile not found</h1>;
+  } else {
+    return (
+      <>
+        <Head>
+          <title>{`${profile.first_name} ${profile.last_name} | coreer`}</title>
+        </Head>
+        <Container>
+          <ProfileBanner profile={profile} />
 
-        <Modal title={activeSection} isOpen={isModalOpen} onClose={closeModal}>
-          {activeSection === "About" && (
-            <AboutModalForm closeModal={closeModal} />
-          )}
-          {activeSection === "Add Project" && (
-            <AddProjectModalForm closeModal={closeModal} />
-          )}
-          {activeSection === "Education" && (
-            <EducationModalForm closeModal={closeModal} />
-          )}
-          {activeSection === "Experience" && (
-            <WorkModalForm closeModal={closeModal} />
-          )}
-        </Modal>
-        <div className={styles.container}>
-          <ProfileSection
-            title="About"
-            action={() => openModal("About")}
-            profile={profile}
+          <Modal
+            title={activeSection}
+            isOpen={isModalOpen}
+            onClose={closeModal}
           >
-            <AboutSection profile={profile} />
-          </ProfileSection>
+            {activeSection === "About" && (
+              <AboutModalForm closeModal={closeModal} />
+            )}
+            {activeSection === "Add Project" && (
+              <AddProjectModalForm closeModal={closeModal} />
+            )}
+            {activeSection === "Education" && (
+              <EducationModalForm closeModal={closeModal} />
+            )}
+            {activeSection === "Experience" && (
+              <WorkModalForm closeModal={closeModal} />
+            )}
+            {activeSection === "Skills" && (
+              <SkillsModalForm closeModal={closeModal} />
+            )}
+          </Modal>
+          <div className={styles.container}>
+            <ProfileSection
+              title="About"
+              action={() => openModal("About")}
+              profile={profile}
+            >
+              <AboutSection profile={profile} />
+            </ProfileSection>
 
-          <ProfileSection
-            title={"Skills"}
-            action={() => openModal("section")}
-            profile={profile}
-          >
-            <LanguageList languages={profile.languages} />
-          </ProfileSection>
+            <ProfileSection
+              title={"Skills"}
+              action={() => openModal("Skills")}
+              profile={profile}
+            >
+              <LanguageList languages={profile.languages} />
+            </ProfileSection>
 
-          <ProfileSection
-            title={"Projects"}
-            profile={profile}
-            action={() => openModal("Add Project")}
-            actionIcon={faPlus}
-          >
-            <Projects projects={profile.projects} />
-          </ProfileSection>
-          <ProfileSection
-            title={"Work Experience"}
-            profile={profile}
-            action={() => openModal("Experience")}
-            actionIcon={faPlus}
-          >
-            <CardList>
-              {profile?.work_experiences.map((experience) => (
-                <Card
-                  image={null}
-                  title={experience.company}
-                  subtitle={experience.job_title}
-                  body={experience.description}
-                  start_date={new Date()}
-                  end_date="Present"
-                  size="large"
-                />
-              ))}
-            </CardList>
-          </ProfileSection>
-          <ProfileSection
-            title={"Education"}
-            profile={profile}
-            action={() => openModal("Education")}
-            actionIcon={faPlus}
-          >
-            <CardList>
-              {profile?.educations.map((education) => (
-                <Card
-                  image={education.school.logo}
-                  title={education.school.name}
-                  subtitle={education.degree}
-                  body="Lorem ipsum dolor sit amet consectetur. Tempor dui vulputate netus facilisis vel."
-                  size="large"
-                />
-              ))}
-            </CardList>
-          </ProfileSection>
-          {/* <ProfileSection title={"Reviews"} profile={profile}>
+            <ProfileSection
+              title={"Projects"}
+              profile={profile}
+              action={() => openModal("Add Project")}
+              actionIcon={faPlus}
+            >
+              <Projects projects={profile.projects} />
+            </ProfileSection>
+            <ProfileSection
+              title={"Work Experience"}
+              profile={profile}
+              action={() => openModal("Experience")}
+              actionIcon={faPlus}
+            >
+              <CardList>
+                {profile?.work_experiences.map((experience) => (
+                  <Card
+                    image={null}
+                    title={experience.company}
+                    subtitle={experience.job_title}
+                    body={experience.description}
+                    start_date={new Date()}
+                    end_date="Present"
+                    size="large"
+                  />
+                ))}
+              </CardList>
+            </ProfileSection>
+            <ProfileSection
+              title={"Education"}
+              profile={profile}
+              action={() => openModal("Education")}
+              actionIcon={faPlus}
+            >
+              <CardList>
+                {profile?.educations.map((education) => (
+                  <Card
+                    image={education.school.logo}
+                    title={education.school.name}
+                    subtitle={education.degree}
+                    body="Lorem ipsum dolor sit amet consectetur. Tempor dui vulputate netus facilisis vel."
+                    size="large"
+                  />
+                ))}
+              </CardList>
+            </ProfileSection>
+            {/* <ProfileSection title={"Reviews"} profile={profile}>
             <CardList>
               <Card
                 image="http://www.gurunepal.com/wp-content/uploads/2020/05/heriot-watt-1-1.png"
@@ -150,22 +163,23 @@ const profile = ({ profile }: ProfileProps) => {
               />
             </CardList>
           </ProfileSection> */}
-          <ProfileSection
-            title={`Similar to ${profile.first_name}`}
-            profile={profile}
-          >
-            <ProfileCardList>
-              {recommendations.slice(1, 5).map((item) => (
-                <ProfileCard profile={item} />
-              ))}
-            </ProfileCardList>
-          </ProfileSection>
-        </div>
-        {/* </div>
+            <ProfileSection
+              title={`Similar to ${profile.first_name}`}
+              profile={profile}
+            >
+              <ProfileCardList>
+                {recommendations.slice(1, 5).map((item) => (
+                  <ProfileCard profile={item} />
+                ))}
+              </ProfileCardList>
+            </ProfileSection>
+          </div>
+          {/* </div>
           <Suggestions user={profile} suggestions={recommend} /> */}
-      </Container>
-    </>
-  );
+        </Container>
+      </>
+    );
+  }
 };
 
 export const getServerSideProps = async (context: any) => {

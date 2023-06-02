@@ -1,13 +1,16 @@
 import TagSelectorList from "../TagSelector/TagSelectorList/TagSelectorList";
 import TagSelector from "../TagSelector/TagSelector/TagSelector";
 import Actions from "../Actions/Actions";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 import LoadingOverlay from "@/components/Layout/LoadingOverlay/LoadingOverlay";
+import { Skill } from "@/interfaces/language.model";
 
 interface LanguagesProps {
-  options: object[];
+  options: Skill[];
+  defaultOptions: Skill[];
+  updateKey: string;
 }
 
 const Languages = ({ options, defaultOptions, updateKey }: LanguagesProps) => {
@@ -33,9 +36,9 @@ const Languages = ({ options, defaultOptions, updateKey }: LanguagesProps) => {
             <TagSelector
               title={option.name}
               active={selectedOptions.some((item) => item.id == option.id)}
-              onClick={() => {
-                setSelectedOptions([...selectedOptions, option]);
-              }}
+              setSelectedOptions={setSelectedOptions}
+              selectedOptions={selectedOptions}
+              option={option}
             />
           ))}
         </TagSelectorList>

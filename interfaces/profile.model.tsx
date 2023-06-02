@@ -2,6 +2,7 @@ import { Project } from "./project.model";
 import { Education } from "./education.model";
 import { Skill } from "./language.model";
 import { WorkExperience } from "./work_experiences.model";
+import { Interest } from "./interest.model";
 
 export interface Profile {
   id: number;
@@ -14,9 +15,9 @@ export interface Profile {
   projects: Project[];
   educations: Education[];
   languages: Skill[];
-  interests: object[];
+  interests: Interest[];
   location: string;
   onboarded: boolean;
-  following: Profile[];
+  following: number[];
   work_experiences: WorkExperience[];
 }

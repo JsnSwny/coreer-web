@@ -26,7 +26,7 @@ const ProfileSection = ({
     <section className={styles.container}>
       <h2 className={styles.title}>
         {title}{" "}
-        {profile.id == user.id && action && (
+        {profile.id == user!.id && action && (
           <FontAwesomeIcon
             icon={actionIcon}
             onClick={action}

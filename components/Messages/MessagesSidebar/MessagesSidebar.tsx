@@ -5,7 +5,7 @@ import globalStyles from "@/styles/globalStyles.module.scss";
 
 interface MessagesSidebarProps {
   conversations: ConversationType[];
-  currentConversation: ConversationType;
+  currentConversation?: ConversationType;
 }
 
 const MessagesSidebar = ({

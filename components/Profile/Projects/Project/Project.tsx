@@ -9,7 +9,7 @@ interface ProjectProps {
 }
 
 const Project = ({ project }: ProjectProps) => {
-  const videoRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const handleMouseEnter = () => {
     if (videoRef.current) {
@@ -44,7 +44,7 @@ const Project = ({ project }: ProjectProps) => {
       </div>
       <h3 className={styles.title}>{project.title}</h3>
       <p className={styles.description}>{project.description}</p>
-      {project.languages.length > 0 && (
+      {project.languages && project.languages.length > 0 && (
         <TagsList
           tags={project.languages.map((item) => ({ text: item.name }))}
         />

@@ -8,7 +8,7 @@ interface MessageProps {
 
 const Message = ({ message }: MessageProps) => {
   const { user } = useAuth();
-  const isFromUser = user.id == message.from_user.id;
+  const isFromUser = user!.id == message.from_user.id;
   return (
     <li className={`${styles.container} ${isFromUser ? styles.fromUser : ""}`}>
       <div className={styles.messageWrapper}>

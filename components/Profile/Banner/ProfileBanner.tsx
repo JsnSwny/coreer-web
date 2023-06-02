@@ -4,7 +4,7 @@ import LargeContainer from "@/components/Container/LargeContainer";
 import { Profile } from "@/interfaces/profile.model";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCameraRetro } from "@fortawesome/free-solid-svg-icons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { server } from "@/config";
 import axios from "axios";
 import { useAuth } from "@/contexts/AuthContext";
@@ -22,11 +22,10 @@ interface ProfileBannerProps {
 }
 
 const ProfileBanner = ({ profile }: ProfileBannerProps) => {
-  const [selectedFile, setSelectedFile] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [imagePreviewUrl, setImagePreviewUrl] = useState<
-    string | ArrayBuffer | null
-  >(profile.profile_photo ? profile.profile_photo : profile.image);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(
+    profile.profile_photo ? profile.profile_photo : profile.image
+  );
   const { user, updateProfilePicture, userToken } = useAuth();
 
   useEffect(() => {
@@ -35,16 +34,17 @@ const ProfileBanner = ({ profile }: ProfileBannerProps) => {
     );
   }, [profile]);
 
-  const photoUpload = (e) => {
+  const photoUpload = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const reader = new FileReader();
-    const file = e.target.files[0];
-    reader.onloadend = () => {
-      setSelectedFile(file);
-      updateProfilePicture(file);
-      setImagePreviewUrl(reader.result);
-    };
-    reader.readAsDataURL(file);
+    const file = e.target.files?.[0] as File | undefined;
+    if (file) {
+      reader.onloadend = () => {
+        updateProfilePicture(file);
+        setImagePreviewUrl(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -55,8 +55,10 @@ const ProfileBanner = ({ profile }: ProfileBannerProps) => {
           src="https://www.pixel4k.com/wp-content/uploads/2018/11/night-city-skyscraper-skyline-night-new-york-usa-4k_1541972184.jpg"
         />
         <div className={styles.content}>
-          <img className={styles.profilePhoto} src={imagePreviewUrl} />
-          {profile.id == user.id && (
+          {imagePreviewUrl && (
+            <img className={styles.profilePhoto} src={imagePreviewUrl} />
+          )}
+          {profile.id == user!.id && (
             <label htmlFor="photo-upload" className={styles.changePhoto}>
               <FontAwesomeIcon
                 icon={faCameraRetro}
@@ -80,7 +82,7 @@ const ProfileBanner = ({ profile }: ProfileBannerProps) => {
           </h1>
           <p className={styles.subtitle}>{profile.job}</p>
         </div>
-        {profile.id != user.id && (
+        {profile.id != user!.id && (
           <div className={styles.buttons}>
             <Button
               text="Message"
@@ -90,16 +92,16 @@ const ProfileBanner = ({ profile }: ProfileBannerProps) => {
               icon={faEnvelope}
             />
             <Button
-              text={user.following.includes(profile.id) ? "Remove" : "Like"}
-              alt={!user.following.includes(profile.id)}
+              text={user!.following.includes(profile!.id) ? "Remove" : "Like"}
+              alt={!user!.following.includes(profile!.id)}
               onClick={() => {
-                likeUser(user, profile, userToken);
+                likeUser(user!, profile, userToken!);
               }}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               size="small"
               icon={
-                isHovered || user.following.includes(profile.id)
+                isHovered || user!.following.includes(profile.id)
                   ? faStar
                   : farStar
               }

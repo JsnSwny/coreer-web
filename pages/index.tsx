@@ -1,6 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Container from "@/components/Container/Container";
 import ProfileCardList from "@/components/Card/ProfileCardList/ProfileCardList";
@@ -13,7 +11,6 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useEffect, useState } from "react";
 import withAuth from "@/components/Route/withAuth";
 import axios from "axios";
-import cookie from "cookie";
 import SectionList from "@/components/Layout/SectionList/SectionList";
 import ExploreHeading from "@/components/Layout/ExploreHeading/ExploreHeading";
 import TopMatchBanner from "@/components/Banner/TopMatchBanner/TopMatchBanner";
@@ -21,10 +18,9 @@ import TopMatchBannerPlaceholder from "@/components/Banner/TopMatchBanner/TopMat
 import ProfileCardPlaceholder from "@/components/Card/ProfileCard/ProfileCardPlaceholder";
 
 const Home = () => {
-  const router = useRouter();
-  const { user, userToken } = useAuth();
+  const { userToken } = useAuth();
 
-  const [recommendations, setRecommendations] = useState([
+  const [recommendations, setRecommendations] = useState<(Profile | null)[]>([
     null,
     null,
     null,
@@ -39,9 +35,10 @@ const Home = () => {
       const config = {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Token ${userToken}`,
         },
       };
-      config.headers["Authorization"] = `Token ${userToken}`;
+
       axios.get(`${server}/recommend/5`, config).then((res) => {
         setRecommendations(res.data.recommendations);
         setLoading(false);
@@ -63,7 +60,7 @@ const Home = () => {
           <ExploreHeading />
           <SectionList>
             <Section title={"Your top match"}>
-              {loading ? (
+              {!recommendations[0] ? (
                 <TopMatchBannerPlaceholder />
               ) : (
                 <TopMatchBanner profile={recommendations[0]} />
@@ -75,7 +72,7 @@ const Home = () => {
                 {recommendations
                   .slice(1, 5)
                   .map((item) =>
-                    loading ? (
+                    !item ? (
                       <ProfileCardPlaceholder />
                     ) : (
                       <ProfileCard profile={item} />

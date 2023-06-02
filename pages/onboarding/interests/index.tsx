@@ -11,8 +11,13 @@ import { server } from "@/config";
 import axios from "axios";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
+import { Interest } from "@/interfaces/interest.model";
 
-const interests = ({ interests }) => {
+interface InterestsProps {
+  interests: Interest[];
+}
+
+const interests = ({ interests }: InterestsProps) => {
   const { user } = useAuth();
   const router = useRouter();
   return (
@@ -22,14 +27,7 @@ const interests = ({ interests }) => {
       </Head>
       {user && (
         <OnboardingWrapper title={"Interests"} description={"fasfasf asas asd"}>
-          <Interests
-            options={interests}
-            defaultOptions={user.interests}
-            updateKey={"interests_id"}
-            onSubmit={async () => {
-              router.push("/onboarding/languages");
-            }}
-          />
+          <Interests options={interests} defaultOptions={user.interests} />
         </OnboardingWrapper>
       )}
     </>

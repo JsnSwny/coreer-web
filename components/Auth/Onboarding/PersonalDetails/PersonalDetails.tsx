@@ -15,8 +15,8 @@ const PersonalDetails = () => {
     router.push("/onboarding/interests");
   };
 
-  const [firstName, setFirstName] = useState(user.first_name);
-  const [lastName, setLastName] = useState(user.last_name);
+  const [firstName, setFirstName] = useState(user!.first_name);
+  const [lastName, setLastName] = useState(user!.last_name);
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>

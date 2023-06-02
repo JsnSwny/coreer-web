@@ -1,15 +1,19 @@
 import globalStyles from "@/styles/globalStyles.module.scss";
 import Modal from "../../Modal/Modal";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import Button from "@/components/Button/Button";
 
-const AboutModalForm = ({ closeModal }) => {
-  const { user, updateUser } = useAuth();
-  const [inputValue, setInputValue] = useState(user.bio);
+interface ModalFormProps {
+  closeModal: () => void;
+}
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
+const AboutModalForm = ({ closeModal }: ModalFormProps) => {
+  const { user, updateUser } = useAuth();
+  const [inputValue, setInputValue] = useState(user?.bio);
+
+  const handleInputChange = (e: ChangeEvent) => {
+    setInputValue((e.target as HTMLInputElement).value);
   };
 
   const handleSave = () => {
@@ -26,10 +30,9 @@ const AboutModalForm = ({ closeModal }) => {
           <label className={globalStyles.label}>Bio</label>
           <textarea
             className={globalStyles.input}
-            type="text"
             value={inputValue}
             onChange={handleInputChange}
-            rows="4"
+            rows={4}
           ></textarea>
         </div>
       </div>

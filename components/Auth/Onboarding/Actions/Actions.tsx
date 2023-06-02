@@ -2,7 +2,7 @@ import globalStyles from "@/styles/globalStyles.module.scss";
 import styles from "./Actions.module.scss";
 
 interface ActionsProps {
-  actionText: string;
+  actionText?: string;
 }
 
 const Actions = ({ actionText = "Next Step" }: ActionsProps) => {
