@@ -4,8 +4,8 @@ import { Profile } from "./profile.model";
 
 export interface ProjectRequest {
   title: string;
-  start_date: string;
-  end_date?: string;
+  start_date: string | null;
+  end_date: string | null;
   description: string;
   languages?: Skill[];
   image?: File | null;
@@ -16,8 +16,8 @@ export interface ProjectRequest {
 export interface Project {
   id: number;
   title: string;
-  start_date: string;
-  end_date?: string;
+  start_date: string | null;
+  end_date: string | null;
   description: string;
   languages?: Skill[];
   image?: string | null;

@@ -1,110 +1,111 @@
 @import "./variables";
 
 .input {
-  display: block;
-  width: 100%;
-  min-height: 44px;
-  border-radius: 5px;
-  border: 0.5px solid $stroke;
-  padding: 0 1rem;
-  font-size: 16px;
-  box-shadow: 0 5px 20px -10px rgba(24, 21, 41, 0.1);
+	display: block;
+	width: 100%;
+	min-height: 44px;
+	border-radius: 5px;
+	border: 0.5px solid $stroke;
+	padding: 0 1rem;
+	font-size: 16px;
+	box-shadow: 0 5px 20px -10px rgba(24, 21, 41, 0.1);
+	background: white;
 }
 
 .label {
-  color: $black;
-  display: block;
-  width: 100%;
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+	color: $black;
+	display: block;
+	width: 100%;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
 }
 
 .button {
-  color: white;
-  background: $primary;
-  width: 100%;
-  height: 44px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
+	color: white;
+	background: $primary;
+	width: 100%;
+	height: 44px;
+	border: none;
+	border-radius: 5px;
+	font-size: 16px;
+	font-weight: bold;
+	cursor: pointer;
 }
 
 .shadow {
-  box-shadow: 0 25px 25px -30px rgba(24, 21, 41, 0.2);
+	box-shadow: 0 25px 25px -30px rgba(24, 21, 41, 0.2);
 }
 
 .input {
-  // box-shadow: 0 0px 5px 1px rgba(24, 21, 41, 0.1);
-  width: 100%;
-  border: 1px solid $stroke;
-  border-radius: 10px;
-  padding: 0.75rem 1rem;
-  color: $dark-light;
-  font-size: 16px;
-  &:focus {
-    outline: none;
-  }
+	// box-shadow: 0 0px 5px 1px rgba(24, 21, 41, 0.1);
+	width: 100%;
+	border: 1px solid $stroke;
+	border-radius: 10px;
+	padding: 0.75rem 1rem;
+	color: $dark-light;
+	font-size: 16px;
+	&:focus {
+		outline: none;
+	}
 }
 
 .modalBody {
-  &::after {
-    content: "";
-    width: calc(100% + 4rem);
-    height: 1px;
-    display: block;
-    background: $stroke;
-    flex: 1;
-    margin: 2.5rem -2rem 1.25rem -2rem;
-  }
-  .formGroup {
-    &:not(:last-child) {
-      margin-bottom: 1.5rem;
-    }
-  }
-  .formTwoColumn {
-    display: flex;
-    gap: 2rem;
-  }
+	&::after {
+		content: "";
+		width: calc(100% + 4rem);
+		height: 1px;
+		display: block;
+		background: $stroke;
+		flex: 1;
+		margin: 2.5rem -2rem 1.25rem -2rem;
+	}
+	.formGroup {
+		&:not(:last-child) {
+			margin-bottom: 1.5rem;
+		}
+	}
+	.formTwoColumn {
+		display: flex;
+		gap: 2rem;
+	}
 }
 
 .modalFooter {
-  display: flex;
-  justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
 
 .placeholderBlue {
-  animation: placeholder-pulse-blue 2s infinite;
-  background: $primary;
+	animation: placeholder-pulse-blue 2s infinite;
+	background: $primary;
 }
 
 .placeholderWhite {
-  animation: placeholder-pulse-white 2s infinite;
-  background: white;
+	animation: placeholder-pulse-white 2s infinite;
+	background: white;
 }
 
 @keyframes placeholder-pulse-blue {
-  0% {
-    background-color: lighten($primary, 3%);
-  }
-  50% {
-    background-color: lighten($primary, 8%);
-  }
-  100% {
-    background-color: lighten($primary, 3%);
-  }
+	0% {
+		background-color: lighten($primary, 3%);
+	}
+	50% {
+		background-color: lighten($primary, 8%);
+	}
+	100% {
+		background-color: lighten($primary, 3%);
+	}
 }
 
 @keyframes placeholder-pulse-white {
-  0% {
-    background-color: darken(white, 5%);
-  }
-  50% {
-    background-color: darken(white, 12%);
-  }
-  100% {
-    background-color: darken(white, 5%);
-  }
+	0% {
+		background-color: darken(white, 5%);
+	}
+	50% {
+		background-color: darken(white, 12%);
+	}
+	100% {
+		background-color: darken(white, 5%);
+	}
 }

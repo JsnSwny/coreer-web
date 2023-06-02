@@ -1,16 +1,14 @@
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import React from "react";
 import styles from "./Card.module.scss";
-
-type EndDate = Date | "Present";
 
 interface CardProps {
   image: string | null;
   title: string;
   subtitle: string;
   body: string;
-  start_date?: Date;
-  end_date?: EndDate;
+  start_date: string;
+  end_date: string | null;
   size?: string;
 }
 
@@ -29,7 +27,7 @@ const Card = ({
       <div className={styles.content}>
         {start_date && (
           <p className={styles.date}>
-            {`${format(start_date, "MMM yyyy")} - ${end_date}`}
+            {`${format(parseISO(start_date), "MMMM yyyy")} - ${end_date ? format(parseISO(end_date), "MMMM yyyy") : "Present"}`}
           </p>
         )}
         <h3 className={styles.title}>{title}</h3>

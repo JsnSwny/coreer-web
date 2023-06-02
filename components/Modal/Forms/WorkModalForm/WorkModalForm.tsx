@@ -5,6 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import Button from "@/components/Button/Button";
 import { WorkExperienceRequest } from "@/interfaces/work_experiences.model";
 import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
+import { format } from "date-fns";
 
 interface ModalFormProps {
   closeModal: () => void;
@@ -21,16 +22,22 @@ const WorkModalForm = ({ closeModal }: ModalFormProps) => {
   const [endDate, setEndDate] = useState<Date | null>(null);
 
   const handleSave = () => {
-    let obj: WorkExperienceRequest = {
-      user: user!.id,
-      job_title: jobTitle,
-      company,
-      location,
-      start_date: "2023-05-29",
-      description,
-    };
-    addWorkExperience(obj);
-    closeModal();
+    if(jobTitle && company && location && startDate) {
+      let obj: WorkExperienceRequest = {
+        user: user!.id,
+        job_title: jobTitle,
+        company,
+        location,
+        start_date: format(startDate, "yyyy-MM-dd"),
+        end_date: endDate ? format(endDate, "yyyy-MM-dd") : endDate,
+        description,
+      };
+      addWorkExperience(obj);
+      closeModal();
+    }
+    
+    
+    
   };
 
   return (

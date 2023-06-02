@@ -12,8 +12,8 @@ export interface Education {
   school: School;
   degree: string;
   description: string;
-  start_date: Date;
-  end_date?: Date;
+  start_date: string;
+  end_date: string | null;
   user: Profile;
 }
 
@@ -22,6 +22,6 @@ export interface EducationRequest {
   degree: string;
   description: string;
   start_date: string;
-  end_date?: string;
+  end_date: string | null;
   user: number;
 }

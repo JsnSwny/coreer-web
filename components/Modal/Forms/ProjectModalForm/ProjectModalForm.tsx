@@ -5,6 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import Button from "@/components/Button/Button";
 import { ProjectRequest } from "@/interfaces/project.model";
 import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
+import { format } from "date-fns";
 
 interface ModalFormProps {
   closeModal: () => void;
@@ -19,17 +20,19 @@ const ProjectModalForm = ({ closeModal }: ModalFormProps) => {
   const [endDate, setEndDate] = useState<Date | null>(null);
 
   const handleSave = () => {
-    let obj: ProjectRequest = {
-      title,
-      description,
-      image,
-      start_date: "2023-05-29",
-      user: user!.id,
-    };
-    addProject(obj);
-    setTitle("");
-    setDescription("");
-    closeModal();
+    if(title) {
+      let obj: ProjectRequest = {
+        title,
+        description,
+        image,
+        start_date: startDate ? format(startDate, "yyyy-MM-dd") : startDate,
+        end_date: endDate ? format(endDate, "yyyy-MM-dd") : endDate,
+        user: user!.id,
+      };
+      addProject(obj);
+      closeModal();
+    }
+    
   };
 
   const photoUpload = (e: ChangeEvent<HTMLInputElement>) => {

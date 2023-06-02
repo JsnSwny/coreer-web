@@ -9,6 +9,7 @@ import axios from "axios";
 import { EducationRequest, School } from "@/interfaces/education.model";
 import { ActionMeta } from "react-select";
 import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
+import { format } from "date-fns";
 
 interface ModalFormProps {
   closeModal: () => void;
@@ -29,11 +30,12 @@ const EducationModalForm = ({ closeModal }: ModalFormProps) => {
   const [endDate, setEndDate] = useState<Date | null>(null);
 
   const handleSave = () => {
-    if (school) {
+    if (school && degree && startDate) {
       let obj: EducationRequest = {
         school_id: parseInt(school.value),
         degree,
-        start_date: "2023-05-29",
+        start_date: format(startDate, "yyyy-MM-dd"),
+        end_date: endDate ? format(endDate, "yyyy-MM-dd") : endDate,
         description,
         user: user!.id,
       };

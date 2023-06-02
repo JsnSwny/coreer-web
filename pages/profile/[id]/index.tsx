@@ -142,8 +142,8 @@ const profile = ({ profile }: ProfileProps) => {
                     title={experience.company}
                     subtitle={experience.job_title}
                     body={experience.description}
-                    start_date={new Date()}
-                    end_date="Present"
+                    start_date={experience.start_date}
+                    end_date={experience?.end_date}
                     size="large"
                   />
                 ))}
@@ -162,6 +162,8 @@ const profile = ({ profile }: ProfileProps) => {
                     title={education.school.name}
                     subtitle={education.degree}
                     body={education.description}
+                    start_date={education.start_date}
+                    end_date={education.end_date}
                     size="large"
                   />
                 ))}

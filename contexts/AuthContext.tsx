@@ -196,7 +196,13 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
       formData.append("title", data.title);
       formData.append("description", data.description);
-      formData.append("start_date", data.start_date);
+      if(data.start_date) {
+        formData.append("start_date", data.start_date);
+      }
+      
+      if(data.end_date) {
+        formData.append("end_date", data.end_date);
+      }
       formData.append("user", data.user.toString());
 
       await axios

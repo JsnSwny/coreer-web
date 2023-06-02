@@ -47,7 +47,11 @@ const Project = ({ project }: ProjectProps) => {
           <FontAwesomeIcon icon={faRobot} className={styles.placeholderIcon} />
         )}
       </div>
-
+      {project.start_date && (
+          <p className={styles.date}>
+            {`${format(parseISO(project.start_date), "MMMM yyyy")} - ${project.end_date ? format(parseISO(project.end_date), "MMMM yyyy") : "Present"}`}
+          </p>
+        )}
       <h3 className={styles.title}>{project.title}</h3>
       <p className={styles.description}>{project.description}</p>
       {project.languages && project.languages.length > 0 && (
