@@ -52,11 +52,12 @@ const profile = ({ profile }: ProfileProps) => {
 
   const openModal = (section: string, description: string = "", item?: any) => {
     setActiveSection({ title: section, description });
-    setModalItem(item)
+    if (item) setModalItem(item);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
+    setModalItem(null);
     setIsModalOpen(false);
   };
 
@@ -78,7 +79,6 @@ const profile = ({ profile }: ProfileProps) => {
         </Head>
         <ProfileBanner profile={profile} />
         <Container>
-
           {activeSection && (
             <Modal
               title={activeSection.title}
@@ -90,7 +90,7 @@ const profile = ({ profile }: ProfileProps) => {
                 <AboutModalForm closeModal={closeModal} />
               )}
               {activeSection.title === "Project" && (
-                <ProjectModalForm closeModal={closeModal} />
+                <ProjectModalForm closeModal={closeModal} item={modalItem} />
               )}
               {activeSection.title === "Education" && (
                 <EducationModalForm closeModal={closeModal} item={modalItem} />
@@ -131,7 +131,7 @@ const profile = ({ profile }: ProfileProps) => {
               action={() => openModal("Project")}
               actionIcon={faPlus}
             >
-              <Projects projects={profile.projects} />
+              <Projects projects={profile.projects} action={openModal} />
             </ProfileSection>
             <ProfileSection
               title={"Work Experience"}
@@ -140,24 +140,29 @@ const profile = ({ profile }: ProfileProps) => {
               actionIcon={faPlus}
             >
               <CardList>
-                {profile?.work_experiences.slice()
-                .sort((a, b) => {
-                  const endDateA = a.end_date ? new Date(a.end_date) : null;
-                  const endDateB = b.end_date ? new Date(b.end_date) : null;
-                
-                  return differenceInMonths(endDateB || new Date(), endDateA || new Date());
-                }).map((experience) => (
-                  <Card
-                    image={null}
-                    title={experience.company}
-                    subtitle={experience.job_title}
-                    body={experience.description}
-                    start_date={experience.start_date}
-                    end_date={experience.end_date}
-                    size="large"
-                    action={() => openModal("Experience", "", experience)}
-                  />
-                ))}
+                {profile?.work_experiences
+                  .slice()
+                  .sort((a, b) => {
+                    const endDateA = a.end_date ? new Date(a.end_date) : null;
+                    const endDateB = b.end_date ? new Date(b.end_date) : null;
+
+                    return differenceInMonths(
+                      endDateB || new Date(),
+                      endDateA || new Date()
+                    );
+                  })
+                  .map((experience) => (
+                    <Card
+                      image={null}
+                      title={experience.company}
+                      subtitle={experience.job_title}
+                      body={experience.description}
+                      start_date={experience.start_date}
+                      end_date={experience.end_date}
+                      size="large"
+                      action={() => openModal("Experience", "", experience)}
+                    />
+                  ))}
               </CardList>
             </ProfileSection>
             <ProfileSection
@@ -167,24 +172,29 @@ const profile = ({ profile }: ProfileProps) => {
               actionIcon={faPlus}
             >
               <CardList>
-                {profile?.educations.slice()
-                .sort((a, b) => {
-                  const endDateA = a.end_date ? new Date(a.end_date) : null;
-                  const endDateB = b.end_date ? new Date(b.end_date) : null;
-                
-                  return differenceInMonths(endDateB || new Date(), endDateA || new Date());
-                }).map((education) => (
-                  <Card
-                    image={education.school.logo}
-                    title={education.school.name}
-                    subtitle={education.degree}
-                    body={education.description}
-                    start_date={education.start_date}
-                    end_date={education.end_date}
-                    size="large"
-                    action={() => openModal("Education", "", education)}
-                  />
-                ))}
+                {profile?.educations
+                  .slice()
+                  .sort((a, b) => {
+                    const endDateA = a.end_date ? new Date(a.end_date) : null;
+                    const endDateB = b.end_date ? new Date(b.end_date) : null;
+
+                    return differenceInMonths(
+                      endDateB || new Date(),
+                      endDateA || new Date()
+                    );
+                  })
+                  .map((education) => (
+                    <Card
+                      image={education.school.logo}
+                      title={education.school.name}
+                      subtitle={education.degree}
+                      body={education.description}
+                      start_date={education.start_date}
+                      end_date={education.end_date}
+                      size="large"
+                      action={() => openModal("Education", "", education)}
+                    />
+                  ))}
               </CardList>
             </ProfileSection>
             <ProfileSection

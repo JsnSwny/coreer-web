@@ -3,10 +3,10 @@ import Modal from "../../Modal/Modal";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import Button from "@/components/Button/Button";
-import { ProjectRequest } from "@/interfaces/project.model";
+import { Project, ProjectRequest } from "@/interfaces/project.model";
 import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
-import { format } from "date-fns";
-import { addProject } from "@/api/projects";
+import { format, parseISO } from "date-fns";
+import { addProject, updateProject } from "@/api/projects";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import Head from "next/head";
@@ -31,21 +31,31 @@ const quillModules = {
     ["code-block"],
   ],
   syntax: {
-    highlight: (text) => hljs.highlightAuto(text).value,
+    highlight: (text: string) => hljs.highlightAuto(text).value,
   },
 };
 interface ModalFormProps {
   closeModal: () => void;
+  item: Project | null;
 }
 
-const ProjectModalForm = ({ closeModal }: ModalFormProps) => {
+const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
+  console.log(item);
   const { user, setUser } = useAuth();
   const [image, setImage] = useState<File | null>(null);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const [editorContent, setEditorContent] = useState("");
+  const [title, setTitle] = useState(item ? item.title : "");
+  const [description, setDescription] = useState(
+    item?.description ? item.description : ""
+  );
+  const [startDate, setStartDate] = useState<Date | null>(
+    item?.start_date ? parseISO(item.start_date) : null
+  );
+  const [endDate, setEndDate] = useState<Date | null>(
+    item?.end_date ? parseISO(item.end_date) : null
+  );
+  const [editorContent, setEditorContent] = useState(
+    item?.content ? item.content : ""
+  );
 
   const handleSave = async () => {
     if (title) {
@@ -56,10 +66,30 @@ const ProjectModalForm = ({ closeModal }: ModalFormProps) => {
         start_date: startDate ? format(startDate, "yyyy-MM-dd") : startDate,
         end_date: endDate ? format(endDate, "yyyy-MM-dd") : endDate,
         user: user!.id,
-        content: editorContent,
+        content: editorContent ? editorContent : "",
       };
-      const newProject = await addProject(obj);
-      setUser({ ...user!, projects: [...user!.projects, newProject] });
+      if (item) {
+        // Update existing project
+        const updatedProject = await updateProject(item.id, obj);
+        setUser({
+          ...user!,
+          projects: user!.projects.map((project) =>
+            project.id === updatedProject.id ? updatedProject : project
+          ),
+        });
+      } else {
+        // Add new project
+        const newProject = await addProject(obj);
+        setUser({ ...user!, projects: [...user!.projects, newProject] });
+      }
+
+      setTitle("");
+      setDescription("");
+      setStartDate(null);
+      setEndDate(null);
+      setImage(null);
+      setEditorContent("");
+
       closeModal();
     }
   };
@@ -103,7 +133,7 @@ const ProjectModalForm = ({ closeModal }: ModalFormProps) => {
           setEndDate={setEndDate}
         />
         <div className={globalStyles.formGroup}>
-          <label className={globalStyles.label}>Description*</label>
+          <label className={globalStyles.label}>Description</label>
           <textarea
             className={globalStyles.input}
             value={description}
@@ -111,12 +141,16 @@ const ProjectModalForm = ({ closeModal }: ModalFormProps) => {
             rows={4}
           ></textarea>
         </div>
-        <ReactQuill
-          value={editorContent}
-          onChange={setEditorContent}
-          modules={quillModules}
-          theme="snow"
-        />
+        <div className={globalStyles.formGroup}>
+          <label className={globalStyles.label}>Content</label>
+          <ReactQuill
+            value={editorContent}
+            onChange={setEditorContent}
+            modules={quillModules}
+            theme="snow"
+            style={{ height: `${12 * 24}px` }}
+          />
+        </div>
       </div>
       <div className={globalStyles.modalFooter}>
         <Button text="Save" onClick={handleSave} />
