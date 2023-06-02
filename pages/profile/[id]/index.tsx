@@ -78,6 +78,7 @@ const profile = ({ profile }: ProfileProps) => {
         </Head>
         <ProfileBanner profile={profile} />
         <Container>
+
           {activeSection && (
             <Modal
               title={activeSection.title}

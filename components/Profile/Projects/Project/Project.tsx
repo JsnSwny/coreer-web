@@ -9,9 +9,10 @@ import { calculateTimeDifference } from "@/utils/calculateTimeDifference";
 
 interface ProjectProps {
   project: Project;
+  openModal: () => void;
 }
 
-const Project = ({ project }: ProjectProps) => {
+const Project = ({ project, openModal }: ProjectProps) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const handleMouseEnter = () => {
@@ -27,7 +28,7 @@ const Project = ({ project }: ProjectProps) => {
     }
   };
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={(e) => openModal()}>
       <div
         className={styles.placeholder}
         onMouseEnter={handleMouseEnter}
