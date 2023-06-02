@@ -11,6 +11,7 @@ export interface ProjectRequest {
   image?: File | null;
   video?: File | null;
   user: number;
+  content: string;
 }
 
 export interface Project {
@@ -23,4 +24,5 @@ export interface Project {
   image?: string | null;
   video?: string | null;
   user: Profile;
+  content: string;
 }

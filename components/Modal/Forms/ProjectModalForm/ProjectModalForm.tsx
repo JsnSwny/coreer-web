@@ -7,7 +7,33 @@ import { ProjectRequest } from "@/interfaces/project.model";
 import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
 import { format } from "date-fns";
 import { addProject } from "@/api/projects";
+import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic";
+import Head from "next/head";
+import "highlight.js/styles/monokai-sublime.css";
+import hljs from "highlight.js";
 
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+
+const quillModules = {
+  toolbar: [
+    [{ header: [2, 3, false] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
+    [
+      { script: "sub" },
+      { script: "super" },
+      { list: "ordered" },
+      { list: "bullet" },
+      { indent: "-1" },
+      { indent: "+1" },
+    ],
+    ["link", "image"],
+    ["code-block"],
+  ],
+  syntax: {
+    highlight: (text) => hljs.highlightAuto(text).value,
+  },
+};
 interface ModalFormProps {
   closeModal: () => void;
 }
@@ -19,9 +45,10 @@ const ProjectModalForm = ({ closeModal }: ModalFormProps) => {
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
+  const [editorContent, setEditorContent] = useState("");
 
   const handleSave = async () => {
-    if(title) {
+    if (title) {
       let obj: ProjectRequest = {
         title,
         description,
@@ -29,12 +56,12 @@ const ProjectModalForm = ({ closeModal }: ModalFormProps) => {
         start_date: startDate ? format(startDate, "yyyy-MM-dd") : startDate,
         end_date: endDate ? format(endDate, "yyyy-MM-dd") : endDate,
         user: user!.id,
+        content: editorContent,
       };
       const newProject = await addProject(obj);
       setUser({ ...user!, projects: [...user!.projects, newProject] });
       closeModal();
     }
-    
   };
 
   const photoUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +77,8 @@ const ProjectModalForm = ({ closeModal }: ModalFormProps) => {
     }
   };
 
+  // const quillFormats = ["header", "bold", "italic", "underline", "code-block"];
+
   return (
     <>
       <div className={globalStyles.modalBody}>
@@ -57,7 +86,6 @@ const ProjectModalForm = ({ closeModal }: ModalFormProps) => {
           <label className={globalStyles.label}>Image</label>
           <input autoFocus type="file" onChange={photoUpload} />
         </div>
-
         <div className={globalStyles.formGroup}>
           <label className={globalStyles.label}>Title*</label>
           <input
@@ -83,6 +111,12 @@ const ProjectModalForm = ({ closeModal }: ModalFormProps) => {
             rows={4}
           ></textarea>
         </div>
+        <ReactQuill
+          value={editorContent}
+          onChange={setEditorContent}
+          modules={quillModules}
+          theme="snow"
+        />
       </div>
       <div className={globalStyles.modalFooter}>
         <Button text="Save" onClick={handleSave} />

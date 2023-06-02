@@ -56,7 +56,7 @@ const Home = () => {
       </Head>
 
       <main className={styles.main}>
-        <Container>
+        <Container margin>
           <ExploreHeading />
           <SectionList>
             <Section title={"Your top match"}>
