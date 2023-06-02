@@ -6,20 +6,21 @@ import Button from "@/components/Button/Button";
 import { ProjectRequest } from "@/interfaces/project.model";
 import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
 import { format } from "date-fns";
+import { addProject } from "@/api/projects";
 
 interface ModalFormProps {
   closeModal: () => void;
 }
 
 const ProjectModalForm = ({ closeModal }: ModalFormProps) => {
-  const { user, addProject } = useAuth();
+  const { user, setUser } = useAuth();
   const [image, setImage] = useState<File | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if(title) {
       let obj: ProjectRequest = {
         title,
@@ -29,7 +30,8 @@ const ProjectModalForm = ({ closeModal }: ModalFormProps) => {
         end_date: endDate ? format(endDate, "yyyy-MM-dd") : endDate,
         user: user!.id,
       };
-      addProject(obj);
+      const newProject = await addProject(obj);
+      setUser({ ...user!, projects: [...user!.projects, newProject] });
       closeModal();
     }
     

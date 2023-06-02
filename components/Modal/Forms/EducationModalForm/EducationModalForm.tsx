@@ -10,13 +10,14 @@ import { EducationRequest, School } from "@/interfaces/education.model";
 import { ActionMeta } from "react-select";
 import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
 import { format } from "date-fns";
+import { addEducation } from "@/api/educations";
 
 interface ModalFormProps {
   closeModal: () => void;
 }
 
 const EducationModalForm = ({ closeModal }: ModalFormProps) => {
-  const { user, updateUser, addEducation } = useAuth();
+  const { user, setUser } = useAuth();
 
   type SchoolSelect = {
     value: string;
@@ -29,7 +30,7 @@ const EducationModalForm = ({ closeModal }: ModalFormProps) => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (school && degree && startDate) {
       let obj: EducationRequest = {
         school_id: parseInt(school.value),
@@ -39,9 +40,10 @@ const EducationModalForm = ({ closeModal }: ModalFormProps) => {
         description,
         user: user!.id,
       };
-      addEducation(obj);
-      setDegree("");
-      setSchool(null);
+
+      const newEducation = await addEducation(obj)
+      setUser({ ...user!, educations: [...user!.educations, newEducation] });
+
       closeModal();
     }
   };
