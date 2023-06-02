@@ -27,6 +27,7 @@ import axios from "axios";
 import EducationModalForm from "@/components/Modal/Forms/EducationModalForm/EducationModalForm";
 import WorkModalForm from "@/components/Modal/Forms/WorkModalForm/WorkModalForm";
 import SkillsModalForm from "@/components/Modal/Forms/SkillsModalForm/SkillsModalForm";
+import { differenceInMonths } from "date-fns";
 
 interface ProfileProps {
   profile: Profile | null;
@@ -136,14 +137,20 @@ const profile = ({ profile }: ProfileProps) => {
               actionIcon={faPlus}
             >
               <CardList>
-                {profile?.work_experiences.map((experience) => (
+                {profile?.work_experiences.slice()
+                .sort((a, b) => {
+                  const endDateA = a.end_date ? new Date(a.end_date) : null;
+                  const endDateB = b.end_date ? new Date(b.end_date) : null;
+                
+                  return differenceInMonths(endDateB || new Date(), endDateA || new Date());
+                }).map((experience) => (
                   <Card
                     image={null}
                     title={experience.company}
                     subtitle={experience.job_title}
                     body={experience.description}
                     start_date={experience.start_date}
-                    end_date={experience?.end_date}
+                    end_date={experience.end_date}
                     size="large"
                   />
                 ))}
@@ -156,7 +163,13 @@ const profile = ({ profile }: ProfileProps) => {
               actionIcon={faPlus}
             >
               <CardList>
-                {profile?.educations.map((education) => (
+                {profile?.educations.slice()
+                .sort((a, b) => {
+                  const endDateA = a.end_date ? new Date(a.end_date) : null;
+                  const endDateB = b.end_date ? new Date(b.end_date) : null;
+                
+                  return differenceInMonths(endDateB || new Date(), endDateA || new Date());
+                }).map((education) => (
                   <Card
                     image={education.school.logo}
                     title={education.school.name}
