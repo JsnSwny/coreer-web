@@ -7,11 +7,16 @@
 	&.large {
 		width: 100%;
 	}
+	&:hover {
+		.icon {
+			opacity: 1;
+		}
+	}
 }
 
 .date {
 	color: $dark-light;
-	font-size: 14px;
+	font-size: 16px;
 	margin-bottom: 0.75rem;
 }
 
@@ -19,7 +24,7 @@
 	margin-top: 0.25rem;
 	font-size: 16px;
 	// font-weight: bold;
-	color: $dark-light;
+	// color: $dark-light;
 }
 
 .image {
@@ -32,4 +37,16 @@
 	margin-top: 1rem;
 	line-height: 1.3rem;
 	font-size: 14px;
+}
+
+.content {
+	flex: 1;
+}
+
+.icon {
+	width: 24px;
+	opacity: 0;
+	transition: 0.2s ease opacity;
+	cursor: pointer;
+	color: $black;
 }

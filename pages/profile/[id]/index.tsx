@@ -44,13 +44,15 @@ const profile = ({ profile }: ProfileProps) => {
   profile = user!.id == profile?.id ? user : profile;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalItem, setModalItem] = useState(null);
   const [activeSection, setActiveSection] = useState<ActiveSectionProps | null>(
     null
   );
   const [recommendations, setRecommendations] = useState([]);
 
-  const openModal = (section: string, description: string = "") => {
+  const openModal = (section: string, description: string = "", item?: any) => {
     setActiveSection({ title: section, description });
+    setModalItem(item)
     setIsModalOpen(true);
   };
 
@@ -86,14 +88,14 @@ const profile = ({ profile }: ProfileProps) => {
               {activeSection.title === "About" && (
                 <AboutModalForm closeModal={closeModal} />
               )}
-              {activeSection.title === "Add Project" && (
+              {activeSection.title === "Project" && (
                 <ProjectModalForm closeModal={closeModal} />
               )}
               {activeSection.title === "Education" && (
-                <EducationModalForm closeModal={closeModal} />
+                <EducationModalForm closeModal={closeModal} item={modalItem} />
               )}
               {activeSection.title === "Experience" && (
-                <WorkModalForm closeModal={closeModal} />
+                <WorkModalForm closeModal={closeModal} item={modalItem} />
               )}
               {activeSection.title === "Skills" && (
                 <SkillsModalForm closeModal={closeModal} />
@@ -125,7 +127,7 @@ const profile = ({ profile }: ProfileProps) => {
             <ProfileSection
               title={"Projects"}
               profile={profile}
-              action={() => openModal("Add Project")}
+              action={() => openModal("Project")}
               actionIcon={faPlus}
             >
               <Projects projects={profile.projects} />
@@ -152,6 +154,7 @@ const profile = ({ profile }: ProfileProps) => {
                     start_date={experience.start_date}
                     end_date={experience.end_date}
                     size="large"
+                    action={() => openModal("Experience", "", experience)}
                   />
                 ))}
               </CardList>
@@ -178,20 +181,11 @@ const profile = ({ profile }: ProfileProps) => {
                     start_date={education.start_date}
                     end_date={education.end_date}
                     size="large"
+                    action={() => openModal("Education", "", education)}
                   />
                 ))}
               </CardList>
             </ProfileSection>
-            {/* <ProfileSection title={"Reviews"} profile={profile}>
-            <CardList>
-              <Card
-                image="http://www.gurunepal.com/wp-content/uploads/2020/05/heriot-watt-1-1.png"
-                title="Sarah Wilson"
-                subtitle="Web Developer @ Microsoft"
-                body="John is a brilliant machine learning engineer who consistently delivers high-quality work. He is an excellent team player who is always willing to help his colleagues and share his knowledge with them.”"
-              />
-            </CardList>
-          </ProfileSection> */}
             <ProfileSection
               title={`Similar to ${profile.first_name}`}
               profile={profile}
@@ -203,8 +197,6 @@ const profile = ({ profile }: ProfileProps) => {
               </ProfileCardList>
             </ProfileSection>
           </div>
-          {/* </div>
-          <Suggestions user={profile} suggestions={recommend} /> */}
         </Container>
       </>
     );

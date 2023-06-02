@@ -3,24 +3,25 @@ import Modal from "../../Modal/Modal";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import Button from "@/components/Button/Button";
-import { WorkExperienceRequest } from "@/interfaces/work_experiences.model";
+import { WorkExperience, WorkExperienceRequest } from "@/interfaces/work_experiences.model";
 import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
-import { format } from "date-fns";
-import { addExperience } from "@/api/experiences";
+import { format, parseISO } from "date-fns";
+import { addExperience, updateExperience } from "@/api/experiences";
 
 interface ModalFormProps {
   closeModal: () => void;
+  item: WorkExperience | null;
 }
 
-const WorkModalForm = ({ closeModal }: ModalFormProps) => {
+const WorkModalForm = ({ closeModal, item }: ModalFormProps) => {
   const { user, setUser } = useAuth();
 
-  const [jobTitle, setJobTitle] = useState("");
-  const [company, setCompany] = useState("");
-  const [location, setLocation] = useState("");
-  const [description, setDescription] = useState("");
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [jobTitle, setJobTitle] = useState(item ? item.job_title : "");
+  const [company, setCompany] = useState(item ? item.company : "");
+  const [location, setLocation] = useState(item ? item.location : "");
+  const [description, setDescription] = useState(item ? item.description : "");
+  const [startDate, setStartDate] = useState<Date | null>(item ? parseISO(item.start_date) : null);
+  const [endDate, setEndDate] = useState<Date | null>(item ? item.end_date ? parseISO(item.end_date) : null : null);
 
   const handleSave = async () => {
     if(jobTitle && company && location && startDate) {
@@ -33,16 +34,30 @@ const WorkModalForm = ({ closeModal }: ModalFormProps) => {
         end_date: endDate ? format(endDate, "yyyy-MM-dd") : endDate,
         description,
       };
-      const newExperience = await addExperience(obj);
-      setUser({
-        ...user!,
-        work_experiences: [...user!.work_experiences, newExperience],
-      });
+
+      let updatedUser = null;
+
+      if (item) {
+        // Update existing experience
+        const updatedExperience = await updateExperience(item.id, obj);
+        updatedUser = {
+          ...user!,
+          work_experiences: user!.work_experiences.map((experience) =>
+            experience.id === updatedExperience.id ? updatedExperience : experience
+          ),
+        };
+      } else {
+        // Add new experience
+        const newExperience = await addExperience(obj);
+        updatedUser = {
+          ...user!,
+          work_experiences: [...user!.work_experiences, newExperience],
+        };
+      }
+  
+      setUser(updatedUser);
       closeModal();
     }
-    
-    
-    
   };
 
   return (

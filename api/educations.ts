@@ -14,3 +14,14 @@ export const addEducation = async (data: EducationRequest) => {
 		// setLoading(false);
 	}
 };
+
+export const updateEducation = async (id: number, data: EducationRequest) => {
+	try {
+		const response = await axios.put(`${server}/api/educations/${id}/`, data, getUserConfig());
+		return response.data;
+	} catch (error: any) {
+		console.error(error.response);
+	} finally {
+		// setLoading(false);
+	}
+};
