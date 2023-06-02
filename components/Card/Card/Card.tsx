@@ -1,3 +1,4 @@
+import { calculateTimeDifference } from "@/utils/calculateTimeDifference";
 import { format, parseISO } from "date-fns";
 import React from "react";
 import styles from "./Card.module.scss";
@@ -27,7 +28,7 @@ const Card = ({
       <div className={styles.content}>
         {start_date && (
           <p className={styles.date}>
-            {`${format(parseISO(start_date), "MMMM yyyy")} - ${end_date ? format(parseISO(end_date), "MMMM yyyy") : "Present"}`}
+            {`${format(parseISO(start_date), "MMMM yyyy")} - ${end_date ? format(parseISO(end_date), "MMMM yyyy") : "Present"}`} ({calculateTimeDifference(start_date, end_date)})
           </p>
         )}
         <h3 className={styles.title}>{title}</h3>

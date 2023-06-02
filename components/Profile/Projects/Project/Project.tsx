@@ -5,6 +5,7 @@ import TagsList from "@/components/Tags/TagsList/TagsList";
 import { useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRobot } from "@fortawesome/free-solid-svg-icons";
+import { calculateTimeDifference } from "@/utils/calculateTimeDifference";
 
 interface ProjectProps {
   project: Project;
@@ -49,7 +50,7 @@ const Project = ({ project }: ProjectProps) => {
       </div>
       {project.start_date && (
           <p className={styles.date}>
-            {`${format(parseISO(project.start_date), "MMMM yyyy")} - ${project.end_date ? format(parseISO(project.end_date), "MMMM yyyy") : "Present"}`}
+            {`${format(parseISO(project.start_date), "MMMM yyyy")} - ${project.end_date ? format(parseISO(project.end_date), "MMMM yyyy") : "Present"}`} ({calculateTimeDifference(project.start_date, project.end_date)})
           </p>
         )}
       <h3 className={styles.title}>{project.title}</h3>
