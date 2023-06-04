@@ -64,6 +64,21 @@
     .editWrapper {
       opacity: 1;
     }
+    &::after {
+      opacity: 1;
+    }
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(black, 0.8);
+    border-radius: 10px;
+    opacity: 0;
+    transition: 0.2s ease opacity;
   }
 }
 
@@ -80,14 +95,11 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: white;
-  border-radius: 50%;
   width: 45px;
   height: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 0.5px solid $stroke;
   opacity: 0;
   transition: 0.2s ease opacity;
   z-index: 10;
@@ -95,4 +107,9 @@
 
 .editIcon {
   width: 24px;
+  color: white;
+  transition: 0.2s ease color;
+  &:hover {
+    color: $primary;
+  }
 }

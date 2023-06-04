@@ -1,0 +1,31 @@
+@import "@/styles/_variables.scss";
+
+.suggestions {
+  border-left: 1px solid $stroke;
+  border-right: 1px solid $stroke;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  .suggestion {
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid $stroke;
+    cursor: pointer;
+    background: white;
+    transition: 0.2s ease background;
+    &:hover {
+      background: $primary;
+      color: white;
+    }
+    &:last-child {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+  }
+}
+
+.input {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}

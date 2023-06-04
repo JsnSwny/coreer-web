@@ -95,6 +95,12 @@
   }
 }
 
+.formGroup {
+  &:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+}
+
 .modalFooter {
   margin-top: 1.25rem;
   display: flex;

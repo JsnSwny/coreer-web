@@ -17,7 +17,7 @@ const DateRangeInput = ({
 }: DateRangeInput) => {
   return (
     <div className={`${globalStyles.formGroup} ${globalStyles.formTwoColumn}`}>
-      <div>
+      <div style={{ flex: 1 }}>
         <label className={globalStyles.label}>Start Date*</label>
         <DatePicker
           selected={startDate}
@@ -30,7 +30,7 @@ const DateRangeInput = ({
           showMonthYearPicker
         />
       </div>
-      <div>
+      <div style={{ flex: 1 }}>
         <label className={globalStyles.label}>End Date</label>
         <DatePicker
           selected={endDate}

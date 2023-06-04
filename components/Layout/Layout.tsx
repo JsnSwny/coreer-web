@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "../Header/Header/Header";
 import Head from "next/head";
-import Sidebar from "../Sidebar/Sidebar";
 import styles from "./Layout.module.scss";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
@@ -15,6 +14,7 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY;
   const { user } = useAuth();
   const router = useRouter();
   const [showHeader, setShowHeader] = useState(user && user.onboarded);
@@ -33,6 +33,9 @@ const Layout = ({ children }: LayoutProps) => {
             href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap"
             rel="stylesheet"
           />
+          <script
+            src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`}
+          ></script>
         </Head>
         {/* <Sidebar /> */}
         <ToastContainer />

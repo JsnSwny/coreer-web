@@ -3,10 +3,14 @@ import Modal from "../../Modal/Modal";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import Button from "@/components/Button/Button";
-import { WorkExperience, WorkExperienceRequest } from "@/interfaces/work_experiences.model";
+import {
+  WorkExperience,
+  WorkExperienceRequest,
+} from "@/interfaces/work_experiences.model";
 import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
 import { format, parseISO } from "date-fns";
 import { addExperience, updateExperience } from "@/api/experiences";
+import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput";
 
 interface ModalFormProps {
   closeModal: () => void;
@@ -20,11 +24,15 @@ const WorkModalForm = ({ closeModal, item }: ModalFormProps) => {
   const [company, setCompany] = useState(item ? item.company : "");
   const [location, setLocation] = useState(item ? item.location : "");
   const [description, setDescription] = useState(item ? item.description : "");
-  const [startDate, setStartDate] = useState<Date | null>(item ? parseISO(item.start_date) : null);
-  const [endDate, setEndDate] = useState<Date | null>(item ? item.end_date ? parseISO(item.end_date) : null : null);
+  const [startDate, setStartDate] = useState<Date | null>(
+    item ? parseISO(item.start_date) : null
+  );
+  const [endDate, setEndDate] = useState<Date | null>(
+    item ? (item.end_date ? parseISO(item.end_date) : null) : null
+  );
 
   const handleSave = async () => {
-    if(jobTitle && company && location && startDate) {
+    if (jobTitle && company && location && startDate) {
       let obj: WorkExperienceRequest = {
         user: user!.id,
         job_title: jobTitle,
@@ -43,7 +51,9 @@ const WorkModalForm = ({ closeModal, item }: ModalFormProps) => {
         updatedUser = {
           ...user!,
           work_experiences: user!.work_experiences.map((experience) =>
-            experience.id === updatedExperience.id ? updatedExperience : experience
+            experience.id === updatedExperience.id
+              ? updatedExperience
+              : experience
           ),
         };
       } else {
@@ -54,7 +64,7 @@ const WorkModalForm = ({ closeModal, item }: ModalFormProps) => {
           work_experiences: [...user!.work_experiences, newExperience],
         };
       }
-  
+
       setUser(updatedUser);
       closeModal();
     }
@@ -84,12 +94,7 @@ const WorkModalForm = ({ closeModal, item }: ModalFormProps) => {
         </div>
         <div className={globalStyles.formGroup}>
           <label className={globalStyles.label}>Location*</label>
-          <input
-            className={globalStyles.input}
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          />
+          <LocationSearchInput location={location} setLocation={setLocation} />
         </div>
         <DateRangeInput
           startDate={startDate}
