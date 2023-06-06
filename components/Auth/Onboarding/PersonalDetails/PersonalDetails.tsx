@@ -8,7 +8,7 @@ import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput";
 
 const PersonalDetails = () => {
   const router = useRouter();
-  const { user, updateUser } = useAuth();
+  const { user, updateUser, githubDetails } = useAuth();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();

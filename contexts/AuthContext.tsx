@@ -22,11 +22,14 @@ interface AuthContextType {
   userToken: string | null;
   signIn: (email: string, password: string) => void;
   signOut: () => void;
-  signUp: (email: string, password: string, passwordConfirm: string) => void;
+  signUp: (email: string, password1: string, password2: string) => void;
   loading: boolean;
   setUser: (profile: Profile | null) => void;
   updateProfilePicture: (file: File) => void;
   updateUser: (data: object) => void;
+  fetchUser: (accessToken: string) => void;
+  githubDetails: object | null;
+  setGithubDetails: (data: object | null) => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -39,6 +42,9 @@ export const AuthContext = createContext<AuthContextType>({
   setUser: () => {},
   updateProfilePicture: () => {},
   updateUser: () => {},
+  fetchUser: () => {},
+  githubDetails: () => {},
+  setGithubDetails: () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -51,52 +57,73 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<Profile | null>(null);
   const [userToken, setUserToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [githubDetails, setGithubDetails] = useState<object | null>(null);
+
+  const fetchUser = async (accessToken: string) => {
+    try {
+      console.log(`Fetching user: ${accessToken}`);
+      const response = await axios.get(`${server}/api/auth/user/`, {
+        headers: {
+          Authorization: `Token ${accessToken}`,
+        },
+      });
+
+      if (response.status === 200) {
+        const userData = response.data;
+        console.log(userData);
+        localStorage.setItem("token", accessToken);
+        setUser(userData);
+        setUserToken(accessToken);
+      } else {
+        // Handle error case when fetching user information
+        setUser(null);
+      }
+    } catch (error) {
+      // Handle any network errors
+      setUser(null);
+    }
+
+    setLoading(false);
+  };
 
   const signIn = async (email: string, password: string) => {
     try {
-      const response = await axios.post(`${server}/api/auth/login`, {
+      const response = await axios.post(`${server}/api/auth/login/`, {
         email,
         password,
       });
 
-      const user = response.data.user;
-      setUser(user);
-      setUserToken(response.data.token);
-
-      localStorage.setItem("token", response.data.token);
-      document.cookie = cookie.serialize("token", response.data.token, {
-        maxAge: 3600,
-        path: "/",
-      });
+      if (response.status === 200) {
+        const { key } = response.data;
+        localStorage.setItem("token", key);
+        fetchUser(key);
+      } else {
+        setUser(null);
+        setLoading(false);
+      }
     } catch (error) {
-      console.error(error);
-    } finally {
+      // Handle any network errors
+      setUser(null);
       setLoading(false);
     }
   };
 
   const signUp = async (
     email: string,
-    password: string,
-    passwordConfirm: string
+    password1: string,
+    password2: string
   ) => {
     try {
       await axios
-        .post(`${server}/api/auth/register`, {
+        .post(`${server}/api/auth/registration/`, {
           email,
-          password,
-          passwordConfirm,
+          password1,
+          password2,
         })
         .then((res) => {
-          const user = res.data.user;
-          setUser(user);
-          setUserToken(res.data.token);
-
-          localStorage.setItem("token", res.data.token);
-          document.cookie = cookie.serialize("token", res.data.token, {
-            maxAge: 3600,
-            path: "/",
-          });
+          console.log("Registered!");
+          console.log(res.data);
+          signIn(email, password1);
         });
     } catch (error: any) {
       console.error(error.response);
@@ -107,9 +134,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signOut = () => {
     const token = localStorage.getItem("token");
+    console.log(`Signing out: ${token}`);
     if (token) {
       axios
-        .post(`${server}/api/auth/logout`, null, getUserConfig())
+        .post(`${server}/api/auth/logout/`, null, getUserConfig())
         .then((res) => {
           localStorage.removeItem("token");
           document.cookie = cookie.serialize("token", "", {
@@ -122,7 +150,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         .catch((err) => console.log(err));
     }
   };
-  
 
   const updateProfilePicture = async (file: File) => {
     try {
@@ -150,7 +177,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const updateUser = async (data: object) => {
     setLoading(true);
     try {
-
       await axios
         .put(`${server}/api/user/${user!.id}/`, data, getUserConfig())
         .then((res) => {
@@ -164,30 +190,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  const fetchUser = useCallback(() => {
-    let token = localStorage.getItem("token");
-    if (token) {
-      axios
-        .get(`${server}/api/auth/user`, getUserConfig())
-        .then((res) => {
-          setUser(res.data);
-          setUserToken(token);
-        })
-        .catch((err) => {
-          setUser(null);
-          setUserToken(null);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    } else {
-      setLoading(false);
-    }
-  }, []);
-
   useEffect(() => {
-    fetchUser();
-  }, [fetchUser]);
+    const accessToken = localStorage.getItem("token");
+    if (accessToken) fetchUser(accessToken);
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -201,6 +207,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         setUser,
         updateProfilePicture,
         updateUser,
+        fetchUser,
+        githubDetails,
+        setGithubDetails,
       }}
     >
       {children}

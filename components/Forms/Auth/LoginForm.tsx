@@ -7,16 +7,17 @@ import { useRouter } from "next/router";
 import globalStyles from "@/styles/globalStyles.module.scss";
 import Button from "@/components/Button/Button";
 import Link from "next/link";
+import LoadingOverlay from "@/components/Layout/LoadingOverlay/LoadingOverlay";
+import GithubAuth from "./GithubAuth/GithubAuth";
 
 const LoginForm = () => {
   const { signIn } = useAuth();
-  const router = useRouter();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     await signIn(email, password);
 
-    router.push("/");
+    // router.push("/");
   };
 
   const [email, setEmail] = useState("");
@@ -40,7 +41,6 @@ const LoginForm = () => {
             className={`${globalStyles.input} ${styles.input}`}
           />
         </label>
-
         <label
           htmlFor="password"
           className={`${globalStyles.label} ${styles.label}`}
@@ -55,8 +55,8 @@ const LoginForm = () => {
             className={`${globalStyles.input} ${styles.input}`}
           />
         </label>
-
         <Button text="Login" size="large" />
+        <GithubAuth />
       </form>
       <p className={styles.altLink}>
         Don't have an account? <Link href="/signup">Sign up</Link>

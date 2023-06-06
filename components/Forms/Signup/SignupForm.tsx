@@ -15,8 +15,6 @@ const SignupForm = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     await signUp(email, password, passwordConfirm);
-
-    router.push("/");
   };
 
   const [email, setEmail] = useState("");

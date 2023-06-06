@@ -15,8 +15,7 @@ const TopMatchBanner = ({ profile }: TopMatchBannerProps) => {
   return (
     <div className={styles.banner}>
       <div className={styles.left}>
-        <img className={styles.image} src={profile.profile_photo} />
-        {/* <LikeButton profile={profile} /> */}
+        <img className={styles.image} src={profile.image} />
         <div className={styles.details}>
           <h3 className={styles.title}>
             {profile.first_name} {profile.last_name}
