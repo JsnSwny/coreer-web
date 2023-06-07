@@ -1,0 +1,25 @@
+@import "@/styles/_variables.scss";
+
+.questionBlock {
+  width: calc(50% - 1rem);
+  background: white;
+  padding: 3rem;
+  border-radius: 15px;
+  border: 1px solid $stroke;
+  h2 {
+    font-size: 32px;
+    line-height: 2.6rem;
+  }
+  p {
+    color: $dark-light;
+    margin-top: 1.5rem;
+    line-height: 1.8rem;
+    font-size: 16px;
+  }
+  .icon {
+    font-size: 32px;
+    margin-bottom: 0.75rem;
+    color: $black;
+    width: 24px;
+  }
+}

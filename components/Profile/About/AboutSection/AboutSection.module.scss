@@ -2,21 +2,6 @@
 
 .container {
   display: flex;
-  justify-content: space-between;
-  gap: 5rem;
-}
-
-.about {
-  h4 {
-    font-size: 14px;
-  }
-  p {
-    color: $dark-light;
-  }
-}
-
-.details {
-  h1 {
-    font-size: 32px;
-  }
+  flex-direction: column;
+  gap: 2rem;
 }

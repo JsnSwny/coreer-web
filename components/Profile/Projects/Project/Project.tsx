@@ -35,16 +35,6 @@ const Project = ({ project, openProjectModal, action }: ProjectProps) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        {project.video && (
-          <video
-            className={styles.video}
-            ref={videoRef}
-            loop
-            muted
-            src={project.video}
-          ></video>
-        )}
-
         {project.image && <img className={styles.image} src={project.image} />}
         {!project.image && (
           <FontAwesomeIcon icon={faRobot} className={styles.placeholderIcon} />

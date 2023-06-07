@@ -16,6 +16,7 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
 import { toast } from "react-toastify";
+import ResponseBanner from "./ResponseBanner/ResponseBanner";
 
 interface ProfileBannerProps {
   profile: Profile;
@@ -49,14 +50,7 @@ const ProfileBanner = ({ profile }: ProfileBannerProps) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.bannerContainer}>
-        <img
-          className={styles.banner}
-          src="https://www.pixel4k.com/wp-content/uploads/2018/11/night-city-skyscraper-skyline-night-new-york-usa-4k_1541972184.jpg"
-        />
-        <Container>
-
-        
+      <div className={styles.left}>
         <div className={styles.content}>
           {imagePreviewUrl && (
             <img className={styles.profilePhoto} src={imagePreviewUrl} />
@@ -77,16 +71,14 @@ const ProfileBanner = ({ profile }: ProfileBannerProps) => {
             </label>
           )}
         </div>
-        </Container>
-      </div>
-      <Container>
-      <div className={styles.details}>
-        <div>
-          <h1 className={styles.title}>
-            {profile.first_name} {profile.last_name}
-          </h1>
-          <p className={styles.subtitle}>{profile.job}</p>
-        </div>
+        <h1 className={styles.title}>
+          {profile.first_name} {profile.last_name}
+        </h1>
+        <p className={styles.subtitle}>
+          Undergraduate Student • BSc Computer Science
+        </p>
+        <p className={styles.location}>Edinburgh, UK</p>
+        <ResponseBanner />
         {profile.id != user!.id && (
           <div className={styles.buttons}>
             <Button
@@ -114,7 +106,6 @@ const ProfileBanner = ({ profile }: ProfileBannerProps) => {
           </div>
         )}
       </div>
-      </Container>
     </div>
   );
 };

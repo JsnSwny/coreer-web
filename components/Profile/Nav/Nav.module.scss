@@ -1,0 +1,35 @@
+@import "@/styles/_variables.scss";
+
+.nav {
+  list-style: none;
+  display: flex;
+  border-bottom: 1px solid $stroke;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+
+  li {
+    padding: 1rem 3rem;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: 0.2s ease background, 0.2s ease border-bottom;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    &:hover {
+      h3 {
+        color: $primary;
+      }
+    }
+    h3 {
+      //   font-size: 20px;
+      color: $dark-light;
+      transition: 0.2s ease color;
+    }
+    &.active {
+      background: rgba($primary, 0.05);
+      border-bottom: 3px solid $primary;
+      h3 {
+        color: $primary;
+      }
+    }
+  }
+}

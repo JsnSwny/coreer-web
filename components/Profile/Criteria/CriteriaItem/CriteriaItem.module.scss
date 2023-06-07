@@ -1,0 +1,9 @@
+@import "@/styles/_variables.scss";
+
+.criteriaItem {
+  width: calc(100% / 3);
+  background: white;
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  border: 1px solid $stroke;
+}

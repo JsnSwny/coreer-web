@@ -1,0 +1,16 @@
+@import "@/styles/_variables.scss";
+
+.banner {
+  list-style: none;
+  display: flex;
+  gap: 4rem;
+  margin-top: 1.5rem;
+  h4 {
+    font-weight: normal;
+    color: $dark-light;
+  }
+  p {
+    font-weight: bold;
+    margin-top: 0.25rem;
+  }
+}

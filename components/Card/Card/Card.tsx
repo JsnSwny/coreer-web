@@ -24,22 +24,29 @@ const Card = ({
   start_date,
   end_date,
   size,
-  action
+  action,
 }: CardProps) => {
   return (
     <div className={`${styles.card} ${size && styles[size]}`}>
       {image && <img className={styles.image} src={image} />}
       <div className={styles.content}>
-        {start_date && (
-          <p className={styles.date}>
-            {`${format(parseISO(start_date), "MMMM yyyy")} - ${end_date ? format(parseISO(end_date), "MMMM yyyy") : "Present"}`} ({calculateTimeDifference(start_date, end_date)})
-          </p>
-        )}
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.subtitle}>{subtitle}</p>
-        <p className={styles.body}>{body}</p>
+        {start_date && (
+          <p className={styles.date}>
+            {`${format(parseISO(start_date), "MMMM yyyy")} - ${
+              end_date ? format(parseISO(end_date), "MMMM yyyy") : "Present"
+            }`}{" "}
+            ({calculateTimeDifference(start_date, end_date)})
+          </p>
+        )}
+        {body && <p className={styles.body}>{body}</p>}
       </div>
-      <FontAwesomeIcon icon={faPencil} className={styles.icon} onClick={action} />
+      <FontAwesomeIcon
+        icon={faPencil}
+        className={styles.icon}
+        onClick={action}
+      />
     </div>
   );
 };

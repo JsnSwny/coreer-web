@@ -28,6 +28,8 @@ import EducationModalForm from "@/components/Modal/Forms/EducationModalForm/Educ
 import WorkModalForm from "@/components/Modal/Forms/WorkModalForm/WorkModalForm";
 import SkillsModalForm from "@/components/Modal/Forms/SkillsModalForm/SkillsModalForm";
 import { differenceInMonths } from "date-fns";
+import CriteriaList from "@/components/Profile/Criteria/CriteriaList/CriteriaList";
+import Nav from "@/components/Profile/Nav/Nav";
 
 interface ProfileProps {
   profile: Profile | null;
@@ -49,6 +51,8 @@ const profile = ({ profile }: ProfileProps) => {
     null
   );
   const [recommendations, setRecommendations] = useState([]);
+
+  const [section, setSection] = useState("Projects");
 
   const openModal = (section: string, description: string = "", item?: any) => {
     setActiveSection({ title: section, description });
@@ -77,8 +81,11 @@ const profile = ({ profile }: ProfileProps) => {
         <Head>
           <title>{`${profile.first_name} ${profile.last_name} | coreer`}</title>
         </Head>
-        <ProfileBanner profile={profile} />
-        <Container>
+        <Container margin>
+          <ProfileBanner profile={profile} />
+          <CriteriaList profile={profile} />
+          <Nav section={section} setSection={setSection} />
+
           {activeSection && (
             <Modal
               title={activeSection.title}
@@ -103,111 +110,18 @@ const profile = ({ profile }: ProfileProps) => {
               )}
             </Modal>
           )}
+          {section == "Projects" && (
+            <Projects projects={profile.projects} action={openModal} />
+          )}
+          {section == "Similar Users" && (
+            <ProfileCardList>
+              {recommendations.slice(1, 5).map((item) => (
+                <ProfileCard profile={item} />
+              ))}
+            </ProfileCardList>
+          )}
 
-          <div className={styles.container}>
-            <ProfileSection
-              title="About"
-              action={() =>
-                openModal("About", "Write a short summary about yourself")
-              }
-              profile={profile}
-            >
-              <AboutSection profile={profile} />
-            </ProfileSection>
-
-            <ProfileSection
-              title={"Skills"}
-              action={() =>
-                openModal("Skills", "Select at least 5 programming languages")
-              }
-              profile={profile}
-            >
-              <LanguageList languages={profile.languages} />
-            </ProfileSection>
-
-            <ProfileSection
-              title={"Projects"}
-              profile={profile}
-              action={() => openModal("Project")}
-              actionIcon={faPlus}
-            >
-              <Projects projects={profile.projects} action={openModal} />
-            </ProfileSection>
-            <ProfileSection
-              title={"Work Experience"}
-              profile={profile}
-              action={() => openModal("Experience")}
-              actionIcon={faPlus}
-            >
-              <CardList>
-                {profile?.work_experiences
-                  .slice()
-                  .sort((a, b) => {
-                    const endDateA = a.end_date ? new Date(a.end_date) : null;
-                    const endDateB = b.end_date ? new Date(b.end_date) : null;
-
-                    return differenceInMonths(
-                      endDateB || new Date(),
-                      endDateA || new Date()
-                    );
-                  })
-                  .map((experience) => (
-                    <Card
-                      image={null}
-                      title={experience.company}
-                      subtitle={experience.job_title}
-                      body={experience.description}
-                      start_date={experience.start_date}
-                      end_date={experience.end_date}
-                      size="large"
-                      action={() => openModal("Experience", "", experience)}
-                    />
-                  ))}
-              </CardList>
-            </ProfileSection>
-            <ProfileSection
-              title={"Education"}
-              profile={profile}
-              action={() => openModal("Education")}
-              actionIcon={faPlus}
-            >
-              <CardList>
-                {profile?.educations
-                  .slice()
-                  .sort((a, b) => {
-                    const endDateA = a.end_date ? new Date(a.end_date) : null;
-                    const endDateB = b.end_date ? new Date(b.end_date) : null;
-
-                    return differenceInMonths(
-                      endDateB || new Date(),
-                      endDateA || new Date()
-                    );
-                  })
-                  .map((education) => (
-                    <Card
-                      image={education.school.logo}
-                      title={education.school.name}
-                      subtitle={education.degree}
-                      body={education.description}
-                      start_date={education.start_date}
-                      end_date={education.end_date}
-                      size="large"
-                      action={() => openModal("Education", "", education)}
-                    />
-                  ))}
-              </CardList>
-            </ProfileSection>
-            <ProfileSection
-              title={`Similar to ${profile.first_name}`}
-              profile={profile}
-            >
-              <ProfileCardList>
-                {recommendations.slice(1, 5).map((item) => (
-                  <ProfileCard profile={item} />
-                ))}
-              </ProfileCardList>
-            </ProfileSection>
-          </div>
+          {section == "About" && <AboutSection profile={profile} />}
         </Container>
       </>
     );

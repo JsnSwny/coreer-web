@@ -1,25 +1,32 @@
 @import "@/styles/_variables.scss";
 
 .container {
-	margin-bottom: 6rem;
+  background: white;
+  border: 1px solid $stroke;
+  padding: 3rem;
+  border-radius: 15px;
 }
 
 .title {
-	margin-bottom: 1rem;
-	font-size: 28px;
-	svg {
-		width: 20px;
-		margin-left: 0.75rem;
-		color: $primary;
-	}
+  margin-bottom: 1rem;
+  font-size: 32px;
+  .titleIcon {
+    height: 24px;
+    margin-right: 1rem;
+  }
+  .icon {
+    width: 20px;
+    margin-left: 0.75rem;
+    color: $primary;
+  }
 }
 
 .divider {
-	border: none;
-	border-bottom: 1px solid $stroke;
-	margin-bottom: 1.5rem;
+  border: none;
+  border-bottom: 1px solid $stroke;
+  margin-bottom: 1.5rem;
 }
 
 .icon {
-	cursor: pointer;
+  cursor: pointer;
 }

@@ -11,6 +11,7 @@ interface ProfileSectionProps {
   children: React.ReactNode;
   action?: () => void;
   actionIcon?: IconProp;
+  icon: IconProp;
   profile: Profile;
 }
 
@@ -20,11 +21,13 @@ const ProfileSection = ({
   action,
   actionIcon = faPencil,
   profile,
+  icon,
 }: ProfileSectionProps) => {
   const { user } = useAuth();
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>
+        <FontAwesomeIcon icon={icon} className={styles.titleIcon} />
         {title}{" "}
         {profile.id == user!.id && action && (
           <FontAwesomeIcon
