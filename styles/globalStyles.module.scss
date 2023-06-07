@@ -5,6 +5,7 @@
   width: 100%;
   min-height: 44px;
   border-radius: 5px;
+
   border: 0.5px solid $stroke;
   padding: 0 1rem;
   font-size: 16px;
@@ -18,18 +19,19 @@
   width: 100%;
   font-size: 14px;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
+  line-height: 1.2rem;
+  // font-family: "Poppins", sans-serif;
 }
 
 .button {
   color: white;
   background: $primary;
-  width: 100%;
+  font-weight: bold;
   height: 44px;
   border: none;
   border-radius: 5px;
   font-size: 16px;
-  font-weight: bold;
   cursor: pointer;
 }
 
@@ -44,7 +46,6 @@
   border-radius: 10px;
   padding: 0.75rem 1rem;
   color: $dark-light;
-  font-size: 16px;
   &:focus {
     outline: none;
   }
@@ -68,10 +69,7 @@
       margin-bottom: 1.5rem;
     }
   }
-  .formTwoColumn {
-    display: flex;
-    gap: 2rem;
-  }
+
   &::-webkit-scrollbar {
     width: 8px;
     padding-left: 1rem;
@@ -98,6 +96,14 @@
 .formGroup {
   &:not(:last-child) {
     margin-bottom: 1.5rem;
+  }
+}
+
+.formTwoColumn {
+  display: flex;
+  gap: 2rem;
+  .formGroup {
+    flex: 1;
   }
 }
 

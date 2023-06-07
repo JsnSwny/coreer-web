@@ -13,7 +13,7 @@ const PersonalDetails = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     updateUser({ first_name: firstName, last_name: lastName, location });
-    router.push("/onboarding/interests");
+    router.push("/onboarding/about-you");
   };
 
   const [firstName, setFirstName] = useState(user!.first_name);

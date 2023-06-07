@@ -3,33 +3,38 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
+  padding-bottom: 2rem;
   align-items: center;
 }
 
 .logo {
-  margin-top: 3rem;
+  margin-top: 1rem;
   color: $primary;
   font-size: 24px;
-}
-
-.title {
-  margin-top: 4rem;
 }
 
 .description {
   max-width: 500px;
   text-align: center;
-  margin-top: 0.5rem;
+  font-size: 18px;
+  margin-top: 0.75rem;
   color: $dark-light;
+  line-height: 1.5rem;
+  font-family: "Newsreader", serif;
 }
 
 .content {
-  max-width: 750px;
+  max-width: 700px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 4rem;
+  background: white;
+  padding: 2.5rem 4rem;
+  border-radius: 15px;
+  border: 0.5px solid $stroke;
 }
 
 .header {

@@ -28,9 +28,9 @@ const Layout = ({ children }: LayoutProps) => {
       <div className={styles.container}>
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
           <link
-            href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&Newsreader:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;700&display=swap"
             rel="stylesheet"
           />
           <script
