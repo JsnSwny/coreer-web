@@ -11,3 +11,21 @@
   // font-family: "Consolas";
   white-space: nowrap;
 }
+
+.purple {
+  background: rgba(#a742ff, 0.05);
+  color: #a742ff;
+  border: 1px solid #a742ff;
+}
+
+.orange {
+  background: rgba(#f18805, 0.05);
+  color: #f18805;
+  border: 1px solid #f18805;
+}
+
+.black {
+  background: rgba($black, 0.05);
+  color: $black;
+  border: 1px solid $black;
+}

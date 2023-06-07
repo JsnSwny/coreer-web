@@ -3,7 +3,12 @@ import { Education } from "./education.model";
 import { Skill } from "./language.model";
 import { WorkExperience } from "./work_experiences.model";
 import { Interest } from "./interest.model";
+import { UserAnswer } from "./question.model";
 
+export interface CareerLevel {
+  name: string;
+  level_type: "S" | "P";
+}
 export interface Profile {
   id: number;
   image: string;
@@ -19,5 +24,8 @@ export interface Profile {
   location: string;
   onboarded: boolean;
   following: number[];
+  current_level: CareerLevel;
+  looking_for: CareerLevel[];
+  user_answers: UserAnswer[];
   work_experiences: WorkExperience[];
 }

@@ -18,7 +18,7 @@ interface AboutSectionProps {
 const AboutSection = ({ profile }: AboutSectionProps) => {
   return (
     <section className={styles.container}>
-      <QuestionsList />
+      <QuestionsList user_answers={profile.user_answers} />
       <ProfileSection
         title="Work Experience"
         profile={profile}

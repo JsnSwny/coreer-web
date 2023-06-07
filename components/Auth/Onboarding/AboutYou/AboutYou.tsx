@@ -6,14 +6,42 @@ import Actions from "../Actions/Actions";
 import { useAuth } from "@/contexts/AuthContext";
 import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput";
 import Select from "react-select";
+import axios from "axios";
+import { server } from "@/config";
+import { useEffect } from "react";
+import { Question } from "@/interfaces/question.model";
 
-const AboutYou = () => {
+const AboutYou = ({ questions }) => {
   const router = useRouter();
   const { user, updateUser, githubDetails } = useAuth();
 
-  const handleSubmit = (e: FormEvent) => {
+  console.log(user);
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // updateUser({ first_name: firstName, last_name: lastName, location });
+    const selectedQuestions = [questionOneOption, questionTwoOption];
+    const selectedAnswers = [questionOneAnswer, questionTwoAnswer];
+    try {
+      const requestPromises = selectedQuestions.map((question, index) => {
+        console.log({
+          user: user!.id,
+          question_id: question.value,
+          answer: selectedAnswers[index],
+        });
+        return axios.post(`${server}/api/user-answers/`, {
+          user: user!.id,
+          question_id: question.value,
+          answer: selectedAnswers[index],
+        });
+      });
+
+      const responses = await axios.all(requestPromises);
+      responses.forEach((response) => {
+        console.log(response.data);
+      });
+    } catch (error) {
+      console.error(error);
+    }
     router.push("/onboarding/interests");
   };
 
@@ -24,12 +52,33 @@ const AboutYou = () => {
   }
 
   const [careerLevel, setCareerLevel] = useState<Option | null>(null);
-  const [questionOneOption, setQuestionOneOption] = useState("");
+  const [questionOneOption, setQuestionOneOption] = useState(null);
   const [lookingFor, setLookingFor] = useState<Option[]>([]);
   const [questionOneAnswer, setQuestionOneAnswer] = useState("");
 
-  const [questionTwoOption, setQuestionTwoOption] = useState("");
+  const [questionTwoOption, setQuestionTwoOption] = useState(null);
   const [questionTwoAnswer, setQuestionTwoAnswer] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      if (user.user_answers) {
+        setQuestionOneOption(
+          questionOptions.find(
+            (item: Option) =>
+              parseInt(item.value) == user.user_answers[0]?.question.id
+          )
+        );
+        setQuestionTwoOption(
+          questionOptions.find(
+            (item: Option) =>
+              parseInt(item.value) == user.user_answers[1]?.question.id
+          )
+        );
+        setQuestionOneAnswer(user.user_answers[0]?.answer);
+        setQuestionTwoAnswer(user.user_answers[1]?.answer);
+      }
+    }
+  }, [user]);
 
   const options: Option[] = [
     { value: "undergraduate", label: "Undergraduate", group: "student" },
@@ -49,38 +98,10 @@ const AboutYou = () => {
     },
   ];
 
-  const questionOptions = [
-    {
-      value: "1",
-      label:
-        "Describe a significant project or achievement you've completed during your studies that you are particularly proud of?",
-      color: "#00B8D9",
-    },
-    {
-      value: "2",
-      label:
-        "How do you envision applying the skills and knowledge you've gained in your tech studies to real-world scenarios or industry challenges?",
-      color: "#0052CC",
-    },
-    {
-      value: "3",
-      label:
-        "Are there any specific areas within the tech industry that you are particularly passionate about? If so, what draws you to those areas?",
-      color: "#5243AA",
-    },
-    {
-      value: "4",
-      label:
-        "Have you had any experiences collaborating with others on tech-related projects? Could you share an example and discuss what you learned from the experience?",
-      color: "#5243AA",
-    },
-    {
-      value: "5",
-      label:
-        "In what ways do you believe you can contribute to the tech industry and make a positive impact in the future?",
-      color: "#5243AA",
-    },
-  ];
+  const questionOptions = questions.map((item) => ({
+    value: item.id,
+    label: item.text,
+  }));
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
@@ -123,7 +144,9 @@ const AboutYou = () => {
           options={questionOptions}
           onChange={(selectedOption) => setQuestionOneOption(selectedOption)}
           value={questionOneOption}
-          isOptionDisabled={(option) => questionTwoOption.value == option.value}
+          isOptionDisabled={(option) =>
+            questionTwoOption?.value == option.value
+          }
         />
       </div>
 
@@ -136,6 +159,8 @@ const AboutYou = () => {
             placeholder="Question 1 Answer..."
             className={globalStyles.input}
             rows={4}
+            value={questionOneAnswer}
+            onChange={(e) => setQuestionOneAnswer(e.target.value)}
           ></textarea>
         </div>
       )}
@@ -148,7 +173,9 @@ const AboutYou = () => {
           options={questionOptions}
           onChange={(selectedOption) => setQuestionTwoOption(selectedOption)}
           value={questionTwoOption}
-          isOptionDisabled={(option) => questionOneOption.value == option.value}
+          isOptionDisabled={(option) =>
+            questionOneOption?.value == option.value
+          }
         />
       </div>
 
@@ -161,6 +188,8 @@ const AboutYou = () => {
             placeholder="Question 2 Answer..."
             className={globalStyles.input}
             rows={4}
+            value={questionTwoAnswer}
+            onChange={(e) => setQuestionTwoAnswer(e.target.value)}
           ></textarea>
         </div>
       )}

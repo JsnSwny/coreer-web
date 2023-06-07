@@ -5,6 +5,7 @@ import { useState, useEffect, FormEvent } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 import { Interest } from "@/interfaces/interest.model";
+import globalStyles from "@/styles/globalStyles.module.scss";
 
 interface InterestsProps {
   options: Interest[];
@@ -16,24 +17,49 @@ const Interests = ({ options, defaultOptions }: InterestsProps) => {
   const router = useRouter();
   const [selectedOptions, setSelectedOptions] = useState(defaultOptions);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    await updateUser({
+      interests_id: selectedOptions.map((item) => item.id),
+    });
     router.push("/onboarding/languages");
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <TagSelectorList>
-        {options.map((option) => (
-          <TagSelector
-            title={option.name}
-            active={selectedOptions.some((item) => item.id == option.id)}
-            selectedOptions={selectedOptions}
-            setSelectedOptions={setSelectedOptions}
-            option={option}
-          />
-        ))}
-      </TagSelectorList>
+      <div className={globalStyles.formGroup}>
+        <label className={globalStyles.label}>Career Interests</label>
+        <TagSelectorList>
+          {options
+            .filter((item) => item.interest_type == "C")
+            .map((option) => (
+              <TagSelector
+                title={option.name}
+                active={selectedOptions.some((item) => item.id == option.id)}
+                selectedOptions={selectedOptions}
+                setSelectedOptions={setSelectedOptions}
+                option={option}
+              />
+            ))}
+        </TagSelectorList>
+      </div>
+      <div className={globalStyles.formGroup}>
+        <label className={globalStyles.label}>Personal Interests</label>
+        <TagSelectorList>
+          {options
+            .filter((item) => item.interest_type == "P")
+            .map((option) => (
+              <TagSelector
+                title={option.name}
+                active={selectedOptions.some((item) => item.id == option.id)}
+                selectedOptions={selectedOptions}
+                setSelectedOptions={setSelectedOptions}
+                option={option}
+              />
+            ))}
+        </TagSelectorList>
+      </div>
+
       <Actions />
     </form>
   );

@@ -9,10 +9,12 @@
 
 .title {
   margin-bottom: 1rem;
-  font-size: 32px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
   .titleIcon {
     height: 24px;
-    margin-right: 1rem;
+    margin-right: 1.5rem;
   }
   .icon {
     width: 20px;

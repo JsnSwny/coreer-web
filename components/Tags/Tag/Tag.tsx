@@ -6,7 +6,9 @@ interface TagProps {
 }
 
 const Tag = ({ tag }: TagProps) => {
-  return <li className={styles.container}>{tag.text}</li>;
+  return (
+    <li className={`${styles.container} ${styles[tag.color]}`}>{tag.text}</li>
+  );
 };
 
 export default Tag;
