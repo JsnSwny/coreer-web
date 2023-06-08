@@ -121,7 +121,9 @@ const profile = ({ profile }: ProfileProps) => {
             </ProfileCardList>
           )}
 
-          {section == "About" && <AboutSection profile={profile} />}
+          {section == "About" && (
+            <AboutSection profile={profile} openModal={openModal} />
+          )}
         </Container>
       </>
     );

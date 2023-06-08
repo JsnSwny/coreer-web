@@ -3,11 +3,15 @@ import Project from "../Project/Project";
 import { Project as ProjectModel } from "@/interfaces/project.model";
 import { differenceInMonths } from "date-fns";
 import ProjectModal from "@/components/Modal/ProjectModal/ProjectModal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import axios from "axios";
+import Button from "@/components/Button/Button";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 interface ProjectsProps {
   projects: ProjectModel[];
-  action: (title: string, description: string, item: ProjectModel) => void;
+  action: (title: string, description?: string, item?: ProjectModel) => void;
 }
 
 const Projects = ({ projects, action }: ProjectsProps) => {
@@ -26,12 +30,33 @@ const Projects = ({ projects, action }: ProjectsProps) => {
     setIsModalOpen(false);
   };
 
+  // const { githubToken } = useAuth();
+  // const getRepositories = async () => {
+  //   const response = await axios.get("https://api.github.com/user/repos", {
+  //     headers: {
+  //       Authorization: `Bearer ${githubToken}`,
+  //     },
+  //   });
+  //   const repositories = response.data;
+  //   console.log(repositories);
+  // };
+
+  // useEffect(() => {
+  //   getRepositories();
+  // }, [githubToken]);
+
   return (
     <>
       <ProjectModal
         project={selectedProject!}
         onClose={closeModal}
         isOpen={isModalOpen}
+      />
+      <Button
+        text="Add New Project"
+        alt
+        icon={faPlus}
+        onClick={() => action("Project")}
       />
       <div className={styles.container}>
         {projects

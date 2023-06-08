@@ -9,13 +9,15 @@ import { differenceInMonths } from "date-fns";
 import {
   faBriefcase,
   faGraduationCap,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 interface AboutSectionProps {
   profile: Profile;
+  openModal: (section: string, description?: string, item?: object) => {};
 }
 
-const AboutSection = ({ profile }: AboutSectionProps) => {
+const AboutSection = ({ profile, openModal }: AboutSectionProps) => {
   return (
     <section className={styles.container}>
       <QuestionsList user_answers={profile.user_answers} />
@@ -23,6 +25,8 @@ const AboutSection = ({ profile }: AboutSectionProps) => {
         title="Work Experience"
         profile={profile}
         icon={faBriefcase}
+        action={() => openModal("Experience")}
+        actionIcon={faPlus}
       >
         <CardList>
           {profile?.work_experiences
@@ -45,7 +49,7 @@ const AboutSection = ({ profile }: AboutSectionProps) => {
                 start_date={experience.start_date}
                 end_date={experience.end_date}
                 size="large"
-                // action={() => openModal("Experience", "", experience)}
+                action={() => openModal("Experience", "", experience)}
               />
             ))}
         </CardList>
@@ -54,8 +58,8 @@ const AboutSection = ({ profile }: AboutSectionProps) => {
         title={"Education"}
         profile={profile}
         icon={faGraduationCap}
-        // action={() => openModal("Education")}
-        // actionIcon={faPlus}
+        action={() => openModal("Education")}
+        actionIcon={faPlus}
       >
         <CardList>
           {profile?.educations
@@ -78,7 +82,7 @@ const AboutSection = ({ profile }: AboutSectionProps) => {
                 start_date={education.start_date}
                 end_date={education.end_date}
                 size="large"
-                // action={() => openModal("Education", "", education)}
+                action={() => openModal("Education", "", education)}
               />
             ))}
         </CardList>

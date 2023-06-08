@@ -11,7 +11,7 @@ import AboutYou from "@/components/Auth/Onboarding/AboutYou/AboutYou";
 import axios from "axios";
 import { server } from "@/config";
 
-const about_you = ({ questions }) => {
+const about_you = ({ questions, careerLevels }) => {
   const { user } = useAuth();
   return (
     <>
@@ -19,7 +19,7 @@ const about_you = ({ questions }) => {
         <title>Onboarding | About you</title>
       </Head>
       <OnboardingWrapper title={"About You"} description={"fasfasf asas asd"}>
-        <AboutYou questions={questions} />
+        <AboutYou questions={questions} careerLevels={careerLevels} />
       </OnboardingWrapper>
     </>
   );
@@ -27,6 +27,7 @@ const about_you = ({ questions }) => {
 
 export const getServerSideProps = async (context: any) => {
   let questions: any = [];
+  let careerLevels: any = [];
   await axios
     .get(`${server}/api/questions/`)
     .then((res) => {
@@ -36,9 +37,20 @@ export const getServerSideProps = async (context: any) => {
       console.log("error");
       console.log(err.response);
     });
+
+  await axios
+    .get(`${server}/api/career-levels/`)
+    .then((res) => {
+      careerLevels = res.data;
+    })
+    .catch((err) => {
+      console.log("error");
+      console.log(err.response);
+    });
   return {
     props: {
       questions,
+      careerLevels,
     },
   };
 };

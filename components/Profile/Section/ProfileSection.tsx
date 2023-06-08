@@ -26,9 +26,11 @@ const ProfileSection = ({
   const { user } = useAuth();
   return (
     <section className={styles.container}>
-      <h2 className={styles.title}>
-        <FontAwesomeIcon icon={icon} className={styles.titleIcon} />
-        {title}{" "}
+      <div className={styles.header}>
+        <div className={styles.title}>
+          <FontAwesomeIcon icon={icon} className={styles.titleIcon} />
+          <h2>{title}</h2>
+        </div>
         {profile.id == user!.id && action && (
           <FontAwesomeIcon
             icon={actionIcon}
@@ -36,7 +38,8 @@ const ProfileSection = ({
             className={styles.icon}
           />
         )}
-      </h2>
+      </div>
+
       <hr className={styles.divider} />
       {children}
     </section>

@@ -23,8 +23,8 @@
 }
 
 .title {
-  font-size: 48px;
-  margin-top: 2rem;
+  font-size: 40px;
+  margin-top: 1.5rem;
   font-weight: 800;
 }
 
@@ -52,17 +52,18 @@
 }
 
 .profilePhoto {
-  width: 150px;
-  height: 150px;
+  width: 175px;
+  height: 175px;
   object-fit: cover;
   border-radius: 50%;
   outline: 5px solid $background;
+  position: relative;
+  display: block;
 }
 
 .content {
   position: relative;
-  display: flex;
-  align-items: flex-end;
+  width: 175px;
 }
 
 .changePhoto {
@@ -74,8 +75,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  left: 75px;
-  bottom: -15px;
+  left: 50%;
+  bottom: -10px;
   transform: translateX(-50%);
   transition: 0.2s ease background;
   cursor: pointer;

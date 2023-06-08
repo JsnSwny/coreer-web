@@ -28,8 +28,8 @@ interface AuthContextType {
   updateProfilePicture: (file: File) => void;
   updateUser: (data: object) => void;
   fetchUser: (accessToken: string) => void;
-  githubDetails: object | null;
-  setGithubDetails: (data: object | null) => void;
+  githubToken: string | null;
+  setGithubToken: (token: string) => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -43,8 +43,8 @@ export const AuthContext = createContext<AuthContextType>({
   updateProfilePicture: () => {},
   updateUser: () => {},
   fetchUser: () => {},
-  githubDetails: () => {},
-  setGithubDetails: () => {},
+  githubToken: null,
+  setGithubToken: () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -57,7 +57,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<Profile | null>(null);
   const [userToken, setUserToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const [githubDetails, setGithubDetails] = useState<object | null>(null);
+  const [githubToken, setGithubToken] = useState<string | null>(null);
 
   const fetchUser = async (accessToken: string) => {
     try {
@@ -175,6 +175,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const updateUser = async (data: object) => {
+    console.log(data);
     setLoading(true);
     try {
       await axios
@@ -208,8 +209,8 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         updateProfilePicture,
         updateUser,
         fetchUser,
-        githubDetails,
-        setGithubDetails,
+        githubToken,
+        setGithubToken,
       }}
     >
       {children}

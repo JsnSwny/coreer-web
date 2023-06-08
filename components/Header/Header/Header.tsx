@@ -6,13 +6,10 @@ import Link from "next/link";
 import NavProfile from "../NavProfile/NavProfile";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faStar } from "@fortawesome/free-regular-svg-icons";
+import { faEnvelope, faStar } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const router = useRouter();
-
-  console.log(router);
-
   const largeContainer = router.pathname.includes("/messages");
 
   return (
@@ -21,11 +18,11 @@ const Header = () => {
         <div className={styles.wrapper}>
           <Nav>
             <Link href="/">
-              <p className={styles.title}>coreer.</p>
+              <p className={styles.title}>coreer</p>
             </Link>
+            <Search />
           </Nav>
           <div className={styles.right}>
-            <Search />
             <Link href="/likes" className={styles.icon}>
               <FontAwesomeIcon icon={faStar} />
             </Link>

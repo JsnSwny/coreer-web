@@ -9,7 +9,7 @@ import { server } from "@/config";
 import LoadingOverlay from "@/components/Layout/LoadingOverlay/LoadingOverlay";
 
 const GithubAuth = () => {
-  const { fetchUser, setGithubDetails } = useAuth();
+  const { fetchUser, setGithubToken } = useAuth();
   const router = useRouter();
   const [loadingAuth, setLoadingAuth] = useState(false);
 
@@ -29,14 +29,7 @@ const GithubAuth = () => {
             })
             .then((res) => {
               const { key } = res.data;
-              console.log(res.data);
-              axios
-                .get(`https://api.github.com/user`, {
-                  headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                  },
-                })
-                .then((res) => setGithubDetails(res.data));
+              setGithubToken(accessToken);
 
               fetchUser(key);
             })

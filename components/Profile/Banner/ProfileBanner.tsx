@@ -77,7 +77,7 @@ const ProfileBanner = ({ profile }: ProfileBannerProps) => {
         <p className={styles.subtitle}>
           Undergraduate Student • BSc Computer Science
         </p>
-        <p className={styles.location}>Edinburgh, UK</p>
+        <p className={styles.location}>{profile.location}</p>
         <ResponseBanner />
         {profile.id != user!.id && (
           <div className={styles.buttons}>

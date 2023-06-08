@@ -11,23 +11,22 @@ import { server } from "@/config";
 import { useEffect } from "react";
 import { Question } from "@/interfaces/question.model";
 
-const AboutYou = ({ questions }) => {
+const AboutYou = ({ questions, careerLevels }) => {
   const router = useRouter();
   const { user, updateUser, githubDetails } = useAuth();
-
-  console.log(user);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const selectedQuestions = [questionOneOption, questionTwoOption];
     const selectedAnswers = [questionOneAnswer, questionTwoAnswer];
+    console.log(lookingFor);
+    console.log(careerLevel);
+    updateUser({
+      career_level_id: parseInt(careerLevel?.value),
+      looking_for_id: lookingFor.map((item) => parseInt(item.value)),
+    });
     try {
       const requestPromises = selectedQuestions.map((question, index) => {
-        console.log({
-          user: user!.id,
-          question_id: question.value,
-          answer: selectedAnswers[index],
-        });
         return axios.post(`${server}/api/user-answers/`, {
           user: user!.id,
           question_id: question.value,
@@ -48,7 +47,7 @@ const AboutYou = ({ questions }) => {
   interface Option {
     value: string;
     label: string;
-    group: "student" | "professional";
+    group: "S" | "P";
   }
 
   const [careerLevel, setCareerLevel] = useState<Option | null>(null);
@@ -80,21 +79,20 @@ const AboutYou = ({ questions }) => {
     }
   }, [user]);
 
-  const options: Option[] = [
-    { value: "undergraduate", label: "Undergraduate", group: "student" },
-    { value: "graduate", label: "Graduate", group: "student" },
-    { value: "entry-level", label: "Entry Level", group: "professional" },
-    { value: "experienced", label: "Experienced", group: "professional" },
-  ];
+  const options: Option[] = careerLevels.map((item) => ({
+    value: item.id,
+    label: item.name,
+    group: item.level_type,
+  }));
 
   const groupedOptions = [
     {
       label: "Student",
-      options: options.filter((option) => option.group === "student"),
+      options: options.filter((option) => option.group === "S"),
     },
     {
       label: "Professional",
-      options: options.filter((option) => option.group === "professional"),
+      options: options.filter((option) => option.group === "P"),
     },
   ];
 

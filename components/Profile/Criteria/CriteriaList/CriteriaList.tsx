@@ -13,10 +13,10 @@ const CriteriaList = ({ profile }: CriteriaListProps) => {
   return (
     <ul className={styles.criteriaList}>
       <CriteriaItem
-        title="Looking for"
-        items={profile.looking_for.map((item) => ({
+        title="Interests"
+        items={profile.interests.map((item: Interest) => ({
           name: item.name,
-          color: "black",
+          color: item.interest_type == "C" ? "purple" : "orange",
         }))}
       />
       <CriteriaItem
@@ -27,10 +27,10 @@ const CriteriaList = ({ profile }: CriteriaListProps) => {
         }))}
       />
       <CriteriaItem
-        title="Interests"
-        items={profile.interests.map((item: Interest) => ({
+        title="Looking for"
+        items={profile.looking_for.map((item) => ({
           name: item.name,
-          color: item.interest_type == "C" ? "purple" : "orange",
+          color: "black",
         }))}
       />
     </ul>
