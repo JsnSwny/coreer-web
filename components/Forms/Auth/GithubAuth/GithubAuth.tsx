@@ -9,9 +9,28 @@ import { server } from "@/config";
 import LoadingOverlay from "@/components/Layout/LoadingOverlay/LoadingOverlay";
 
 const GithubAuth = () => {
-  const { fetchUser, setGithubToken } = useAuth();
+  const { fetchUser, setGithubToken, updateProfilePicture } = useAuth();
   const router = useRouter();
   const [loadingAuth, setLoadingAuth] = useState(false);
+
+  const convertUrlToFile = async (imageUrl) => {
+    try {
+      const response = await fetch(imageUrl);
+      const contentType = response.headers.get("Content-Type");
+      const extension = contentType.split("/")[1];
+
+      const blob = await response.blob();
+
+      const file = new File([blob], "profile_image." + extension, {
+        type: contentType,
+      });
+
+      return file;
+    } catch (error) {
+      console.log("Failed to convert image URL to file:", error);
+      return null;
+    }
+  };
 
   useEffect(() => {
     const code = router.query.code;
@@ -27,11 +46,27 @@ const GithubAuth = () => {
               code,
               access_token: accessToken,
             })
-            .then((res) => {
+            .then(async (res) => {
               const { key } = res.data;
               setGithubToken(accessToken);
 
-              fetchUser(key);
+              const user = await fetchUser(key);
+
+              // Todo: Figure out a better way to conditionally upload github profile picture
+              // if (!user.onboarded) {
+              //   let extra_data = user.social_account.extra_data;
+              //   const jsonString = extra_data
+              //     .replace(/False/g, "false")
+              //     .replace(/True/g, "true")
+              //     .replace(/None/g, "null")
+              //     .replace(/'/g, '"');
+
+              //   const jsonObject = JSON.parse(jsonString);
+              //   const file = await convertUrlToFile(jsonObject.avatar_url);
+              //   if (file) {
+              //     updateProfilePicture(user.id, key, file);
+              //   }
+              // }
             })
             .catch((err) => console.log(err.response))
             .finally(() => setLoadingAuth(false));

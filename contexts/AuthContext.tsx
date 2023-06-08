@@ -25,7 +25,7 @@ interface AuthContextType {
   signUp: (email: string, password1: string, password2: string) => void;
   loading: boolean;
   setUser: (profile: Profile | null) => void;
-  updateProfilePicture: (file: File) => void;
+  updateProfilePicture: (id: number, key: string, file: File) => void;
   updateUser: (data: object) => void;
   fetchUser: (accessToken: string) => void;
   githubToken: string | null;
@@ -70,16 +70,15 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
       if (response.status === 200) {
         const userData = response.data;
-        console.log(userData);
         localStorage.setItem("token", accessToken);
         setUser(userData);
         setUserToken(accessToken);
+        setLoading(false);
+        return userData;
       } else {
-        // Handle error case when fetching user information
         setUser(null);
       }
     } catch (error) {
-      // Handle any network errors
       setUser(null);
     }
 
@@ -151,24 +150,31 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  const updateProfilePicture = async (file: File) => {
+  const updateProfilePicture = async (id: number, key: string, file: File) => {
+    console.log("Updating file");
+    console.log(file);
     try {
       const config = {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Token ${userToken}`,
+          Authorization: `Token ${key}`,
         },
       };
+
+      console.log(user);
 
       const formData = new FormData();
       formData.append("image", file);
 
+      console.log("form data");
+      console.log(formData);
+
       await axios
-        .put(`${server}/api/user/${user!.id}/`, formData, config)
+        .put(`${server}/api/user/${id}/`, formData, config)
         .then((res) => setUser(res.data))
         .catch((err) => console.log(err.response));
     } catch (error: any) {
-      console.error(error.response);
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -193,7 +199,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
   useEffect(() => {
     const accessToken = localStorage.getItem("token");
-    if (accessToken) fetchUser(accessToken);
+    if (accessToken) {
+      fetchUser(accessToken);
+    } else setLoading(false);
   }, []);
 
   return (

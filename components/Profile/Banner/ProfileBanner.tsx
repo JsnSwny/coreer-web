@@ -41,7 +41,7 @@ const ProfileBanner = ({ profile }: ProfileBannerProps) => {
     const file = e.target.files?.[0] as File | undefined;
     if (file) {
       reader.onloadend = () => {
-        updateProfilePicture(file);
+        updateProfilePicture(user!.id, userToken, file);
         setImagePreviewUrl(reader.result as string);
       };
       reader.readAsDataURL(file);

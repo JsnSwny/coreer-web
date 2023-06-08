@@ -68,19 +68,20 @@
       opacity: 1;
     }
   }
-  &.showEdit {
-    &::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(black, 0.8);
-      border-radius: 10px;
-      opacity: 0;
-      transition: 0.2s ease opacity;
-    }
+}
+
+.showEdit {
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(black, 0.8);
+    border-radius: 10px;
+    opacity: 0;
+    transition: 0.2s ease opacity;
   }
 }
 
