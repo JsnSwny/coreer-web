@@ -111,7 +111,11 @@ const profile = ({ profile }: ProfileProps) => {
             </Modal>
           )}
           {section == "Projects" && (
-            <Projects projects={profile.projects} action={openModal} />
+            <Projects
+              projects={profile.projects}
+              action={openModal}
+              profile={profile}
+            />
           )}
           {section == "Similar Users" && (
             <ProfileCardList>

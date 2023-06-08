@@ -8,13 +8,15 @@ import { useAuth } from "@/contexts/AuthContext";
 import axios from "axios";
 import Button from "@/components/Button/Button";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { Profile } from "@/interfaces/profile.model";
 
 interface ProjectsProps {
   projects: ProjectModel[];
   action: (title: string, description?: string, item?: ProjectModel) => void;
+  profile: Profile;
 }
 
-const Projects = ({ projects, action }: ProjectsProps) => {
+const Projects = ({ projects, action, profile }: ProjectsProps) => {
   const [selectedProject, setSelectedProject] = useState<ProjectModel | null>(
     null
   );
@@ -30,7 +32,7 @@ const Projects = ({ projects, action }: ProjectsProps) => {
     setIsModalOpen(false);
   };
 
-  // const { githubToken } = useAuth();
+  const { githubToken, user } = useAuth();
   // const getRepositories = async () => {
   //   const response = await axios.get("https://api.github.com/user/repos", {
   //     headers: {
@@ -44,6 +46,7 @@ const Projects = ({ projects, action }: ProjectsProps) => {
   // useEffect(() => {
   //   getRepositories();
   // }, [githubToken]);
+  const showEdit = profile.id == user!.id;
 
   return (
     <>
@@ -52,12 +55,16 @@ const Projects = ({ projects, action }: ProjectsProps) => {
         onClose={closeModal}
         isOpen={isModalOpen}
       />
-      <Button
-        text="Add New Project"
-        alt
-        icon={faPlus}
-        onClick={() => action("Project")}
-      />
+
+      {showEdit && (
+        <Button
+          text="Add New Project"
+          alt
+          icon={faPlus}
+          onClick={() => action("Project")}
+        />
+      )}
+
       <div className={styles.container}>
         {projects
           .slice()
@@ -74,6 +81,7 @@ const Projects = ({ projects, action }: ProjectsProps) => {
               project={project}
               openProjectModal={() => openProjectModal(project)}
               action={action}
+              showEdit={showEdit}
             />
           ))}
       </div>

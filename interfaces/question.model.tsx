@@ -13,3 +13,9 @@ export interface UserAnswer {
   question: Question;
   answer: string;
 }
+
+export interface UserAnswerRequest {
+  user: number;
+  question_id: number;
+  answer: string;
+}

@@ -11,6 +11,7 @@ import {
   faGraduationCap,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface AboutSectionProps {
   profile: Profile;
@@ -18,9 +19,11 @@ interface AboutSectionProps {
 }
 
 const AboutSection = ({ profile, openModal }: AboutSectionProps) => {
+  const { user } = useAuth();
+  const showEdit = user!.id == profile.id;
   return (
     <section className={styles.container}>
-      <QuestionsList user_answers={profile.user_answers} />
+      <QuestionsList user_answers={profile.user_answers} showEdit={showEdit} />
       <ProfileSection
         title="Work Experience"
         profile={profile}
@@ -50,6 +53,7 @@ const AboutSection = ({ profile, openModal }: AboutSectionProps) => {
                 end_date={experience.end_date}
                 size="large"
                 action={() => openModal("Experience", "", experience)}
+                showEdit={showEdit}
               />
             ))}
         </CardList>
@@ -83,6 +87,7 @@ const AboutSection = ({ profile, openModal }: AboutSectionProps) => {
                 end_date={education.end_date}
                 size="large"
                 action={() => openModal("Education", "", education)}
+                showEdit={showEdit}
               />
             ))}
         </CardList>

@@ -4,13 +4,14 @@ import styles from "./QuestionsList.module.scss";
 
 interface QuestionsListProps {
   user_answers: UserAnswer[];
+  showEdit: boolean;
 }
 
-const QuestionsList = ({ user_answers }: QuestionsListProps) => {
+const QuestionsList = ({ user_answers, showEdit }: QuestionsListProps) => {
   return (
     <ul className={styles.questionsList}>
       {user_answers.map((item: UserAnswer) => (
-        <QuestionBlock item={item} />
+        <QuestionBlock item={item} showEdit={showEdit} />
       ))}
     </ul>
   );

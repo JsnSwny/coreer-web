@@ -11,9 +11,15 @@ interface ProjectProps {
   project: Project;
   openProjectModal: () => void;
   action: (title: string, description: string, item: Project) => void;
+  showEdit: boolean;
 }
 
-const Project = ({ project, openProjectModal, action }: ProjectProps) => {
+const Project = ({
+  project,
+  openProjectModal,
+  action,
+  showEdit,
+}: ProjectProps) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const handleMouseEnter = () => {
@@ -31,7 +37,7 @@ const Project = ({ project, openProjectModal, action }: ProjectProps) => {
   return (
     <div className={styles.container} onClick={(e) => openProjectModal()}>
       <div
-        className={styles.placeholder}
+        className={`${styles.placeholder} ${showEdit ? styles.showEdit : ""}`}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
@@ -39,15 +45,17 @@ const Project = ({ project, openProjectModal, action }: ProjectProps) => {
         {!project.image && (
           <FontAwesomeIcon icon={faRobot} className={styles.placeholderIcon} />
         )}
-        <div
-          className={styles.editWrapper}
-          onClick={(e) => {
-            e.stopPropagation();
-            action("Project", "", project);
-          }}
-        >
-          <FontAwesomeIcon icon={faPencil} className={styles.editIcon} />
-        </div>
+        {showEdit && (
+          <div
+            className={styles.editWrapper}
+            onClick={(e) => {
+              e.stopPropagation();
+              action("Project", "", project);
+            }}
+          >
+            <FontAwesomeIcon icon={faPencil} className={styles.editIcon} />
+          </div>
+        )}
       </div>
       {project.start_date && (
         <p className={styles.date}>

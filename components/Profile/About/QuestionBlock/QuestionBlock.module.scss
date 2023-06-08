@@ -6,6 +6,11 @@
   padding: 3rem;
   border-radius: 15px;
   border: 1px solid $stroke;
+  &:hover {
+    .edit {
+      opacity: 1;
+    }
+  }
   h2 {
     font-size: 24px;
     line-height: 2rem;
@@ -18,8 +23,23 @@
   }
   .icon {
     font-size: 32px;
-    margin-bottom: 0.75rem;
+
     color: $black;
     width: 18px;
   }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.edit {
+  height: 24px;
+  color: $primary;
+  opacity: 0;
+  transition: 0.2s ease opacity;
+  cursor: pointer;
 }

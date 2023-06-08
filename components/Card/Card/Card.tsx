@@ -14,6 +14,7 @@ interface CardProps {
   end_date: string | null;
   size?: string;
   action?: () => void;
+  showEdit: boolean;
 }
 
 const Card = ({
@@ -25,6 +26,7 @@ const Card = ({
   end_date,
   size,
   action,
+  showEdit,
 }: CardProps) => {
   return (
     <div className={`${styles.card} ${size && styles[size]}`}>
@@ -42,11 +44,13 @@ const Card = ({
         )}
         {body && <p className={styles.body}>{body}</p>}
       </div>
-      <FontAwesomeIcon
-        icon={faPencil}
-        className={styles.icon}
-        onClick={action}
-      />
+      {showEdit && (
+        <FontAwesomeIcon
+          icon={faPencil}
+          className={styles.icon}
+          onClick={action}
+        />
+      )}
     </div>
   );
 };
