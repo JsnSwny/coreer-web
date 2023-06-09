@@ -110,6 +110,12 @@
 .modalFooter {
   margin-top: 1.25rem;
   display: flex;
+  justify-content: space-between;
+}
+
+.modalFooterRight {
+  flex: 1;
+  display: flex;
   justify-content: flex-end;
 }
 

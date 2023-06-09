@@ -33,3 +33,17 @@ export const updateUserAnswer = async (id: number, data: UserAnswerRequest) => {
     // setLoading(false);
   }
 };
+
+export const deleteUserAnswer = async (id: number) => {
+  try {
+    const response = await axios.delete(
+      `${server}/api/user-answers/${id}/`,
+      getUserConfig()
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error(error.response);
+  } finally {
+    // setLoading(false);
+  }
+};

@@ -19,7 +19,7 @@ import {
   UserAnswerRequest,
 } from "@/interfaces/question.model";
 import { StringLiteral } from "typescript";
-import { updateUserAnswer } from "@/api/questions";
+import { deleteUserAnswer, updateUserAnswer } from "@/api/questions";
 
 interface ModalFormProps {
   closeModal: () => void;
@@ -68,6 +68,17 @@ const QuestionModalForm = ({ closeModal, userAnswer }: ModalFormProps) => {
     }
   };
 
+  const handleDelete = async () => {
+    deleteUserAnswer(userAnswer!.id);
+    setUser({
+      ...user!,
+      user_answers: [
+        ...user!.user_answers.filter((item) => userAnswer!.id != item!.id),
+      ],
+    });
+    closeModal();
+  };
+
   useEffect(() => {
     axios.get(`${server}/api/questions/`).then((res: any) => {
       const questionOptions = res.data.map((item: Question) => ({
@@ -113,7 +124,12 @@ const QuestionModalForm = ({ closeModal, userAnswer }: ModalFormProps) => {
         </div>
       </div>
       <div className={globalStyles.modalFooter}>
-        <Button text="Save" onClick={handleSave} />
+        {userAnswer && (
+          <Button text="Delete" color="red" onClick={handleDelete} />
+        )}
+        <div className={globalStyles.modalFooterRight}>
+          <Button text="Save" onClick={handleSave} />
+        </div>
       </div>
     </>
   );

@@ -6,7 +6,7 @@ import Button from "@/components/Button/Button";
 import { Project, ProjectRequest } from "@/interfaces/project.model";
 import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
 import { format, parseISO } from "date-fns";
-import { addProject, updateProject } from "@/api/projects";
+import { addProject, deleteProject, updateProject } from "@/api/projects";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import Head from "next/head";
@@ -107,6 +107,15 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
     }
   };
 
+  const handleDelete = async () => {
+    deleteProject(item!.id);
+    setUser({
+      ...user!,
+      projects: [...user!.projects.filter((project) => project.id != item!.id)],
+    });
+    closeModal();
+  };
+
   // const quillFormats = ["header", "bold", "italic", "underline", "code-block"];
 
   return (
@@ -153,7 +162,10 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
         </div>
       </div>
       <div className={globalStyles.modalFooter}>
-        <Button text="Save" onClick={handleSave} />
+        {item && <Button text="Delete" color="red" onClick={handleDelete} />}
+        <div className={globalStyles.modalFooterRight}>
+          <Button text="Save" onClick={handleSave} />
+        </div>
       </div>
     </>
   );

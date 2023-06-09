@@ -9,7 +9,11 @@ import {
 } from "@/interfaces/work_experiences.model";
 import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
 import { format, parseISO } from "date-fns";
-import { addExperience, updateExperience } from "@/api/experiences";
+import {
+  addExperience,
+  deleteExperience,
+  updateExperience,
+} from "@/api/experiences";
 import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput";
 
 interface ModalFormProps {
@@ -70,6 +74,19 @@ const WorkModalForm = ({ closeModal, item }: ModalFormProps) => {
     }
   };
 
+  const handleDelete = async () => {
+    deleteExperience(item!.id);
+    setUser({
+      ...user!,
+      work_experiences: [
+        ...user!.work_experiences.filter(
+          (experience) => experience.id != item!.id
+        ),
+      ],
+    });
+    closeModal();
+  };
+
   return (
     <>
       <div className={globalStyles.modalBody}>
@@ -113,7 +130,10 @@ const WorkModalForm = ({ closeModal, item }: ModalFormProps) => {
         </div>
       </div>
       <div className={globalStyles.modalFooter}>
-        <Button text="Save" onClick={handleSave} />
+        {item && <Button text="Delete" color="red" onClick={handleDelete} />}
+        <div className={globalStyles.modalFooterRight}>
+          <Button text="Save" onClick={handleSave} />
+        </div>
       </div>
     </>
   );

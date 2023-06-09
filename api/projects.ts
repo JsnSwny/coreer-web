@@ -85,3 +85,26 @@ export const updateProject = async (id: number, data: ProjectRequest) => {
     // setLoading(false);
   }
 };
+
+export const deleteProject = async (id: number) => {
+  try {
+    const userToken = localStorage.getItem("token");
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Token ${userToken}`,
+      },
+    };
+
+    const response = await axios.delete(
+      `${server}/api/projects/${id}/`,
+      config
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error(error.response);
+  } finally {
+    // setLoading(false);
+  }
+};

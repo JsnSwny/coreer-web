@@ -6,11 +6,19 @@ import Button from "@/components/Button/Button";
 import AsyncSelect from "react-select/async";
 import { server } from "@/config";
 import axios from "axios";
-import { Education, EducationRequest, School } from "@/interfaces/education.model";
+import {
+  Education,
+  EducationRequest,
+  School,
+} from "@/interfaces/education.model";
 import { ActionMeta } from "react-select";
 import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
 import { format, parseISO } from "date-fns";
-import { addEducation, updateEducation } from "@/api/educations";
+import {
+  addEducation,
+  deleteEducation,
+  updateEducation,
+} from "@/api/educations";
 
 interface ModalFormProps {
   closeModal: () => void;
@@ -25,14 +33,19 @@ const EducationModalForm = ({ closeModal, item }: ModalFormProps) => {
     label: string;
   };
 
-  const [school, setSchool] = useState<SchoolSelect | null>(item?.school ? {value: item.school.id, label: item.school.name} : null);
+  const [school, setSchool] = useState<SchoolSelect | null>(
+    item?.school ? { value: item.school.id, label: item.school.name } : null
+  );
   const [degree, setDegree] = useState(item ? item.degree : "");
-  const [description, setDescription] = useState(item?.description ? item.description : "");
-  const [startDate, setStartDate] = useState<Date | null>(item?.start_date ? parseISO(item.start_date) : null);
-  const [endDate, setEndDate] = useState<Date | null>(item?.end_date ? parseISO(item.end_date) : null);
-
-  console.log(school)
-
+  const [description, setDescription] = useState(
+    item?.description ? item.description : ""
+  );
+  const [startDate, setStartDate] = useState<Date | null>(
+    item?.start_date ? parseISO(item.start_date) : null
+  );
+  const [endDate, setEndDate] = useState<Date | null>(
+    item?.end_date ? parseISO(item.end_date) : null
+  );
   const handleSave = async () => {
     if (school && degree && startDate) {
       let obj: EducationRequest = {
@@ -62,12 +75,21 @@ const EducationModalForm = ({ closeModal, item }: ModalFormProps) => {
     }
   };
 
+  const handleDelete = async () => {
+    deleteEducation(item!.id);
+    setUser({
+      ...user!,
+      educations: [
+        ...user!.educations.filter((education) => education.id != item!.id),
+      ],
+    });
+    closeModal();
+  };
+
   const loadSchoolOptions = async (inputValue: string) => {
     const options = await axios.get(
       `${server}/api/schools/?search=${inputValue}`
     );
-
-    console.log(options);
 
     return options.data.results.map((item: School) => ({
       value: item.id,
@@ -116,7 +138,10 @@ const EducationModalForm = ({ closeModal, item }: ModalFormProps) => {
         </div>
       </div>
       <div className={globalStyles.modalFooter}>
-        <Button text="Save" onClick={handleSave} />
+        {item && <Button text="Delete" color="red" onClick={handleDelete} />}
+        <div className={globalStyles.modalFooterRight}>
+          <Button text="Save" onClick={handleSave} />
+        </div>
       </div>
     </>
   );

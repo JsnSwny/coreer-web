@@ -16,6 +16,7 @@ interface ButtonProps {
   icon?: IconProp;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
+  color?: string;
 }
 
 const Button = ({
@@ -28,14 +29,15 @@ const Button = ({
   onClick,
   onMouseEnter,
   onMouseLeave,
+  color = "primary",
 }: ButtonProps) => {
   return (
     <button
       data-variant={variant}
       onClick={onClick}
-      className={`${styles.btn} ${!link ? styles.noLink : ""} ${styles[size]} ${
-        alt ? styles.alt : ""
-      }`}
+      className={`${styles.btn} ${styles[color]} ${
+        !link ? styles.noLink : ""
+      } ${styles[size]} ${alt ? styles.alt : ""}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >

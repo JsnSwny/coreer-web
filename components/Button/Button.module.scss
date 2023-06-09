@@ -25,6 +25,13 @@
   svg {
     height: 20px;
   }
+  &.red {
+    background: #d2302c;
+    border: 1px solid #d2302c;
+    &:hover {
+      background: darken(#d2302c, 10%);
+    }
+  }
   &.large {
     width: 100%;
     font-size: 16px;
@@ -32,10 +39,10 @@
   &.alt {
     color: $primary;
     background: white;
-    border: 1px solid $primary;
+    // border: 1px solid $primary;
     &:hover {
       background: $primary;
-      border: 1px solid $primary;
+      // border: 1px solid $primary;
       color: white;
     }
   }
