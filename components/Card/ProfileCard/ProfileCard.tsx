@@ -23,7 +23,7 @@ const ProfileCard = ({ profile }: CardProps) => {
   };
   return (
     <Link href={`/${profile.username}`} className={styles.card}>
-      <img className={styles.image} src={profile.profile_photo} />
+      <img className={styles.image} src={profile.image} />
       <LikeButton profile={profile} className={styles.likeButton} />
       <div className={styles.content}>
         <h3 className={styles.title}>
