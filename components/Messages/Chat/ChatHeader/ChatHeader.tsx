@@ -10,7 +10,7 @@ const ChatHeader = ({ currentConversation }: ChatHeaderProps) => {
   return (
     <header className={styles.header}>
       <Link
-        href={`/profile/${currentConversation.other_user.id}`}
+        href={`/${currentConversation.other_user.username}`}
         className={styles.link}
       >
         <img

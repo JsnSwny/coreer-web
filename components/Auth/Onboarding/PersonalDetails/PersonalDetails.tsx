@@ -8,11 +8,16 @@ import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput";
 
 const PersonalDetails = () => {
   const router = useRouter();
-  const { user, updateUser, githubDetails } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    updateUser({ first_name: firstName, last_name: lastName, location });
+    updateUser({
+      first_name: firstName,
+      last_name: lastName,
+      location,
+      username: `${firstName.toLowerCase}-${lastName.toLowerCase()}`,
+    });
     router.push("/onboarding/about-you");
   };
 

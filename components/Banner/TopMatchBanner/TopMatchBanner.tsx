@@ -39,7 +39,7 @@ const TopMatchBanner = ({ profile }: TopMatchBannerProps) => {
             </Link>
           </button>
           <button className={`${styles.button} ${styles.buttonAlt}`}>
-            <Link className={styles.buttonLink} href={`/profile/${profile.id}`}>
+            <Link className={styles.buttonLink} href={`/${profile.username}`}>
               View Profile
             </Link>
           </button>

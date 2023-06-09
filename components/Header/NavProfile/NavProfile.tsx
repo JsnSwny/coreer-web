@@ -25,7 +25,7 @@ export default function NavProfile() {
         <ul className={styles.menu}>
           <li>
             <Link
-              href={`/profile/${user?.id}`}
+              href={`/${user?.username}`}
               className={styles.menuItem}
               onClick={() => handleMenuClick()}
             >

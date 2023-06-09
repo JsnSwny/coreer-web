@@ -22,7 +22,7 @@ const ProfileCard = ({ profile }: CardProps) => {
     }
   };
   return (
-    <Link href={`/profile/${profile.id}`} className={styles.card}>
+    <Link href={`/${profile.username}`} className={styles.card}>
       <img className={styles.image} src={profile.profile_photo} />
       <LikeButton profile={profile} className={styles.likeButton} />
       <div className={styles.content}>

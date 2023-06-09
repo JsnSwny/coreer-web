@@ -11,6 +11,7 @@ export interface CareerLevel {
 }
 export interface Profile {
   id: number;
+  username: string;
   image: string;
   first_name: string;
   last_name: string;

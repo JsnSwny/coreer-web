@@ -11,7 +11,7 @@ interface SuggestionProps {
 
 const Suggestion = ({ profile }: SuggestionProps) => {
   return (
-    <Link href={`/profile/${profile.id}`} className={styles.container}>
+    <Link href={`/${profile.username}`} className={styles.container}>
       <div className={styles.leftWrapper}>
         <img className={styles.image} src={profile.profile_photo} />
         <div className={styles.content}>
