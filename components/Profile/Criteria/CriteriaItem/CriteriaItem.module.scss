@@ -7,3 +7,13 @@
   border-radius: 10px;
   border: 1px solid $stroke;
 }
+
+.criteriaHeader {
+  display: flex;
+  justify-content: space-between;
+  svg {
+    height: 20px;
+    color: $primary;
+    cursor: pointer;
+  }
+}

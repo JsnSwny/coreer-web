@@ -3,7 +3,7 @@ import Container from "../../Container/Container";
 import LargeContainer from "@/components/Container/LargeContainer";
 import { Profile } from "@/interfaces/profile.model";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCameraRetro } from "@fortawesome/free-solid-svg-icons";
+import { faCameraRetro, faPencil } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect, ChangeEvent } from "react";
 import { server } from "@/config";
 import axios from "axios";
@@ -20,9 +20,11 @@ import ResponseBanner from "./ResponseBanner/ResponseBanner";
 
 interface ProfileBannerProps {
   profile: Profile;
+  openModal: (section: string, description?: string, item?: object) => void;
 }
 
-const ProfileBanner = ({ profile }: ProfileBannerProps) => {
+const ProfileBanner = ({ profile, openModal }: ProfileBannerProps) => {
+  console.log(openModal);
   const [isHovered, setIsHovered] = useState(false);
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(
     profile.profile_photo ? profile.profile_photo : profile.image
@@ -41,7 +43,7 @@ const ProfileBanner = ({ profile }: ProfileBannerProps) => {
     const file = e.target.files?.[0] as File | undefined;
     if (file) {
       reader.onloadend = () => {
-        updateProfilePicture(user!.id, userToken, file);
+        updateProfilePicture(user!.id, userToken!, file);
         setImagePreviewUrl(reader.result as string);
       };
       reader.readAsDataURL(file);
@@ -71,9 +73,17 @@ const ProfileBanner = ({ profile }: ProfileBannerProps) => {
             </label>
           )}
         </div>
-        <h1 className={styles.title}>
-          {profile.first_name} {profile.last_name}
-        </h1>
+        <div className={styles.titleWrapper}>
+          <h1 className={styles.title}>
+            {profile.first_name} {profile.last_name}
+          </h1>
+          <FontAwesomeIcon
+            icon={faPencil}
+            className={styles.titleIcon}
+            onClick={() => openModal("Details")}
+          />
+        </div>
+
         <p className={styles.subtitle}>
           Undergraduate Student • BSc Computer Science
         </p>

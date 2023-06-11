@@ -24,7 +24,7 @@ const AboutModalForm = ({ closeModal }: ModalFormProps) => {
     setInputValue((e.target as HTMLInputElement).value);
   };
 
-  const handleSave = () => {
+  const onSubmit = () => {
     // onSave(inputValue);
     updateUser({ bio: inputValue, location });
     setInputValue("");
@@ -32,7 +32,7 @@ const AboutModalForm = ({ closeModal }: ModalFormProps) => {
   };
 
   return (
-    <>
+    <form onSubmit={onSubmit}>
       <div className={globalStyles.modalBody}>
         <div className={globalStyles.formGroup}>
           <label className={globalStyles.label}>Bio</label>
@@ -49,9 +49,9 @@ const AboutModalForm = ({ closeModal }: ModalFormProps) => {
         </div>
       </div>
       <div className={globalStyles.modalFooter}>
-        <Button text="Save" onClick={handleSave} />
+        <Button text="Save" />
       </div>
-    </>
+    </form>
   );
 };
 

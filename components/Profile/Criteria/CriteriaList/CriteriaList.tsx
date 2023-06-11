@@ -6,10 +6,10 @@ import { Interest } from "@/interfaces/interest.model";
 
 interface CriteriaListProps {
   profile: Profile;
+  openModal: (title: string) => void;
 }
 
-const CriteriaList = ({ profile }: CriteriaListProps) => {
-  console.log(profile);
+const CriteriaList = ({ profile, openModal }: CriteriaListProps) => {
   return (
     <ul className={styles.criteriaList}>
       <CriteriaItem
@@ -18,6 +18,7 @@ const CriteriaList = ({ profile }: CriteriaListProps) => {
           name: item.name,
           color: item.interest_type == "C" ? "purple" : "orange",
         }))}
+        openModal={() => openModal("Interests")}
       />
       <CriteriaItem
         title="Languages"
@@ -25,6 +26,7 @@ const CriteriaList = ({ profile }: CriteriaListProps) => {
           name: item.name,
           color: "blue",
         }))}
+        openModal={() => openModal("Skills")}
       />
       <CriteriaItem
         title="Looking for"

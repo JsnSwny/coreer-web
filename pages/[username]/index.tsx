@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Profile } from "../../../interfaces/profile.model";
 import { server } from "@/config";
 import Image from "next/image";
 import ProfileBanner from "@/components/Profile/Banner/ProfileBanner";
 import Container from "@/components/Container/Container";
-import ProfileBio from "@/components/Profile/Bio/ProfileBio";
 import Suggestions from "@/components/Suggestions/Suggestions/Suggestions";
 import styles from "@/components/Profile/Profile.module.scss";
 import ProfileSection from "@/components/Profile/Section/ProfileSection";
@@ -12,8 +10,6 @@ import Head from "next/head";
 import Projects from "@/components/Profile/Projects/Projects/Projects";
 import CardList from "@/components/Card/CardList/CardList";
 import Card from "@/components/Card/Card/Card";
-import LanguageList from "@/components/Profile/Languages/LanguageList/LanguageList";
-import Language from "@/components/Profile/Languages/Language/Language";
 import withAuth from "@/components/Route/withAuth";
 import AboutSection from "@/components/Profile/About/AboutSection/AboutSection";
 import Modal from "@/components/Modal/Modal/Modal";
@@ -30,6 +26,9 @@ import SkillsModalForm from "@/components/Modal/Forms/SkillsModalForm/SkillsModa
 import { differenceInMonths } from "date-fns";
 import CriteriaList from "@/components/Profile/Criteria/CriteriaList/CriteriaList";
 import Nav from "@/components/Profile/Nav/Nav";
+import { Profile } from "@/interfaces/profile.model";
+import DetailsModalForm from "@/components/Modal/Forms/DetailsModalForm/DetailsModalForm";
+import InterestsModalForm from "@/components/Modal/Forms/InterestsModalForm/InterestsModalForm";
 
 interface ProfileProps {
   profile: Profile | null;
@@ -82,10 +81,6 @@ const profile = ({ profile }: ProfileProps) => {
           <title>{`${profile.first_name} ${profile.last_name} | coreer`}</title>
         </Head>
         <Container margin>
-          <ProfileBanner profile={profile} />
-          <CriteriaList profile={profile} />
-          <Nav section={section} setSection={setSection} />
-
           {activeSection && (
             <Modal
               title={activeSection.title}
@@ -93,6 +88,9 @@ const profile = ({ profile }: ProfileProps) => {
               isOpen={isModalOpen}
               onClose={closeModal}
             >
+              {activeSection.title === "Details" && (
+                <DetailsModalForm closeModal={closeModal} />
+              )}
               {activeSection.title === "About" && (
                 <AboutModalForm closeModal={closeModal} />
               )}
@@ -108,8 +106,16 @@ const profile = ({ profile }: ProfileProps) => {
               {activeSection.title === "Skills" && (
                 <SkillsModalForm closeModal={closeModal} />
               )}
+              {activeSection.title === "Interests" && (
+                <InterestsModalForm closeModal={closeModal} />
+              )}
             </Modal>
           )}
+
+          <ProfileBanner profile={profile} openModal={openModal} />
+          <CriteriaList profile={profile} openModal={openModal} />
+          <Nav section={section} setSection={setSection} />
+
           {section == "Projects" && (
             <Projects
               projects={profile.projects}
