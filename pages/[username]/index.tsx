@@ -40,7 +40,7 @@ interface ActiveSectionProps {
 }
 
 const Profile = ({ profile }: ProfileProps) => {
-  const { updateUser, user } = useAuth();
+  const { user } = useAuth();
 
   profile = user!.id == profile?.id ? user : profile;
 

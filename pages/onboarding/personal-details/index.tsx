@@ -5,11 +5,9 @@ import AuthWrapper from "@/components/Auth/AuthWrapper";
 import AuthBanner from "@/components/Auth/AuthBanner";
 import withGuest from "@/components/Route/withGuest";
 import OnboardingWrapper from "@/components/Auth/Onboarding/OnboardingWrapper/OnboardingWrapper";
-import PersonalDetails from "@/components/Auth/Onboarding/PersonalDetails/PersonalDetails";
 import { useAuth } from "@/contexts/AuthContext";
 
 const PersonalDetails = () => {
-  const { user } = useAuth();
   return (
     <>
       <Head>

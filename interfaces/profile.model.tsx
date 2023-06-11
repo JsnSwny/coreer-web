@@ -6,6 +6,7 @@ import { Interest } from "./interest.model";
 import { UserAnswer } from "./question.model";
 
 export interface CareerLevel {
+  id: number;
   name: string;
   level_type: "S" | "P";
 }

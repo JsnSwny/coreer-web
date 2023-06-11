@@ -10,26 +10,33 @@ import axios from "axios";
 import { server } from "@/config";
 import { useEffect } from "react";
 import { Question } from "@/interfaces/question.model";
+import { CareerLevel } from "@/interfaces/profile.model";
 
-const AboutYou = ({ questions, careerLevels }) => {
+interface AboutYouProps {
+  questions: Question[];
+  careerLevels: CareerLevel[];
+}
+
+const AboutYou = ({ questions, careerLevels }: AboutYouProps) => {
   const router = useRouter();
-  const { user, updateUser, githubDetails } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const selectedQuestions = [questionOneOption, questionTwoOption];
     const selectedAnswers = [questionOneAnswer, questionTwoAnswer];
-    console.log(lookingFor);
-    console.log(careerLevel);
-    updateUser({
-      career_level_id: parseInt(careerLevel?.value),
-      looking_for_id: lookingFor.map((item) => parseInt(item.value)),
-    });
+    if(careerLevel && lookingFor) {
+      updateUser({
+        career_level_id: parseInt(careerLevel?.value),
+        looking_for_id: lookingFor.map((item) => parseInt(item.value)),
+      });
+    }
+   
     try {
-      const requestPromises = selectedQuestions.map((question, index) => {
+      const requestPromises = selectedQuestions.map((question: any, index) => {
         return axios.post(`${server}/api/user-answers/`, {
           user: user!.id,
-          question_id: question.value,
+          question_id: question?.value,
           answer: selectedAnswers[index],
         });
       });
@@ -50,12 +57,18 @@ const AboutYou = ({ questions, careerLevels }) => {
     group: "S" | "P";
   }
 
+  const questionOptions: Option[] = questions.map((item) => ({
+    value: String(item.id),
+    label: item.text,
+    group: "S"
+  }));
+
   const [careerLevel, setCareerLevel] = useState<Option | null>(null);
-  const [questionOneOption, setQuestionOneOption] = useState(null);
+  const [questionOneOption, setQuestionOneOption] = useState<Option | null | undefined>(null);
   const [lookingFor, setLookingFor] = useState<Option[]>([]);
   const [questionOneAnswer, setQuestionOneAnswer] = useState("");
 
-  const [questionTwoOption, setQuestionTwoOption] = useState(null);
+  const [questionTwoOption, setQuestionTwoOption] = useState<Option | null | undefined>(null);
   const [questionTwoAnswer, setQuestionTwoAnswer] = useState("");
 
   useEffect(() => {
@@ -80,7 +93,7 @@ const AboutYou = ({ questions, careerLevels }) => {
   }, [user]);
 
   const options: Option[] = careerLevels.map((item) => ({
-    value: item.id,
+    value: String(item.id),
     label: item.name,
     group: item.level_type,
   }));
@@ -96,10 +109,7 @@ const AboutYou = ({ questions, careerLevels }) => {
     },
   ];
 
-  const questionOptions = questions.map((item) => ({
-    value: item.id,
-    label: item.text,
-  }));
+  
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
@@ -110,8 +120,8 @@ const AboutYou = ({ questions, careerLevels }) => {
           </label>
           <Select
             options={groupedOptions}
-            onChange={(selectedOption: Option) => {
-              if (careerLevel && selectedOption.group != careerLevel.group)
+            onChange={(selectedOption) => {
+              if (careerLevel && selectedOption?.group != careerLevel.group)
                 setLookingFor([]);
               setCareerLevel(selectedOption);
             }}
@@ -124,8 +134,8 @@ const AboutYou = ({ questions, careerLevels }) => {
           </label>
           <Select
             options={groupedOptions}
-            onChange={(selectedOption) => setLookingFor(selectedOption)}
-            isOptionDisabled={(option: Option) =>
+            onChange={(selectedOption: Option[]) => setLookingFor(selectedOption)}
+            isOptionDisabled={(option) =>
               careerLevel && option.group == careerLevel.group
             }
             value={lookingFor}

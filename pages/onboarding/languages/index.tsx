@@ -5,8 +5,6 @@ import AuthWrapper from "@/components/Auth/AuthWrapper";
 import AuthBanner from "@/components/Auth/AuthBanner";
 import withGuest from "@/components/Route/withGuest";
 import OnboardingWrapper from "@/components/Auth/Onboarding/OnboardingWrapper/OnboardingWrapper";
-import PersonalDetails from "@/components/Auth/Onboarding/PersonalDetails/PersonalDetails";
-import Interests from "@/components/Auth/Onboarding/Interests/Interest";
 import { server } from "@/config";
 import axios from "axios";
 import { useAuth } from "@/contexts/AuthContext";
@@ -27,7 +25,7 @@ const Languages = ({ languages }: LanguagesProps) => {
       </Head>
       <OnboardingWrapper title={"Languages"} description={"fasfasf asas asd"}>
         {user && (
-          <Languages
+          <LanguagesList
             options={languages.languages}
             defaultOptions={user.languages}
             updateKey="languages_id"

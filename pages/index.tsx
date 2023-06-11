@@ -73,11 +73,11 @@ const Home = () => {
               <ProfileCardList large={true}>
                 {recommendations
                   .slice(1, 5)
-                  .map((item) =>
+                  .map((item, idx) =>
                     !item ? (
-                      <ProfileCardPlaceholder />
+                      <ProfileCardPlaceholder key={idx} />
                     ) : (
-                      <ProfileCard profile={item} />
+                      <ProfileCard profile={item} key={item.id} />
                     )
                   )}
               </ProfileCardList>
