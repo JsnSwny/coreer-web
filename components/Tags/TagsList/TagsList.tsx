@@ -10,8 +10,8 @@ interface TagsListProps {
 const TagsList = ({ tags, className }: TagsListProps) => {
   return (
     <ul className={`${styles.container} ${className}`}>
-      {tags.map((tag) => (
-        <Tag tag={tag} />
+      {tags.map((tag, idx) => (
+        <Tag key={idx} tag={tag} />
       ))}
     </ul>
   );
