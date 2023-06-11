@@ -21,8 +21,8 @@ const PersonalDetails = () => {
     router.push("/onboarding/about-you");
   };
 
-  const [firstName, setFirstName] = useState(user!.first_name);
-  const [lastName, setLastName] = useState(user!.last_name);
+  const [firstName, setFirstName] = useState(user!.first_name ? user!.first_name : "");
+  const [lastName, setLastName] = useState(user!.last_name ? user!.last_name : "");
   const [location, setLocation] = useState("");
 
   return (
