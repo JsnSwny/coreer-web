@@ -23,7 +23,7 @@ interface ResultsProps {
   query: string;
 }
 
-const results = ({ searchData, currentPage, perPage, query }: ResultsProps) => {
+const Results = ({ searchData, currentPage, perPage, query }: ResultsProps) => {
   const router = useRouter();
   const [isLoading, setLoading] = useState(false);
   const [currentPageState, setCurrentPage] = useState(currentPage);
@@ -112,4 +112,4 @@ export const getServerSideProps = async (context: any) => {
   };
 };
 
-export default withAuth(results);
+export default withAuth(Results);

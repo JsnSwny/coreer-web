@@ -11,7 +11,7 @@ import AboutYou from "@/components/Auth/Onboarding/AboutYou/AboutYou";
 import axios from "axios";
 import { server } from "@/config";
 
-const about_you = ({ questions, careerLevels }) => {
+const AboutYou = ({ questions, careerLevels }) => {
   const { user } = useAuth();
   return (
     <>
@@ -55,4 +55,4 @@ export const getServerSideProps = async (context: any) => {
   };
 };
 
-export default about_you;
+export default AboutYou;

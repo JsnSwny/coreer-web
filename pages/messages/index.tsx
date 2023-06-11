@@ -14,7 +14,7 @@ import { Message } from "@/interfaces/message.model";
 import ChatContainer from "@/components/Messages/Chat/ChatContainer/ChatContainer";
 import MessagesDetailsContainer from "@/components/Messages/MessagesDetails/MessagesDetailsContainer/MessagesDetailsContainer";
 
-const messages = () => {
+const Messages = () => {
   const [conversationsList, setConversationsList] = useState([]);
   const [messageHistory, setMessageHistory] = useState([]);
   const { userToken } = useAuth();
@@ -49,4 +49,4 @@ const messages = () => {
   );
 };
 
-export default withAuth(messages);
+export default withAuth(Messages);

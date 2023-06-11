@@ -20,7 +20,7 @@ interface MessagesProps {
   id: number;
 }
 
-const messages = ({ conversations, currConversation, id }: MessagesProps) => {
+const Messages = ({ conversations, currConversation, id }: MessagesProps) => {
   const [conversationsList, setConversationsList] = useState(conversations);
   const [messageHistory, setMessageHistory] = useState([]);
   const [currentConversation, setCurrentConversation] =
@@ -131,4 +131,4 @@ export const getServerSideProps = async (context: any) => {
   };
 };
 
-export default withAuth(messages);
+export default withAuth(Messages);

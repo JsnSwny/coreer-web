@@ -18,7 +18,7 @@ interface LanguagesProps {
   languages: { languages: Skill[] };
 }
 
-const languages = ({ languages }: LanguagesProps) => {
+const Languages = ({ languages }: LanguagesProps) => {
   const { user } = useAuth();
   return (
     <>
@@ -57,4 +57,4 @@ export const getServerSideProps = async (context: any) => {
   };
 };
 
-export default languages;
+export default Languages;

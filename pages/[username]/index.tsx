@@ -39,7 +39,7 @@ interface ActiveSectionProps {
   description?: string;
 }
 
-const profile = ({ profile }: ProfileProps) => {
+const Profile = ({ profile }: ProfileProps) => {
   const { updateUser, user } = useAuth();
 
   profile = user!.id == profile?.id ? user : profile;
@@ -153,4 +153,4 @@ export const getServerSideProps = async (context: any) => {
   };
 };
 
-export default withAuth(profile);
+export default withAuth(Profile);

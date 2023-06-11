@@ -8,7 +8,7 @@ import OnboardingWrapper from "@/components/Auth/Onboarding/OnboardingWrapper/On
 import PersonalDetails from "@/components/Auth/Onboarding/PersonalDetails/PersonalDetails";
 import { useAuth } from "@/contexts/AuthContext";
 
-const personal_details = () => {
+const PersonalDetails = () => {
   const { user } = useAuth();
   return (
     <>
@@ -25,4 +25,4 @@ const personal_details = () => {
   );
 };
 
-export default personal_details;
+export default PersonalDetails;

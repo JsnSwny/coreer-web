@@ -5,7 +5,7 @@ import AuthWrapper from "@/components/Auth/AuthWrapper";
 import AuthBanner from "@/components/Auth/AuthBanner";
 import withGuest from "@/components/Route/withGuest";
 
-const login = () => {
+const Login = () => {
   return (
     <>
       <Head>
@@ -21,4 +21,4 @@ const login = () => {
   );
 };
 
-export default withGuest(login);
+export default withGuest(Login);

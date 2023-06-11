@@ -17,7 +17,7 @@ interface InterestsProps {
   interests: Interest[];
 }
 
-const interests = ({ interests }: InterestsProps) => {
+const Interests = ({ interests }: InterestsProps) => {
   const { user } = useAuth();
   const router = useRouter();
   return (
@@ -61,4 +61,4 @@ export const getServerSideProps = async (context: any) => {
   };
 };
 
-export default interests;
+export default Interests;
