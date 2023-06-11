@@ -50,6 +50,7 @@ const InterestsModalForm = ({ closeModal }: ModalFormProps) => {
         <TagSelectorList>
           {options.map((option: Skill) => (
             <TagSelector
+              key={option.id}
               title={option.name}
               active={selectedOptions.some((item) => item.id == option.id)}
               setSelectedOptions={setSelectedOptions}

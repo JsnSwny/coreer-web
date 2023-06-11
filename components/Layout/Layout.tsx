@@ -34,6 +34,7 @@ const Layout = ({ children }: LayoutProps) => {
             rel="stylesheet"
           />
           <script
+          async
             src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`}
           ></script>
         </Head>

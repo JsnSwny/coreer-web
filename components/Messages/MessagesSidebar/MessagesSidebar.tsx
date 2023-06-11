@@ -26,6 +26,7 @@ const MessagesSidebar = ({
         <ul className={styles.conversations}>
           {conversations.map((conversation) => (
             <Conversation
+              key={conversation.id}
               conversation={conversation}
               isActive={currentConversation?.id == conversation?.id}
             />

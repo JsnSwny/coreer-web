@@ -72,7 +72,7 @@ const SignupForm = () => {
         <Button text="Sign up" size="large" />
       </form>
       <p className={styles.altLink}>
-        Don't have an account? <Link href="/login">Log in</Link>
+        Already have an account? <Link href="/login">Log in</Link>
       </p>
     </>
   );

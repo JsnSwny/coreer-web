@@ -125,8 +125,8 @@ const Profile = ({ profile }: ProfileProps) => {
           )}
           {section == "Similar Users" && (
             <ProfileCardList>
-              {recommendations.slice(1, 5).map((item) => (
-                <ProfileCard profile={item} />
+              {recommendations.slice(1, 5).map((item: Profile) => (
+                <ProfileCard profile={item} key={item.id} />
               ))}
             </ProfileCardList>
           )}

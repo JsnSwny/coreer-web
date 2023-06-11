@@ -34,6 +34,7 @@ const Languages = ({ options, defaultOptions, updateKey }: LanguagesProps) => {
         <TagSelectorList>
           {options.map((option) => (
             <TagSelector
+              key={option.id}
               title={option.name}
               active={selectedOptions.some((item) => item.id == option.id)}
               setSelectedOptions={setSelectedOptions}

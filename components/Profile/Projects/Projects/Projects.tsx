@@ -78,6 +78,7 @@ const Projects = ({ projects, action, profile }: ProjectsProps) => {
           })
           .map((project) => (
             <Project
+              key={project.id}
               project={project}
               openProjectModal={() => openProjectModal(project)}
               action={action}

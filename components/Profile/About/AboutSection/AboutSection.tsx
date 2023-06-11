@@ -45,6 +45,7 @@ const AboutSection = ({ profile, openModal }: AboutSectionProps) => {
             })
             .map((experience) => (
               <Card
+                key={experience.id}
                 image={null}
                 title={experience.job_title}
                 subtitle={experience.company}
@@ -79,6 +80,7 @@ const AboutSection = ({ profile, openModal }: AboutSectionProps) => {
             })
             .map((education) => (
               <Card
+                key={education.id}
                 image={education.school.logo}
                 title={education.school.name}
                 subtitle={education.degree}

@@ -59,7 +59,7 @@ const LoginForm = () => {
         <GithubAuth />
       </form>
       <p className={styles.altLink}>
-        Don't have an account? <Link href="/signup">Sign up</Link>
+        Dont have an account? <Link href="/signup">Sign up</Link>
       </p>
     </>
   );

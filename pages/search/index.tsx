@@ -67,7 +67,7 @@ const Results = ({ searchData, currentPage, perPage, query }: ResultsProps) => {
   return (
     <Container flex={true}>
       <Head>
-        <title>"{query}" | Search</title>
+        <title>&quot;{query}&quot; | Search</title>
       </Head>
       {isLoading ? (
         <p>Loading...</p>
@@ -77,7 +77,7 @@ const Results = ({ searchData, currentPage, perPage, query }: ResultsProps) => {
             <h3 className={styles.title}>{results.count} Profiles Found</h3>
             <ProfileCardList className={styles.cardList} large={true}>
               {results.results.map((item: Profile) => (
-                <ProfileCard profile={item} />
+                <ProfileCard profile={item} key={item.id} />
               ))}
             </ProfileCardList>
             <Pagination

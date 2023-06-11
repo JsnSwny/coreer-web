@@ -34,6 +34,7 @@ const Interests = ({ options, defaultOptions }: InterestsProps) => {
             .filter((item) => item.interest_type == "C")
             .map((option) => (
               <TagSelector
+                key={option.id}
                 title={option.name}
                 active={selectedOptions.some((item) => item.id == option.id)}
                 selectedOptions={selectedOptions}
@@ -50,6 +51,7 @@ const Interests = ({ options, defaultOptions }: InterestsProps) => {
             .filter((item) => item.interest_type == "P")
             .map((option) => (
               <TagSelector
+                key={option.id}
                 title={option.name}
                 active={selectedOptions.some((item) => item.id == option.id)}
                 selectedOptions={selectedOptions}

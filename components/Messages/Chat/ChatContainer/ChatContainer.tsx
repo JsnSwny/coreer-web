@@ -24,7 +24,7 @@ const ChatContainer = ({
           <div className={styles.messagesContainer}>
             <ul className={styles.wrapper}>
               {messageHistory.map((message) => (
-                <Message message={message} />
+                <Message key={message.id} message={message} />
               ))}
             </ul>
           </div>

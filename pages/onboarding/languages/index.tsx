@@ -25,7 +25,7 @@ const Languages = ({ languages }: LanguagesProps) => {
       </Head>
       <OnboardingWrapper title={"Languages"} description={"fasfasf asas asd"}>
         {user && (
-          <LanguagesList
+          <Languages
             options={languages.languages}
             defaultOptions={user.languages}
             updateKey="languages_id"

@@ -11,7 +11,7 @@ const QuestionsList = ({ user_answers, showEdit }: QuestionsListProps) => {
   return (
     <ul className={styles.questionsList}>
       {user_answers.map((item: UserAnswer) => (
-        <QuestionBlock item={item} showEdit={showEdit} />
+        <QuestionBlock key={item.id} item={item} showEdit={showEdit} />
       ))}
     </ul>
   );
