@@ -24,8 +24,21 @@
 
 .title {
   font-size: 40px;
-  margin-top: 1.5rem;
+
   font-weight: 800;
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.titleIcon {
+  height: 20px;
+  margin-left: 1rem;
+  color: $primary;
+  cursor: pointer;
 }
 
 .subtitle {

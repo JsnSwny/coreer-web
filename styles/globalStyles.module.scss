@@ -13,6 +13,11 @@
   background: white;
 }
 
+.input:disabled {
+  background: #dddddd;
+  color: $dark-light;
+}
+
 .label {
   color: $black;
   display: block;

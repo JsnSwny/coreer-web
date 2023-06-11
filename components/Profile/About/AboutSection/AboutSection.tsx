@@ -15,7 +15,7 @@ import { useAuth } from "@/contexts/AuthContext";
 
 interface AboutSectionProps {
   profile: Profile;
-  openModal: (section: string, description?: string, item?: object) => {};
+  openModal: (section: string, description?: string, item?: object) => void;
 }
 
 const AboutSection = ({ profile, openModal }: AboutSectionProps) => {
