@@ -27,6 +27,22 @@ const Messages = ({ conversations, currConversation, id }: MessagesProps) => {
   const [currentConversation, setCurrentConversation] =
     useState(currConversation);
 
+  useEffect(() => {
+    const config: any = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    config.headers["Authorization"] = `Token ${userToken}`;
+    axios
+      .get(`${server}/api/conversations/`, config)
+      .then((res: any) => {
+        setConversationsList(res.data);
+      })
+      .catch((err: any) => console.log(err));
+  }, []);
+
   const { userToken } = useAuth();
 
   const { readyState, sendJsonMessage } = useWebSocket(

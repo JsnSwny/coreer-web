@@ -18,7 +18,9 @@ import TopMatchBannerPlaceholder from "@/components/Banner/TopMatchBanner/TopMat
 import ProfileCardPlaceholder from "@/components/Card/ProfileCard/ProfileCardPlaceholder";
 
 const Home = () => {
-  const { userToken } = useAuth();
+  const { user, userToken } = useAuth();
+
+  const router = useRouter();
 
   const [recommendations, setRecommendations] = useState<(Profile | null)[]>([
     null,
@@ -31,6 +33,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    router.push(`/${user!.username}`);
     if (userToken) {
       const config = {
         headers: {
