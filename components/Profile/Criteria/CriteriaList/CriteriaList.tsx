@@ -3,6 +3,7 @@ import CriteriaItem from "../CriteriaItem/CriteriaItem";
 
 import styles from "./CriteriaList.module.scss";
 import { Interest } from "@/interfaces/interest.model";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface CriteriaListProps {
   profile: Profile;
@@ -10,6 +11,7 @@ interface CriteriaListProps {
 }
 
 const CriteriaList = ({ profile, openModal }: CriteriaListProps) => {
+  const { user } = useAuth();
   return (
     <ul className={styles.criteriaList}>
       <CriteriaItem
@@ -19,6 +21,7 @@ const CriteriaList = ({ profile, openModal }: CriteriaListProps) => {
           color: item.interest_type == "C" ? "purple" : "orange",
         }))}
         openModal={() => openModal("Interests")}
+        canEdit={profile.id == user!.id}
       />
       <CriteriaItem
         title="Languages"
@@ -27,6 +30,7 @@ const CriteriaList = ({ profile, openModal }: CriteriaListProps) => {
           color: "blue",
         }))}
         openModal={() => openModal("Skills")}
+        canEdit={profile.id == user!.id}
       />
       <CriteriaItem
         title="Looking for"

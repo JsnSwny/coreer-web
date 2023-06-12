@@ -76,11 +76,13 @@ const ProfileBanner = ({ profile, openModal }: ProfileBannerProps) => {
           <h1 className={styles.title}>
             {profile.first_name} {profile.last_name}
           </h1>
-          <FontAwesomeIcon
-            icon={faPencil}
-            className={styles.titleIcon}
-            onClick={() => openModal("Details")}
-          />
+          {profile.id == user!.id && (
+            <FontAwesomeIcon
+              icon={faPencil}
+              className={styles.titleIcon}
+              onClick={() => openModal("Details")}
+            />
+          )}
         </div>
 
         <p className={styles.subtitle}>

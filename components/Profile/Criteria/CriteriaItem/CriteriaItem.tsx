@@ -12,14 +12,22 @@ interface CriteriaItemProps {
   title: string;
   items: Item[];
   openModal?: () => void;
+  canEdit?: boolean;
 }
 
-const CriteriaItem = ({ title, items, openModal }: CriteriaItemProps) => {
+const CriteriaItem = ({
+  title,
+  items,
+  openModal,
+  canEdit,
+}: CriteriaItemProps) => {
   return (
     <li className={styles.criteriaItem}>
       <div className={styles.criteriaHeader}>
         <h2>{title}</h2>
-        {openModal && <FontAwesomeIcon icon={faPencil} onClick={openModal} />}
+        {canEdit && openModal && (
+          <FontAwesomeIcon icon={faPencil} onClick={openModal} />
+        )}
       </div>
 
       <TagsList
