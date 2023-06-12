@@ -13,6 +13,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Message } from "@/interfaces/message.model";
 import ChatContainer from "@/components/Messages/Chat/ChatContainer/ChatContainer";
 import MessagesDetailsContainer from "@/components/Messages/MessagesDetails/MessagesDetailsContainer/MessagesDetailsContainer";
+import { redisServer } from "@/config";
 
 interface MessagesProps {
   conversations: Conversation[];
@@ -29,7 +30,7 @@ const Messages = ({ conversations, currConversation, id }: MessagesProps) => {
   const { userToken } = useAuth();
 
   const { readyState, sendJsonMessage } = useWebSocket(
-    `ws://192.168.0.14:8000/ws/chat/${id}/?token=${userToken}`,
+    `${redisServer}/ws/chat/${id}/?token=${userToken}`,
     {
       onMessage: (e) => {
         const data = JSON.parse(e.data);
