@@ -21,16 +21,17 @@ const DetailsModalForm = ({ closeModal }: ModalFormProps) => {
   const [lastName, setLastName] = useState(user?.last_name);
   const [location, setLocation] = useState(user?.location ? user.location : "");
   const [username, setUsername] = useState(user?.username);
-  const [bio, setBio] = useState(user?.bio ? user.bio : "")
+  const [bio, setBio] = useState(user!.bio ? user!.bio : "");
 
   const onSubmit = () => {
     // onSave(inputValue);
+    console.log(bio);
     updateUser({
       location,
       first_name: firstName,
       last_name: lastName,
       username,
-      bio
+      bio,
     });
     // setInputValue("");
     closeModal();
@@ -84,7 +85,6 @@ const DetailsModalForm = ({ closeModal }: ModalFormProps) => {
         </div>
       </div>
 
-      
       <div className={globalStyles.modalFooter}>
         <Button text="Save" />
       </div>

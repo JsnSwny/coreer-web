@@ -25,13 +25,13 @@ const AboutYou = ({ questions, careerLevels }: AboutYouProps) => {
     e.preventDefault();
     const selectedQuestions = [questionOneOption, questionTwoOption];
     const selectedAnswers = [questionOneAnswer, questionTwoAnswer];
-    if(careerLevel && lookingFor) {
+    if (careerLevel && lookingFor) {
       updateUser({
-        career_level_id: parseInt(careerLevel?.value),
+        current_level_id: parseInt(careerLevel?.value),
         looking_for_id: lookingFor.map((item) => parseInt(item.value)),
       });
     }
-   
+
     try {
       const requestPromises = selectedQuestions.map((question: any, index) => {
         return axios.post(`${server}/api/user-answers/`, {
@@ -60,15 +60,19 @@ const AboutYou = ({ questions, careerLevels }: AboutYouProps) => {
   const questionOptions: Option[] = questions.map((item) => ({
     value: String(item.id),
     label: item.text,
-    group: "S"
+    group: "S",
   }));
 
   const [careerLevel, setCareerLevel] = useState<Option | null>(null);
-  const [questionOneOption, setQuestionOneOption] = useState<Option | null | undefined>(null);
+  const [questionOneOption, setQuestionOneOption] = useState<
+    Option | null | undefined
+  >(null);
   const [lookingFor, setLookingFor] = useState<Option[]>([]);
   const [questionOneAnswer, setQuestionOneAnswer] = useState("");
 
-  const [questionTwoOption, setQuestionTwoOption] = useState<Option | null | undefined>(null);
+  const [questionTwoOption, setQuestionTwoOption] = useState<
+    Option | null | undefined
+  >(null);
   const [questionTwoAnswer, setQuestionTwoAnswer] = useState("");
 
   useEffect(() => {
@@ -108,8 +112,6 @@ const AboutYou = ({ questions, careerLevels }: AboutYouProps) => {
       options: options.filter((option) => option.group === "P"),
     },
   ];
-
-  
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
