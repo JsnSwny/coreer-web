@@ -1,3 +1,4 @@
+import Container from "@/components/Container/Container";
 import styles from "./MessagesContainer.module.scss";
 
 interface MessagesContainerProps {
@@ -5,7 +6,11 @@ interface MessagesContainerProps {
 }
 
 const MessagesContainer = ({ children }: MessagesContainerProps) => {
-  return <div className={styles.container}>{children}</div>;
+  return (
+    <Container margin>
+      <div className={styles.container}>{children}</div>
+    </Container>
+  );
 };
 
 export default MessagesContainer;

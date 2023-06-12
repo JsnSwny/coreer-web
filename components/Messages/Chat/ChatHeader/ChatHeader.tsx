@@ -15,7 +15,7 @@ const ChatHeader = ({ currentConversation }: ChatHeaderProps) => {
       >
         <img
           className={styles.image}
-          src={currentConversation.other_user.profile_photo}
+          src={currentConversation.other_user.image}
         />
         <div className={styles.content}>
           <h4 className={styles.name}>

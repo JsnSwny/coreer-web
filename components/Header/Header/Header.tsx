@@ -10,11 +10,11 @@ import { faEnvelope, faStar } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const router = useRouter();
-  const largeContainer = router.pathname.includes("/messages");
+  // const largeContainer = router.pathname.includes("/messages");
 
   return (
     <header className={styles.header}>
-      <Container size={largeContainer ? "large" : "medium"}>
+      <Container size={"medium"}>
         <div className={styles.wrapper}>
           <Nav>
             <Link href="/">

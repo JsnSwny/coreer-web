@@ -43,7 +43,6 @@ const Messages = () => {
       <MessagesContainer>
         <MessagesSidebar conversations={conversationsList} />
         <ChatContainer messageHistory={messageHistory} />
-        {/* <MessagesDetailsContainer /> */}
       </MessagesContainer>
     </>
   );

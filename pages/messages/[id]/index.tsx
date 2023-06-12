@@ -54,6 +54,9 @@ const Messages = ({ conversations, currConversation, id }: MessagesProps) => {
             break;
         }
       },
+      onError: (error) => {
+        console.log("Websocket error:", error);
+      },
       onOpen: () => {
         console.log("Connected!");
       },
@@ -90,7 +93,6 @@ const Messages = ({ conversations, currConversation, id }: MessagesProps) => {
           messageHistory={messageHistory}
           currentConversation={currentConversation}
         />
-        <MessagesDetailsContainer />
       </MessagesContainer>
     </>
   );

@@ -2,9 +2,8 @@
 
 .footer {
   width: 100%;
-  padding: 1rem 1rem;
+  padding: 1.5rem 3rem;
   display: flex;
-  max-width: 750px;
   margin: 0 auto;
 }
 
@@ -31,7 +30,7 @@
   display: flex;
   align-items: center;
   background-color: white;
-  border: 1px solid $stroke;
+  border: 1px solid #dedede;
   width: 100%;
   border-radius: 50px;
   position: relative;
