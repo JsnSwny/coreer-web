@@ -41,10 +41,10 @@ const Home = () => {
 
       console.log(userToken);
 
-      axios.get(`${server}/recommend/5`, config).then((res) => {
-        setRecommendations(res.data.recommendations);
-        setLoading(false);
-      });
+      // axios.get(`${server}/recommend/5`, config).then((res) => {
+      //   setRecommendations(res.data.recommendations);
+      //   setLoading(false);
+      // });
     }
   }, []);
 

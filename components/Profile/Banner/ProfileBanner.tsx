@@ -24,7 +24,6 @@ interface ProfileBannerProps {
 }
 
 const ProfileBanner = ({ profile, openModal }: ProfileBannerProps) => {
-  console.log(openModal);
   const [isHovered, setIsHovered] = useState(false);
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(
     profile.profile_photo ? profile.profile_photo : profile.image
@@ -85,10 +84,11 @@ const ProfileBanner = ({ profile, openModal }: ProfileBannerProps) => {
         </div>
 
         <p className={styles.subtitle}>
-          Undergraduate Student • BSc Computer Science
+          {profile.current_level?.name} {/*• BSc Computer Science*/}
         </p>
         <p className={styles.location}>{profile.location}</p>
-        <ResponseBanner />
+        <p className={styles.bio}>{profile.bio}</p>
+        {/* <ResponseBanner /> */}
         {profile.id != user!.id && (
           <div className={styles.buttons}>
             <Button

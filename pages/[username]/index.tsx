@@ -64,13 +64,13 @@ const Profile = ({ profile }: ProfileProps) => {
     setIsModalOpen(false);
   };
 
-  useEffect(() => {
-    if (profile) {
-      axios
-        .get(`${server}/recommend/6/${profile.id}`)
-        .then((res) => setRecommendations(res.data.recommendations));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (profile) {
+  //     axios
+  //       .get(`${server}/recommend/6/${profile.id}`)
+  //       .then((res) => setRecommendations(res.data.recommendations));
+  //   }
+  // }, []);
 
   if (!profile) {
     return <h1>Profile not found</h1>;
@@ -123,13 +123,13 @@ const Profile = ({ profile }: ProfileProps) => {
               profile={profile}
             />
           )}
-          {section == "Similar Users" && (
+          {/* {section == "Similar Users" && (
             <ProfileCardList>
               {recommendations.slice(1, 5).map((item: Profile) => (
                 <ProfileCard profile={item} key={item.id} />
               ))}
             </ProfileCardList>
-          )}
+          )} */}
 
           {section == "About" && (
             <AboutSection profile={profile} openModal={openModal} />

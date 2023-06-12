@@ -1,114 +1,118 @@
 @import "@/styles/_variables.scss";
 
 .container {
-  position: relative;
-  margin-bottom: 2rem;
-  display: flex;
-  gap: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid $stroke;
+	position: relative;
+	margin-bottom: 2rem;
+	display: flex;
+	gap: 2rem;
+	padding-bottom: 2rem;
+	border-bottom: 1px solid $stroke;
 }
 
 .left {
-  width: 50%;
+	width: 50%;
 }
 
 .details {
-  margin-left: calc(150px + 1rem);
-  margin-right: 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 90px;
+	margin-left: calc(150px + 1rem);
+	margin-right: 2rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 90px;
 }
 
 .title {
-  font-size: 40px;
+	font-size: 40px;
 
-  font-weight: 800;
+	font-weight: 800;
 }
 
 .titleWrapper {
-  display: flex;
-  align-items: center;
-  margin-top: 1.5rem;
+	display: flex;
+	align-items: center;
+	margin-top: 1.5rem;
+}
+
+.bio {
+	margin-top: 2rem;
 }
 
 .titleIcon {
-  height: 20px;
-  margin-left: 1rem;
-  color: $primary;
-  cursor: pointer;
+	height: 20px;
+	margin-left: 1rem;
+	color: $primary;
+	cursor: pointer;
 }
 
 .subtitle {
-  font-family: "Newsreader", serif;
-  font-size: 20px;
-  margin-top: 0.5rem;
+	font-family: "Newsreader", serif;
+	font-size: 20px;
+	margin-top: 0.5rem;
 }
 
 .location {
-  color: $dark-light;
-  margin-top: 0.5rem;
+	color: $dark-light;
+	margin-top: 0.5rem;
 }
 
 .bannerContainer {
-  position: relative;
+	position: relative;
 }
 
 .banner {
-  height: 300px;
-  width: 100%;
-  object-fit: cover;
-  display: inline-block;
-  // border-radius: 15px;
+	height: 300px;
+	width: 100%;
+	object-fit: cover;
+	display: inline-block;
+	// border-radius: 15px;
 }
 
 .profilePhoto {
-  width: 175px;
-  height: 175px;
-  object-fit: cover;
-  border-radius: 50%;
-  outline: 5px solid $background;
-  position: relative;
-  display: block;
+	width: 175px;
+	height: 175px;
+	object-fit: cover;
+	border-radius: 50%;
+	outline: 5px solid $background;
+	position: relative;
+	display: block;
 }
 
 .content {
-  position: relative;
-  width: 175px;
+	position: relative;
+	width: 175px;
 }
 
 .changePhoto {
-  width: 30px;
-  height: 30px;
-  background: $primary;
-  border-radius: 50%;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  left: 50%;
-  bottom: -10px;
-  transform: translateX(-50%);
-  transition: 0.2s ease background;
-  cursor: pointer;
-  &:hover {
-    background: darken($primary, 10%);
-  }
+	width: 30px;
+	height: 30px;
+	background: $primary;
+	border-radius: 50%;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	left: 50%;
+	bottom: -10px;
+	transform: translateX(-50%);
+	transition: 0.2s ease background;
+	cursor: pointer;
+	&:hover {
+		background: darken($primary, 10%);
+	}
 }
 
 .changePhotoImage {
-  width: 16px;
-  color: white;
+	width: 16px;
+	color: white;
 }
 
 .fileInput {
-  display: none;
+	display: none;
 }
 
 .buttons {
-  display: flex;
-  gap: 0.75rem;
-  margin-top: 3rem;
+	display: flex;
+	gap: 0.75rem;
+	margin-top: 3rem;
 }

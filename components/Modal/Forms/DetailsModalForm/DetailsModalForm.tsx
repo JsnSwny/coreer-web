@@ -21,6 +21,7 @@ const DetailsModalForm = ({ closeModal }: ModalFormProps) => {
   const [lastName, setLastName] = useState(user?.last_name);
   const [location, setLocation] = useState(user?.location ? user.location : "");
   const [username, setUsername] = useState(user?.username);
+  const [bio, setBio] = useState(user?.bio ? user.bio : "")
 
   const onSubmit = () => {
     // onSave(inputValue);
@@ -29,6 +30,7 @@ const DetailsModalForm = ({ closeModal }: ModalFormProps) => {
       first_name: firstName,
       last_name: lastName,
       username,
+      bio
     });
     // setInputValue("");
     closeModal();
@@ -71,7 +73,18 @@ const DetailsModalForm = ({ closeModal }: ModalFormProps) => {
           <label className={globalStyles.label}>Location</label>
           <LocationSearchInput location={location} setLocation={setLocation} />
         </div>
+        <div className={globalStyles.formGroup}>
+          <label className={globalStyles.label}>Bio</label>
+          <textarea
+            className={globalStyles.input}
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+            rows={4}
+          ></textarea>
+        </div>
       </div>
+
+      
       <div className={globalStyles.modalFooter}>
         <Button text="Save" />
       </div>

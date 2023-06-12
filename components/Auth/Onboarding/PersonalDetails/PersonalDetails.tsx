@@ -16,7 +16,6 @@ const PersonalDetails = () => {
       first_name: firstName,
       last_name: lastName,
       location,
-      username: `${firstName.toLowerCase}-${lastName.toLowerCase()}`,
     });
     router.push("/onboarding/about-you");
   };

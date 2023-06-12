@@ -134,7 +134,7 @@ const AboutYou = ({ questions, careerLevels }: AboutYouProps) => {
           </label>
           <Select
             options={groupedOptions}
-            onChange={(selectedOption: Option[]) => setLookingFor(selectedOption)}
+            onChange={(selectedOption) => setLookingFor(selectedOption)}
             isOptionDisabled={(option) =>
               careerLevel && option.group == careerLevel.group
             }

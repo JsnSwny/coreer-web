@@ -20,12 +20,12 @@ const Nav = ({ section, setSection }: NavProps) => {
       >
         <h3>About</h3>
       </li>
-      <li
+      {/* <li
         className={section == "Similar Users" ? styles.active : ""}
         onClick={() => setSection("Similar Users")}
       >
         <h3>Similar Users</h3>
-      </li>
+      </li> */}
     </ul>
   );
 };
