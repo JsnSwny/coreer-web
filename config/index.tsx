@@ -6,4 +6,4 @@ export const server = dev
 
 export const redisServer = dev
   ? "ws://192.168.0.14:8000"
-  : "ws://coreer.herokuapp.com";
+  : "wss://coreer.herokuapp.com";
