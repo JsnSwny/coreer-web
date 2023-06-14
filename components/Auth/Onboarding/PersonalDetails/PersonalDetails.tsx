@@ -9,6 +9,7 @@ import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from "@/components/Forms/Error/FormError";
+import { useEffect } from "react";
 
 const schema = yup.object().shape({
 	first_name: yup.string().max(32).required("First name is required"),
@@ -30,6 +31,14 @@ const PersonalDetails = () => {
 		mode: "onTouched",
 		resolver: yupResolver(schema),
 	});
+
+	useEffect(() => {
+		reset({
+			first_name: user!.first_name,
+			last_name: user!.last_name,
+			location: user!.location,
+		});
+	}, [reset]);
 
 	const onSubmitHandler = (data: {
 		first_name: string;
