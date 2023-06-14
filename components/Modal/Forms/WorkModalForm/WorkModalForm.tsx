@@ -1,6 +1,6 @@
 import globalStyles from "@/styles/globalStyles.module.scss";
 import Modal from "../../Modal/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import Button from "@/components/Button/Button";
 import {
@@ -43,6 +43,7 @@ const WorkModalForm = ({ closeModal, item }: ModalFormProps) => {
 		formState: { errors },
 		control,
 		watch,
+		reset,
 	} = useForm({
 		mode: "onTouched",
 		resolver: yupResolver(schema),
@@ -86,11 +87,23 @@ const WorkModalForm = ({ closeModal, item }: ModalFormProps) => {
 				...user!,
 				work_experiences: [...user!.work_experiences, newExperience],
 			};
-
-			setUser(updatedUser);
-			closeModal();
 		}
+		setUser(updatedUser);
+		closeModal();
 	};
+
+	useEffect(() => {
+		if (item) {
+			reset({
+				job_title: item.job_title,
+				company: item.company,
+				location: item.location,
+				start_date: parseISO(item.start_date),
+				end_date: item.end_date ? parseISO(item.end_date) : undefined,
+				description: item.description,
+			});
+		}
+	}, [reset]);
 
 	const handleDelete = async () => {
 		deleteExperience(item!.id);
@@ -149,8 +162,15 @@ const WorkModalForm = ({ closeModal, item }: ModalFormProps) => {
 					<FormError message={errors.description?.message} />
 				</div>
 			</div>
-			<div className={globalStyles.modalFooter}>
-				{item && <Button text="Delete" color="red" onClick={handleDelete} />}
+			<div className={`${globalStyles.modalFooter}`}>
+				{item && (
+					<Button
+						submit={false}
+						text="Delete"
+						color="red"
+						onClick={handleDelete}
+					/>
+				)}
 				<div className={globalStyles.modalFooterRight}>
 					<Button text="Save" />
 				</div>

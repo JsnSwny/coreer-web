@@ -154,7 +154,12 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 					/>
 					<FormError message={errors.title?.message} />
 				</div>
-				<DateRangeInput control={control} errors={errors} watch={watch} />
+				<DateRangeInput
+					control={control}
+					errors={errors}
+					watch={watch}
+					startDateRequired={false}
+				/>
 				<div className={globalStyles.formGroup}>
 					<label className={globalStyles.label}>Description</label>
 					<textarea
@@ -183,7 +188,14 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 				</div>
 			</div>
 			<div className={globalStyles.modalFooter}>
-				{item && <Button text="Delete" color="red" onClick={handleDelete} />}
+				{item && (
+					<Button
+						submit={false}
+						text="Delete"
+						color="red"
+						onClick={handleDelete}
+					/>
+				)}
 				<div className={globalStyles.modalFooterRight}>
 					<Button text="Save" />
 				</div>

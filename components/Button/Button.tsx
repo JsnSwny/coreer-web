@@ -18,6 +18,7 @@ interface ButtonProps {
 	onMouseLeave?: () => void;
 	color?: string;
 	disabled?: boolean;
+	submit?: boolean;
 }
 
 const Button = ({
@@ -32,6 +33,7 @@ const Button = ({
 	onMouseLeave,
 	color = "primary",
 	disabled = false,
+	submit = true,
 }: ButtonProps) => {
 	return (
 		<button
@@ -43,6 +45,7 @@ const Button = ({
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			disabled={disabled}
+			type={submit ? "submit" : "button"}
 		>
 			{link ? (
 				<Link

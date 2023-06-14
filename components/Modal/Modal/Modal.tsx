@@ -7,41 +7,44 @@ import Button from "@/components/Button/Button";
 import { useAuth } from "@/contexts/AuthContext";
 
 type ModalProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  title: string;
-  children: React.ReactNode;
-  description?: string;
+	isOpen: boolean;
+	onClose: () => void;
+	title: string;
+	children: React.ReactNode;
+	description?: string;
 };
 
 const Modal: React.FC<ModalProps> = ({
-  isOpen,
-  onClose,
-  title,
-  description,
-  children,
+	isOpen,
+	onClose,
+	title,
+	description,
+	children,
 }) => {
-  if (!isOpen) {
-    return null;
-  }
+	if (!isOpen) {
+		return null;
+	}
 
-  return (
-    <div className={styles.modal} onClick={onClose}>
-      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.modalHeader}>
-          <div>
-            <h2>{title}</h2>
-            {description && <p>{description}</p>}
-          </div>
+	return (
+		<div className={styles.modal} onMouseDown={onClose}>
+			<div
+				className={styles.modalContent}
+				onMouseDown={(e) => e.stopPropagation()}
+			>
+				<div className={styles.modalHeader}>
+					<div>
+						<h2>{title}</h2>
+						{description && <p>{description}</p>}
+					</div>
 
-          <button className={styles.closeButton} onClick={onClose}>
-            <FontAwesomeIcon icon={faXmark} />
-          </button>
-        </div>
-        {children}
-      </div>
-    </div>
-  );
+					<button className={styles.closeButton} onClick={onClose}>
+						<FontAwesomeIcon icon={faXmark} />
+					</button>
+				</div>
+				{children}
+			</div>
+		</div>
+	);
 };
 
 export default Modal;

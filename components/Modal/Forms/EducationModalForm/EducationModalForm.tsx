@@ -175,7 +175,14 @@ const EducationModalForm = ({ closeModal, item }: ModalFormProps) => {
 				</div>
 			</div>
 			<div className={globalStyles.modalFooter}>
-				{item && <Button text="Delete" color="red" onClick={handleDelete} />}
+				{item && (
+					<Button
+						submit={false}
+						text="Delete"
+						color="red"
+						onClick={handleDelete}
+					/>
+				)}
 				<div className={globalStyles.modalFooterRight}>
 					<Button text="Save" />
 				</div>

@@ -8,16 +8,26 @@ interface DateRangeInput {
 	control: any;
 	errors: any;
 	watch: any;
+	startDateRequired?: boolean;
+	endDateRequired?: boolean;
 }
 
-const DateRangeInput = ({ control, errors, watch }: DateRangeInput) => {
+const DateRangeInput = ({
+	control,
+	errors,
+	watch,
+	startDateRequired = true,
+	endDateRequired = false,
+}: DateRangeInput) => {
 	const watchStartDate = watch("start_date");
 	const watchEndDate = watch("end_date");
 
 	return (
 		<div className={`${globalStyles.formGroup} ${globalStyles.formTwoColumn}`}>
 			<div style={{ flex: 1 }}>
-				<label className={globalStyles.label}>Start Date*</label>
+				<label className={globalStyles.label}>
+					Start Date{startDateRequired ? "*" : ""}
+				</label>
 				<Controller
 					control={control}
 					name="start_date"
