@@ -42,8 +42,6 @@ const WorkModalForm = ({ closeModal, item }: ModalFormProps) => {
 		handleSubmit,
 		formState: { errors },
 		control,
-		reset,
-		getValues,
 		watch,
 	} = useForm({
 		mode: "onTouched",
