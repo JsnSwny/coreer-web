@@ -4,10 +4,7 @@ import styles from "./AboutYou.module.scss";
 import { useRouter } from "next/router";
 import Actions from "../Actions/Actions";
 import { useAuth } from "@/contexts/AuthContext";
-import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput";
 import Select from "react-select";
-import axios from "axios";
-import { server } from "@/config";
 import { useEffect } from "react";
 import { Question } from "@/interfaces/question.model";
 import { CareerLevel } from "@/interfaces/profile.model";
@@ -15,7 +12,6 @@ import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from "@/components/Forms/Error/FormError";
-import { valueContainerCSS } from "react-select/dist/declarations/src/components/containers";
 
 const schema = yup.object().shape({
 	current_level: yup.string().required("Current level is required"),
