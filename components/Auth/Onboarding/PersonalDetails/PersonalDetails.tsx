@@ -6,13 +6,14 @@ import Actions from "../Actions/Actions";
 import { useAuth } from "@/contexts/AuthContext";
 import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput";
 import * as yup from "yup";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from "@/components/Forms/Error/FormError";
 
 const schema = yup.object().shape({
 	first_name: yup.string().max(32).required("First name is required"),
 	last_name: yup.string().max(32).required("Last name is required"),
+	location: yup.string().required("Location is required"),
 });
 
 const PersonalDetails = () => {
@@ -23,17 +24,22 @@ const PersonalDetails = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
+		control,
 		reset,
 	} = useForm({
 		mode: "onTouched",
 		resolver: yupResolver(schema),
 	});
 
-	const onSubmitHandler = (data: { first_name: string; last_name: string }) => {
+	const onSubmitHandler = (data: {
+		first_name: string;
+		last_name: string;
+		location: string;
+	}) => {
 		updateUser({
 			first_name: data.first_name,
 			last_name: data.last_name,
-			location: location,
+			location: data.location,
 		});
 		router.push("/onboarding/about-you");
 	};
@@ -73,8 +79,15 @@ const PersonalDetails = () => {
 				<label htmlFor="location" className={globalStyles.label}>
 					Location
 				</label>
-				<LocationSearchInput location={location} setLocation={setLocation} />
-				{/* <FormError message={errors.location?.message} /> */}
+				<Controller
+					control={control}
+					name="location"
+					render={({ field }) => (
+						<LocationSearchInput control={control} errors={errors} />
+					)}
+				></Controller>
+
+				<FormError message={errors.location?.message} />
 			</div>
 
 			<Actions />
