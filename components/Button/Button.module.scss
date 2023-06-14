@@ -1,63 +1,67 @@
 @import "@/styles/_variables.scss";
 
 .btn {
-  background: $primary;
-  border: 1px solid $primary;
-  border-radius: 10px;
-  color: white;
-  font: inherit;
-  font-weight: bold;
-  font-size: 14px;
-  transition: 0.2s ease background, 0.2s ease color;
-  cursor: pointer;
-  &:hover {
-    background: darken($primary, 10%);
-  }
-  &[data-variant="pill"] {
-    padding: 0.75rem 1.5rem;
-    border-radius: 30px;
-  }
-  height: 46px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  svg {
-    height: 20px;
-  }
-  &.red {
-    background: #d2302c;
-    border: 1px solid #d2302c;
-    &:hover {
-      background: darken(#d2302c, 10%);
-    }
-  }
-  &.large {
-    width: 100%;
-    font-size: 16px;
-  }
-  &.alt {
-    color: $primary;
-    background: white;
-    // border: 1px solid $primary;
-    &:hover {
-      background: $primary;
-      // border: 1px solid $primary;
-      color: white;
-    }
-  }
+	background: $primary;
+	border: 1px solid $primary;
+	border-radius: 10px;
+	color: white;
+	font: inherit;
+	font-weight: bold;
+	font-size: 14px;
+	transition: 0.2s ease background, 0.2s ease color;
+	cursor: pointer;
+	&:hover {
+		background: darken($primary, 10%);
+	}
+	&[data-variant="pill"] {
+		padding: 0.75rem 1.5rem;
+		border-radius: 30px;
+	}
+	height: 46px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	svg {
+		height: 20px;
+	}
+	&.red {
+		background: #d2302c;
+		border: 1px solid #d2302c;
+		&:hover {
+			background: darken(#d2302c, 10%);
+		}
+	}
+	&.large {
+		width: 100%;
+		font-size: 16px;
+	}
+	&.alt {
+		color: $primary;
+		background: white;
+		// border: 1px solid $primary;
+		&:hover {
+			background: $primary;
+			// border: 1px solid $primary;
+			color: white;
+		}
+	}
+	&:disabled {
+		opacity: 0.3;
+		cursor: default;
+	}
 }
 
 .link {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  height: 100%;
-  &.small {
-    padding: 0 1.5rem;
-  }
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	height: 100%;
+	&.small {
+		padding: 0 1.5rem;
+	}
 }
 
 .noLink {
-  padding: 0 1.5rem;
+	padding: 0 1.5rem;
 }
