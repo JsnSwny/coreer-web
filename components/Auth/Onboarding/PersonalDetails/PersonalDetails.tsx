@@ -5,68 +5,81 @@ import { useRouter } from "next/router";
 import Actions from "../Actions/Actions";
 import { useAuth } from "@/contexts/AuthContext";
 import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput";
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import FormError from "@/components/Forms/Error/FormError";
+
+const schema = yup.object().shape({
+	first_name: yup.string().max(32).required("First name is required"),
+	last_name: yup.string().max(32).required("Last name is required"),
+});
 
 const PersonalDetails = () => {
-  const router = useRouter();
-  const { user, updateUser } = useAuth();
+	const router = useRouter();
+	const { user, updateUser } = useAuth();
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    updateUser({
-      first_name: firstName,
-      last_name: lastName,
-      location,
-    });
-    router.push("/onboarding/about-you");
-  };
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		reset,
+	} = useForm({
+		mode: "onTouched",
+		resolver: yupResolver(schema),
+	});
 
-  const [firstName, setFirstName] = useState(user?.first_name ? user?.first_name : "");
-  const [lastName, setLastName] = useState(user?.last_name ? user?.last_name : "");
-  const [location, setLocation] = useState("");
+	const onSubmitHandler = (data: { first_name: string; last_name: string }) => {
+		updateUser({
+			first_name: data.first_name,
+			last_name: data.last_name,
+			location: location,
+		});
+		router.push("/onboarding/about-you");
+	};
 
-  return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      <div className={globalStyles.formGroup}>
-        <div className={styles.inputWrapper}>
-          <div style={{ flex: 1 }}>
-            <label htmlFor="first_name" className={globalStyles.label}>
-              First name
-            </label>
-            <input
-              type="text"
-              name="first_name"
-              value={firstName}
-              autoFocus
-              onChange={(e) => setFirstName(e.target.value)}
-              required
-              className={globalStyles.input}
-            />
-          </div>
-          <div style={{ flex: 1 }}>
-            <label htmlFor="last_name" className={globalStyles.label}>
-              Last name
-            </label>
-            <input
-              type="text"
-              name="last_name"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              required
-              className={globalStyles.input}
-            />
-          </div>
-        </div>
-      </div>
-      <div className={globalStyles.formGroup}>
-        <label htmlFor="location" className={globalStyles.label}>
-          Location
-        </label>
-        <LocationSearchInput location={location} setLocation={setLocation} />
-      </div>
+	const [location, setLocation] = useState("");
 
-      <Actions />
-    </form>
-  );
+	return (
+		<form onSubmit={handleSubmit(onSubmitHandler)} className={styles.form}>
+			<div className={globalStyles.formGroup}>
+				<div className={styles.inputWrapper}>
+					<div style={{ flex: 1 }}>
+						<label htmlFor="first_name" className={globalStyles.label}>
+							First name
+						</label>
+						<input
+							type="text"
+							{...register("first_name")}
+							autoFocus
+							className={globalStyles.input}
+						/>
+						<FormError message={errors.first_name?.message} />
+					</div>
+					<div style={{ flex: 1 }}>
+						<label htmlFor="last_name" className={globalStyles.label}>
+							Last name
+						</label>
+						<input
+							type="text"
+							{...register("last_name")}
+							className={globalStyles.input}
+						/>
+						<FormError message={errors.last_name?.message} />
+					</div>
+				</div>
+			</div>
+			<div className={globalStyles.formGroup}>
+				<label htmlFor="location" className={globalStyles.label}>
+					Location
+				</label>
+				<LocationSearchInput location={location} setLocation={setLocation} />
+				{/* <FormError message={errors.location?.message} /> */}
+			</div>
+
+			<Actions />
+		</form>
+	);
 };
 
 export default PersonalDetails;
