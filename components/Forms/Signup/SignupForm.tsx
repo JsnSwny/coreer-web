@@ -7,14 +7,42 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import globalStyles from "@/styles/globalStyles.module.scss";
 import Button from "@/components/Button/Button";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import FormError from "../Error/FormError";
+
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().min(8).max(32).required(),
+  passwordConfirm: yup
+    .string()
+    .required("Confirm Password is required")
+    .min(8, "Password length should be at least 8 characters")
+    .max(32, "Password cannot exceed more than 32 characters")
+    .oneOf([yup.ref("password")], "Passwords do not match"),
+});
 
 const SignupForm = () => {
   const { signUp } = useAuth();
-  const router = useRouter();
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setError,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmitHandler = async (data: {
+    email: string;
+    password: string;
+    passwordConfirm: string;
+  }) => {
     await signUp(email, password, passwordConfirm);
+    reset();
   };
 
   const [email, setEmail] = useState("");
@@ -23,52 +51,54 @@ const SignupForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <label
-          htmlFor="email"
-          className={`${globalStyles.label} ${styles.label}`}
-        >
-          Email
+      <form onSubmit={handleSubmit(onSubmitHandler)} className={styles.form}>
+        <div className={globalStyles.formGroup}>
+          <label
+            htmlFor="email"
+            className={`${globalStyles.label} ${styles.label}`}
+          >
+            Email
+          </label>
           <input
+            {...register("email")}
             type="email"
             name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
             className={`${globalStyles.input} ${styles.input}`}
           />
-        </label>
+          <FormError message={errors.email?.message} />
+        </div>
 
-        <label
-          htmlFor="password"
-          className={`${globalStyles.label} ${styles.label}`}
-        >
-          Password
+        <div className={globalStyles.formGroup}>
+          <label
+            htmlFor="password"
+            className={`${globalStyles.label} ${styles.label}`}
+          >
+            Password
+          </label>
           <input
+            {...register("password")}
             type="password"
             name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
             className={`${globalStyles.input} ${styles.input}`}
           />
-        </label>
+          <FormError message={errors.password?.message} />
+        </div>
 
-        <label
-          htmlFor="password"
-          className={`${globalStyles.label} ${styles.label}`}
-        >
-          Confirm Password
+        <div className={globalStyles.formGroup}>
+          <label
+            htmlFor="password"
+            className={`${globalStyles.label} ${styles.label}`}
+          >
+            Confirm Password
+          </label>
           <input
+            {...register("passwordConfirm")}
             type="password"
             name="password"
-            value={passwordConfirm}
-            onChange={(e) => setPasswordConfirm(e.target.value)}
-            required
             className={`${globalStyles.input} ${styles.input}`}
           />
-        </label>
-
+          <FormError message={errors.passwordConfirm?.message} />
+        </div>
         <Button text="Sign up" size="large" />
       </form>
       <p className={styles.altLink}>

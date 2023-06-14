@@ -1,5 +1,5 @@
 import styles from "./LoginForm.module.scss";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { server } from "@/config";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -9,52 +9,72 @@ import Button from "@/components/Button/Button";
 import Link from "next/link";
 import LoadingOverlay from "@/components/Layout/LoadingOverlay/LoadingOverlay";
 import GithubAuth from "./GithubAuth/GithubAuth";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import FormError from "../Error/FormError";
+
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().min(8).max(32).required(),
+});
 
 const LoginForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    setError,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
   const { signIn } = useAuth();
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    await signIn(email, password);
-
-    // router.push("/");
+  const onSubmitHandler = async (data: { email: string; password: string }) => {
+    const result = await signIn(data.email, data.password);
+    reset();
   };
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   return (
     <>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <label
-          htmlFor="email"
-          className={`${globalStyles.label} ${styles.label}`}
-        >
-          Email
+      <form onSubmit={handleSubmit(onSubmitHandler)} className={styles.form}>
+        <div className={globalStyles.formGroup}>
+          <label
+            htmlFor="email"
+            className={`${globalStyles.label} ${styles.label}`}
+          >
+            Email
+          </label>
           <input
+            {...register("email")}
             autoFocus
             type="email"
             name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
             className={`${globalStyles.input} ${styles.input}`}
           />
-        </label>
-        <label
-          htmlFor="password"
-          className={`${globalStyles.label} ${styles.label}`}
-        >
-          Password
+          <FormError message={errors.email?.message} />
+        </div>
+
+        <div className={globalStyles.formGroup}>
+          <label
+            htmlFor="password"
+            className={`${globalStyles.label} ${styles.label}`}
+          >
+            Password
+          </label>
+
           <input
+            {...register("password")}
             type="password"
             name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             required
             className={`${globalStyles.input} ${styles.input}`}
           />
-        </label>
+          <FormError message={errors.password?.message} />
+        </div>
+        <FormError message={errors.root?.message} margin />
         <Button text="Login" size="large" />
         <GithubAuth />
       </form>

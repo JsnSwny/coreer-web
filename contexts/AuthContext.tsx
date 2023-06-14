@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useCallback,
 } from "react";
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { Profile } from "@/interfaces/profile.model";
 import { server } from "@/config";
 import cookie from "cookie";
@@ -85,7 +85,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     setLoading(false);
   };
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = async (
+    email: string,
+    password: string
+  ): Promise<AxiosResponse<any, any> | undefined> => {
     try {
       const response = await axios.post(`${server}/api/auth/login/`, {
         email,
@@ -99,11 +102,15 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       } else {
         setUser(null);
         setLoading(false);
+        console.log(response);
+        console.log("Returning response");
       }
+      return response;
     } catch (error) {
-      // Handle any network errors
+      const axiosError = error as AxiosError;
       setUser(null);
       setLoading(false);
+      return axiosError.response;
     }
   };
 
@@ -126,6 +133,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         });
     } catch (error: any) {
       console.error(error.response);
+      return error.response.data;
     } finally {
       setLoading(false);
     }

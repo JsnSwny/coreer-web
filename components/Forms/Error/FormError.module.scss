@@ -1,0 +1,18 @@
+.error {
+  color: rgb(221, 28, 28);
+  background: rgba(rgb(221, 28, 28), 0.1);
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border-radius: 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  svg {
+    margin-right: 0.5rem;
+    height: 16px;
+  }
+}
+
+.margin {
+  margin: 1rem 0;
+}
