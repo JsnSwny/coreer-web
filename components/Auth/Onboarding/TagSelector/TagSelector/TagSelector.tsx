@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./TagSelector.module.scss";
 
 interface Option {
