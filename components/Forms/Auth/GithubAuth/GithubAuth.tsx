@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaGithub } from "react-icons/fa";
 import styles from "./GithubAuth.module.scss";
 import { useAuth } from "@/contexts/AuthContext";
@@ -13,11 +12,11 @@ const GithubAuth = () => {
   const router = useRouter();
   const [loadingAuth, setLoadingAuth] = useState(false);
 
-  const convertUrlToFile = async (imageUrl) => {
+  const convertUrlToFile = async (imageUrl: string) => {
     try {
       const response = await fetch(imageUrl);
-      const contentType = response.headers.get("Content-Type");
-      const extension = contentType.split("/")[1];
+      const contentType = response.headers.get("Content-Type") ?? 'image/jpeg'; // default to jpg if not found, unlikely
+      const extension = contentType?.split("/")[1];
 
       const blob = await response.blob();
 
