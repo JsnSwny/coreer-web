@@ -1,18 +1,12 @@
 import Head from "next/head";
 import MessagesSidebar from "@/components/Messages/MessagesSidebar/MessagesSidebar";
 import { server } from "@/config";
-import cookie from "cookie";
 import axios from "axios";
-import { Conversation } from "@/interfaces/conversation.model";
-import React, { useState, useCallback, useEffect } from "react";
-import useWebSocket, { ReadyState } from "react-use-websocket";
+import React, { useState, useEffect } from "react";
 import withAuth from "@/components/Route/withAuth";
 import MessagesContainer from "@/components/Messages/MessagesContainer/MessagesContainer";
-import SendMessage from "@/components/Messages/Chat/SendMessage/SendMessage";
 import { useAuth } from "@/contexts/AuthContext";
-import { Message } from "@/interfaces/message.model";
 import ChatContainer from "@/components/Messages/Chat/ChatContainer/ChatContainer";
-import MessagesDetailsContainer from "@/components/Messages/MessagesDetails/MessagesDetailsContainer/MessagesDetailsContainer";
 
 const Messages = () => {
   const [conversationsList, setConversationsList] = useState([]);
