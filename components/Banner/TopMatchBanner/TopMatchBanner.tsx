@@ -30,14 +30,14 @@ const TopMatchBanner = ({ profile }: TopMatchBannerProps) => {
           <p>{profile.bio}</p>
         </div>
         <div className={styles.buttonWrapper}>
-          <button className={styles.button}>
+          {user && <button className={styles.button}>
             <Link
               className={styles.buttonLink}
               href={`/messages/${chatHrefConstructor(user, profile)}`}
             >
               Message {profile.first_name}
             </Link>
-          </button>
+          </button>}
           <button className={`${styles.button} ${styles.buttonAlt}`}>
             <Link className={styles.buttonLink} href={`/${profile.username}`}>
               View Profile

@@ -91,7 +91,7 @@ const ProfileBanner = ({ profile, openModal }: ProfileBannerProps) => {
         <p className={styles.location}>{profile.location}</p>
         <p className={styles.bio}>{profile.bio}</p>
         {/* <ResponseBanner /> */}
-        {profile.id != user!.id && (
+        {user && profile.id != user.id && (
           <div className={styles.buttons}>
             <Button
               text="Message"
