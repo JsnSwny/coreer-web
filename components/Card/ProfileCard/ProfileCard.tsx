@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 import React from "react";
 import styles from "./ProfileCard.module.scss";
 import { Profile } from "@/interfaces/profile.model";
