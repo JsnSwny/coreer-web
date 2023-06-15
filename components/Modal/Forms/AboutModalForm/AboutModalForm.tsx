@@ -1,14 +1,7 @@
 import globalStyles from "@/styles/globalStyles.module.scss";
-import Modal from "../../Modal/Modal";
 import { ChangeEvent, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import Button from "@/components/Button/Button";
-import PlacesAutocomplete from "react-places-autocomplete";
-import {
-  geocodeByAddress,
-  geocodeByPlaceId,
-  getLatLng,
-} from "react-places-autocomplete";
 import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput";
 
 interface ModalFormProps {
@@ -45,6 +38,7 @@ const AboutModalForm = ({ closeModal }: ModalFormProps) => {
         </div>
         <div className={globalStyles.formGroup}>
           <label className={globalStyles.label}>Location</label>
+          {/* TODO(sean): Why is this different to other uses of <LocationSearchInput that have control?? */}
           <LocationSearchInput location={location} setLocation={setLocation} />
         </div>
       </div>
