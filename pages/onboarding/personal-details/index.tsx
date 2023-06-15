@@ -9,20 +9,17 @@ import PersonalDetails from "@/components/Auth/Onboarding/PersonalDetails/Person
 import { useAuth } from "@/contexts/AuthContext";
 
 const PersonalDetailsPage = () => {
-  const { user } = useAuth();
-  return (
-    <>
-      <Head>
-        <title>Onboarding | Personal Details</title>
-      </Head>
-      <OnboardingWrapper
-        title={"Personal Details"}
-        description={"fasfasf asas asd"}
-      >
-        <PersonalDetails />
-      </OnboardingWrapper>
-    </>
-  );
+	const { user } = useAuth();
+	return (
+		<>
+			<Head>
+				<title>Onboarding | Personal Details</title>
+			</Head>
+			<OnboardingWrapper title={"Personal Details"}>
+				<PersonalDetails />
+			</OnboardingWrapper>
+		</>
+	);
 };
 
 export default PersonalDetailsPage;

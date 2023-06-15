@@ -19,12 +19,10 @@ const Interests = ({ options, defaultOptions }: InterestsProps) => {
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
-		if (selectedOptions.length > 5) {
-			await updateUser({
-				interests_id: selectedOptions.map((item) => item.id),
-			});
-			router.push("/onboarding/languages");
-		}
+		await updateUser({
+			interests_id: selectedOptions.map((item) => item.id),
+		});
+		router.push("/onboarding/languages");
 	};
 
 	return (
@@ -67,8 +65,8 @@ const Interests = ({ options, defaultOptions }: InterestsProps) => {
 			</div>
 
 			<Actions
-				actionText={`Next Step (${selectedOptions.length}/6)`}
-				disabled={selectedOptions.length < 6}
+				actionText={`Next Step (${selectedOptions.length} of 6)`}
+				// disabled={selectedOptions.length < 6}
 			/>
 		</form>
 	);

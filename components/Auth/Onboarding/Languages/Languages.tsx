@@ -21,13 +21,11 @@ const Languages = ({ options, defaultOptions, updateKey }: LanguagesProps) => {
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
-		if (selectedOptions.length > 1) {
-			await updateUser({
-				[updateKey]: selectedOptions.map((item) => item.id),
-				onboarded: true,
-			});
-			router.push("/");
-		}
+		await updateUser({
+			[updateKey]: selectedOptions.map((item) => item.id),
+			onboarded: true,
+		});
+		router.push("/");
 	};
 
 	return (
@@ -86,8 +84,8 @@ const Languages = ({ options, defaultOptions, updateKey }: LanguagesProps) => {
 					</TagSelectorList>
 				</div>
 				<Actions
-					actionText={`Get Started (${selectedOptions.length}/2)`}
-					disabled={selectedOptions.length < 2}
+					actionText={`Get Started`}
+					// disabled={selectedOptions.length < 2}
 				/>
 			</form>
 		</>

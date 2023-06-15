@@ -12,47 +12,52 @@ import axios from "axios";
 import { server } from "@/config";
 
 const AboutYouPage = ({ questions, careerLevels }) => {
-  const { user } = useAuth();
-  return (
-    <>
-      <Head>
-        <title>Onboarding | About you</title>
-      </Head>
-      <OnboardingWrapper title={"About You"} description={"fasfasf asas asd"}>
-        <AboutYou questions={questions} careerLevels={careerLevels} />
-      </OnboardingWrapper>
-    </>
-  );
+	const { user } = useAuth();
+	return (
+		<>
+			<Head>
+				<title>Onboarding | About you</title>
+			</Head>
+			<OnboardingWrapper
+				title={"About You"}
+				description={
+					"Where are you in your career and who do you want to find on Coreer?"
+				}
+			>
+				<AboutYou questions={questions} careerLevels={careerLevels} />
+			</OnboardingWrapper>
+		</>
+	);
 };
 
 export const getServerSideProps = async (context: any) => {
-  let questions: any = [];
-  let careerLevels: any = [];
-  await axios
-    .get(`${server}/api/questions/`)
-    .then((res) => {
-      questions = res.data;
-    })
-    .catch((err) => {
-      console.log("error");
-      console.log(err.response);
-    });
+	let questions: any = [];
+	let careerLevels: any = [];
+	await axios
+		.get(`${server}/api/questions/`)
+		.then((res) => {
+			questions = res.data;
+		})
+		.catch((err) => {
+			console.log("error");
+			console.log(err.response);
+		});
 
-  await axios
-    .get(`${server}/api/career-levels/`)
-    .then((res) => {
-      careerLevels = res.data;
-    })
-    .catch((err) => {
-      console.log("error");
-      console.log(err.response);
-    });
-  return {
-    props: {
-      questions,
-      careerLevels,
-    },
-  };
+	await axios
+		.get(`${server}/api/career-levels/`)
+		.then((res) => {
+			careerLevels = res.data;
+		})
+		.catch((err) => {
+			console.log("error");
+			console.log(err.response);
+		});
+	return {
+		props: {
+			questions,
+			careerLevels,
+		},
+	};
 };
 
 export default AboutYouPage;
