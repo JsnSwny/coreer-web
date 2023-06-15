@@ -1,17 +1,19 @@
-import LoginForm from "@/components/Forms/Auth/LoginForm";
 import Head from "next/head";
-import Auth from "@/components/Auth/Auth";
-import AuthWrapper from "@/components/Auth/AuthWrapper";
-import AuthBanner from "@/components/Auth/AuthBanner";
-import withGuest from "@/components/Route/withGuest";
 import OnboardingWrapper from "@/components/Auth/Onboarding/OnboardingWrapper/OnboardingWrapper";
-import PersonalDetails from "@/components/Auth/Onboarding/PersonalDetails/PersonalDetails";
 import { useAuth } from "@/contexts/AuthContext";
 import AboutYou from "@/components/Auth/Onboarding/AboutYou/AboutYou";
 import axios from "axios";
 import { server } from "@/config";
+import { FC } from "react"
+import { CareerLevel } from "../../../interfaces/profile.model"
+import { Question } from "../../../interfaces/question.model"
 
-const AboutYouPage = ({ questions, careerLevels }) => {
+type Props = {
+	questions: Question[];
+	careerLevels: CareerLevel[];
+}
+
+const AboutYouPage: FC<Props> = ({ questions, careerLevels }) => {
 	const { user } = useAuth();
 	return (
 		<>
@@ -31,27 +33,19 @@ const AboutYouPage = ({ questions, careerLevels }) => {
 };
 
 export const getServerSideProps = async (context: any) => {
-	let questions: any = [];
-	let careerLevels: any = [];
-	await axios
-		.get(`${server}/api/questions/`)
-		.then((res) => {
-			questions = res.data;
-		})
-		.catch((err) => {
-			console.log("error");
-			console.log(err.response);
-		});
+	let questions: Question[] = []; // TODO(sean): I don't think questions is used anywhere?
+	let careerLevels: CareerLevel[] = [];
 
-	await axios
-		.get(`${server}/api/career-levels/`)
-		.then((res) => {
-			careerLevels = res.data;
-		})
-		.catch((err) => {
-			console.log("error");
-			console.log(err.response);
-		});
+	try {
+		const questionsPromise = axios.get<Question[]>(`${server}/api/questions/`);
+		const careerLevelsPromise = axios.get<CareerLevel[]>(`${server}/api/career-levels/`);
+
+		questions = (await questionsPromise).data;
+		careerLevels = (await careerLevelsPromise).data;
+	} catch (err: any) {
+		console.log(err.response);
+		// TODO(sean): Maybe want to respond with an error here, this will default to just rendering with empty questions / career levels
+	}
 	return {
 		props: {
 			questions,
