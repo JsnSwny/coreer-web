@@ -3,7 +3,8 @@
   "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
   "plugins": ["jest", "@typescript-eslint"],
   "rules": {
-    "react-hooks/exhaustive-deps": 0
+    "react-hooks/exhaustive-deps": 0,
+    "@next/next/no-img-element": 0
   },
   "env": {
     "jest/globals": true

@@ -6,8 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "lint:file": "eslint --ext .js,.jsx,.ts,.tsx",
+    "lint": "npm run lint:file .",
+    "lint:fix": "npm run lint --fix"
   },
   "dependencies": {
     "@babel/helper-module-imports": "^7.18.6",
