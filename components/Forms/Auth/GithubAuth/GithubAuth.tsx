@@ -16,7 +16,7 @@ const GithubAuth = () => {
     try {
       const response = await fetch(imageUrl);
       const contentType = response.headers.get("Content-Type") ?? 'image/jpeg'; // default to jpg if not found, unlikely
-      const extension = contentType?.split("/")[1];
+      const extension = contentType.split("/")[1];
 
       const blob = await response.blob();
 
