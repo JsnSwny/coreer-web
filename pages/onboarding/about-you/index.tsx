@@ -5,6 +5,7 @@ import AboutYou from "@/components/Auth/Onboarding/AboutYou/AboutYou";
 import axios from "axios";
 import { server } from "@/config";
 import { FC } from "react"
+import { GetServerSideProps, NextPage } from "next"
 import { CareerLevel } from "../../../interfaces/profile.model"
 import { Question } from "../../../interfaces/question.model"
 
@@ -13,8 +14,7 @@ type Props = {
 	careerLevels: CareerLevel[];
 }
 
-const AboutYouPage: FC<Props> = ({ questions, careerLevels }) => {
-	const { user } = useAuth();
+const AboutYouPage: NextPage<Props> = ({ questions, careerLevels }) => {
 	return (
 		<>
 			<Head>
@@ -32,8 +32,8 @@ const AboutYouPage: FC<Props> = ({ questions, careerLevels }) => {
 	);
 };
 
-export const getServerSideProps = async (context: any) => {
-	let questions: Question[] = []; // TODO(sean): I don't think questions is used anywhere?
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
+	let questions: Question[] = [];
 	let careerLevels: CareerLevel[] = [];
 
 	try {
