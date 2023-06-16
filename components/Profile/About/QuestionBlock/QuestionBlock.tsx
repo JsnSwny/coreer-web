@@ -1,10 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./QuestionBlock.module.scss";
-import { FaQuestion } from "react-icons/fa";
 import { faPencil, faQuestion } from "@fortawesome/free-solid-svg-icons";
 import { UserAnswer } from "@/interfaces/question.model";
 import Modal from "@/components/Modal/Modal/Modal";
-import AboutModalForm from "@/components/Modal/Forms/AboutModalForm/AboutModalForm";
 import { useState } from "react";
 import QuestionModalForm from "@/components/Modal/Forms/QuestionModalForm/QuestionModalForm";
 interface QuestionBlockProps {
