@@ -1,12 +1,12 @@
-import Head from "next/head";
-import MessagesSidebar from "@/components/Messages/MessagesSidebar/MessagesSidebar";
-import { server } from "@/config";
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import withAuth from "@/components/Route/withAuth";
-import MessagesContainer from "@/components/Messages/MessagesContainer/MessagesContainer";
-import { useAuth } from "@/contexts/AuthContext";
 import ChatContainer from "@/components/Messages/Chat/ChatContainer/ChatContainer";
+import MessagesContainer from "@/components/Messages/MessagesContainer/MessagesContainer";
+import MessagesSidebar from "@/components/Messages/MessagesSidebar/MessagesSidebar";
+import withAuth from "@/components/Route/withAuth";
+import { server } from "@/config";
+import { useAuth } from "@/contexts/AuthContext";
+import axios from "axios";
+import Head from "next/head";
+import { useEffect, useState } from "react";
 
 const Messages = () => {
   const [conversationsList, setConversationsList] = useState([]);

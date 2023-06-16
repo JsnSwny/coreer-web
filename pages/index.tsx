@@ -1,21 +1,19 @@
-import Head from "next/head";
-import styles from "@/styles/Home.module.css";
-import Container from "@/components/Container/Container";
-import ProfileCardList from "@/components/Card/ProfileCardList/ProfileCardList";
-import ProfileCard from "@/components/Card/ProfileCard/ProfileCard";
-import { server } from "@/config";
-import { useRouter } from "next/router";
-import { Profile } from "@/interfaces/profile.model";
-import Section from "@/components/Layout/Section/Section";
-import { useAuth } from "@/contexts/AuthContext";
-import { useEffect, useState } from "react";
-import withAuth from "@/components/Route/withAuth";
-import axios from "axios";
-import SectionList from "@/components/Layout/SectionList/SectionList";
-import ExploreHeading from "@/components/Layout/ExploreHeading/ExploreHeading";
 import TopMatchBanner from "@/components/Banner/TopMatchBanner/TopMatchBanner";
 import TopMatchBannerPlaceholder from "@/components/Banner/TopMatchBanner/TopMatchBannerPlaceholder";
+import ProfileCard from "@/components/Card/ProfileCard/ProfileCard";
 import ProfileCardPlaceholder from "@/components/Card/ProfileCard/ProfileCardPlaceholder";
+import ProfileCardList from "@/components/Card/ProfileCardList/ProfileCardList";
+import Container from "@/components/Container/Container";
+import ExploreHeading from "@/components/Layout/ExploreHeading/ExploreHeading";
+import Section from "@/components/Layout/Section/Section";
+import SectionList from "@/components/Layout/SectionList/SectionList";
+import withAuth from "@/components/Route/withAuth";
+import { useAuth } from "@/contexts/AuthContext";
+import { Profile } from "@/interfaces/profile.model";
+import styles from "@/styles/Home.module.css";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const Home = () => {
   const { user, userToken } = useAuth();
@@ -81,7 +79,7 @@ const Home = () => {
                       <ProfileCardPlaceholder key={idx} />
                     ) : (
                       <ProfileCard profile={item} key={item.id} />
-                    )
+                    ),
                   )}
               </ProfileCardList>
             </Section>

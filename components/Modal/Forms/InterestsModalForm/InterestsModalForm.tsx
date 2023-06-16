@@ -1,13 +1,12 @@
-import globalStyles from "@/styles/globalStyles.module.scss";
-import { useState } from "react";
-import { useAuth } from "@/contexts/AuthContext";
+import TagSelector from "@/components/Auth/Onboarding/TagSelector/TagSelector/TagSelector";
+import TagSelectorList from "@/components/Auth/Onboarding/TagSelector/TagSelectorList/TagSelectorList";
 import Button from "@/components/Button/Button";
 import { server } from "@/config";
+import { useAuth } from "@/contexts/AuthContext";
+import globalStyles from "@/styles/globalStyles.module.scss";
 import axios from "axios";
-import TagSelector from "@/components/Auth/Onboarding/TagSelector/TagSelector/TagSelector";
-import { useEffect } from "react";
-import TagSelectorList from "@/components/Auth/Onboarding/TagSelector/TagSelectorList/TagSelectorList";
-import { Interest } from "../../../../interfaces/interest.model"
+import { useEffect, useState } from "react";
+import { Interest } from "../../../../interfaces/interest.model";
 
 interface ModalFormProps {
   closeModal: () => void;
@@ -17,9 +16,7 @@ const InterestsModalForm = ({ closeModal }: ModalFormProps) => {
   const { user, updateUser } = useAuth();
 
   const [options, setOptions] = useState<Interest[]>([]);
-  const [selectedOptions, setSelectedOptions] = useState(
-    user?.interests ?? []
-  );
+  const [selectedOptions, setSelectedOptions] = useState(user?.interests ?? []);
 
   useEffect(() => {
     axios

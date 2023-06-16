@@ -1,21 +1,9 @@
-import React, {
-  createContext,
-  useState,
-  useContext,
-  useEffect,
-  useCallback,
-} from "react";
-import axios, { AxiosError, AxiosResponse } from "axios";
-import { Profile } from "@/interfaces/profile.model";
 import { server } from "@/config";
-import cookie from "cookie";
-import {
-  WorkExperience,
-  WorkExperienceRequest,
-} from "@/interfaces/work_experiences.model";
-import { Project, ProjectRequest } from "@/interfaces/project.model";
-import { EducationRequest } from "@/interfaces/education.model";
+import { Profile } from "@/interfaces/profile.model";
 import { getUserConfig } from "@/utils/getUserConfig";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import cookie from "cookie";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface AuthContextType {
   user: Profile | null;
@@ -87,7 +75,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signIn = async (
     email: string,
-    password: string
+    password: string,
   ): Promise<AxiosResponse<any, any> | undefined> => {
     try {
       const response = await axios.post(`${server}/api/auth/login/`, {
@@ -114,11 +102,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  const signUp = async (
-    email: string,
-    password1: string,
-    password2: string
-  ) => {
+  const signUp = async (email: string, password1: string, password2: string) => {
     try {
       await axios
         .post(`${server}/api/auth/registration/`, {

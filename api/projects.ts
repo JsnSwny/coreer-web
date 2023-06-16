@@ -1,8 +1,6 @@
-import axios from "axios";
-import { useAuth } from "@/contexts/AuthContext";
-import { ProjectRequest } from "@/interfaces/project.model";
 import { server } from "@/config";
-import { Profile } from "@/interfaces/profile.model";
+import { ProjectRequest } from "@/interfaces/project.model";
+import axios from "axios";
 
 const convertDataToFormData = (data: ProjectRequest) => {
   const formData = new FormData();
@@ -14,7 +12,7 @@ const convertDataToFormData = (data: ProjectRequest) => {
   formData.append("user", data.user.toString());
   data.content && formData.append("content", data.content);
   return formData;
-}
+};
 
 export const addProject = async (data: ProjectRequest) => {
   try {
@@ -27,11 +25,7 @@ export const addProject = async (data: ProjectRequest) => {
     };
     const formData = convertDataToFormData(data);
 
-    const response = await axios.post(
-      `${server}/api/projects/`,
-      formData,
-      config
-    );
+    const response = await axios.post(`${server}/api/projects/`, formData, config);
     return response.data;
   } catch (error: any) {
     console.error(error.response);
@@ -52,11 +46,7 @@ export const updateProject = async (id: number, data: ProjectRequest) => {
 
     const formData = convertDataToFormData(data);
 
-    const response = await axios.put(
-      `${server}/api/projects/${id}/`,
-      formData,
-      config
-    );
+    const response = await axios.put(`${server}/api/projects/${id}/`, formData, config);
     return response.data;
   } catch (error: any) {
     console.error(error.response);
@@ -76,10 +66,7 @@ export const deleteProject = async (id: number) => {
       },
     };
 
-    const response = await axios.delete(
-      `${server}/api/projects/${id}/`,
-      config
-    );
+    const response = await axios.delete(`${server}/api/projects/${id}/`, config);
     return response.data;
   } catch (error: any) {
     console.error(error.response);

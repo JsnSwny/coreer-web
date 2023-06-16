@@ -14,10 +14,7 @@ const Nav = ({ section, setSection }: NavProps) => {
       >
         <h3>Projects</h3>
       </li>
-      <li
-        className={section == "About" ? styles.active : ""}
-        onClick={() => setSection("About")}
-      >
+      <li className={section == "About" ? styles.active : ""} onClick={() => setSection("About")}>
         <h3>About</h3>
       </li>
       {/* <li

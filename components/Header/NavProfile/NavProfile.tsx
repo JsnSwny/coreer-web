@@ -1,8 +1,7 @@
-import { useContext, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import styles from "./NavProfile.module.scss";
 import { useAuth } from "@/contexts/AuthContext";
+import Link from "next/link";
+import { useState } from "react";
+import styles from "./NavProfile.module.scss";
 
 export default function NavProfile() {
   const { user, signOut } = useAuth();

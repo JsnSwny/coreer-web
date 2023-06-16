@@ -8,17 +8,12 @@ interface ContainerProps {
   margin?: boolean;
 }
 
-const Container = ({
-  flex,
-  children,
-  size = "medium",
-  margin,
-}: ContainerProps) => {
+const Container = ({ flex, children, size = "medium", margin }: ContainerProps) => {
   return (
     <div
-      className={`${styles.container} ${flex ? styles.flex : ""} ${
-        styles[size]
-      } ${margin ? styles.margin : ""}`}
+      className={`${styles.container} ${flex ? styles.flex : ""} ${styles[size]} ${
+        margin ? styles.margin : ""
+      }`}
     >
       {children}
     </div>

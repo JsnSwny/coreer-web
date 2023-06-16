@@ -1,14 +1,11 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
-import React, { useState } from "react";
-import styles from "./LikeButton.module.scss";
 import { useAuth } from "@/contexts/AuthContext";
-import axios from "axios";
-import { server } from "@/config";
 import { Profile } from "@/interfaces/profile.model";
 import { likeUser } from "@/utils/likeUser";
-import { toast, ToastContainer } from "react-toastify";
+import { faStar as farStar } from "@fortawesome/free-regular-svg-icons";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from "react";
+import styles from "./LikeButton.module.scss";
 
 interface LikeButtonProps {
   profile: Profile;
@@ -27,13 +24,9 @@ const LikeButton = ({ profile, className, alt }: LikeButtonProps) => {
 
   return (
     <FontAwesomeIcon
-      icon={
-        isHovered || user!.following.includes(profile.id) ? faStar : farStar
-      }
+      icon={isHovered || user!.following.includes(profile.id) ? faStar : farStar}
       className={`${className} ${styles.likeButton} ${
-        isHovered || user!.following.includes(profile.id)
-          ? styles.solid
-          : styles.regular
+        isHovered || user!.following.includes(profile.id) ? styles.solid : styles.regular
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

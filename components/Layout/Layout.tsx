@@ -1,11 +1,10 @@
-import React from "react";
-import Header from "../Header/Header/Header";
-import Head from "next/head";
-import styles from "./Layout.module.scss";
-import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import { ToastContainer, toast } from "react-toastify";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import Header from "../Header/Header/Header";
+import styles from "./Layout.module.scss";
 
 import "react-toastify/dist/ReactToastify.css";
 

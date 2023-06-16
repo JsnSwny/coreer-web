@@ -1,9 +1,9 @@
 export const getUserConfig = () => {
-  const userToken = localStorage.getItem('token');
+  const userToken = localStorage.getItem("token");
 
   return {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: `Token ${userToken}`,
     },
   };

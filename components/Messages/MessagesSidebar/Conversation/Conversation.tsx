@@ -1,16 +1,13 @@
 import { Conversation as ConversationType } from "@/interfaces/conversation.model";
-import styles from "./Conversation.module.scss";
 import Link from "next/link";
+import styles from "./Conversation.module.scss";
 
 interface ConversationProps {
   conversation: ConversationType;
   isActive?: boolean;
 }
 
-const Conversation = ({
-  conversation,
-  isActive = false,
-}: ConversationProps) => {
+const Conversation = ({ conversation, isActive = false }: ConversationProps) => {
   return (
     <li className={`${styles.conversation} ${isActive ? styles.active : ""}`}>
       <Link href={`/messages/${conversation.name}`} className={styles.link}>
@@ -24,13 +21,10 @@ const Conversation = ({
         />
         <div className={styles.content}>
           <h4 className={styles.name}>
-            {conversation.other_user.first_name}{" "}
-            {conversation.other_user.last_name}
+            {conversation.other_user.first_name} {conversation.other_user.last_name}
           </h4>
           {conversation.last_message && (
-            <p className={styles.last_message}>
-              {conversation.last_message?.content}
-            </p>
+            <p className={styles.last_message}>{conversation.last_message?.content}</p>
           )}
         </div>
       </Link>

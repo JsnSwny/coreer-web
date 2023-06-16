@@ -1,10 +1,10 @@
+import { useAuth } from "@/contexts/AuthContext";
+import { Profile } from "@/interfaces/profile.model";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styles from "./ProfileSection.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil } from "@fortawesome/free-solid-svg-icons";
-import { Profile } from "@/interfaces/profile.model";
-import { useAuth } from "@/contexts/AuthContext";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 interface ProfileSectionProps {
   title: string;
@@ -32,11 +32,7 @@ const ProfileSection = ({
           <h2>{title}</h2>
         </div>
         {profile.id == user!.id && action && (
-          <FontAwesomeIcon
-            icon={actionIcon}
-            onClick={action}
-            className={styles.icon}
-          />
+          <FontAwesomeIcon icon={actionIcon} onClick={action} className={styles.icon} />
         )}
       </div>
 

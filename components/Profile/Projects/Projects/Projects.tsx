@@ -1,14 +1,13 @@
-import styles from "./Projects.module.scss";
-import Project from "../Project/Project";
-import { Project as ProjectModel } from "@/interfaces/project.model";
-import { differenceInMonths } from "date-fns";
-import ProjectModal from "@/components/Modal/ProjectModal/ProjectModal";
-import { useState, useEffect } from "react";
-import { useAuth } from "@/contexts/AuthContext";
-import axios from "axios";
 import Button from "@/components/Button/Button";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import ProjectModal from "@/components/Modal/ProjectModal/ProjectModal";
+import { useAuth } from "@/contexts/AuthContext";
 import { Profile } from "@/interfaces/profile.model";
+import { Project as ProjectModel } from "@/interfaces/project.model";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { differenceInMonths } from "date-fns";
+import { useState } from "react";
+import Project from "../Project/Project";
+import styles from "./Projects.module.scss";
 
 interface ProjectsProps {
   projects: ProjectModel[];
@@ -17,9 +16,7 @@ interface ProjectsProps {
 }
 
 const Projects = ({ projects, action, profile }: ProjectsProps) => {
-  const [selectedProject, setSelectedProject] = useState<ProjectModel | null>(
-    null
-  );
+  const [selectedProject, setSelectedProject] = useState<ProjectModel | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openProjectModal = (project: ProjectModel) => {
@@ -50,19 +47,10 @@ const Projects = ({ projects, action, profile }: ProjectsProps) => {
 
   return (
     <>
-      <ProjectModal
-        project={selectedProject!}
-        onClose={closeModal}
-        isOpen={isModalOpen}
-      />
+      <ProjectModal project={selectedProject!} onClose={closeModal} isOpen={isModalOpen} />
 
       {showEdit && (
-        <Button
-          text="Add New Project"
-          alt
-          icon={faPlus}
-          onClick={() => action("Project")}
-        />
+        <Button text="Add New Project" alt icon={faPlus} onClick={() => action("Project")} />
       )}
 
       <div className={styles.container}>
@@ -71,10 +59,7 @@ const Projects = ({ projects, action, profile }: ProjectsProps) => {
           .sort((a, b) => {
             const endDateA = a.end_date ? new Date(a.end_date) : null;
             const endDateB = b.end_date ? new Date(b.end_date) : null;
-            return differenceInMonths(
-              endDateB || new Date(),
-              endDateA || new Date()
-            );
+            return differenceInMonths(endDateB || new Date(), endDateA || new Date());
           })
           .map((project) => (
             <Project

@@ -1,17 +1,12 @@
-import globalStyles from "@/styles/globalStyles.module.scss";
-import Modal from "../../Modal/Modal";
-import { useState } from "react";
-import { useAuth } from "@/contexts/AuthContext";
-import Button from "@/components/Button/Button";
-import AsyncSelect from "react-select/async";
-import { server } from "@/config";
-import axios from "axios";
-import { School } from "@/interfaces/education.model";
-import TagsList from "@/components/Tags/TagsList/TagsList";
 import TagSelector from "@/components/Auth/Onboarding/TagSelector/TagSelector/TagSelector";
-import { useEffect } from "react";
 import TagSelectorList from "@/components/Auth/Onboarding/TagSelector/TagSelectorList/TagSelectorList";
+import Button from "@/components/Button/Button";
+import { server } from "@/config";
+import { useAuth } from "@/contexts/AuthContext";
 import { Skill } from "@/interfaces/language.model";
+import globalStyles from "@/styles/globalStyles.module.scss";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 interface ModalFormProps {
   closeModal: () => void;
@@ -21,9 +16,7 @@ const SkillsModalForm = ({ closeModal }: ModalFormProps) => {
   const { user, updateUser } = useAuth();
 
   const [options, setOptions] = useState([]);
-  const [selectedOptions, setSelectedOptions] = useState(
-    user ? user.languages : []
-  );
+  const [selectedOptions, setSelectedOptions] = useState(user ? user.languages : []);
 
   useEffect(() => {
     axios

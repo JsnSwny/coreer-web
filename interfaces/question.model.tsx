@@ -1,4 +1,3 @@
-import { Message } from "./message.model";
 import { Profile } from "./profile.model";
 
 export interface Question {

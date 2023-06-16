@@ -1,17 +1,13 @@
-import styles from "./MessagesSidebar.module.scss";
-import Conversation from "./Conversation/Conversation";
 import { Conversation as ConversationType } from "@/interfaces/conversation.model";
-import globalStyles from "@/styles/globalStyles.module.scss";
+import Conversation from "./Conversation/Conversation";
+import styles from "./MessagesSidebar.module.scss";
 
 interface MessagesSidebarProps {
   conversations: ConversationType[];
   currentConversation?: ConversationType;
 }
 
-const MessagesSidebar = ({
-  conversations,
-  currentConversation,
-}: MessagesSidebarProps) => {
+const MessagesSidebar = ({ conversations, currentConversation }: MessagesSidebarProps) => {
   return (
     <div className={styles.sidebar}>
       <div className={styles.titleContainer}>

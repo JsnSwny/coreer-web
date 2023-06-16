@@ -1,8 +1,7 @@
 import TagsList from "@/components/Tags/TagsList/TagsList";
-import styles from "./CriteriaItem.module.scss";
-import { Profile } from "@/interfaces/profile.model";
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faPencil } from "@fortawesome/free-solid-svg-icons";
+import styles from "./CriteriaItem.module.scss";
 
 interface Item {
   name: string;
@@ -15,19 +14,12 @@ interface CriteriaItemProps {
   canEdit?: boolean;
 }
 
-const CriteriaItem = ({
-  title,
-  items,
-  openModal,
-  canEdit,
-}: CriteriaItemProps) => {
+const CriteriaItem = ({ title, items, openModal, canEdit }: CriteriaItemProps) => {
   return (
     <li className={styles.criteriaItem}>
       <div className={styles.criteriaHeader}>
         <h2>{title}</h2>
-        {canEdit && openModal && (
-          <FontAwesomeIcon icon={faPencil} onClick={openModal} />
-        )}
+        {canEdit && openModal && <FontAwesomeIcon icon={faPencil} onClick={openModal} />}
       </div>
 
       <TagsList

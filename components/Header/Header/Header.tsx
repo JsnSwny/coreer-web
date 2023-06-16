@@ -1,12 +1,12 @@
-import Nav from "../Nav/Nav";
-import styles from "./Header.module.scss";
-import Container from "../../Container/Container";
-import Search from "../Search/Search";
-import Link from "next/link";
-import NavProfile from "../NavProfile/NavProfile";
-import { useRouter } from "next/router";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import Container from "../../Container/Container";
+import Nav from "../Nav/Nav";
+import NavProfile from "../NavProfile/NavProfile";
+import Search from "../Search/Search";
+import styles from "./Header.module.scss";
 
 const Header = () => {
   const router = useRouter();

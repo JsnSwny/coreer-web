@@ -1,8 +1,8 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import styles from "./NavItem.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import styles from "./NavItem.module.scss";
 
 interface NavItemProps {
   link: string;
@@ -18,10 +18,7 @@ const NavItem = ({ link, icon, activeIcon, title }: NavItemProps) => {
 
   return (
     <li className={`${styles.container}`}>
-      <Link
-        href={link}
-        className={`${styles.link} ${isActive ? styles.active : ""}`}
-      >
+      <Link href={link} className={`${styles.link} ${isActive ? styles.active : ""}`}>
         <div className={styles.iconWrapper}>
           <FontAwesomeIcon
             icon={isActive ? activeIcon : icon}

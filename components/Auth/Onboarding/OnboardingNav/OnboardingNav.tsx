@@ -1,8 +1,11 @@
-import { faContactBook, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faContactBook,
+  faPersonBiking,
+  faTerminal,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import styles from "./OnboardingNav.module.scss";
 import OnboardingNavItem from "./OnboardingNavItem";
-import { faPersonBiking } from "@fortawesome/free-solid-svg-icons";
-import { faTerminal } from "@fortawesome/free-solid-svg-icons";
 
 const OnboardingNav = () => {
   return (
@@ -13,24 +16,9 @@ const OnboardingNav = () => {
         icon={faContactBook}
         step={1}
       />
-      <OnboardingNavItem
-        title={"About You"}
-        link={"about-you"}
-        icon={faUser}
-        step={2}
-      />
-      <OnboardingNavItem
-        title={"Interests"}
-        link={"interests"}
-        icon={faPersonBiking}
-        step={3}
-      />
-      <OnboardingNavItem
-        title={"Languages"}
-        link={"languages"}
-        icon={faTerminal}
-        step={4}
-      />
+      <OnboardingNavItem title={"About You"} link={"about-you"} icon={faUser} step={2} />
+      <OnboardingNavItem title={"Interests"} link={"interests"} icon={faPersonBiking} step={3} />
+      <OnboardingNavItem title={"Languages"} link={"languages"} icon={faTerminal} step={4} />
     </ul>
   );
 };

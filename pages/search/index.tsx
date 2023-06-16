@@ -1,15 +1,14 @@
-import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
-import { server } from "@/config";
-import Container from "@/components/Container/Container";
-import ProfileCardList from "@/components/Card/ProfileCardList/ProfileCardList";
 import ProfileCard from "@/components/Card/ProfileCard/ProfileCard";
-import { Profile } from "@/interfaces/profile.model";
-import SearchFilters from "@/components/Search/SearchFilters/SearchFilters";
-import styles from "./index.module.scss";
+import ProfileCardList from "@/components/Card/ProfileCardList/ProfileCardList";
+import Container from "@/components/Container/Container";
 import Pagination from "@/components/Pagination/Pagination";
-import Head from "next/head";
 import withAuth from "@/components/Route/withAuth";
+import { server } from "@/config";
+import { Profile } from "@/interfaces/profile.model";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import styles from "./index.module.scss";
 
 interface SearchResult {
   results: Profile[];
@@ -47,7 +46,7 @@ const Results = ({ searchData, currentPage, perPage, query }: ResultsProps) => {
         query: currentQuery,
       },
       undefined,
-      { shallow: true }
+      { shallow: true },
     );
 
     setLoading(true);

@@ -1,9 +1,8 @@
+import { Profile } from "@/interfaces/profile.model";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import styles from "./Suggestion.module.scss";
-import Button from "@/components/Button/Button";
-import { Profile } from "@/interfaces/profile.model";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 interface SuggestionProps {
   profile: Profile;

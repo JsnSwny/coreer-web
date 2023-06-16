@@ -1,25 +1,12 @@
-import globalStyles from "@/styles/globalStyles.module.scss";
-import Modal from "../../Modal/Modal";
-import { ChangeEvent, useState, useEffect } from "react";
-import { useAuth } from "@/contexts/AuthContext";
-import Button from "@/components/Button/Button";
-import PlacesAutocomplete from "react-places-autocomplete";
-import {
-  geocodeByAddress,
-  geocodeByPlaceId,
-  getLatLng,
-} from "react-places-autocomplete";
-import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput";
-import Select from "react-select";
-import { server } from "@/config";
-import axios from "axios";
-import {
-  Question,
-  UserAnswer,
-  UserAnswerRequest,
-} from "@/interfaces/question.model";
-import { StringLiteral } from "typescript";
 import { deleteUserAnswer, updateUserAnswer } from "@/api/questions";
+import Button from "@/components/Button/Button";
+import { server } from "@/config";
+import { useAuth } from "@/contexts/AuthContext";
+import { Question, UserAnswer, UserAnswerRequest } from "@/interfaces/question.model";
+import globalStyles from "@/styles/globalStyles.module.scss";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Select from "react-select";
 
 interface ModalFormProps {
   closeModal: () => void;
@@ -34,9 +21,7 @@ type Option = {
 const QuestionModalForm = ({ closeModal, userAnswer }: ModalFormProps) => {
   const { user, setUser } = useAuth();
   const [answer, setAnswer] = useState("");
-  const [selectedQuestion, setSelectedQuestion] = useState<
-    Option | null | undefined
-  >(null);
+  const [selectedQuestion, setSelectedQuestion] = useState<Option | null | undefined>(null);
   const [questionOptions, setQuestionOptions] = useState([]);
 
   const handleSave = async () => {
@@ -54,9 +39,7 @@ const QuestionModalForm = ({ closeModal, userAnswer }: ModalFormProps) => {
         setUser({
           ...user!,
           user_answers: user!.user_answers.map((userAnswer) =>
-            userAnswer.id === updatedUserAnswer.id
-              ? updatedUserAnswer
-              : userAnswer
+            userAnswer.id === updatedUserAnswer.id ? updatedUserAnswer : userAnswer,
           ),
         });
       } else {
@@ -72,9 +55,7 @@ const QuestionModalForm = ({ closeModal, userAnswer }: ModalFormProps) => {
     deleteUserAnswer(userAnswer!.id);
     setUser({
       ...user!,
-      user_answers: [
-        ...user!.user_answers.filter((item) => userAnswer!.id != item!.id),
-      ],
+      user_answers: [...user!.user_answers.filter((item) => userAnswer!.id != item!.id)],
     });
     closeModal();
   };
@@ -88,9 +69,7 @@ const QuestionModalForm = ({ closeModal, userAnswer }: ModalFormProps) => {
       setQuestionOptions(questionOptions);
       if (userAnswer) {
         setSelectedQuestion(
-          questionOptions.find(
-            (item: Option) => parseInt(item.value) == userAnswer.question.id
-          )
+          questionOptions.find((item: Option) => parseInt(item.value) == userAnswer.question.id),
         );
         setAnswer(userAnswer.answer);
       }
@@ -124,9 +103,7 @@ const QuestionModalForm = ({ closeModal, userAnswer }: ModalFormProps) => {
         </div>
       </div>
       <div className={globalStyles.modalFooter}>
-        {userAnswer && (
-          <Button text="Delete" color="red" onClick={handleDelete} />
-        )}
+        {userAnswer && <Button text="Delete" color="red" onClick={handleDelete} />}
         <div className={globalStyles.modalFooterRight}>
           <Button text="Save" onClick={handleSave} />
         </div>

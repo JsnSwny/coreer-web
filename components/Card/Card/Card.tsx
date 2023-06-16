@@ -2,7 +2,6 @@ import { calculateTimeDifference } from "@/utils/calculateTimeDifference";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { format, parseISO } from "date-fns";
-import React from "react";
 import styles from "./Card.module.scss";
 
 interface CardProps {
@@ -44,13 +43,7 @@ const Card = ({
         )}
         {body && <p className={styles.body}>{body}</p>}
       </div>
-      {showEdit && (
-        <FontAwesomeIcon
-          icon={faPencil}
-          className={styles.icon}
-          onClick={action}
-        />
-      )}
+      {showEdit && <FontAwesomeIcon icon={faPencil} className={styles.icon} onClick={action} />}
     </div>
   );
 };

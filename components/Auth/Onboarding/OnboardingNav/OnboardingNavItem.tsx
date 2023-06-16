@@ -1,12 +1,8 @@
-import styles from "./OnboardingNavItem.module.scss";
-import {
-  FontAwesomeIcon,
-  FontAwesomeIconProps,
-} from "@fortawesome/react-fontawesome";
-import { faContactBook } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import styles from "./OnboardingNavItem.module.scss";
 
 interface OnboardingNavItemProps {
   title: string;
@@ -15,12 +11,7 @@ interface OnboardingNavItemProps {
   step: number;
 }
 
-const OnboardingNavItem = ({
-  title,
-  link,
-  icon,
-  step,
-}: OnboardingNavItemProps) => {
+const OnboardingNavItem = ({ title, link, icon, step }: OnboardingNavItemProps) => {
   const router = useRouter();
   return (
     <li

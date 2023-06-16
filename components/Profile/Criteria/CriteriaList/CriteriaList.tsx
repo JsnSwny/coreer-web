@@ -1,9 +1,9 @@
 import { Profile } from "@/interfaces/profile.model";
 import CriteriaItem from "../CriteriaItem/CriteriaItem";
 
-import styles from "./CriteriaList.module.scss";
-import { Interest } from "@/interfaces/interest.model";
 import { useAuth } from "@/contexts/AuthContext";
+import { Interest } from "@/interfaces/interest.model";
+import styles from "./CriteriaList.module.scss";
 
 interface CriteriaListProps {
   profile: Profile;

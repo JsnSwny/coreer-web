@@ -1,10 +1,10 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./QuestionBlock.module.scss";
-import { faPencil, faQuestion } from "@fortawesome/free-solid-svg-icons";
-import { UserAnswer } from "@/interfaces/question.model";
-import Modal from "@/components/Modal/Modal/Modal";
-import { useState } from "react";
 import QuestionModalForm from "@/components/Modal/Forms/QuestionModalForm/QuestionModalForm";
+import Modal from "@/components/Modal/Modal/Modal";
+import { UserAnswer } from "@/interfaces/question.model";
+import { faPencil, faQuestion } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+import styles from "./QuestionBlock.module.scss";
 interface QuestionBlockProps {
   item: UserAnswer;
   showEdit: boolean;

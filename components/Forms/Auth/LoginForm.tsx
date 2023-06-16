@@ -1,18 +1,13 @@
-import styles from "./LoginForm.module.scss";
-import axios, { AxiosResponse } from "axios";
-import { server } from "@/config";
-import { useState, useEffect } from "react";
-import { useAuth } from "@/contexts/AuthContext";
-import { useRouter } from "next/router";
-import globalStyles from "@/styles/globalStyles.module.scss";
 import Button from "@/components/Button/Button";
-import Link from "next/link";
-import LoadingOverlay from "@/components/Layout/LoadingOverlay/LoadingOverlay";
-import GithubAuth from "./GithubAuth/GithubAuth";
-import { useForm } from "react-hook-form";
+import { useAuth } from "@/contexts/AuthContext";
+import globalStyles from "@/styles/globalStyles.module.scss";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import FormError from "../Error/FormError";
+import GithubAuth from "./GithubAuth/GithubAuth";
+import styles from "./LoginForm.module.scss";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -41,10 +36,7 @@ const LoginForm = () => {
     <>
       <form onSubmit={handleSubmit(onSubmitHandler)} className={styles.form}>
         <div className={globalStyles.formGroup}>
-          <label
-            htmlFor="email"
-            className={`${globalStyles.label} ${styles.label}`}
-          >
+          <label htmlFor="email" className={`${globalStyles.label} ${styles.label}`}>
             Email
           </label>
           <input
@@ -58,10 +50,7 @@ const LoginForm = () => {
         </div>
 
         <div className={globalStyles.formGroup}>
-          <label
-            htmlFor="password"
-            className={`${globalStyles.label} ${styles.label}`}
-          >
+          <label htmlFor="password" className={`${globalStyles.label} ${styles.label}`}>
             Password
           </label>
 

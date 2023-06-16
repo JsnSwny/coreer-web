@@ -1,8 +1,8 @@
-import styles from "./Search.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import styles from "./Search.module.scss";
 
 const Search = () => {
   const router = useRouter();

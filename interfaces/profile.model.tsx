@@ -1,9 +1,9 @@
-import { Project } from "./project.model";
 import { Education } from "./education.model";
-import { Skill } from "./language.model";
-import { WorkExperience } from "./work_experiences.model";
 import { Interest } from "./interest.model";
+import { Skill } from "./language.model";
+import { Project } from "./project.model";
 import { UserAnswer } from "./question.model";
+import { WorkExperience } from "./work_experiences.model";
 
 export interface CareerLevel {
   id: number;

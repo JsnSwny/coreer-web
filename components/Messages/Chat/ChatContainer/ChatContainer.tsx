@@ -1,9 +1,9 @@
+import { Conversation } from "@/interfaces/conversation.model";
 import { Message as MessageType } from "@/interfaces/message.model";
-import styles from "./ChatContainer.module.scss";
+import ChatHeader from "../ChatHeader/ChatHeader";
 import Message from "../Message/Message";
 import SendMessage from "../SendMessage/SendMessage";
-import ChatHeader from "../ChatHeader/ChatHeader";
-import { Conversation } from "@/interfaces/conversation.model";
+import styles from "./ChatContainer.module.scss";
 
 interface ChatContainerProps {
   messageHistory: MessageType[];

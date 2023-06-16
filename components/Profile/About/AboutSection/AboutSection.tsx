@@ -1,17 +1,12 @@
-import { Profile } from "@/interfaces/profile.model";
-import ProfileBanner from "../../Banner/ProfileBanner";
-import styles from "./AboutSection.module.scss";
-import QuestionsList from "../QuestionsList/QuestionsList";
-import ProfileSection from "../../Section/ProfileSection";
-import CardList from "@/components/Card/CardList/CardList";
 import Card from "@/components/Card/Card/Card";
-import { differenceInMonths } from "date-fns";
-import {
-  faBriefcase,
-  faGraduationCap,
-  faPlus,
-} from "@fortawesome/free-solid-svg-icons";
+import CardList from "@/components/Card/CardList/CardList";
 import { useAuth } from "@/contexts/AuthContext";
+import { Profile } from "@/interfaces/profile.model";
+import { faBriefcase, faGraduationCap, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { differenceInMonths } from "date-fns";
+import ProfileSection from "../../Section/ProfileSection";
+import QuestionsList from "../QuestionsList/QuestionsList";
+import styles from "./AboutSection.module.scss";
 
 interface AboutSectionProps {
   profile: Profile;
@@ -38,10 +33,7 @@ const AboutSection = ({ profile, openModal }: AboutSectionProps) => {
               const endDateA = a.end_date ? new Date(a.end_date) : null;
               const endDateB = b.end_date ? new Date(b.end_date) : null;
 
-              return differenceInMonths(
-                endDateB || new Date(),
-                endDateA || new Date()
-              );
+              return differenceInMonths(endDateB || new Date(), endDateA || new Date());
             })
             .map((experience) => (
               <Card
@@ -73,10 +65,7 @@ const AboutSection = ({ profile, openModal }: AboutSectionProps) => {
               const endDateA = a.end_date ? new Date(a.end_date) : null;
               const endDateB = b.end_date ? new Date(b.end_date) : null;
 
-              return differenceInMonths(
-                endDateB || new Date(),
-                endDateA || new Date()
-              );
+              return differenceInMonths(endDateB || new Date(), endDateA || new Date());
             })
             .map((education) => (
               <Card

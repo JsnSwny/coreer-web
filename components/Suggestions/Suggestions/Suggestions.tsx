@@ -1,6 +1,6 @@
-import styles from "./Suggestions.module.scss";
-import Suggestion from "../Suggestion/Suggestion";
 import { Profile } from "@/interfaces/profile.model";
+import Suggestion from "../Suggestion/Suggestion";
+import styles from "./Suggestions.module.scss";
 
 interface SuggestionsProps {
   user: Profile;

@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
 import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 const withGuest = (WrappedComponent: React.ComponentType<any>) => {

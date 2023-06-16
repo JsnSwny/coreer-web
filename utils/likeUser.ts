@@ -1,14 +1,9 @@
 import { server } from "@/config";
-import { useAuth } from "@/contexts/AuthContext";
 import { Profile } from "@/interfaces/profile.model";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export const likeUser = (
-  user: Profile,
-  profile: Profile,
-  userToken: string
-) => {
+export const likeUser = (user: Profile, profile: Profile, userToken: string) => {
   console.log("Liking user");
   let toastMessage = !user.following.includes(profile.id)
     ? `Added ${profile.first_name} ${profile.last_name} to your likes!`
@@ -50,7 +45,7 @@ export const likeUser = (
           {
             following_id: profile.id,
           },
-          config
+          config,
         )
 
         .catch((err) => console.log(err.response));

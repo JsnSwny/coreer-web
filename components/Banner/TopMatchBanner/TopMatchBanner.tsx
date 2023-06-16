@@ -1,10 +1,9 @@
-import { Profile } from "@/interfaces/profile.model";
-import styles from "./TopMatchBanner.module.scss";
-import Link from "next/link";
-import TagsList from "@/components/Tags/TagsList/TagsList";
 import LikeButton from "@/components/Button/LikeButton/LikeButton";
-import { chatHrefConstructor } from "@/utils/chatHrefConstructor";
 import { useAuth } from "@/contexts/AuthContext";
+import { Profile } from "@/interfaces/profile.model";
+import { chatHrefConstructor } from "@/utils/chatHrefConstructor";
+import Link from "next/link";
+import styles from "./TopMatchBanner.module.scss";
 
 interface TopMatchBannerProps {
   profile: Profile;
@@ -30,14 +29,16 @@ const TopMatchBanner = ({ profile }: TopMatchBannerProps) => {
           <p>{profile.bio}</p>
         </div>
         <div className={styles.buttonWrapper}>
-          {user && <button className={styles.button}>
-            <Link
-              className={styles.buttonLink}
-              href={`/messages/${chatHrefConstructor(user, profile)}`}
-            >
-              Message {profile.first_name}
-            </Link>
-          </button>}
+          {user && (
+            <button className={styles.button}>
+              <Link
+                className={styles.buttonLink}
+                href={`/messages/${chatHrefConstructor(user, profile)}`}
+              >
+                Message {profile.first_name}
+              </Link>
+            </button>
+          )}
           <button className={`${styles.button} ${styles.buttonAlt}`}>
             <Link className={styles.buttonLink} href={`/${profile.username}`}>
               View Profile

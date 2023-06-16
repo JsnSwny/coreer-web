@@ -1,5 +1,5 @@
-import styles from "./ProfileCardList.module.scss";
 import React from "react";
+import styles from "./ProfileCardList.module.scss";
 
 interface CardListProps {
   children: React.ReactNode;
@@ -7,15 +7,9 @@ interface CardListProps {
   large?: boolean;
 }
 
-const ProfileCardList = ({
-  children,
-  className,
-  large = false,
-}: CardListProps) => {
+const ProfileCardList = ({ children, className, large = false }: CardListProps) => {
   return (
-    <ul className={`${styles.cards} ${className} ${large ? styles.large : ""}`}>
-      {children}
-    </ul>
+    <ul className={`${styles.cards} ${className} ${large ? styles.large : ""}`}>{children}</ul>
   );
 };
 

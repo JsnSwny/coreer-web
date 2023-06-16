@@ -1,16 +1,15 @@
-import Head from "next/head";
-import MessagesSidebar from "@/components/Messages/MessagesSidebar/MessagesSidebar";
-import { server } from "@/config";
-import cookie from "cookie";
-import axios from "axios";
-import { Conversation } from "@/interfaces/conversation.model";
-import React, { useState, useEffect } from "react";
-import useWebSocket from "react-use-websocket";
-import withAuth from "@/components/Route/withAuth";
-import MessagesContainer from "@/components/Messages/MessagesContainer/MessagesContainer";
-import { useAuth } from "@/contexts/AuthContext";
 import ChatContainer from "@/components/Messages/Chat/ChatContainer/ChatContainer";
-import { redisServer } from "@/config";
+import MessagesContainer from "@/components/Messages/MessagesContainer/MessagesContainer";
+import MessagesSidebar from "@/components/Messages/MessagesSidebar/MessagesSidebar";
+import withAuth from "@/components/Route/withAuth";
+import { redisServer, server } from "@/config";
+import { useAuth } from "@/contexts/AuthContext";
+import { Conversation } from "@/interfaces/conversation.model";
+import axios from "axios";
+import cookie from "cookie";
+import Head from "next/head";
+import { useEffect, useState } from "react";
+import useWebSocket from "react-use-websocket";
 
 interface MessagesProps {
   conversations: Conversation[];
@@ -21,8 +20,7 @@ interface MessagesProps {
 const Messages = ({ conversations, currConversation, id }: MessagesProps) => {
   const [conversationsList, setConversationsList] = useState(conversations);
   const [messageHistory, setMessageHistory] = useState([]);
-  const [currentConversation, setCurrentConversation] =
-    useState(currConversation);
+  const [currentConversation, setCurrentConversation] = useState(currConversation);
 
   useEffect(() => {
     const config: any = {
@@ -42,42 +40,37 @@ const Messages = ({ conversations, currConversation, id }: MessagesProps) => {
 
   const { userToken } = useAuth();
 
-  const { sendJsonMessage } = useWebSocket(
-    `${redisServer}/ws/chat/${id}/?token=${userToken}`,
-    {
-      onMessage: (e) => {
-        const data = JSON.parse(e.data);
-        switch (data.type) {
-          case "chat_message_echo":
-            setMessageHistory((previous): any => [...previous, data.message]);
-            break;
-          case "message_history":
-            // console.log("MESSAGE HISTORY:");
-            // console.log(data);
-            // setConversationsList([data.conversation, ...conversationsList]);
-            setMessageHistory(data.messages);
-            console.log(data.conversation);
-            if (
-              !conversationsList.some((item) => item.id == data.conversation.id)
-            ) {
-              setConversationsList([data.conversation, ...conversationsList]);
-            }
+  const { sendJsonMessage } = useWebSocket(`${redisServer}/ws/chat/${id}/?token=${userToken}`, {
+    onMessage: (e) => {
+      const data = JSON.parse(e.data);
+      switch (data.type) {
+        case "chat_message_echo":
+          setMessageHistory((previous): any => [...previous, data.message]);
+          break;
+        case "message_history":
+          // console.log("MESSAGE HISTORY:");
+          // console.log(data);
+          // setConversationsList([data.conversation, ...conversationsList]);
+          setMessageHistory(data.messages);
+          console.log(data.conversation);
+          if (!conversationsList.some((item) => item.id == data.conversation.id)) {
+            setConversationsList([data.conversation, ...conversationsList]);
+          }
 
-            setCurrentConversation(data.conversation);
-            break;
-        }
-      },
-      onError: (error) => {
-        console.log("Websocket error:", error);
-      },
-      onOpen: () => {
-        console.log("Connected!");
-      },
-      onClose: () => {
-        console.log("Disconnected!");
-      },
-    }
-  );
+          setCurrentConversation(data.conversation);
+          break;
+      }
+    },
+    onError: (error) => {
+      console.log("Websocket error:", error);
+    },
+    onOpen: () => {
+      console.log("Connected!");
+    },
+    onClose: () => {
+      console.log("Disconnected!");
+    },
+  });
 
   const sendMessage = (e: any, message: any) => {
     e.preventDefault();
@@ -134,9 +127,7 @@ export const getServerSideProps = async (context: any) => {
     })
     .catch((err: any) => console.log(err));
 
-  let currentConversation = conversations.find(
-    (item) => item.name == context.params.id
-  );
+  let currentConversation = conversations.find((item) => item.name == context.params.id);
 
   return {
     props: {

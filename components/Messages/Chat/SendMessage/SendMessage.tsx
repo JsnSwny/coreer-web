@@ -1,7 +1,7 @@
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import styles from "./SendMessage.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 interface SendMessageProps {
   sendMessage: (e: any, message: string) => void;
@@ -35,9 +35,7 @@ const SendMessage = ({ sendMessage }: SendMessageProps) => {
             setMessage("");
           }}
           icon={faPaperPlane}
-          className={`${styles.icon} ${
-            message.length > 0 ? styles.active : ""
-          }`}
+          className={`${styles.icon} ${message.length > 0 ? styles.active : ""}`}
         />
       </div>
     </footer>

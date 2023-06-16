@@ -1,15 +1,11 @@
-import axios from "axios";
 import { server } from "@/config";
 import { WorkExperienceRequest } from "@/interfaces/work_experiences.model";
 import { getUserConfig } from "@/utils/getUserConfig";
+import axios from "axios";
 
 export const addExperience = async (data: WorkExperienceRequest) => {
   try {
-    const response = await axios.post(
-      `${server}/api/work-experiences/`,
-      data,
-      getUserConfig()
-    );
+    const response = await axios.post(`${server}/api/work-experiences/`, data, getUserConfig());
     return response.data;
   } catch (error: any) {
     console.error(error.response);
@@ -18,15 +14,12 @@ export const addExperience = async (data: WorkExperienceRequest) => {
   }
 };
 
-export const updateExperience = async (
-  id: number,
-  data: WorkExperienceRequest
-) => {
+export const updateExperience = async (id: number, data: WorkExperienceRequest) => {
   try {
     const response = await axios.put(
       `${server}/api/work-experiences/${id}/`,
       data,
-      getUserConfig()
+      getUserConfig(),
     );
     return response.data;
   } catch (error: any) {
@@ -38,10 +31,7 @@ export const updateExperience = async (
 
 export const deleteExperience = async (id: number) => {
   try {
-    const response = await axios.delete(
-      `${server}/api/work-experiences/${id}/`,
-      getUserConfig()
-    );
+    const response = await axios.delete(`${server}/api/work-experiences/${id}/`, getUserConfig());
     return response.data;
   } catch (error: any) {
     console.error(error.response);

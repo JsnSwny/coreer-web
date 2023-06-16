@@ -1,11 +1,10 @@
-import React from "react";
-import styles from "./ProfileCard.module.scss";
-import { Profile } from "@/interfaces/profile.model";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationPin } from "@fortawesome/free-solid-svg-icons";
-import TagsList from "@/components/Tags/TagsList/TagsList";
-import Link from "next/link";
 import LikeButton from "@/components/Button/LikeButton/LikeButton";
+import TagsList from "@/components/Tags/TagsList/TagsList";
+import { Profile } from "@/interfaces/profile.model";
+import { faLocationPin } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
+import styles from "./ProfileCard.module.scss";
 
 type EndDate = Date | "Present";
 
@@ -30,8 +29,8 @@ const ProfileCard = ({ profile }: CardProps) => {
         </h3>
         <p className={styles.subtitle}>{profile.job}</p>
         <p className={styles.location}>
-          <FontAwesomeIcon icon={faLocationPin} className={styles.pin} />{" "}
-          {getLocation()} <span className={styles.locationSeparator}>•</span>{" "}
+          <FontAwesomeIcon icon={faLocationPin} className={styles.pin} /> {getLocation()}{" "}
+          <span className={styles.locationSeparator}>•</span>{" "}
           <span className={styles.miles}>3000 miles away</span>
         </p>
       </div>

@@ -1,11 +1,11 @@
-import { FaGithub } from "react-icons/fa";
-import styles from "./GithubAuth.module.scss";
+import LoadingOverlay from "@/components/Layout/LoadingOverlay/LoadingOverlay";
+import { server } from "@/config";
 import { useAuth } from "@/contexts/AuthContext";
+import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { server } from "@/config";
-import LoadingOverlay from "@/components/Layout/LoadingOverlay/LoadingOverlay";
+import { FaGithub } from "react-icons/fa";
+import styles from "./GithubAuth.module.scss";
 
 const GithubAuth = () => {
   const { fetchUser, setGithubToken, updateProfilePicture } = useAuth();
@@ -15,7 +15,7 @@ const GithubAuth = () => {
   const convertUrlToFile = async (imageUrl: string) => {
     try {
       const response = await fetch(imageUrl);
-      const contentType = response.headers.get("Content-Type") ?? 'image/jpeg'; // default to jpg if not found, unlikely
+      const contentType = response.headers.get("Content-Type") ?? "image/jpeg"; // default to jpg if not found, unlikely
       const extension = contentType.split("/")[1];
 
       const blob = await response.blob();

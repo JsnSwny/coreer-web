@@ -1,7 +1,6 @@
 import { Tag as TagModel } from "@/interfaces/tag.model";
 import Tag from "../Tag/Tag";
 import styles from "./TagsList.module.scss";
-import React from "react";
 interface TagsListProps {
   tags: TagModel[];
   className?: string;

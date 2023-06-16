@@ -1,6 +1,6 @@
-import { useRouter } from "next/router";
 import { useAuth } from "@/contexts/AuthContext";
-import React, { ComponentType, useEffect } from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 
 const withAuth = (WrappedComponent: React.ComponentType<any>) => {
   const Wrapper = (props: any) => {

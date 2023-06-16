@@ -7,7 +7,7 @@ interface TagProps {
 
 const Tag = ({ tag }: TagProps) => {
   return (
-    <li className={`${styles.container} ${tag.color ? styles[tag.color] : ''}`}>{tag.text}</li>
+    <li className={`${styles.container} ${tag.color ? styles[tag.color] : ""}`}>{tag.text}</li>
   );
 };
 
