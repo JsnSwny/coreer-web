@@ -4,15 +4,12 @@ import { server } from "@/config";
 import cookie from "cookie";
 import axios from "axios";
 import { Conversation } from "@/interfaces/conversation.model";
-import React, { useState, useCallback, useEffect } from "react";
-import useWebSocket, { ReadyState } from "react-use-websocket";
+import React, { useState, useEffect } from "react";
+import useWebSocket from "react-use-websocket";
 import withAuth from "@/components/Route/withAuth";
 import MessagesContainer from "@/components/Messages/MessagesContainer/MessagesContainer";
-import SendMessage from "@/components/Messages/Chat/SendMessage/SendMessage";
 import { useAuth } from "@/contexts/AuthContext";
-import { Message } from "@/interfaces/message.model";
 import ChatContainer from "@/components/Messages/Chat/ChatContainer/ChatContainer";
-import MessagesDetailsContainer from "@/components/Messages/MessagesDetails/MessagesDetailsContainer/MessagesDetailsContainer";
 import { redisServer } from "@/config";
 
 interface MessagesProps {
@@ -45,7 +42,7 @@ const Messages = ({ conversations, currConversation, id }: MessagesProps) => {
 
   const { userToken } = useAuth();
 
-  const { readyState, sendJsonMessage } = useWebSocket(
+  const { sendJsonMessage } = useWebSocket(
     `${redisServer}/ws/chat/${id}/?token=${userToken}`,
     {
       onMessage: (e) => {

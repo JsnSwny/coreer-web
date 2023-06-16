@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import PlacesAutocomplete, {
 	geocodeByAddress,
 	getLatLng,
 } from "react-places-autocomplete";
 import globalStyles from "@/styles/globalStyles.module.scss";
 import styles from "./LocationSearchInput.module.scss";
-import { userForm, Controller } from "react-hook-form";
+import { Controller } from "react-hook-form";
 
 interface LocationSearchInputProps {
 	control: any;
@@ -33,7 +33,7 @@ const LocationSearchInput = ({ control, errors }: LocationSearchInputProps) => {
 			render={({ field }) => (
 				<PlacesAutocomplete
 					value={field.value}
-					onSelect={field.onSelect}
+					onSelect={field.onChange}
 					onChange={field.onChange}
 					searchOptions={{ types: ["locality", "country"] }}
 				>

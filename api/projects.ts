@@ -4,33 +4,28 @@ import { ProjectRequest } from "@/interfaces/project.model";
 import { server } from "@/config";
 import { Profile } from "@/interfaces/profile.model";
 
+const convertDataToFormData = (data: ProjectRequest) => {
+  const formData = new FormData();
+  data.image && formData.append("image", data.image);
+  formData.append("title", data.title);
+  data.description && formData.append("description", data.description);
+  data.start_date && formData.append("start_date", data.start_date);
+  data.end_date && formData.append("end_date", data.end_date);
+  formData.append("user", data.user.toString());
+  data.content && formData.append("content", data.content);
+  return formData;
+}
+
 export const addProject = async (data: ProjectRequest) => {
   try {
     const userToken = localStorage.getItem("token");
-
     const config = {
       headers: {
         "Content-Type": "multipart/form-data",
         Authorization: `Token ${userToken}`,
       },
     };
-
-    const formData = new FormData();
-    if (data.image) {
-      formData.append("image", data.image);
-    }
-
-    formData.append("title", data.title);
-    formData.append("description", data.description);
-    if (data.start_date) {
-      formData.append("start_date", data.start_date);
-    }
-
-    if (data.end_date) {
-      formData.append("end_date", data.end_date);
-    }
-    formData.append("user", data.user.toString());
-    formData.append("content", data.content);
+    const formData = convertDataToFormData(data);
 
     const response = await axios.post(
       `${server}/api/projects/`,
@@ -48,7 +43,6 @@ export const addProject = async (data: ProjectRequest) => {
 export const updateProject = async (id: number, data: ProjectRequest) => {
   try {
     const userToken = localStorage.getItem("token");
-
     const config = {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -56,22 +50,7 @@ export const updateProject = async (id: number, data: ProjectRequest) => {
       },
     };
 
-    const formData = new FormData();
-    if (data.image) {
-      formData.append("image", data.image);
-    }
-
-    formData.append("title", data.title);
-    formData.append("description", data.description);
-    if (data.start_date) {
-      formData.append("start_date", data.start_date);
-    }
-
-    if (data.end_date) {
-      formData.append("end_date", data.end_date);
-    }
-    formData.append("user", data.user.toString());
-    formData.append("content", data.content);
+    const formData = convertDataToFormData(data);
 
     const response = await axios.put(
       `${server}/api/projects/${id}/`,

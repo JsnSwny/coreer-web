@@ -91,9 +91,6 @@ const Profile = ({ profile }: ProfileProps) => {
 							{activeSection.title === "Details" && (
 								<DetailsModalForm closeModal={closeModal} />
 							)}
-							{activeSection.title === "About" && (
-								<AboutModalForm closeModal={closeModal} />
-							)}
 							{activeSection.title === "Project" && (
 								<ProjectModalForm closeModal={closeModal} item={modalItem} />
 							)}
@@ -153,4 +150,4 @@ export const getServerSideProps = async (context: any) => {
 	};
 };
 
-export default Profile;
+export default withAuth(Profile);
