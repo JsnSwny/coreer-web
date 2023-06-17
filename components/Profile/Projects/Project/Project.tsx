@@ -70,7 +70,9 @@ const Project = ({
 			<div className={styles.header}>
 				<h3 className={styles.title}>{project.title}</h3>
 				{project.description && (
-					<p className={styles.description}>{project.description}</p>
+					<p className={styles.description}>
+						{project.description.replace(/<[^>]+>/g, "")}
+					</p>
 				)}
 			</div>
 

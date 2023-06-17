@@ -6,7 +6,7 @@ export interface ProjectRequest {
 	start_date?: string | undefined;
 	end_date?: string | undefined;
 	description?: string | undefined;
-	languages?: Skill[];
+	languages_id?: number[];
 	image?: File | null;
 	video?: File | null;
 	user_id: number;

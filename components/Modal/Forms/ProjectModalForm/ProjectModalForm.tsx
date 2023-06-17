@@ -16,6 +16,11 @@ import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from "@/components/Forms/Error/FormError";
+import Select from "react-select";
+import { Skill } from "@/interfaces/language.model";
+import axios from "axios";
+import { useEffect } from "react";
+import { server } from "@/config";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -50,7 +55,13 @@ const schema = yup.object().shape({
 	start_date: yup.date(),
 	end_date: yup.date(),
 	project_link: yup.string(),
-	repo_link: yup.string(),
+	repo_link: yup
+		.string()
+		.matches(
+			/^(https?:\/\/)?(www\.)?github\.com\/[A-Za-z0-9_-]+\/[A-Za-z0-9_-]+$/,
+			"Invalid GitHub repo URL"
+		),
+	languages: yup.array(),
 });
 
 const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
@@ -69,6 +80,33 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 	const { user, setUser } = useAuth();
 	const [image, setImage] = useState<File | null>(null);
 
+	interface Option {
+		value: string;
+		label: string;
+		group: "L" | "F" | "O";
+	}
+
+	const [options, setOptions] = useState<Option[]>([]);
+	const [selectedOptions, setSelectedOptions] = useState([]);
+
+	useEffect(() => {
+		axios
+			.get(`${server}/most-popular-languages/`)
+			.then((res) => {
+				setOptions(
+					res.data.languages.map((item: Skill) => ({
+						value: item.id,
+						label: item.name,
+						group: item.category,
+					}))
+				);
+			})
+			.catch((err) => {
+				console.log("error");
+				console.log(err.response);
+			});
+	}, []);
+
 	const onSubmitHandler = async (data: {
 		title: string;
 		description?: string;
@@ -77,6 +115,7 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 		end_date?: Date;
 		project_link?: string;
 		repo_link?: string;
+		languages?: number[];
 	}) => {
 		let obj: ProjectRequest = {
 			title: data.title,
@@ -90,7 +129,11 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 				: data.end_date,
 			user_id: user!.id,
 			project_link: data.project_link,
-			repo_link: data.repo_link,
+			repo_link:
+				data.repo_link && !/^https?:\/\//i.test(data.repo_link)
+					? `https://${data.repo_link}` // Prepend 'https://' if URL does not have a protocol
+					: data.repo_link,
+			languages_id: data.languages ? data.languages : [],
 		};
 
 		console.log(obj);
@@ -115,16 +158,25 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 
 	const photoUpload = (e: ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
-		console.log(e);
-		const reader = new FileReader();
-		const file = e.target.files?.[0] as File | undefined;
 
-		if (file) {
+		const maxSize = 5 * 1024 * 1024;
+
+		if (file.size <= maxSize) {
 			reader.onloadend = () => {
 				setImage(file);
 			};
 			reader.readAsDataURL(file);
+			// Clear the image error if it was previously set
+			setValue("image", file); // Assuming you are using the 'react-hook-form' `setValue` method
 			return file;
+		} else {
+			// Set the image error when the file size exceeds the limit
+			setValue("image", ""); // Assuming you are using the 'react-hook-form' `setValue` method
+			setError("image", {
+				type: "maxSize",
+				message: "File size exceeds the maximum limit",
+			});
+			return;
 		}
 	};
 
@@ -138,6 +190,29 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 	};
 
 	// const quillFormats = ["header", "bold", "italic", "underline", "code-block"];
+
+	// const options: Option[] = careerLevels.map((item) => ({
+	// 	value: String(item.id),
+	// 	label: item.name,
+	// 	group: item.category,
+	// }));
+
+	const groupedOptions = [
+		{
+			label: "Languages",
+			options: options.filter((option) => option.group === "L"),
+		},
+		{
+			label: "Framework",
+			options: options.filter((option) => option.group === "F"),
+		},
+		{
+			label: "Other",
+			options: options.filter((option) => option.group === "O"),
+		},
+	];
+
+	console.log(groupedOptions);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -173,6 +248,28 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 					></Controller>
 					<FormError message={errors.description?.message} />
 				</div>
+				<div className={globalStyles.formGroup}>
+					<label className={globalStyles.label}>Skills</label>
+					<Controller
+						control={control}
+						name="languages"
+						render={({ field }) => (
+							<Select
+								options={groupedOptions}
+								onChange={(val) => field.onChange(val.map((c) => c.value))}
+								isMulti
+								value={
+									field.value &&
+									options.filter(
+										(c) => field.value && field.value.includes(c.value)
+									)
+								}
+							/>
+						)}
+					/>
+					<FormError message={errors.languages?.message} />
+				</div>
+
 				<DateRangeInput
 					control={control}
 					errors={errors}
@@ -189,7 +286,7 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 
 				<div className={globalStyles.formGroup}>
 					<label className={globalStyles.label}>Thumbnail</label>
-					<input autoFocus type="file" onChange={photoUpload} />
+					<input type="file" onChange={photoUpload} />
 					{/* <FormError message={errors.image?.message} /> */}
 				</div>
 				<div className={globalStyles.formGroup}>

@@ -13,8 +13,12 @@ const convertDataToFormData = (data: ProjectRequest) => {
 	data.end_date && formData.append("end_date", data.end_date);
 	data.repo_link && formData.append("repo_link", data.repo_link);
 	data.project_link && formData.append("project_link", data.project_link);
+	data.languages_id &&
+		formData.append("languages_id", data.languages_id.join(","));
+
 	formData.append("user_id", data.user_id.toString());
 	data.content && formData.append("content", data.content);
+	console.log(formData);
 	return formData;
 };
 

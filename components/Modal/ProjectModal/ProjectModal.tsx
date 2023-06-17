@@ -40,7 +40,7 @@ const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
 						/>}
 						</div>
 						
-						{project.description && <p className={styles.description}>{project.description}</p>}
+						{project.description && <div className={styles.description} dangerouslySetInnerHTML={{ __html: project.description }}></div>}
 						
 					</div>
 
