@@ -9,7 +9,7 @@ export interface ProjectRequest {
 	languages?: Skill[];
 	image?: File | null;
 	video?: File | null;
-	user: number;
+	user_id: number;
 	content?: string | undefined;
 	repo_link?: string;
 	project_link?: string;

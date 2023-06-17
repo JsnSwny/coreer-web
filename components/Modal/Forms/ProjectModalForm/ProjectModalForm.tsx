@@ -49,7 +49,8 @@ const schema = yup.object().shape({
 	description: yup.string(),
 	start_date: yup.date(),
 	end_date: yup.date(),
-	content: yup.string(),
+	project_link: yup.string(),
+	repo_link: yup.string(),
 });
 
 const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
@@ -74,7 +75,8 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 		image?: File | null;
 		start_date?: Date;
 		end_date?: Date;
-		content?: string;
+		project_link?: string;
+		repo_link?: string;
 	}) => {
 		let obj: ProjectRequest = {
 			title: data.title,
@@ -86,8 +88,9 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 			end_date: data.end_date
 				? format(data.end_date, "yyyy-MM-dd")
 				: data.end_date,
-			user: user!.id,
-			content: data.content,
+			user_id: user!.id,
+			project_link: data.project_link,
+			repo_link: data.repo_link,
 		};
 
 		console.log(obj);
@@ -139,11 +142,11 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 	return (
 		<form onSubmit={handleSubmit(onSubmitHandler)}>
 			<div className={globalStyles.modalBody}>
-				<div className={globalStyles.formGroup}>
-					<label className={globalStyles.label}>Image</label>
-					<input autoFocus type="file" onChange={photoUpload} />
-					{/* <FormError message={errors.image?.message} /> */}
+				<div className={globalStyles.modalSection}>
+					<span>1</span>
+					<p>Information</p>
 				</div>
+
 				<div className={globalStyles.formGroup}>
 					<label className={globalStyles.label}>Title*</label>
 					<input
@@ -154,37 +157,70 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 					/>
 					<FormError message={errors.title?.message} />
 				</div>
-				<DateRangeInput
-					control={control}
-					errors={errors}
-					watch={watch}
-					startDateRequired={false}
-				/>
 				<div className={globalStyles.formGroup}>
 					<label className={globalStyles.label}>Description</label>
-					<textarea
-						className={globalStyles.input}
-						rows={4}
-						{...register("description")}
-					></textarea>
-					<FormError message={errors.description?.message} />
-				</div>
-				<div className={globalStyles.formGroup}>
-					<label className={globalStyles.label}>Content</label>
 					<Controller
 						control={control}
-						name="content"
+						name="description"
 						render={({ field }) => (
 							<ReactQuill
 								value={field.value}
 								onChange={(value) => field.onChange(value)}
 								modules={quillModules}
 								theme="snow"
-								style={{ height: `${12 * 24}px` }}
 							/>
 						)}
 					></Controller>
-					<FormError message={errors.content?.message} />
+					<FormError message={errors.description?.message} />
+				</div>
+				<DateRangeInput
+					control={control}
+					errors={errors}
+					watch={watch}
+					startDateRequired={false}
+				/>
+
+				<hr className={globalStyles.modalDivider} />
+
+				<div className={globalStyles.modalSection}>
+					<span>2</span>
+					<p>Images & Videos</p>
+				</div>
+
+				<div className={globalStyles.formGroup}>
+					<label className={globalStyles.label}>Thumbnail</label>
+					<input autoFocus type="file" onChange={photoUpload} />
+					{/* <FormError message={errors.image?.message} /> */}
+				</div>
+				<div className={globalStyles.formGroup}>
+					<label className={globalStyles.label}>Video</label>
+					<input type="file" onChange={photoUpload} />
+					{/* <FormError message={errors.image?.message} /> */}
+				</div>
+				<hr className={globalStyles.modalDivider} />
+
+				<div className={globalStyles.modalSection}>
+					<span>3</span>
+					<p>Links</p>
+				</div>
+
+				<div className={globalStyles.formGroup}>
+					<label className={globalStyles.label}>Repository URL</label>
+					<input
+						className={globalStyles.input}
+						type="text"
+						{...register("repo_link")}
+					/>
+					<FormError message={errors.repo_link?.message} />
+				</div>
+				<div className={globalStyles.formGroup}>
+					<label className={globalStyles.label}>Project URL</label>
+					<input
+						className={globalStyles.input}
+						type="text"
+						{...register("project_link")}
+					/>
+					<FormError message={errors.project_link?.message} />
 				</div>
 			</div>
 			<div className={globalStyles.modalFooter}>
