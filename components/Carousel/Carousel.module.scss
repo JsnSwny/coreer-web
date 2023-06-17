@@ -25,12 +25,12 @@
 .imageList {
 	display: flex;
 	// justify-content: center;
+	gap: 1rem;
 	width: 100%;
 }
 
 .thumbnailWrapper {
 	width: 20%;
-	margin: 0 0.5rem;
 	cursor: pointer;
 
 	> * {

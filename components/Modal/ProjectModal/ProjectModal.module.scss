@@ -33,18 +33,14 @@
 
 .modalHeader {
 	margin-top: 2rem;
-	p {
-		margin-top: 0.25rem;
-		color: $dark-light;
-	}
-	border-bottom: 1px solid $stroke;
-	padding-bottom: 2.5rem;
+	// border-bottom: 1px solid $stroke;
+	// padding-bottom: 2.5rem;
 }
 
 .buttons {
 	display: flex;
 	gap: 1rem;
-	margin-top: 1rem;
+	margin-top: 3rem;
 }
 
 .closeButton {
@@ -109,11 +105,30 @@
 }
 
 .description {
-	font-size: 20px;
+	font-size: 16px;
+	color: $dark-light;
+	margin-top: 2rem;
+	line-height: 1.5rem;
+}
+
+.profile {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1rem;
+	img {
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+	}
+	p {
+		font-weight: bold;
+		margin-left: 0.75rem;
+		font-size: 14px;
+	}
 }
 
 .modalBody {
-	margin-top: 2.5rem;
+	// margin-top: 2.5rem;
 	h3,
 	pre,
 	p {

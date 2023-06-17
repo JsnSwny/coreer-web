@@ -67,8 +67,13 @@ const Project = ({
 					({calculateTimeDifference(project.start_date, project.end_date)})
 				</p>
 			)}
-			<h3 className={styles.title}>{project.title}</h3>
-			<p className={styles.description}>{project.description}</p>
+			<div className={styles.header}>
+				<h3 className={styles.title}>{project.title}</h3>
+				{project.description && (
+					<p className={styles.description}>{project.description}</p>
+				)}
+			</div>
+
 			{project.languages && project.languages.length > 0 && (
 				<TagsList
 					tags={project.languages.map((item) => ({ text: item.name }))}
