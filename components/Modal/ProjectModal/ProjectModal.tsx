@@ -3,6 +3,7 @@ import { Project } from "@/interfaces/project.model";
 import { faRobot, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./ProjectModal.module.scss";
+import Carousel from "@/components/Carousel/Carousel";
 
 interface ProjectModalProps {
 	project: Project;
@@ -21,24 +22,14 @@ const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
 				className={styles.modalContent}
 				onMouseDown={(e) => e.stopPropagation()}
 			>
-				<div className={styles.placeholder}>
-					{project.image && (
-						<img className={styles.image} src={project.image} />
-					)}
-					{!project.image && (
-						<FontAwesomeIcon
-							icon={faRobot}
-							className={styles.placeholderIcon}
-						/>
-					)}
-				</div>
+				<Carousel images={project.images} />
 				<button className={styles.closeButton} onClick={onClose}>
 					<FontAwesomeIcon icon={faXmark} />
 				</button>
 				<div className={styles.modalHeader}>
 					<div>
 						<h3 className={styles.title}>{project.title}</h3>
-						<p className={styles.description}>{project.description}</p>
+						{project.description && <p className={styles.description}>{project.description}</p>}
 					</div>
 					<div className={styles.buttons}>
 						{project.repo_link && (

@@ -28,5 +28,5 @@ export interface Project {
 	content: string;
 	repo_link?: string;
 	project_link?: string;
-	images?: string[];
+	images: string[];
 }

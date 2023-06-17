@@ -140,6 +140,22 @@
 	background: white;
 }
 
+.aspect_ratio_16x9 {
+	position: relative;
+	width: 100%;
+	padding-top: calc(9 / 16 * 100%);
+	overflow: hidden;
+}
+
+.aspect_ratio_16x9 > * {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
 @keyframes placeholder-pulse-blue {
 	0% {
 		background-color: lighten($primary, 3%);
