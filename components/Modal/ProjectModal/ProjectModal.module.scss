@@ -25,6 +25,12 @@
 	overflow: auto;
 }
 
+.titleWrapper {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+}
+
 .modalHeader {
 	margin-top: 2rem;
 	p {

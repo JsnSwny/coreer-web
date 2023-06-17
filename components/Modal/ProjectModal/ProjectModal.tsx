@@ -4,6 +4,7 @@ import { faRobot, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./ProjectModal.module.scss";
 import Carousel from "@/components/Carousel/Carousel";
+import TagsList from "@/components/Tags/TagsList/TagsList";
 
 interface ProjectModalProps {
 	project: Project;
@@ -12,7 +13,6 @@ interface ProjectModalProps {
 }
 
 const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
-	console.log(project);
 	if (!isOpen) {
 		return null;
 	}
@@ -28,8 +28,16 @@ const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
 				</button>
 				<div className={styles.modalHeader}>
 					<div>
+						<div className={styles.titleWrapper}>
 						<h3 className={styles.title}>{project.title}</h3>
+						{project.languages && project.languages.length > 0 && <TagsList
+							tags={project.languages.map((item) => ({ text: item.name }))}
+						/>}
+						</div>
+						
 						{project.description && <p className={styles.description}>{project.description}</p>}
+						
+						
 					</div>
 					<div className={styles.buttons}>
 						{project.repo_link && (
