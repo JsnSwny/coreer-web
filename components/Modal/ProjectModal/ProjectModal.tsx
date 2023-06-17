@@ -3,7 +3,6 @@ import { Project } from "@/interfaces/project.model";
 import { faRobot, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./ProjectModal.module.scss";
-import { useState } from "react";
 
 interface ProjectModalProps {
 	project: Project;
@@ -12,6 +11,7 @@ interface ProjectModalProps {
 }
 
 const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
+	console.log(project);
 	if (!isOpen) {
 		return null;
 	}
@@ -41,8 +41,21 @@ const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
 						<p className={styles.description}>{project.description}</p>
 					</div>
 					<div className={styles.buttons}>
-						<Button text="Repo" alt={true} />
-						<Button text="View Project" />
+						{project.repo_link && (
+							<Button
+								text="Repo"
+								externalLink
+								alt={true}
+								link={project.repo_link}
+							/>
+						)}
+						{project.project_link && (
+							<Button
+								text="View Project"
+								externalLink
+								link={project.project_link}
+							/>
+						)}
 					</div>
 				</div>
 

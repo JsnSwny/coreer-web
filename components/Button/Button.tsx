@@ -1,10 +1,7 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import styles from "./Button.module.scss";
-import {
-	FontAwesomeIcon,
-	FontAwesomeIconProps,
-} from "@fortawesome/react-fontawesome";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 interface ButtonProps {
 	text: string;
@@ -19,6 +16,7 @@ interface ButtonProps {
 	color?: string;
 	disabled?: boolean;
 	submit?: boolean;
+	externalLink?: boolean;
 }
 
 const Button = ({
@@ -34,6 +32,7 @@ const Button = ({
 	color = "primary",
 	disabled = false,
 	submit = true,
+	externalLink = false,
 }: ButtonProps) => {
 	return (
 		<button
@@ -51,6 +50,7 @@ const Button = ({
 				<Link
 					href={link}
 					className={`${styles.link} ${styles[size]} ${alt ? styles.alt : ""}`}
+					target={externalLink ? "_blank" : ""}
 				>
 					{icon && <FontAwesomeIcon icon={icon} />}
 					{text}
