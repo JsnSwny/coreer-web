@@ -37,10 +37,21 @@ const Project = ({
 	return (
 		<div className={styles.container} onClick={(e) => openProjectModal()}>
 			<div
-				className={`${styles.placeholder} ${showEdit ? styles.showEdit : ""}`}
+				className={`${styles.placeholder} ${
+					!project.image ? styles.placeholderActive : ""
+				} ${showEdit ? styles.showEdit : ""}`}
 				onMouseEnter={handleMouseEnter}
 				onMouseLeave={handleMouseLeave}
 			>
+				{project.video && (
+					<video
+						className={styles.video}
+						ref={videoRef}
+						loop
+						muted
+						src={project.video}
+					></video>
+				)}
 				{project.image && <img className={styles.image} src={project.image} />}
 				{!project.image && (
 					<FontAwesomeIcon icon={faRobot} className={styles.placeholderIcon} />

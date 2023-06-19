@@ -23,7 +23,8 @@ const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
 				className={styles.modalContent}
 				onMouseDown={(e) => e.stopPropagation()}
 			>
-				<Carousel images={project.images} />
+				{project.image && <Carousel images={[project.image, ...project.images]} />}
+				
 				<button className={styles.closeButton} onClick={onClose}>
 					<FontAwesomeIcon icon={faXmark} />
 				</button>

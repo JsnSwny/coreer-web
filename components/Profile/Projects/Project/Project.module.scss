@@ -9,8 +9,7 @@
 .image {
 	width: 100%;
 	height: 250px;
-	border-radius: 10px;
-	border: 1px solid $stroke;
+	border-radius: 20px;
 	object-fit: cover;
 	// box-shadow: 0px 0px 15px -7px rgba(0, 0, 0, 0.25);
 }
@@ -23,7 +22,7 @@
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	border-radius: 10px;
+	border-radius: 20px;
 }
 
 .video {
@@ -59,9 +58,10 @@
 	position: relative;
 	width: 100%;
 	padding-top: 56.25%; /* 16:9 aspect ratio */
-	border-radius: 10px;
-	background: linear-gradient(to right, #3366cc, #2d82cc);
+	border-radius: 20px;
+	background: transparent;
 	margin-bottom: 1rem;
+	outline: 1px solid $stroke;
 	&:hover {
 		.video {
 			opacity: 1;
@@ -75,6 +75,10 @@
 	}
 }
 
+.placeholderActive {
+	background: linear-gradient(to right, #3366cc, #2d82cc);
+}
+
 .showEdit {
 	&::after {
 		content: "";
@@ -84,7 +88,7 @@
 		right: 0;
 		bottom: 0;
 		background: rgba(black, 0.8);
-		border-radius: 10px;
+		border-radius: 20px;
 		opacity: 0;
 		transition: 0.2s ease opacity;
 	}

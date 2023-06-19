@@ -49,7 +49,7 @@ interface ModalFormProps {
 }
 
 const schema = yup.object().shape({
-	// image: yup.mixed(),
+	image: yup.mixed().required("Thumbnail is required"),
 	title: yup.string().required("Title is required"),
 	description: yup.string(),
 	start_date: yup.date(),
@@ -59,7 +59,7 @@ const schema = yup.object().shape({
 		.string()
 		.matches(
 			/^(https?:\/\/)?(www\.)?github\.com\/[A-Za-z0-9_-]+\/[A-Za-z0-9_-]+$/,
-			"Invalid GitHub repo URL"
+			{ message: "Invalid GitHub Repo URL", excludeEmptyString: true }
 		),
 	languages: yup.array(),
 });
@@ -73,12 +73,14 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 		reset,
 		getValues,
 		watch,
+		clearErrors,
+		setError,
+		setValue,
 	} = useForm({
 		mode: "onTouched",
 		resolver: yupResolver(schema),
 	});
 	const { user, setUser } = useAuth();
-	const [image, setImage] = useState<File | null>(null);
 
 	interface Option {
 		value: string;
@@ -120,7 +122,7 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 		let obj: ProjectRequest = {
 			title: data.title,
 			description: data.description,
-			image,
+			image: data.image,
 			start_date: data.start_date
 				? format(data.start_date, "yyyy-MM-dd")
 				: data.start_date,
@@ -159,25 +161,16 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 	const photoUpload = (e: ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
 
-		const maxSize = 5 * 1024 * 1024;
+		// const reader = new FileReader();
+		// const file = e.target.files?.[0] as File | undefined;
 
-		if (file.size <= maxSize) {
-			reader.onloadend = () => {
-				setImage(file);
-			};
-			reader.readAsDataURL(file);
-			// Clear the image error if it was previously set
-			setValue("image", file); // Assuming you are using the 'react-hook-form' `setValue` method
-			return file;
-		} else {
-			// Set the image error when the file size exceeds the limit
-			setValue("image", ""); // Assuming you are using the 'react-hook-form' `setValue` method
-			setError("image", {
-				type: "maxSize",
-				message: "File size exceeds the maximum limit",
-			});
-			return;
-		}
+		// if (file) {
+		// 	reader.onloadend = () => {
+		// 		setImage(file);
+		// 	};
+		// 	reader.readAsDataURL(file);
+		// 	return file;
+		// }
 	};
 
 	const handleDelete = async () => {
@@ -285,9 +278,32 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 				</div>
 
 				<div className={globalStyles.formGroup}>
-					<label className={globalStyles.label}>Thumbnail</label>
-					<input type="file" onChange={photoUpload} />
-					{/* <FormError message={errors.image?.message} /> */}
+					<label className={globalStyles.label}>Thumbnail*</label>
+					<Controller
+						control={control}
+						name="image"
+						render={({ field }) => (
+							<input
+								type="file"
+								onChange={(e) => {
+									const file = e.target.files?.[0];
+									if (file) {
+										field.onChange(file);
+										if (file.size > 5 * 1024 * 1024) {
+											setError("image", {
+												type: "maxSize",
+												message: "File size exceeds the maximum limit of 5MB.",
+											});
+											setValue("image", null);
+										} else {
+											clearErrors("image");
+										}
+									}
+								}}
+							/>
+						)}
+					/>
+					<FormError message={errors.image?.message as string} />
 				</div>
 				<div className={globalStyles.formGroup}>
 					<label className={globalStyles.label}>Video</label>
