@@ -49,9 +49,10 @@ interface ModalFormProps {
 }
 
 const schema = yup.object().shape({
-	image: yup.mixed().required("Thumbnail is required"),
+	image: yup.mixed(),
+	video: yup.mixed(),
 	title: yup.string().required("Title is required"),
-	description: yup.string(),
+	description: yup.string().required("Description is required"),
 	start_date: yup.date(),
 	end_date: yup.date(),
 	project_link: yup.string(),
@@ -61,7 +62,10 @@ const schema = yup.object().shape({
 			/^(https?:\/\/)?(www\.)?github\.com\/[A-Za-z0-9_-]+\/[A-Za-z0-9_-]+$/,
 			{ message: "Invalid GitHub Repo URL", excludeEmptyString: true }
 		),
-	languages: yup.array(),
+	languages: yup
+		.array()
+		.min(1, "At least one skill is required")
+		.required("At least one skill is required"),
 });
 
 const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
@@ -117,12 +121,14 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 		end_date?: Date;
 		project_link?: string;
 		repo_link?: string;
+		video?: File | null;
 		languages?: number[];
 	}) => {
 		let obj: ProjectRequest = {
 			title: data.title,
 			description: data.description,
 			image: data.image,
+			video: data.video,
 			start_date: data.start_date
 				? format(data.start_date, "yyyy-MM-dd")
 				: data.start_date,
@@ -278,7 +284,7 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 				</div>
 
 				<div className={globalStyles.formGroup}>
-					<label className={globalStyles.label}>Thumbnail*</label>
+					<label className={globalStyles.label}>Thumbnail</label>
 					<Controller
 						control={control}
 						name="image"
@@ -289,10 +295,10 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 									const file = e.target.files?.[0];
 									if (file) {
 										field.onChange(file);
-										if (file.size > 5 * 1024 * 1024) {
+										if (file.size > 10 * 1024 * 1024) {
 											setError("image", {
 												type: "maxSize",
-												message: "File size exceeds the maximum limit of 5MB.",
+												message: "File size exceeds the maximum limit of 10MB.",
 											});
 											setValue("image", null);
 										} else {
@@ -307,8 +313,31 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 				</div>
 				<div className={globalStyles.formGroup}>
 					<label className={globalStyles.label}>Video</label>
-					<input type="file" onChange={photoUpload} />
-					{/* <FormError message={errors.image?.message} /> */}
+					<Controller
+						control={control}
+						name="video"
+						render={({ field }) => (
+							<input
+								type="file"
+								onChange={(e) => {
+									const file = e.target.files?.[0];
+									if (file) {
+										field.onChange(file);
+										if (file.size > 20 * 1024 * 1024) {
+											setError("video", {
+												type: "maxSize",
+												message: "File size exceeds the maximum limit of 20MB.",
+											});
+											setValue("video", null);
+										} else {
+											clearErrors("video");
+										}
+									}
+								}}
+							/>
+						)}
+					/>
+					<FormError message={errors.video?.message as string} />
 				</div>
 				<hr className={globalStyles.modalDivider} />
 

@@ -1,13 +1,32 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./Carousel.module.scss";
 import globalStyles from "@/styles/globalStyles.module.scss";
 
 interface CarouselProps {
 	images: string[];
+	video: string | null;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ images }) => {
+const Carousel: React.FC<CarouselProps> = ({
+	images,
+	video,
+}: CarouselProps) => {
 	const [activeIndex, setActiveIndex] = useState(0);
+
+	const videoRef = useRef<HTMLVideoElement | null>(null);
+
+	const handleMouseEnter = () => {
+		if (videoRef.current) {
+			videoRef.current.play();
+		}
+	};
+
+	const handleMouseLeave = () => {
+		if (videoRef.current) {
+			videoRef.current.pause();
+			videoRef.current.currentTime = 0;
+		}
+	};
 
 	const handleThumbnailClick = (index: number) => {
 		setActiveIndex(index);
@@ -23,6 +42,15 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
 					alt="Main Image"
 					className={styles.mainImage}
 				/>
+				{activeIndex == 0 && video && (
+					<video
+						className={styles.mainImage}
+						poster={images[activeIndex]}
+						controls
+					>
+						<source src={video} type="video/mp4" />
+					</video>
+				)}
 			</div>
 			<div className={styles.imageList}>
 				{images.map((image, index) => (

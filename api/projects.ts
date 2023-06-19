@@ -7,6 +7,7 @@ import { Profile } from "@/interfaces/profile.model";
 const convertDataToFormData = (data: ProjectRequest) => {
 	const formData = new FormData();
 	data.image && formData.append("image", data.image);
+	data.video && formData.append("video", data.video);
 	formData.append("title", data.title);
 	data.description && formData.append("description", data.description);
 	data.start_date && formData.append("start_date", data.start_date);
@@ -23,6 +24,8 @@ const convertDataToFormData = (data: ProjectRequest) => {
 };
 
 export const addProject = async (data: ProjectRequest) => {
+	console.log("Adding project");
+	console.log(data);
 	try {
 		const userToken = localStorage.getItem("token");
 		const config = {

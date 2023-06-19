@@ -13,7 +13,7 @@ interface ProjectModalProps {
 }
 
 const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
-	console.log(project)
+	console.log(project);
 	if (!isOpen) {
 		return null;
 	}
@@ -23,29 +23,41 @@ const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
 				className={styles.modalContent}
 				onMouseDown={(e) => e.stopPropagation()}
 			>
-				{project.image && <Carousel images={[project.image, ...project.images]} />}
-				
+				{project.image && (
+					<Carousel
+						video={project.video && project.video}
+						images={[project.image, ...project.images]}
+					/>
+				)}
+
 				<button className={styles.closeButton} onClick={onClose}>
 					<FontAwesomeIcon icon={faXmark} />
 				</button>
 				<div className={styles.modalHeader}>
-				<div className={styles.profile}>
+					<div className={styles.profile}>
 						<img src={project.user.image} className={styles.profileImage} />
-						<p>{project.user.first_name} {project.user.last_name}</p>
+						<p>
+							{project.user.first_name} {project.user.last_name}
+						</p>
 					</div>
 					<div>
 						<div className={styles.titleWrapper}>
-						<h3 className={styles.title}>{project.title}</h3>
-						{project.languages && project.languages.length > 0 && <TagsList
-							tags={project.languages.map((item) => ({ text: item.name }))}
-						/>}
+							<h3 className={styles.title}>{project.title}</h3>
+							{project.languages && project.languages.length > 0 && (
+								<TagsList
+									tags={project.languages.map((item) => ({ text: item.name }))}
+								/>
+							)}
 						</div>
-						
-						{project.description && <div className={styles.description} dangerouslySetInnerHTML={{ __html: project.description }}></div>}
-						
+
+						{project.description && (
+							<div
+								className={styles.description}
+								dangerouslySetInnerHTML={{ __html: project.description }}
+							></div>
+						)}
 					</div>
 
-					
 					<div className={styles.buttons}>
 						{project.repo_link && (
 							<Button
@@ -64,8 +76,6 @@ const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
 						)}
 					</div>
 				</div>
-
-			
 
 				<div className={styles.modalBody}>
 					<div dangerouslySetInnerHTML={{ __html: project.content }}></div>
