@@ -4,7 +4,7 @@ import globalStyles from "@/styles/globalStyles.module.scss";
 
 interface CarouselProps {
 	images: string[];
-	video: string | null;
+	video?: string | null;
 }
 
 const Carousel: React.FC<CarouselProps> = ({
@@ -30,6 +30,8 @@ const Carousel: React.FC<CarouselProps> = ({
 
 	const handleThumbnailClick = (index: number) => {
 		setActiveIndex(index);
+		console.log("Handle Click");
+		videoRef.current && videoRef.current.load();
 	};
 
 	return (
@@ -44,6 +46,7 @@ const Carousel: React.FC<CarouselProps> = ({
 				/>
 				{activeIndex == 0 && video && (
 					<video
+						ref={videoRef}
 						className={styles.mainImage}
 						poster={images[activeIndex]}
 						controls
