@@ -174,21 +174,6 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 		closeModal();
 	};
 
-	const photoUpload = (e: ChangeEvent<HTMLInputElement>) => {
-		e.preventDefault();
-
-		// const reader = new FileReader();
-		// const file = e.target.files?.[0] as File | undefined;
-
-		// if (file) {
-		// 	reader.onloadend = () => {
-		// 		setImage(file);
-		// 	};
-		// 	reader.readAsDataURL(file);
-		// 	return file;
-		// }
-	};
-
 	const handleDelete = async () => {
 		deleteProject(item!.id);
 		setUser({
@@ -197,14 +182,6 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 		});
 		closeModal();
 	};
-
-	// const quillFormats = ["header", "bold", "italic", "underline", "code-block"];
-
-	// const options: Option[] = careerLevels.map((item) => ({
-	// 	value: String(item.id),
-	// 	label: item.name,
-	// 	group: item.category,
-	// }));
 
 	const groupedOptions = [
 		{
@@ -220,8 +197,6 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 			options: options.filter((option) => option.group === "O"),
 		},
 	];
-
-	console.log(groupedOptions);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmitHandler)}>
