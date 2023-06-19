@@ -30,3 +30,9 @@ export interface Project {
 	project_link?: string;
 	images: string[];
 }
+
+export interface ProjectImage {
+	id: number;
+	image: string;
+	project: number;
+}

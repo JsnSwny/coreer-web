@@ -21,6 +21,8 @@ import { Skill } from "@/interfaces/language.model";
 import axios from "axios";
 import { useEffect } from "react";
 import { server } from "@/config";
+import GalleryInput from "../../Inputs/GalleryInput/GalleryInput";
+import { ProjectImage } from "@/interfaces/project.model";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -93,7 +95,7 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 	}
 
 	const [options, setOptions] = useState<Option[]>([]);
-	const [selectedOptions, setSelectedOptions] = useState([]);
+	const [galleryImages, setGalleryImages] = useState<ProjectImage[]>([]);
 
 	useEffect(() => {
 		axios
@@ -144,8 +146,6 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 			languages_id: data.languages ? data.languages : [],
 		};
 
-		console.log(obj);
-
 		if (item) {
 			// Update existing project
 			const updatedProject = await updateProject(item.id, obj);
@@ -158,6 +158,16 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 		} else {
 			// Add new project
 			const newProject = await addProject(obj);
+			const requests = galleryImages.map((image) =>
+				axios.put(`${server}/api/project-images/${image.id}/`, {
+					project: newProject.id,
+				})
+			);
+
+			const response = await Promise.all(requests);
+
+			newProject.images = response.map((item) => item.data.image);
+
 			setUser({ ...user!, projects: [...user!.projects, newProject] });
 		}
 
@@ -339,6 +349,12 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 					/>
 					<FormError message={errors.video?.message as string} />
 				</div>
+
+				<GalleryInput
+					galleryImages={galleryImages}
+					setGalleryImages={setGalleryImages}
+				/>
+
 				<hr className={globalStyles.modalDivider} />
 
 				<div className={globalStyles.modalSection}>
