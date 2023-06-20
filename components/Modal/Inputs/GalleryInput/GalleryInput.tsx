@@ -22,7 +22,8 @@ const GalleryInput = ({
 		setGalleryImages([...galleryImages, file]);
 	};
 
-	const handleImageRemove = (file: ProjectImage) => {
+	const handleImageRemove = async (file: ProjectImage) => {
+		await axios.delete(`${server}/api/project-images/${file.id}/`);
 		setGalleryImages(galleryImages.filter((item) => item.id != file.id));
 	};
 

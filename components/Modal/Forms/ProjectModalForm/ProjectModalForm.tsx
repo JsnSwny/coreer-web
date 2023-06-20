@@ -138,7 +138,10 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 				? format(data.end_date, "yyyy-MM-dd")
 				: data.end_date,
 			user_id: user!.id,
-			project_link: data.project_link,
+			project_link:
+				data.project_link && !/^https?:\/\//i.test(data.project_link)
+					? `https://${data.project_link}` // Prepend 'https://' if URL does not have a protocol
+					: data.repo_link,
 			repo_link:
 				data.repo_link && !/^https?:\/\//i.test(data.repo_link)
 					? `https://${data.repo_link}` // Prepend 'https://' if URL does not have a protocol
@@ -149,6 +152,16 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 		if (item) {
 			// Update existing project
 			const updatedProject = await updateProject(item.id, obj);
+
+			const requests = galleryImages.map((image) =>
+				axios.put(`${server}/api/project-images/${image.id}/`, {
+					project: updatedProject.id,
+				})
+			);
+			const response = await Promise.all(requests);
+
+			updatedProject.images = response.map((item) => item.data.image);
+
 			setUser({
 				...user!,
 				projects: user!.projects.map((project) =>
@@ -197,6 +210,48 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 			options: options.filter((option) => option.group === "O"),
 		},
 	];
+
+	useEffect(() => {
+		if (item) {
+			reset({
+				title: item.title,
+				image: item.image
+					? typeof item.image != "string"
+						? item.image
+						: undefined
+					: undefined,
+				video: item.video ? item.video : undefined,
+				start_date: item.start_date ? parseISO(item.start_date) : undefined,
+				end_date: item.end_date ? parseISO(item.end_date) : undefined,
+				description: item.description,
+				project_link: item.project_link ? item.project_link : undefined,
+				repo_link: item.repo_link ? item.repo_link : undefined,
+				languages: item.languages && item.languages.map((item) => item.id),
+			});
+
+			axios
+				.get(`${server}/api/project-images/?project__id=${item.id}`)
+				.then((res) => setGalleryImages(res.data));
+		}
+	}, [reset]);
+
+	// image: yup.mixed(),
+	// video: yup.mixed(),
+	// title: yup.string().required("Title is required"),
+	// description: yup.string().required("Description is required"),
+	// start_date: yup.date(),
+	// end_date: yup.date(),
+	// project_link: yup.string(),
+	// repo_link: yup
+	// 	.string()
+	// 	.matches(
+	// 		/^(https?:\/\/)?(www\.)?github\.com\/[A-Za-z0-9_-]+\/[A-Za-z0-9_-]+$/,
+	// 		{ message: "Invalid GitHub Repo URL", excludeEmptyString: true }
+	// 	),
+	// languages: yup
+	// 	.array()
+	// 	.min(1, "At least one skill is required")
+	// 	.required("At least one skill is required"),
 
 	return (
 		<form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -276,6 +331,7 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 						render={({ field }) => (
 							<input
 								type="file"
+								accept="image/*"
 								onChange={(e) => {
 									const file = e.target.files?.[0];
 									if (file) {
@@ -304,6 +360,7 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 						render={({ field }) => (
 							<input
 								type="file"
+								accept="video/mp4,video/x-m4v,video/*"
 								onChange={(e) => {
 									const file = e.target.files?.[0];
 									if (file) {
