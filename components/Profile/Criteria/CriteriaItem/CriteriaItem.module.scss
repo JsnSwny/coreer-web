@@ -1,19 +1,20 @@
 @import "@/styles/_variables.scss";
 
 .criteriaItem {
-  flex: 1;
-  background: white;
-  padding: 1.5rem 2rem;
-  border-radius: 10px;
-  border: 1px solid $stroke;
+	flex: 1;
+	background: white;
+	padding: 1.5rem 2rem;
+	border-radius: 10px;
+	border: 1px solid $stroke;
 }
 
 .criteriaHeader {
-  display: flex;
-  justify-content: space-between;
-  svg {
-    height: 20px;
-    color: $primary;
-    cursor: pointer;
-  }
+	display: flex;
+	justify-content: space-between;
+	svg {
+		height: 20px;
+		color: $primary;
+		cursor: pointer;
+	}
+	margin-bottom: 1rem;
 }
