@@ -13,6 +13,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ChangeEvent, useEffect, useState } from "react";
 import styles from "./ProfileBanner.module.scss";
+import globalStyles from "@/styles/globalStyles.module.scss";
+import Project from "../Projects/Project/Project";
 
 interface ProfileBannerProps {
 	profile: Profile;
@@ -114,6 +116,9 @@ const ProfileBanner = ({ profile, openModal }: ProfileBannerProps) => {
 					</div>
 				)}
 			</div>
+			{profile!.projects.length > 0 && (
+				<div className={styles.featuredWrapper}>{/* <Project  /> */}</div>
+			)}
 		</div>
 	);
 };
