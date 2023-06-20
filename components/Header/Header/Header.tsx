@@ -1,5 +1,9 @@
 import { useAuth } from "@/contexts/AuthContext";
-import { faEnvelope, faStar } from "@fortawesome/free-solid-svg-icons";
+import {
+	faEnvelope,
+	faFileCirclePlus,
+	faStar,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -29,13 +33,13 @@ const Header = () => {
 					<div className={styles.right}>
 						{user ? (
 							<>
-								<Link href="/likes" className={styles.icon}>
-									<FontAwesomeIcon icon={faStar} />
+								{/* <Link href="/likes" className={styles.icon}>
+									<FontAwesomeIcon icon={faFileCirclePlus} />
 								</Link>
 
 								<Link href="/messages" className={styles.icon}>
 									<FontAwesomeIcon icon={faEnvelope} />
-								</Link>
+								</Link> */}
 								<NavProfile />
 							</>
 						) : (

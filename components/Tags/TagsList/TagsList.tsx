@@ -3,18 +3,21 @@ import Tag from "../Tag/Tag";
 import styles from "./TagsList.module.scss";
 import React from "react";
 interface TagsListProps {
-  tags: TagModel[];
-  className?: string;
+	tags: TagModel[];
+	className?: string;
+	fade?: boolean;
 }
 
-const TagsList = ({ tags, className }: TagsListProps) => {
-  return (
-    <ul className={`${styles.container} ${className}`}>
-      {tags.map((tag, idx) => (
-        <Tag key={idx} tag={tag} />
-      ))}
-    </ul>
-  );
+const TagsList = ({ tags, className, fade = false }: TagsListProps) => {
+	return (
+		<ul
+			className={`${styles.container} ${className} ${fade ? styles.fade : ""}`}
+		>
+			{tags.map((tag, idx) => (
+				<Tag key={idx} tag={tag} />
+			))}
+		</ul>
+	);
 };
 
 export default TagsList;

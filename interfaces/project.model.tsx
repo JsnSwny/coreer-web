@@ -1,4 +1,3 @@
-import { Tag } from "./tag.model";
 import { Skill } from "./language.model";
 import { Profile } from "./profile.model";
 
@@ -7,11 +6,13 @@ export interface ProjectRequest {
 	start_date?: string | undefined;
 	end_date?: string | undefined;
 	description?: string | undefined;
-	languages?: Skill[];
+	languages_id?: number[];
 	image?: File | null;
 	video?: File | null;
-	user: number;
+	user_id: number;
 	content?: string | undefined;
+	repo_link?: string;
+	project_link?: string;
 }
 
 export interface Project {
@@ -25,4 +26,13 @@ export interface Project {
 	video?: string | null;
 	user: Profile;
 	content: string;
+	repo_link?: string;
+	project_link?: string;
+	images: string[];
+}
+
+export interface ProjectImage {
+	id: number;
+	image: string;
+	project: number;
 }

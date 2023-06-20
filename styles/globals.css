@@ -133,3 +133,7 @@ a {
     color-scheme: dark;
   }
 } */
+
+.ql-editor {
+	min-height: 100px;
+}
