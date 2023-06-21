@@ -14,6 +14,7 @@ interface ProjectProps {
 	action: (title: string, description: string, item: Project) => void;
 	showEdit: boolean;
 	isProfile?: boolean;
+	large?: boolean;
 }
 
 const Project = ({
@@ -22,6 +23,7 @@ const Project = ({
 	action,
 	showEdit,
 	isProfile,
+	large,
 }: ProjectProps) => {
 	const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -40,7 +42,10 @@ const Project = ({
 		}
 	};
 	return (
-		<div className={styles.container} onClick={(e) => openProjectModal()}>
+		<div
+			className={`${styles.container} ${large ? styles.large : ""}`}
+			onClick={(e) => openProjectModal()}
+		>
 			<div
 				className={`${styles.placeholder} ${
 					!project.image ? styles.placeholderActive : ""

@@ -48,7 +48,7 @@ const Home = () => {
 			</Head>
 
 			<main className={styles.main}>
-				<Container margin>
+				<Container margin size="large">
 					{/* <ExploreHeading /> */}
 					<SectionList>
 						<Section>
@@ -57,6 +57,7 @@ const Home = () => {
 									projects={projects}
 									action={() => console.log("open")}
 									showEdit={false}
+									large
 								/>
 							)}
 

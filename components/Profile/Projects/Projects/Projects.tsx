@@ -15,6 +15,7 @@ interface ProjectsProps {
 	isProfile?: boolean;
 	showEdit: boolean;
 	margin?: boolean;
+	large?: boolean;
 }
 
 const Projects = ({
@@ -23,6 +24,7 @@ const Projects = ({
 	isProfile = false,
 	showEdit,
 	margin = false,
+	large = false,
 }: ProjectsProps) => {
 	const [selectedProject, setSelectedProject] = useState<ProjectModel | null>(
 		null
@@ -81,6 +83,7 @@ const Projects = ({
 							action={action}
 							showEdit={showEdit}
 							isProfile={isProfile}
+							large={large}
 						/>
 					))}
 			</div>

@@ -15,13 +15,13 @@ import styles from "./Header.module.scss";
 
 const Header = () => {
 	const router = useRouter();
-	// const largeContainer = router.pathname.includes("/messages");
+	const largeContainer = router.pathname == "/";
 
 	const { user } = useAuth();
 
 	return (
 		<header className={styles.header}>
-			<Container size={"medium"}>
+			<Container size={largeContainer ? "large" : "medium"}>
 				<div className={styles.wrapper}>
 					<Nav>
 						<Link href="/">
