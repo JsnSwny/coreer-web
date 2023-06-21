@@ -12,10 +12,18 @@ import styles from "./Projects.module.scss";
 interface ProjectsProps {
 	projects: ProjectModel[];
 	action: (title: string, description?: string, item?: ProjectModel) => void;
-	profile: Profile;
+	isProfile?: boolean;
+	showEdit: boolean;
+	margin?: boolean;
 }
 
-const Projects = ({ projects, action, profile }: ProjectsProps) => {
+const Projects = ({
+	projects,
+	action,
+	isProfile = false,
+	showEdit,
+	margin = false,
+}: ProjectsProps) => {
 	const [selectedProject, setSelectedProject] = useState<ProjectModel | null>(
 		null
 	);
@@ -45,7 +53,6 @@ const Projects = ({ projects, action, profile }: ProjectsProps) => {
 	// useEffect(() => {
 	//   getRepositories();
 	// }, [githubToken]);
-	const showEdit = profile.id == user?.id;
 
 	return (
 		<>
@@ -55,16 +62,7 @@ const Projects = ({ projects, action, profile }: ProjectsProps) => {
 				isOpen={isModalOpen}
 			/>
 
-			{showEdit && (
-				<Button
-					text="Add New Project"
-					alt
-					icon={faPlus}
-					onClick={() => action("Project")}
-				/>
-			)}
-
-			<div className={styles.container}>
+			<div className={`${styles.container} ${margin ? styles.margin : ""}`}>
 				{projects
 					.slice()
 					.sort((a, b) => {
@@ -82,6 +80,7 @@ const Projects = ({ projects, action, profile }: ProjectsProps) => {
 							openProjectModal={() => openProjectModal(project)}
 							action={action}
 							showEdit={showEdit}
+							isProfile={isProfile}
 						/>
 					))}
 			</div>

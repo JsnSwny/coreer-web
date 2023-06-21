@@ -6,12 +6,14 @@ import { useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faPencil, faRobot } from "@fortawesome/free-solid-svg-icons";
 import { calculateTimeDifference } from "@/utils/calculateTimeDifference";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface ProjectProps {
 	project: Project;
 	openProjectModal: () => void;
 	action: (title: string, description: string, item: Project) => void;
 	showEdit: boolean;
+	isProfile?: boolean;
 }
 
 const Project = ({
@@ -19,8 +21,11 @@ const Project = ({
 	openProjectModal,
 	action,
 	showEdit,
+	isProfile,
 }: ProjectProps) => {
 	const videoRef = useRef<HTMLVideoElement | null>(null);
+
+	const { user } = useAuth();
 
 	const handleMouseEnter = () => {
 		if (videoRef.current) {
@@ -68,7 +73,7 @@ const Project = ({
 					</div>
 				)}
 			</div>
-			{project.start_date && (
+			{isProfile && project.start_date && (
 				<p className={styles.date}>
 					{`${format(parseISO(project.start_date), "MMMM yyyy")} - ${
 						project.end_date
@@ -80,16 +85,19 @@ const Project = ({
 			)}
 			<div className={styles.header}>
 				<h3 className={styles.title}>{project.title}</h3>
-				{project.description && (
+				{/* {project.description && (
 					<p className={styles.description}>
 						{project.description.replace(/<[^>]+>/g, "")}
 					</p>
-				)}
+				)} */}
 			</div>
 
 			{project.languages && project.languages.length > 0 && (
 				<TagsList
-					tags={project.languages.map((item) => ({ text: item.name }))}
+					tags={project.languages.map((item) => ({
+						text: item.name,
+						highlight: user?.languages.some((lang) => item.id == lang.id),
+					}))}
 					fade
 				/>
 			)}

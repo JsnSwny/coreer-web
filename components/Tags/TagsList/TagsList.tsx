@@ -13,9 +13,11 @@ const TagsList = ({ tags, className, fade = false }: TagsListProps) => {
 		<ul
 			className={`${styles.container} ${className} ${fade ? styles.fade : ""}`}
 		>
-			{tags.map((tag, idx) => (
-				<Tag key={idx} tag={tag} />
-			))}
+			{tags
+				.sort((a, b) => b.highlight - a.highlight)
+				.map((tag, idx) => (
+					<Tag key={idx} tag={tag} />
+				))}
 		</ul>
 	);
 };

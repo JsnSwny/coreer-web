@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./ProjectModal.module.scss";
 import Carousel from "@/components/Carousel/Carousel";
 import TagsList from "@/components/Tags/TagsList/TagsList";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface ProjectModalProps {
 	project: Project;
@@ -13,7 +14,8 @@ interface ProjectModalProps {
 }
 
 const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
-	console.log(project);
+	const { user } = useAuth();
+
 	if (!isOpen) {
 		return null;
 	}
@@ -45,7 +47,12 @@ const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
 							<h3 className={styles.title}>{project.title}</h3>
 							{project.languages && project.languages.length > 0 && (
 								<TagsList
-									tags={project.languages.map((item) => ({ text: item.name }))}
+									tags={project.languages.map((item) => ({
+										text: item.name,
+										highlight: user?.languages.some(
+											(lang) => lang.id == item.id
+										),
+									}))}
 								/>
 							)}
 						</div>

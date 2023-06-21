@@ -1,3 +1,4 @@
+import Button from "@/components/Button/Button";
 import Container from "@/components/Container/Container";
 import DetailsModalForm from "@/components/Modal/Forms/DetailsModalForm/DetailsModalForm";
 import EducationModalForm from "@/components/Modal/Forms/EducationModalForm/EducationModalForm";
@@ -14,6 +15,7 @@ import Projects from "@/components/Profile/Projects/Projects/Projects";
 import { server } from "@/config";
 import { useAuth } from "@/contexts/AuthContext";
 import { Profile } from "@/interfaces/profile.model";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Head from "next/head";
 import { useState } from "react";
 
@@ -103,11 +105,23 @@ const Profile = ({ profile }: ProfileProps) => {
 					<Nav section={section} setSection={setSection} />
 
 					{section == "Projects" && (
-						<Projects
-							projects={profile.projects}
-							action={openModal}
-							profile={profile}
-						/>
+						<>
+							{profile.id == user!.id && (
+								<Button
+									text="Add New Project"
+									alt
+									icon={faPlus}
+									onClick={() => openModal("Project")}
+								/>
+							)}
+							<Projects
+								projects={profile.projects}
+								action={openModal}
+								isProfile
+								showEdit={profile.id == user!.id}
+								margin
+							/>
+						</>
 					)}
 					{/* {section == "Similar Users" && (
             <ProfileCardList>

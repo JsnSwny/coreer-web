@@ -1,4 +1,5 @@
 export interface Tag {
-  text: string;
-  color?: string;
+	text: string;
+	color?: string;
+	highlight?: boolean;
 }
