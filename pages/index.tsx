@@ -60,27 +60,27 @@ const Home = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<main className={styles.main}>
-				<Container margin size="large">
-					<ProjectModal
-						project={selectedProject!}
-						onClose={closeProjectModal}
-						isOpen={isProjectModalOpen}
+			<Container margin size="large">
+				<ProjectModal
+					project={selectedProject!}
+					onClose={closeProjectModal}
+					isOpen={isProjectModalOpen}
+				/>
+				{/* <ExploreHeading /> */}
+				{projects.length > 0 && (
+					<Projects
+						projects={projects}
+						action={() => console.log("open")}
+						showEdit={false}
+						large
+						openProjectModal={openProjectModal}
+						margin
 					/>
-					{/* <ExploreHeading /> */}
-					<SectionList>
-						<Section>
-							{projects.length > 0 && (
-								<Projects
-									projects={projects}
-									action={() => console.log("open")}
-									showEdit={false}
-									large
-									openProjectModal={openProjectModal}
-								/>
-							)}
+				)}
+				{/* <SectionList>
+						<Section> */}
 
-							{/* <Projects>
+				{/* <Projects>
 								{projects
 									.slice(1, 5)
 									.map((item, idx) =>
@@ -91,10 +91,9 @@ const Home = () => {
 										)
 									)}
 							</Projects> */}
-						</Section>
-					</SectionList>
-				</Container>
-			</main>
+				{/* </Section>
+					</SectionList> */}
+			</Container>
 		</>
 	);
 };

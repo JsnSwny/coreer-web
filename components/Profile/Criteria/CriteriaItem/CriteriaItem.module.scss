@@ -1,4 +1,5 @@
 @import "@/styles/_variables.scss";
+@import "@/styles/_breakpoints.scss";
 
 .criteriaItem {
 	flex: 1;
@@ -6,6 +7,10 @@
 	padding: 1.5rem 2rem;
 	border-radius: 10px;
 	border: 1px solid $stroke;
+	@include breakpoint(md, max) {
+		flex: none;
+		width: 100%;
+	}
 }
 
 .criteriaHeader {

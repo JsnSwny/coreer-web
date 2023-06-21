@@ -1,9 +1,14 @@
+@import "@/styles/_breakpoints.scss";
+
 .container {
 	max-width: 1100px;
 	margin: 0 auto;
 	position: relative;
 	width: 100%;
 	padding: 0 2rem;
+	@include breakpoint(sm, max) {
+		padding: 0 1rem;
+	}
 }
 
 .flex {
@@ -15,8 +20,11 @@
 .large {
 	max-width: 1500px;
 	padding: 0 3rem;
+	@include breakpoint(sm, max) {
+		padding: 0 1rem;
+	}
 }
 
 .margin {
-	margin: 3rem auto;
+	padding: 3rem 2rem;
 }

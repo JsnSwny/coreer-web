@@ -1,4 +1,5 @@
 @import "@/styles/_variables.scss";
+@import "@/styles/_breakpoints.scss";
 
 .container {
 	position: relative;
@@ -8,10 +9,17 @@
 	padding-bottom: 2rem;
 	border-bottom: 1px solid $stroke;
 	justify-content: space-between;
+	@include breakpoint(md, max) {
+		flex-direction: column;
+		gap: 1rem;
+	}
 }
 
 .left {
 	width: 50%;
+	@include breakpoint(md, max) {
+		width: 100%;
+	}
 }
 
 .details {
@@ -121,7 +129,11 @@
 .featuredWrapper {
 	max-width: 500px;
 
-	width: 100%;
+	width: 50%;
+	@include breakpoint(md, max) {
+		width: 100%;
+		max-width: 100%;
+	}
 }
 
 .imageWrapper {
