@@ -12,6 +12,7 @@ interface CriteriaListProps {
 
 const CriteriaList = ({ profile, openModal }: CriteriaListProps) => {
 	const { user } = useAuth();
+	console.log(user);
 	return (
 		<ul className={styles.criteriaList}>
 			<CriteriaItem
@@ -38,12 +39,15 @@ const CriteriaList = ({ profile, openModal }: CriteriaListProps) => {
 				openModal={() => openModal("Skills")}
 				canEdit={profile.id == user?.id}
 			/>
+
 			<CriteriaItem
 				title="Looking for"
 				items={profile.looking_for.map((item) => ({
 					name: item.name,
 					color: "black",
-					highlight: user ? user.current_level.id == item.id : true,
+					highlight: user
+						? user.current_level && user.current_level.id == item.id
+						: true,
 				}))}
 			/>
 		</ul>
