@@ -19,6 +19,7 @@ const CriteriaList = ({ profile, openModal }: CriteriaListProps) => {
 				items={profile.interests.map((item: Interest) => ({
 					name: item.name,
 					color: item.interest_type == "C" ? "purple" : "orange",
+					highlight: user!.interests.some((interest) => interest.id == item.id),
 				}))}
 				openModal={() => openModal("Interests")}
 				canEdit={profile.id == user?.id}
@@ -28,6 +29,7 @@ const CriteriaList = ({ profile, openModal }: CriteriaListProps) => {
 				items={profile.languages.map((item) => ({
 					name: item.name,
 					color: "blue",
+					highlight: user!.languages.some((lang) => lang.id == item.id),
 				}))}
 				openModal={() => openModal("Skills")}
 				canEdit={profile.id == user?.id}
@@ -37,6 +39,7 @@ const CriteriaList = ({ profile, openModal }: CriteriaListProps) => {
 				items={profile.looking_for.map((item) => ({
 					name: item.name,
 					color: "black",
+					highlight: user!.current_level.id == item.id,
 				}))}
 			/>
 		</ul>
