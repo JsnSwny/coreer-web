@@ -70,10 +70,28 @@ const Projects = ({
 					.sort((a, b) => {
 						const endDateA = a.end_date ? new Date(a.end_date) : null;
 						const endDateB = b.end_date ? new Date(b.end_date) : null;
-						return differenceInMonths(
-							endDateB || new Date(),
-							endDateA || new Date()
-						);
+						const startDateA = a.start_date ? new Date(a.start_date) : null;
+						const startDateB = b.start_date ? new Date(b.start_date) : null;
+
+						if (!startDateA && !startDateB) {
+							// If both projects have no start date, sort by end date
+							return differenceInMonths(
+								endDateB || new Date(),
+								endDateA || new Date()
+							);
+						} else if (!startDateA) {
+							// If only project A has no start date, move it to the end
+							return 1;
+						} else if (!startDateB) {
+							// If only project B has no start date, move it to the end
+							return -1;
+						} else {
+							// Sort by end date for projects with both start and end dates
+							return differenceInMonths(
+								endDateB || new Date(),
+								endDateA || new Date()
+							);
+						}
 					})
 					.map((project) => (
 						<Project
