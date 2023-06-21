@@ -134,6 +134,7 @@ const ProfileBanner = ({
 							<img src={pinnedProject.image} />
 						</div>
 						<div className={styles.featuredText}>
+							<h4>Featured Project</h4>
 							<p>{pinnedProject.title}</p>
 						</div>
 					</div>
