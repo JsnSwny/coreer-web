@@ -220,7 +220,11 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 						? item.image
 						: undefined
 					: undefined,
-				video: item.video ? item.video : undefined,
+				video: item.video
+					? typeof item.video != "string"
+						? item.video
+						: undefined
+					: undefined,
 				start_date: item.start_date ? parseISO(item.start_date) : undefined,
 				end_date: item.end_date ? parseISO(item.end_date) : undefined,
 				description: item.description,
