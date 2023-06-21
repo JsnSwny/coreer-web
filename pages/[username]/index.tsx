@@ -145,6 +145,7 @@ const Profile = ({ profile }: ProfileProps) => {
 								showEdit={user ? profile.id == user!.id : false}
 								margin
 								openProjectModal={openProjectModal}
+								sortByEndDate
 							/>
 						</>
 					)}

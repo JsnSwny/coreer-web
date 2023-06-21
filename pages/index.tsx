@@ -44,6 +44,7 @@ const Home = () => {
 		// router.push(`/${user!.username}`);
 		if (userToken) {
 			axios.get(`${server}/api/projects/`).then((res) => {
+				console.log(res.data);
 				setProjects(res.data);
 				setLoading(false);
 			});
