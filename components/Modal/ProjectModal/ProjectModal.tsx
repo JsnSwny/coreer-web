@@ -6,6 +6,7 @@ import styles from "./ProjectModal.module.scss";
 import Carousel from "@/components/Carousel/Carousel";
 import TagsList from "@/components/Tags/TagsList/TagsList";
 import { useAuth } from "@/contexts/AuthContext";
+import Link from "next/link";
 
 interface ProjectModalProps {
 	project: Project;
@@ -36,12 +37,13 @@ const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
 					<FontAwesomeIcon icon={faXmark} />
 				</button>
 				<div className={styles.modalHeader}>
-					<div className={styles.profile}>
+					{console.log(project.user)}
+					<Link href={`/${project.user.username}`} className={styles.profile}>
 						<img src={project.user.image} className={styles.profileImage} />
 						<p>
 							{project.user.first_name} {project.user.last_name}
 						</p>
-					</div>
+					</Link>
 					<div>
 						<div className={styles.titleWrapper}>
 							<h3 className={styles.title}>{project.title}</h3>

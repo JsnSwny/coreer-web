@@ -36,7 +36,7 @@ const Home = () => {
 				setLoading(false);
 			});
 		}
-	});
+	}, []);
 
 	return (
 		<>

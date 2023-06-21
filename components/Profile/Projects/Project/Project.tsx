@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faPencil, faRobot } from "@fortawesome/free-solid-svg-icons";
 import { calculateTimeDifference } from "@/utils/calculateTimeDifference";
 import { useAuth } from "@/contexts/AuthContext";
+import Link from "next/link";
 
 interface ProjectProps {
 	project: Project;
@@ -78,6 +79,18 @@ const Project = ({
 					</div>
 				)}
 			</div>
+			{!isProfile && (
+				<Link
+					href={`/${project.user.username}`}
+					className={styles.profile}
+					onClick={(e) => e.stopPropagation()}
+				>
+					<img src={project.user.image} className={styles.profileImage} />
+					<p>
+						{project.user.first_name} {project.user.last_name}
+					</p>
+				</Link>
+			)}
 			{isProfile && project.start_date && (
 				<p className={styles.date}>
 					{`${format(parseISO(project.start_date), "MMMM yyyy")} - ${

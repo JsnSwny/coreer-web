@@ -130,3 +130,19 @@
 		color: $primary;
 	}
 }
+
+.profile {
+	display: flex;
+	align-items: center;
+	margin-bottom: 0.5rem;
+	img {
+		width: 18px;
+		height: 18px;
+		border-radius: 50%;
+	}
+	p {
+		font-weight: bold;
+		margin-left: 0.5rem;
+		font-size: 12px;
+	}
+}
