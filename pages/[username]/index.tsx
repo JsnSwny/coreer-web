@@ -106,7 +106,7 @@ const Profile = ({ profile }: ProfileProps) => {
 
 					{section == "Projects" && (
 						<>
-							{profile.id == user!.id && (
+							{user && profile.id == user!.id && (
 								<Button
 									text="Add New Project"
 									alt
@@ -118,7 +118,7 @@ const Profile = ({ profile }: ProfileProps) => {
 								projects={profile.projects}
 								action={openModal}
 								isProfile
-								showEdit={profile.id == user!.id}
+								showEdit={user ? profile.id == user!.id : false}
 								margin
 							/>
 						</>
