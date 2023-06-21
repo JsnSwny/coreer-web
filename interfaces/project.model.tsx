@@ -29,6 +29,7 @@ export interface Project {
 	repo_link?: string;
 	project_link?: string;
 	images: string[];
+	is_pinned: boolean;
 }
 
 export interface ProjectImage {

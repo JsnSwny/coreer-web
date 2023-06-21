@@ -40,7 +40,7 @@ const CriteriaList = ({ profile, openModal }: CriteriaListProps) => {
 				canEdit={profile.id == user?.id}
 			/>
 
-			<CriteriaItem
+			{/* <CriteriaItem
 				title="Looking for"
 				items={profile.looking_for.map((item) => ({
 					name: item.name,
@@ -49,7 +49,7 @@ const CriteriaList = ({ profile, openModal }: CriteriaListProps) => {
 						? user.current_level && user.current_level.id == item.id
 						: true,
 				}))}
-			/>
+			/> */}
 		</ul>
 	);
 };

@@ -16,6 +16,7 @@ interface ProjectsProps {
 	showEdit: boolean;
 	margin?: boolean;
 	large?: boolean;
+	openProjectModal: (project: ProjectModel) => void;
 }
 
 const Projects = ({
@@ -25,45 +26,10 @@ const Projects = ({
 	showEdit,
 	margin = false,
 	large = false,
+	openProjectModal,
 }: ProjectsProps) => {
-	const [selectedProject, setSelectedProject] = useState<ProjectModel | null>(
-		null
-	);
-	const [isModalOpen, setIsModalOpen] = useState(false);
-
-	const openProjectModal = (project: ProjectModel) => {
-		setIsModalOpen(true);
-		setSelectedProject(project);
-	};
-
-	const closeModal = () => {
-		setSelectedProject(null);
-		setIsModalOpen(false);
-	};
-
-	const { githubToken, user } = useAuth();
-	// const getRepositories = async () => {
-	//   const response = await axios.get("https://api.github.com/user/repos", {
-	//     headers: {
-	//       Authorization: `Bearer ${githubToken}`,
-	//     },
-	//   });
-	//   const repositories = response.data;
-	//   console.log(repositories);
-	// };
-
-	// useEffect(() => {
-	//   getRepositories();
-	// }, [githubToken]);
-
 	return (
 		<>
-			<ProjectModal
-				project={selectedProject!}
-				onClose={closeModal}
-				isOpen={isModalOpen}
-			/>
-
 			<div className={`${styles.container} ${margin ? styles.margin : ""}`}>
 				{projects
 					.slice()

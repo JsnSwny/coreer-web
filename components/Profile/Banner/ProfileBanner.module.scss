@@ -120,5 +120,56 @@
 
 .featuredWrapper {
 	max-width: 500px;
+
 	width: 100%;
+}
+
+.imageWrapper {
+	position: relative;
+	img {
+		border-radius: 30px;
+	}
+	cursor: pointer;
+	&:hover {
+		&::after {
+			opacity: 0;
+		}
+		.featuredText {
+			background-color: rgba($primary, 0.9);
+		}
+	}
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		display: block;
+
+		background: linear-gradient(
+			rgba(51, 102, 204, 0.1) 20%,
+			rgba(11, 29, 65, 0.96) 70%
+		);
+		opacity: 1;
+		border-radius: 30px;
+		transition: 0.4s ease opacity;
+	}
+}
+
+.featuredText {
+	position: absolute;
+	padding: 1rem 1.5rem;
+	bottom: 0;
+	left: 0;
+	color: white;
+	font-size: 22px;
+	font-weight: bold;
+	font-family: "Newsreader", serif;
+	line-height: 1.8rem;
+	z-index: 2;
+	background-color: transparent;
+	transition: 0.2s ease background-color;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
 }

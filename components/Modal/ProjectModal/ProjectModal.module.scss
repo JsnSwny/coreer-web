@@ -115,7 +115,7 @@
 .profile {
 	display: flex;
 	align-items: center;
-	margin-bottom: 0.75rem;
+	margin-bottom: 1rem;
 	img {
 		width: 25px;
 		height: 25px;
@@ -125,6 +125,20 @@
 		font-weight: bold;
 		margin-left: 0.75rem;
 		font-size: 14px;
+	}
+}
+
+.featureWrapper {
+	display: flex;
+}
+
+.featureIcon {
+	height: 24px;
+	margin-right: 1rem;
+	color: $dark-light;
+	cursor: pointer;
+	&.pinned {
+		color: $primary;
 	}
 }
 

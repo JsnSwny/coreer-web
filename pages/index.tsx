@@ -18,15 +18,27 @@ import TopMatchBannerPlaceholder from "@/components/Banner/TopMatchBanner/TopMat
 import ProfileCardPlaceholder from "@/components/Card/ProfileCard/ProfileCardPlaceholder";
 import { Project } from "@/interfaces/project.model";
 import Projects from "@/components/Profile/Projects/Projects/Projects";
+import ProjectModal from "@/components/Modal/ProjectModal/ProjectModal";
 
 const Home = () => {
 	const { user, userToken } = useAuth();
 
-	const router = useRouter();
-
 	const [projects, setProjects] = useState<Project[]>([]);
 
 	const [loading, setLoading] = useState(true);
+
+	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+	const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
+
+	const openProjectModal = (project: Project) => {
+		setIsProjectModalOpen(true);
+		setSelectedProject(project);
+	};
+
+	const closeProjectModal = () => {
+		setSelectedProject(null);
+		setIsProjectModalOpen(false);
+	};
 
 	useEffect(() => {
 		// router.push(`/${user!.username}`);
@@ -49,6 +61,11 @@ const Home = () => {
 
 			<main className={styles.main}>
 				<Container margin size="large">
+					<ProjectModal
+						project={selectedProject!}
+						onClose={closeProjectModal}
+						isOpen={isProjectModalOpen}
+					/>
 					{/* <ExploreHeading /> */}
 					<SectionList>
 						<Section>
@@ -58,6 +75,7 @@ const Home = () => {
 									action={() => console.log("open")}
 									showEdit={false}
 									large
+									openProjectModal={openProjectModal}
 								/>
 							)}
 

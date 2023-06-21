@@ -1,12 +1,20 @@
 import Button from "@/components/Button/Button";
 import { Project } from "@/interfaces/project.model";
-import { faRobot, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+	faMapPin,
+	faRobot,
+	faThumbTack,
+	faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./ProjectModal.module.scss";
 import Carousel from "@/components/Carousel/Carousel";
 import TagsList from "@/components/Tags/TagsList/TagsList";
 import { useAuth } from "@/contexts/AuthContext";
 import Link from "next/link";
+import axios from "axios";
+import { server } from "@/config";
+import { toast } from "react-toastify";
 
 interface ProjectModalProps {
 	project: Project;
@@ -15,7 +23,7 @@ interface ProjectModalProps {
 }
 
 const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
-	const { user } = useAuth();
+	const { user, userToken, setUser } = useAuth();
 
 	if (!isOpen) {
 		return null;
@@ -37,7 +45,6 @@ const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
 					<FontAwesomeIcon icon={faXmark} />
 				</button>
 				<div className={styles.modalHeader}>
-					{console.log(project.user)}
 					<Link href={`/${project.user.username}`} className={styles.profile}>
 						<img src={project.user.image} className={styles.profileImage} />
 						<p>
@@ -46,7 +53,39 @@ const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
 					</Link>
 					<div>
 						<div className={styles.titleWrapper}>
-							<h3 className={styles.title}>{project.title}</h3>
+							<div className={styles.featureWrapper}>
+								{user && project.user.id == user.id && (
+									<FontAwesomeIcon
+										icon={faThumbTack}
+										className={`${styles.featureIcon} ${
+											project.is_pinned ? styles.pinned : ""
+										}`}
+										onClick={() =>
+											axios
+												.post(
+													`${server}/api/projects/${project.id}/pin/`,
+													{},
+													{
+														headers: {
+															Authorization: `Token ${userToken}`,
+														},
+													}
+												)
+												.then((response) => {
+													toast.success(
+														"Project pinned (Page requires refresh)"
+													);
+												})
+												.catch((error) => {
+													// Error handling
+													console.error(error.response);
+												})
+										}
+									/>
+								)}
+								<h3 className={styles.title}>{project.title}</h3>
+							</div>
+
 							{project.languages && project.languages.length > 0 && (
 								<TagsList
 									tags={project.languages.map((item) => ({

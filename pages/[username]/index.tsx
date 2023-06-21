@@ -7,6 +7,7 @@ import ProjectModalForm from "@/components/Modal/Forms/ProjectModalForm/ProjectM
 import SkillsModalForm from "@/components/Modal/Forms/SkillsModalForm/SkillsModalForm";
 import WorkModalForm from "@/components/Modal/Forms/WorkModalForm/WorkModalForm";
 import Modal from "@/components/Modal/Modal/Modal";
+import ProjectModal from "@/components/Modal/ProjectModal/ProjectModal";
 import AboutSection from "@/components/Profile/About/AboutSection/AboutSection";
 import ProfileBanner from "@/components/Profile/Banner/ProfileBanner";
 import CriteriaList from "@/components/Profile/Criteria/CriteriaList/CriteriaList";
@@ -15,6 +16,7 @@ import Projects from "@/components/Profile/Projects/Projects/Projects";
 import { server } from "@/config";
 import { useAuth } from "@/contexts/AuthContext";
 import { Profile } from "@/interfaces/profile.model";
+import { Project } from "@/interfaces/project.model";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Head from "next/head";
 import { useState } from "react";
@@ -40,7 +42,19 @@ const Profile = ({ profile }: ProfileProps) => {
 	const [activeSection, setActiveSection] = useState<ActiveSectionProps | null>(
 		null
 	);
-	const [recommendations, setRecommendations] = useState([]);
+
+	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+	const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
+
+	const openProjectModal = (project: Project) => {
+		setIsProjectModalOpen(true);
+		setSelectedProject(project);
+	};
+
+	const closeProjectModal = () => {
+		setSelectedProject(null);
+		setIsProjectModalOpen(false);
+	};
 
 	const [section, setSection] = useState("Projects");
 
@@ -100,7 +114,17 @@ const Profile = ({ profile }: ProfileProps) => {
 						</Modal>
 					)}
 
-					<ProfileBanner profile={profile} openModal={openModal} />
+					<ProjectModal
+						project={selectedProject!}
+						onClose={closeProjectModal}
+						isOpen={isProjectModalOpen}
+					/>
+
+					<ProfileBanner
+						profile={profile}
+						openModal={openModal}
+						openProjectModal={openProjectModal}
+					/>
 					<CriteriaList profile={profile} openModal={openModal} />
 					<Nav section={section} setSection={setSection} />
 
@@ -120,6 +144,7 @@ const Profile = ({ profile }: ProfileProps) => {
 								isProfile
 								showEdit={user ? profile.id == user!.id : false}
 								margin
+								openProjectModal={openProjectModal}
 							/>
 						</>
 					)}

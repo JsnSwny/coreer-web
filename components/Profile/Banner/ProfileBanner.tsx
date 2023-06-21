@@ -15,13 +15,19 @@ import { ChangeEvent, useEffect, useState } from "react";
 import styles from "./ProfileBanner.module.scss";
 import globalStyles from "@/styles/globalStyles.module.scss";
 import Project from "../Projects/Project/Project";
+import { Project as ProjectModel } from "@/interfaces/project.model";
 
 interface ProfileBannerProps {
 	profile: Profile;
 	openModal: (section: string, description?: string, item?: object) => void;
+	openProjectModal: (project: ProjectModel) => void;
 }
 
-const ProfileBanner = ({ profile, openModal }: ProfileBannerProps) => {
+const ProfileBanner = ({
+	profile,
+	openModal,
+	openProjectModal,
+}: ProfileBannerProps) => {
 	const [isHovered, setIsHovered] = useState(false);
 	const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(
 		profile.profile_photo ? profile.profile_photo : profile.image
@@ -33,6 +39,8 @@ const ProfileBanner = ({ profile, openModal }: ProfileBannerProps) => {
 			profile.profile_photo ? profile.profile_photo : profile.image
 		);
 	}, [profile]);
+
+	const pinnedProject = profile.projects.find((item) => item.is_pinned);
 
 	const photoUpload = (e: ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
@@ -116,8 +124,20 @@ const ProfileBanner = ({ profile, openModal }: ProfileBannerProps) => {
 					</div>
 				)}
 			</div>
-			{profile!.projects.length > 0 && (
-				<div className={styles.featuredWrapper}>{/* <Project  /> */}</div>
+			{pinnedProject && pinnedProject.image && profile!.projects.length > 0 && (
+				<div className={styles.featuredWrapper}>
+					<div
+						className={`${styles.imageWrapper}`}
+						onClick={() => openProjectModal(pinnedProject)}
+					>
+						<div className={`${globalStyles.aspect_ratio_16x9}`}>
+							<img src={pinnedProject.image} />
+						</div>
+						<div className={styles.featuredText}>
+							<p>{pinnedProject.title}</p>
+						</div>
+					</div>
+				</div>
 			)}
 		</div>
 	);
