@@ -74,7 +74,6 @@ const Home = () => {
 						showEdit={false}
 						large
 						openProjectModal={openProjectModal}
-						margin
 					/>
 				)}
 				{/* <SectionList>
