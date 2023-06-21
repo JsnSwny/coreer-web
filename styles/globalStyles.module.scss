@@ -1,4 +1,5 @@
 @import "./variables";
+@import "./breakpoints";
 
 .input {
 	display: block;
@@ -115,6 +116,9 @@
 	gap: 2rem;
 	.formGroup {
 		flex: 1;
+	}
+	@include breakpoint(sm, max) {
+		flex-direction: column;
 	}
 }
 
