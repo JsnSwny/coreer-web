@@ -44,6 +44,8 @@ const Layout = ({ children }: LayoutProps) => {
 						async
 						src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`}
 					></script>
+
+					<meta name="viewport" content="width=device-width, initial-scale=1" />
 				</Head>
 				{/* <Sidebar /> */}
 				<ToastContainer />
