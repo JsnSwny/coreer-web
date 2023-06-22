@@ -91,7 +91,11 @@ const Project = ({
 					className={styles.profile}
 					onClick={(e) => e.stopPropagation()}
 				>
-					<img src={project.user.image} className={styles.profileImage} />
+					<img
+						alt="Project creator profile picture"
+						src={project.user.image}
+						className={styles.profileImage}
+					/>
 					<p>
 						{project.user.first_name} {project.user.last_name}
 					</p>
