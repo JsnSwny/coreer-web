@@ -52,7 +52,7 @@
 }
 
 .title {
-	font-size: 1.25rem;
+	font-size: 1.125rem;
 	line-height: 1.65rem;
 }
 
@@ -157,16 +157,17 @@
 	img {
 		border-radius: 50%;
 		object-fit: cover;
-		width: 24px;
-		height: 24px;
+		width: 20px;
+		height: 20px;
 		@include breakpoint(sm, max) {
-			width: 28px;
-			height: 28px;
+			width: 24px;
+			height: 24px;
 		}
 	}
 	p {
 		font-weight: bold;
 		font-size: 0.75rem;
+		color: $dark-light;
 		@include breakpoint(sm, max) {
 			font-size: 0.875rem;
 		}
