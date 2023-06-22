@@ -46,7 +46,11 @@ const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
 				</button>
 				<div className={styles.modalHeader}>
 					<Link href={`/${project.user.username}`} className={styles.profile}>
-						<img src={project.user.image} className={styles.profileImage} />
+						<img
+							alt="Project creator profile picture"
+							src={project.user.image}
+							className={styles.profileImage}
+						/>
 						<p>
 							{project.user.first_name} {project.user.last_name}
 						</p>

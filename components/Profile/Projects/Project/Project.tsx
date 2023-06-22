@@ -63,7 +63,13 @@ const Project = ({
 						src={project.video}
 					></video>
 				)}
-				{project.image && <img className={styles.image} src={project.image} />}
+				{project.image && (
+					<img
+						alt="Project thumbnail"
+						className={styles.image}
+						src={project.image}
+					/>
+				)}
 				{!project.image && (
 					<FontAwesomeIcon icon={faRobot} className={styles.placeholderIcon} />
 				)}

@@ -18,7 +18,11 @@ export default function NavProfile() {
 	return (
 		<div className={styles.profile}>
 			<button className={styles.profileButton} onClick={handleMenuClick}>
-				<img src={user?.image} className={styles.profileImage} />
+				<img
+					alt="User profile picture"
+					src={user?.image}
+					className={styles.profileImage}
+				/>
 			</button>
 			{showMenu && (
 				<ul className={styles.menu}>
