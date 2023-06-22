@@ -124,7 +124,9 @@ const Project = ({
 				<TagsList
 					tags={project.languages.map((item) => ({
 						text: item.name,
-						highlight: user?.languages.some((lang) => item.id == lang.id),
+						highlight: user
+							? user?.languages.some((lang) => item.id == lang.id)
+							: true,
 					}))}
 					fade
 				/>
