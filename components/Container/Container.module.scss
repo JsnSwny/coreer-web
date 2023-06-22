@@ -26,8 +26,10 @@
 }
 
 .margin {
-	padding: 2rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 	@include breakpoint(sm, max) {
-		padding: 1rem 1rem;
+		padding-top: 1rem;
+		padding-bottom: 1rem;
 	}
 }
