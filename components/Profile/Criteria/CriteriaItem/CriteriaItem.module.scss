@@ -21,5 +21,11 @@
 		color: $primary;
 		cursor: pointer;
 	}
+	h2 {
+		font-size: 1.5rem;
+		@include breakpoint(sm, max) {
+			font-size: 1.25rem;
+		}
+	}
 	margin-bottom: 1rem;
 }

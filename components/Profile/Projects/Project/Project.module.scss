@@ -52,13 +52,13 @@
 }
 
 .title {
-	font-size: 18px;
-	line-height: 1.5rem;
+	font-size: 1.25rem;
+	line-height: 1.65rem;
 }
 
 .date {
 	font-size: 14px;
-	margin-bottom: 0.75rem;
+	margin-bottom: 0.5rem;
 }
 
 .description {
@@ -81,7 +81,7 @@
 	padding-top: 56.25%; /* 16:9 aspect ratio */
 	border-radius: 20px;
 	background: transparent;
-	margin-bottom: 1rem;
+	margin-bottom: 0.75rem;
 	outline: 1px solid $stroke;
 	// background: linear-gradient(to right, #3366cc, #2d82cc);
 
@@ -157,12 +157,19 @@
 	img {
 		border-radius: 50%;
 		object-fit: cover;
-		width: 18px;
-		height: 18px;
+		width: 24px;
+		height: 24px;
+		@include breakpoint(sm, max) {
+			width: 28px;
+			height: 28px;
+		}
 	}
 	p {
 		font-weight: bold;
-		font-size: 12px;
+		font-size: 0.75rem;
+		@include breakpoint(sm, max) {
+			font-size: 0.875rem;
+		}
 	}
 }
 

@@ -1,4 +1,5 @@
 @import "@/styles/_variables.scss";
+@import "@/styles/_breakpoints.scss";
 
 .header {
 	background-color: darken($primary, 0%);
@@ -24,11 +25,14 @@
 }
 
 .title {
-	font-size: 28px;
+	font-size: 2rem;
 	font-weight: bold;
 	color: white;
 
 	font-family: "Newreader", serif;
+	@include breakpoint(md, max) {
+		font-size: 1.4rem;
+	}
 }
 
 .right {
