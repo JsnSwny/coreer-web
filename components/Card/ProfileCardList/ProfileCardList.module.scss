@@ -1,13 +1,13 @@
 .cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1rem;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 1rem;
 }
 
 .large {
-  grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(4, 1fr);
 }
 
 .container {
-  flex: 1;
+	flex: 1;
 }

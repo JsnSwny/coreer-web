@@ -6,6 +6,7 @@ import { faLocationPin } from "@fortawesome/free-solid-svg-icons";
 import TagsList from "@/components/Tags/TagsList/TagsList";
 import Link from "next/link";
 import LikeButton from "@/components/Button/LikeButton/LikeButton";
+import { useAuth } from "@/contexts/AuthContext";
 
 type EndDate = Date | "Present";
 
@@ -14,6 +15,7 @@ interface CardProps {
 }
 
 const ProfileCard = ({ profile }: CardProps) => {
+	const { user } = useAuth();
 	const getLocation = () => {
 		if (profile.location) {
 			let location = profile.location.split(", ");
@@ -23,7 +25,7 @@ const ProfileCard = ({ profile }: CardProps) => {
 	return (
 		<Link href={`/${profile.username}`} className={styles.card}>
 			<img className={styles.image} src={profile.image} />
-			<LikeButton profile={profile} className={styles.likeButton} />
+			{user && <LikeButton profile={profile} className={styles.likeButton} />}
 			<div className={styles.content}>
 				<h3 className={styles.title}>
 					{profile.first_name} {profile.last_name}

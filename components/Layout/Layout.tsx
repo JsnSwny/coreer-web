@@ -50,7 +50,7 @@ const Layout = ({ children }: LayoutProps) => {
 				{/* <Sidebar /> */}
 				<ToastContainer />
 				<div className={styles.content}>
-					<Header />
+					{!router.pathname.includes("/onboarding") && <Header />}
 					<main>{children}</main>
 				</div>
 			</div>

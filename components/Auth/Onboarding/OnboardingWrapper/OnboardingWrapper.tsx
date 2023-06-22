@@ -14,7 +14,7 @@ const OnboardingWrapper = ({
 }: OnboardingWrapperProps) => {
 	return (
 		<div className={styles.wrapper}>
-			<h3 className={styles.logo}>Coreer.</h3>
+			<h3 className={styles.logo}>coreer</h3>
 			<OnboardingNav />
 			<div className={styles.content}>
 				<div className={styles.header}>
