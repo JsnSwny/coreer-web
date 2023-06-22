@@ -8,6 +8,7 @@ import { differenceInMonths } from "date-fns";
 import { useState } from "react";
 import Project from "../Project/Project";
 import styles from "./Projects.module.scss";
+import ProjectPlaceholder from "../Project/ProjectPlaceholder";
 
 interface ProjectsProps {
 	projects: ProjectModel[];
@@ -18,6 +19,7 @@ interface ProjectsProps {
 	large?: boolean;
 	openProjectModal: (project: ProjectModel) => void;
 	sortByEndDate?: boolean;
+	loading?: boolean;
 }
 
 const Projects = ({
@@ -29,7 +31,27 @@ const Projects = ({
 	large = false,
 	openProjectModal,
 	sortByEndDate,
+	loading = false,
 }: ProjectsProps) => {
+	if (loading) {
+		console.log(loading);
+		return (
+			<div className={`${styles.container}`}>
+				<ProjectPlaceholder />
+				<ProjectPlaceholder />
+				<ProjectPlaceholder />
+				<ProjectPlaceholder />
+				<ProjectPlaceholder />
+				<ProjectPlaceholder />
+				<ProjectPlaceholder />
+				<ProjectPlaceholder />
+				<ProjectPlaceholder />
+				<ProjectPlaceholder />
+				<ProjectPlaceholder />
+				<ProjectPlaceholder />
+			</div>
+		);
+	}
 	return (
 		<>
 			<div className={`${styles.container} ${margin ? styles.margin : ""}`}>

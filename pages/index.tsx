@@ -42,10 +42,12 @@ const Home = () => {
 
 	useEffect(() => {
 		// router.push(`/${user!.username}`);
+		console.log(loading);
 		axios.get(`${server}/api/projects/`).then((res) => {
 			console.log(res.data);
 			setProjects(res.data);
 			setLoading(false);
+			console.log("Not loading");
 		});
 	}, []);
 
@@ -68,15 +70,14 @@ const Home = () => {
 					isOpen={isProjectModalOpen}
 				/>
 				{/* <ExploreHeading /> */}
-				{projects.length > 0 && (
-					<Projects
-						projects={projects}
-						action={() => console.log("open")}
-						showEdit={false}
-						large
-						openProjectModal={openProjectModal}
-					/>
-				)}
+				<Projects
+					projects={projects}
+					action={() => console.log("open")}
+					showEdit={false}
+					large
+					openProjectModal={openProjectModal}
+					loading={loading}
+				/>
 			</Container>
 		</>
 	);
