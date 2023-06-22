@@ -7,7 +7,7 @@
 	width: 100%;
 	padding: 0 2rem;
 	@include breakpoint(sm, max) {
-		padding: 0 0.5rem;
+		padding: 0 1rem;
 	}
 }
 
@@ -21,13 +21,13 @@
 	max-width: 1500px;
 	padding: 0 3rem;
 	@include breakpoint(sm, max) {
-		padding: 0 0.5rem;
+		padding: 0 1rem;
 	}
 }
 
 .margin {
 	padding: 2rem;
 	@include breakpoint(sm, max) {
-		padding: 1rem 0.5rem;
+		padding: 1rem 1rem;
 	}
 }
