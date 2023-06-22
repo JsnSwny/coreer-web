@@ -8,7 +8,6 @@ import { faPen, faPencil, faRobot } from "@fortawesome/free-solid-svg-icons";
 import { calculateTimeDifference } from "@/utils/calculateTimeDifference";
 import { useAuth } from "@/contexts/AuthContext";
 import Link from "next/link";
-import Image from "next/image";
 
 interface ProjectProps {
 	project: Project;
@@ -86,13 +85,7 @@ const Project = ({
 					className={styles.profile}
 					onClick={(e) => e.stopPropagation()}
 				>
-					<Image
-						src={project.user.image}
-						width={18}
-						height={18}
-						alt="Project creator profile image"
-						className={styles.profileImage}
-					/>
+					<img src={project.user.image} className={styles.profileImage} />
 					<p>
 						{project.user.first_name} {project.user.last_name}
 					</p>

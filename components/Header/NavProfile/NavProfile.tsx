@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import Link from "next/link";
 import styles from "./NavProfile.module.scss";
 import { useAuth } from "@/contexts/AuthContext";
-import Image from "next/image";
 
 export default function NavProfile() {
 	const { user, signOut } = useAuth();
@@ -19,15 +18,7 @@ export default function NavProfile() {
 	return (
 		<div className={styles.profile}>
 			<button className={styles.profileButton} onClick={handleMenuClick}>
-				{user && user.image && (
-					<Image
-						src={user.image}
-						width={36}
-						height={36}
-						alt="User profile image"
-						className={styles.profileImage}
-					/>
-				)}
+				<img src={user?.image} className={styles.profileImage} />
 			</button>
 			{showMenu && (
 				<ul className={styles.menu}>
