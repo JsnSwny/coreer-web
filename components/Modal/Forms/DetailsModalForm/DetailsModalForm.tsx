@@ -89,11 +89,7 @@ const DetailsModalForm = ({ closeModal }: ModalFormProps) => {
 
 				<div className={globalStyles.formGroup}>
 					<label className={globalStyles.label}>Username</label>
-					<input
-						{...register("username")}
-						className={globalStyles.input}
-						disabled
-					/>
+					<input {...register("username")} className={globalStyles.input} />
 					<FormError message={errors.username?.message} />
 				</div>
 
