@@ -12,6 +12,7 @@ import AboutSection from "@/components/Profile/About/AboutSection/AboutSection";
 import ProfileBanner from "@/components/Profile/Banner/ProfileBanner";
 import CriteriaList from "@/components/Profile/Criteria/CriteriaList/CriteriaList";
 import Nav from "@/components/Profile/Nav/Nav";
+import ProjectSection from "@/components/Profile/Projects/ProjectSection/ProjectSection";
 import Projects from "@/components/Profile/Projects/Projects/Projects";
 import { server } from "@/config";
 import { useAuth } from "@/contexts/AuthContext";
@@ -129,24 +130,11 @@ const Profile = ({ profile }: ProfileProps) => {
 					<Nav section={section} setSection={setSection} />
 
 					{section == "Projects" && (
-						<>
-							{user && profile.id == user!.id && (
-								<Button
-									text="Add New Project"
-									alt
-									icon={faPlus}
-									onClick={() => openModal("Project")}
-								/>
-							)}
-							<Projects
-								projects={profile.projects}
-								action={openModal}
-								isProfile
-								showEdit={user ? profile.id == user!.id : false}
-								openProjectModal={openProjectModal}
-								sortByEndDate
-							/>
-						</>
+						<ProjectSection
+							openModal={openModal}
+							profile={profile}
+							openProjectModal={openProjectModal}
+						/>
 					)}
 					{/* {section == "Similar Users" && (
             <ProfileCardList>
