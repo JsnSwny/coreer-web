@@ -25,7 +25,9 @@ const Header = () => {
 				<div className={styles.wrapper}>
 					<Nav>
 						<Link href="/">
-							<p className={styles.title}>coreer</p>
+							<p className={styles.title}>
+								<span>co</span>reer
+							</p>
 						</Link>
 						<Search />
 					</Nav>

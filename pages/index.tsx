@@ -68,7 +68,7 @@ const Home = () => {
 					onClose={closeProjectModal}
 					isOpen={isProjectModalOpen}
 				/>
-				{/* <ExploreHeading /> */}
+				<ExploreHeading />
 
 				<Projects
 					projects={projects}

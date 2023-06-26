@@ -33,9 +33,10 @@ const Layout = ({ children }: LayoutProps) => {
 						crossOrigin="anonymous"
 					/>
 					<link
-						href="https://fonts.googleapis.com/css2?family=Newsreader:wght@300;400;500;600;700;800&family=Raleway:ital,wght@0,300;0,400;0,500;0,700;1,400;1,700&display=swap"
+						href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Raleway:wght@300;400;700;900&display=swap"
 						rel="stylesheet"
 					/>
+
 					<link
 						rel="shortcut icon"
 						href="https://coreer-static.s3.eu-west-2.amazonaws.com/media/favicon/favicon.png"

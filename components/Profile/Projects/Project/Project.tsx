@@ -96,7 +96,7 @@ const Project = ({
 						({calculateTimeDifference(project.start_date, project.end_date)})
 					</p>
 				)}
-				<h3 className={styles.title}>{project.title}</h3>
+				<h4 className={styles.title}>{project.title}</h4>
 				<div className={styles.topContainer}>
 					{!isProfile && (
 						<Link
