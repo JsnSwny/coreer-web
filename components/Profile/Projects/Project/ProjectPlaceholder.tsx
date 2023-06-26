@@ -10,24 +10,24 @@ import LikeButton from "@/components/Button/LikeButton/LikeButton";
 import globalStyles from "@/styles/globalStyles.module.scss";
 
 const ProjectPlaceholder = () => {
-	return (
-		<div className={`${styles.container} ${styles.large}`}>
-			<div
-				className={`${globalStyles.placeholderWhite} ${styles.placeholder}`}
-			></div>
-			<div className={styles.profile}>
-				<div
-					className={`${globalStyles.placeholderWhite} ${styles.imagePlaceholder}`}
-				></div>
-				<div
-					className={`${globalStyles.placeholderWhite} ${styles.namePlaceholder}`}
-				></div>
-			</div>
-			<div
-				className={`${globalStyles.placeholderWhite} ${styles.titlePlaceholder}`}
-			></div>
+  return (
+    <div className={`${styles.container} ${styles.large}`}>
+      <div
+        className={`${globalStyles.placeholderWhite} ${styles.placeholder}`}
+      ></div>
+      <div
+        className={`${globalStyles.placeholderWhite} ${styles.titlePlaceholder}`}
+      ></div>
+      <div className={styles.profile}>
+        <div
+          className={`${globalStyles.placeholderWhite} ${styles.imagePlaceholder}`}
+        ></div>
+        <div
+          className={`${globalStyles.placeholderWhite} ${styles.namePlaceholder}`}
+        ></div>
+      </div>
 
-			{/* {project.languages && project.languages.length > 0 && (
+      {/* {project.languages && project.languages.length > 0 && (
 				<TagsList
 					tags={project.languages.map((item) => ({
 						text: item.name,
@@ -36,8 +36,8 @@ const ProjectPlaceholder = () => {
 					fade
 				/>
 			)} */}
-		</div>
-	);
+    </div>
+  );
 };
 
 export default ProjectPlaceholder;
