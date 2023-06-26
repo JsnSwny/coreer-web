@@ -61,7 +61,7 @@ const Home = () => {
 					content="Unlock the power of connection and collaboration at Coreer. Join our tech community to connect, collaborate, and curate. Start shaping your career today!"
 				/>
 			</Head>
-			{/* <ExploreBanner /> */}
+			<ExploreBanner />
 			<Container margin size="large">
 				<ProjectModal
 					project={selectedProject!}

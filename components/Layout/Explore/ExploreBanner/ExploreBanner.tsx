@@ -5,7 +5,13 @@ const ExploreBanner = () => {
 	return (
 		<div className={styles.banner}>
 			<Container size="large">
-				<h1>Discover Projects from Talented Students</h1>
+				<img
+					className={styles.logo}
+					src="https://coreer-static.s3.eu-west-2.amazonaws.com/media/uploads/CodeClan-Logo-Pride.png"
+				/>
+				<h1 className={styles.banner__tagline}>
+					Discover projects from our talented students.
+				</h1>
 			</Container>
 		</div>
 	);

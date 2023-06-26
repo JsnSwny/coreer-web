@@ -1,7 +1,26 @@
 @import "@/styles/_variables.scss";
 
 .banner {
-	background: $primary;
+	background: linear-gradient(
+			45deg,
+			rgba(51, 102, 204, 0.85),
+			rgba(0, 204, 255, 0.85)
+		),
+		url("https://www.digitalxtrafund.scot/wp-content/uploads/2022/03/0_CodeClan-Youth-Academy-in-partnership-with-Baillie-Gifford.jpg");
+	background-position: center;
+	background-size: cover;
 	color: white;
-	padding: 3rem 1rem;
+	padding: 4rem 1rem;
+
+	&__tagline {
+		font-family: "Raleway", sans-serif;
+		margin-top: 1rem;
+		font-size: 2.75rem;
+		max-width: 700px;
+		line-height: 3.5rem;
+	}
+}
+
+.logo {
+	width: 400px;
 }
