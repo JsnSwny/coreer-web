@@ -25,7 +25,7 @@ const Header = () => {
         <div className={styles.wrapper}>
           <Nav>
             <Link href="/" className={styles.logo}>
-              <img src="https://coreer-static.s3.eu-west-2.amazonaws.com/media/favicon/favicon.svg" />
+              {/* <img src="https://coreer-static.s3.eu-west-2.amazonaws.com/media/favicon/favicon.svg" /> */}
               <p className={styles.title}>
                 <span>co</span>reer
               </p>
