@@ -19,7 +19,7 @@
 
 .large {
 	max-width: 1500px;
-	padding: 0 4rem;
+	padding: 0 8rem;
 	@include breakpoint(sm, max) {
 		padding: 0 1rem;
 	}
