@@ -2,53 +2,62 @@
 @import "@/styles/_breakpoints.scss";
 
 .header {
-	background-color: darken(white, 0%);
-	padding: 0.875rem 0;
-	flex: 1;
-	height: 68px;
-	position: fixed;
-	z-index: 100;
-	top: 0;
-	right: 0;
-	left: 0;
-	display: flex;
-	justify-content: flex-end;
-	box-shadow: 0 25px 15px -15px rgba(24, 21, 41, 0.1);
+  background-color: darken(white, 0%);
+  padding: 0.875rem 0;
+  flex: 1;
+  height: 68px;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: flex-end;
+  box-shadow: 0 25px 15px -15px rgba(24, 21, 41, 0.1);
 }
 
 .wrapper {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 
 .title {
-	font-size: 1.5rem;
-	font-weight: bold;
-	color: $primary;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: $primary;
 
-	// font-family: "Newreader", serif;
-	font-weight: 700;
-	@include breakpoint(md, max) {
-		font-size: 1.4rem;
-	}
-	span {
-		font-weight: 500;
-	}
+  // font-family: "Newreader", serif;
+  font-weight: 700;
+  @include breakpoint(md, max) {
+    font-size: 1.4rem;
+  }
+  span {
+    font-weight: 500;
+  }
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  img {
+    width: 32px;
+    margin-right: 0.5rem;
+  }
 }
 
 .right {
-	display: flex;
-	gap: 1.5rem;
-	align-items: center;
-	height: 100%;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  height: 100%;
 }
 
 .icon {
-	display: flex;
-	height: 20px;
-	svg {
-		height: 100%;
-	}
+  display: flex;
+  height: 20px;
+  svg {
+    height: 100%;
+  }
 }
