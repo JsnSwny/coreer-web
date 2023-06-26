@@ -15,6 +15,7 @@
 
 .large {
   @extend .container;
+  width: calc((100% - 3rem) / 3);
 }
 
 .image {
