@@ -1,20 +1,24 @@
 @import "@/styles/_variables.scss";
+@import "@/styles/_breakpoints.scss";
 .header {
-	margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .title {
-	font-size: 1.875rem;
-	font-weight: 900;
-	font-family: "Raleway", sans-serif;
+  font-size: 1.875rem;
+  font-weight: 900;
+  font-family: "Raleway", sans-serif;
+  @include breakpoint(sm, max) {
+    font-size: 1.5rem;
+  }
 }
 
 .subtitle {
-	font-size: 18px;
-	margin-top: 0.25rem;
+  font-size: 18px;
+  margin-top: 0.25rem;
 }
 
 .bold {
-	font-weight: bold;
-	color: $primary;
+  font-weight: bold;
+  color: $primary;
 }
