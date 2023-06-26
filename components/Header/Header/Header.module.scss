@@ -2,8 +2,8 @@
 @import "@/styles/_breakpoints.scss";
 
 .header {
-	background-color: darken($primary, 0%);
-	padding: 1rem 0;
+	background-color: darken(white, 0%);
+	padding: 0.875rem 0;
 	flex: 1;
 	height: 68px;
 	position: fixed;
@@ -14,7 +14,6 @@
 	display: flex;
 	justify-content: flex-end;
 	box-shadow: 0 25px 15px -15px rgba(24, 21, 41, 0.1);
-	color: white;
 }
 
 .wrapper {
@@ -27,7 +26,7 @@
 .title {
 	font-size: 1.75rem;
 	font-weight: bold;
-	color: white;
+	color: $primary;
 
 	font-family: "Newreader", serif;
 	@include breakpoint(md, max) {

@@ -54,7 +54,11 @@ const Projects = ({
 	}
 	return (
 		<>
-			<div className={`${styles.container} ${margin ? styles.margin : ""}`}>
+			<div
+				className={`${styles.container} ${large ? styles.large : ""} ${
+					margin ? styles.margin : ""
+				}`}
+			>
 				{projects
 					.slice()
 					.sort((a, b) => {

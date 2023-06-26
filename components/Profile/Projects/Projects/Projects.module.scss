@@ -1,9 +1,13 @@
 .container {
 	display: flex;
-	gap: 4rem 1.5rem;
+	gap: 2rem 1.5rem;
 	flex-wrap: wrap;
 }
 
 .margin {
 	padding-top: 2rem;
+}
+
+.large {
+	gap: 4rem 1.5rem;
 }

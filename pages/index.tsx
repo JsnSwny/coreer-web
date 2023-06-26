@@ -19,6 +19,7 @@ import ProfileCardPlaceholder from "@/components/Card/ProfileCard/ProfileCardPla
 import { Project } from "@/interfaces/project.model";
 import Projects from "@/components/Profile/Projects/Projects/Projects";
 import ProjectModal from "@/components/Modal/ProjectModal/ProjectModal";
+import ExploreBanner from "@/components/Layout/Explore/ExploreBanner/ExploreBanner";
 
 const Home = () => {
 	const { user, userToken } = useAuth();
@@ -60,7 +61,7 @@ const Home = () => {
 					content="Unlock the power of connection and collaboration at Coreer. Join our tech community to connect, collaborate, and curate. Start shaping your career today!"
 				/>
 			</Head>
-
+			{/* <ExploreBanner /> */}
 			<Container margin size="large">
 				<ProjectModal
 					project={selectedProject!}
@@ -68,6 +69,7 @@ const Home = () => {
 					isOpen={isProjectModalOpen}
 				/>
 				{/* <ExploreHeading /> */}
+
 				<Projects
 					projects={projects}
 					action={() => console.log("open")}

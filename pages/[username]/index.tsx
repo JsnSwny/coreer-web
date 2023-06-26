@@ -143,7 +143,6 @@ const Profile = ({ profile }: ProfileProps) => {
 								action={openModal}
 								isProfile
 								showEdit={user ? profile.id == user!.id : false}
-								margin
 								openProjectModal={openProjectModal}
 								sortByEndDate
 							/>
