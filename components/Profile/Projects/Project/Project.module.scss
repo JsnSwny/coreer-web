@@ -2,7 +2,7 @@
 @import "@/styles/_breakpoints.scss";
 
 .container {
-	width: calc((100% - 4rem) / 3);
+	width: calc((100% - 3rem) / 3);
 	cursor: pointer;
 	// box-shadow: 0px 0px 20px -8px rgba(0, 0, 0, 0.15);
 	@include breakpoint(lg, max) {
@@ -14,15 +14,7 @@
 }
 
 .large {
-	width: calc((100% - 4rem) / 3);
-	cursor: pointer;
-	// box-shadow: 0px 0px 20px -8px rgba(0, 0, 0, 0.15);
-	@include breakpoint(lg, max) {
-		width: calc((100% - 2rem) / 2);
-	}
-	@include breakpoint(sm, max) {
-		width: 100%;
-	}
+	@extend .container;
 }
 
 .image {
