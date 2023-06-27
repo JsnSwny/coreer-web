@@ -44,7 +44,7 @@ const Home = () => {
 	useEffect(() => {
 		// router.push(`/${user!.username}`);
 		console.log(loading);
-		axios.get(`${server}/api/projects/`).then((res) => {
+		axios.get(`${server}/api/projects/?is_visible=true`).then((res) => {
 			console.log(res.data);
 			setProjects(res.data);
 			setLoading(false);

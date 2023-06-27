@@ -30,6 +30,7 @@ export interface Project {
 	project_link?: string;
 	images: string[];
 	is_pinned: boolean;
+	is_visible: boolean;
 }
 
 export interface ProjectImage {
