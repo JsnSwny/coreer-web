@@ -99,13 +99,13 @@ const ProfileBanner = ({
 				{/* <ResponseBanner /> */}
 				{user && profile.id != user.id && (
 					<div className={styles.buttons}>
-						<Button
+						{/* <Button
 							text="Message"
 							link={`/messages/${chatHrefConstructor(user, profile)}`}
 							size="small"
 							alt={true}
 							icon={faEnvelope}
-						/>
+						/> */}
 						<Button
 							text={user!.following.includes(profile!.id) ? "Remove" : "Like"}
 							alt={!user!.following.includes(profile!.id)}
