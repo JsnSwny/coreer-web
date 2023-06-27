@@ -2,196 +2,195 @@
 @import "@/styles/_breakpoints.scss";
 
 .container {
-  width: calc((100% - 3rem) / 3);
-  cursor: pointer;
-  // box-shadow: 0px 0px 20px -8px rgba(0, 0, 0, 0.15);
-  @include breakpoint(lg, max) {
-    width: calc((100% - 2rem) / 2);
-  }
-  @include breakpoint(sm, max) {
-    width: 100%;
-  }
+	width: calc((100% - 3rem) / 3);
+	cursor: pointer;
+	// box-shadow: 0px 0px 20px -8px rgba(0, 0, 0, 0.15);
+	@include breakpoint(lg, max) {
+		width: calc((100% - 2rem) / 2);
+	}
+	@include breakpoint(sm, max) {
+		width: 100%;
+	}
 }
 
 .large {
-  @extend .container;
-  width: calc((100% - 3rem) / 3);
+	@extend .container;
 }
 
 .image {
-  width: 100%;
-  height: 250px;
-  border-radius: 10px;
+	width: 100%;
+	height: 250px;
+	border-radius: 10px;
 
-  // box-shadow: 0px 0px 15px -7px rgba(0, 0, 0, 0.25);
+	// box-shadow: 0px 0px 15px -7px rgba(0, 0, 0, 0.25);
 }
 
 .video,
 .image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: cover;
+	border-radius: 10px;
 }
 
 .video {
-  z-index: 2;
-  opacity: 0;
-  transition: 0.2s ease opacity;
-  height: 100%;
+	z-index: 2;
+	opacity: 0;
+	transition: 0.2s ease opacity;
+	height: 100%;
 }
 
 .title {
-  font-size: 1rem;
-  line-height: 1.65rem;
-  font-family: "Raleway", sans-serif;
-  // white-space: nowrap;
-  // overflow: hidden;
-  // text-overflow: ellipsis;
-  margin-bottom: 1rem;
+	font-size: 1rem;
+	line-height: 1.65rem;
+	font-family: "Raleway", sans-serif;
+	// white-space: nowrap;
+	// overflow: hidden;
+	// text-overflow: ellipsis;
+	margin-bottom: 1rem;
 }
 
 .topContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  // margin-bottom: 0.75rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 1rem;
+	// margin-bottom: 0.75rem;
 }
 
 .date {
-  font-size: 12px;
-  margin-bottom: 0.25rem;
+	font-size: 12px;
+	margin-bottom: 0.25rem;
 }
 
 .description {
-  margin-top: 0.25rem;
-  color: #3c3c4b;
-  font-size: 16px;
+	margin-top: 0.25rem;
+	color: #3c3c4b;
+	font-size: 16px;
 
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .placeholder {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 aspect ratio */
-  border-radius: 10px;
-  background: transparent;
-  margin-bottom: 0.75rem;
-  outline: 0.5px solid $stroke;
-  // background: linear-gradient(to right, #3366cc, #2d82cc);
+	position: relative;
+	width: 100%;
+	padding-top: 56.25%; /* 16:9 aspect ratio */
+	border-radius: 10px;
+	background: transparent;
+	margin-bottom: 0.75rem;
+	outline: 0.5px solid $stroke;
+	// background: linear-gradient(to right, #3366cc, #2d82cc);
 
-  &:hover {
-    .video {
-      opacity: 1;
-    }
-    .editWrapper {
-      opacity: 1;
-    }
-    &::after {
-      opacity: 1;
-    }
-  }
+	&:hover {
+		.video {
+			opacity: 1;
+		}
+		.editWrapper {
+			opacity: 1;
+		}
+		&::after {
+			opacity: 1;
+		}
+	}
 }
 
 .placeholderActive {
-  background: linear-gradient(to right, #3366cc, #2d82cc);
+	background: linear-gradient(to right, #3366cc, #2d82cc);
 }
 
 .showEdit {
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(black, 0.8);
-    border-radius: 10px;
-    opacity: 0;
-    transition: 0.2s ease opacity;
-  }
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(black, 0.8);
+		border-radius: 10px;
+		opacity: 0;
+		transition: 0.2s ease opacity;
+	}
 }
 
 .placeholderIcon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 25%;
-  color: white;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 25%;
+	color: white;
 }
 
 .editWrapper {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 45px;
-  height: 45px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: 0.2s ease opacity;
-  z-index: 10;
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	width: 45px;
+	height: 45px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	transition: 0.2s ease opacity;
+	z-index: 10;
 }
 
 .editIcon {
-  width: 24px;
-  color: white;
-  transition: 0.2s ease color;
-  &:hover {
-    color: $primary;
-  }
+	width: 24px;
+	color: white;
+	transition: 0.2s ease color;
+	&:hover {
+		color: $primary;
+	}
 }
 
 .profile {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  &:hover {
-    p {
-      color: $primary;
-    }
-  }
-  img {
-    border-radius: 50%;
-    object-fit: cover;
-    width: 22px;
-    height: 22px;
-    @include breakpoint(sm, max) {
-      width: 24px;
-      height: 24px;
-    }
-  }
-  p {
-    font-size: 0.75rem;
-    transition: 0.2s ease color;
-    @include breakpoint(sm, max) {
-      font-size: 0.875rem;
-    }
-  }
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	&:hover {
+		p {
+			color: $primary;
+		}
+	}
+	img {
+		border-radius: 50%;
+		object-fit: cover;
+		width: 22px;
+		height: 22px;
+		@include breakpoint(sm, max) {
+			width: 24px;
+			height: 24px;
+		}
+	}
+	p {
+		font-size: 0.75rem;
+		transition: 0.2s ease color;
+		@include breakpoint(sm, max) {
+			font-size: 0.875rem;
+		}
+	}
 }
 
 .titlePlaceholder {
-  height: 18px;
-  width: 80%;
-  margin-bottom: 1rem;
+	height: 18px;
+	width: 80%;
+	margin-bottom: 1rem;
 }
 
 .imagePlaceholder {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
 }
 
 .namePlaceholder {
-  height: 14px;
-  width: 50%;
+	height: 14px;
+	width: 50%;
 }
