@@ -1,10 +1,16 @@
 .container {
-	// display: flex;
-	min-height: 100dvh;
-	// padding-bottom: 2rem;
+  min-height: 100dvh;
+  display: flex;
+  width: 100%;
 }
 
 .content {
-	flex: 1;
-	margin-top: calc(65px);
+  flex: 1;
+  margin-top: calc(65px);
+}
+
+.main {
+  margin-top: calc(64px + 3rem);
+  margin-left: 400px;
+  width: 100%;
 }

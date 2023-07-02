@@ -21,7 +21,7 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <Container size={largeContainer ? "large" : "medium"}>
+      <Container>
         <div className={styles.wrapper}>
           <Nav>
             <Link href="/" className={styles.logo}>
@@ -30,7 +30,7 @@ const Header = () => {
                 <span>co</span>reer
               </p>
             </Link>
-            <Search />
+            {/* <Search /> */}
           </Nav>
 
           <div className={styles.right}>

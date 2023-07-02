@@ -15,7 +15,7 @@ const MessagesSidebar = ({
   return (
     <div className={styles.sidebar}>
       <div className={styles.titleContainer}>
-        <h1 className={styles.title}>Messages</h1>
+        <h1 className={styles.title}>Discover</h1>
       </div>
 
       <div className={styles.contentContainer}>

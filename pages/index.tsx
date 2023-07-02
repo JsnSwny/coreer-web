@@ -20,67 +20,44 @@ import { Project } from "@/interfaces/project.model";
 import Projects from "@/components/Profile/Projects/Projects/Projects";
 import ProjectModal from "@/components/Modal/ProjectModal/ProjectModal";
 import ExploreBanner from "@/components/Layout/Explore/ExploreBanner/ExploreBanner";
+import MessagesSidebar from "@/components/Messages/MessagesSidebar/MessagesSidebar";
+import ProfilePreview from "@/components/Profile/ProfilePreview/ProfilePreview";
+import DiscoverContainer from "@/components/Container/DiscoverContainer/DiscoverContainer";
 
 const Home = () => {
-	const { user, userToken } = useAuth();
+  const { user, userToken } = useAuth();
 
-	const [projects, setProjects] = useState<Project[]>([]);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
 
-	const [loading, setLoading] = useState(true);
+  const openProjectModal = (project: Project) => {
+    setIsProjectModalOpen(true);
+    setSelectedProject(project);
+  };
 
-	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-	const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
+  const closeProjectModal = () => {
+    setSelectedProject(null);
+    setIsProjectModalOpen(false);
+  };
 
-	const openProjectModal = (project: Project) => {
-		setIsProjectModalOpen(true);
-		setSelectedProject(project);
-	};
+  return (
+    <>
+      <Head>
+        <title>Coreer | Discover Projects from Talented Students</title>
+        <meta
+          name="description"
+          content="Unlock the power of connection and collaboration at Coreer. Join our tech community to connect, collaborate, and curate. Start shaping your career today!"
+        />
+      </Head>
 
-	const closeProjectModal = () => {
-		setSelectedProject(null);
-		setIsProjectModalOpen(false);
-	};
-
-	useEffect(() => {
-		// router.push(`/${user!.username}`);
-		console.log(loading);
-		axios.get(`${server}/api/projects/?is_visible=true`).then((res) => {
-			console.log(res.data);
-			setProjects(res.data);
-			setLoading(false);
-			console.log("Not loading");
-		});
-	}, []);
-
-	return (
-		<>
-			<Head>
-				<title>Coreer | Discover Projects from Talented Students</title>
-				<meta
-					name="description"
-					content="Unlock the power of connection and collaboration at Coreer. Join our tech community to connect, collaborate, and curate. Start shaping your career today!"
-				/>
-			</Head>
-			<ExploreBanner />
-			<Container margin size="large">
-				<ProjectModal
-					project={selectedProject!}
-					onClose={closeProjectModal}
-					isOpen={isProjectModalOpen}
-				/>
-				<ExploreHeading />
-
-				<Projects
-					projects={projects}
-					action={() => console.log("open")}
-					showEdit={false}
-					large
-					openProjectModal={openProjectModal}
-					loading={loading}
-				/>
-			</Container>
-		</>
-	);
+      <ProjectModal
+        project={selectedProject!}
+        onClose={closeProjectModal}
+        isOpen={isProjectModalOpen}
+      />
+      <DiscoverContainer openProjectModal={openProjectModal} />
+    </>
+  );
 };
 
-export default Home;
+export default withAuth(Home);

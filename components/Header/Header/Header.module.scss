@@ -2,7 +2,7 @@
 @import "@/styles/_breakpoints.scss";
 
 .header {
-  background-color: darken(white, 0%);
+  // background-color: darken(white, 0%);
   padding: 0.875rem 0;
   flex: 1;
   height: 68px;
@@ -13,7 +13,9 @@
   left: 0;
   display: flex;
   justify-content: flex-end;
-  box-shadow: 0 25px 15px -15px rgba(24, 21, 41, 0.1);
+  // box-shadow: 0 15px 15px -15px rgba(24, 21, 41, 0.1);
+  margin-left: 400px;
+  // border-bottom: 0.5px solid $stroke;
 }
 
 .wrapper {

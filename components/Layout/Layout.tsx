@@ -8,6 +8,7 @@ import styles from "./Layout.module.scss";
 
 import "react-toastify/dist/ReactToastify.css";
 import Script from "next/script";
+import MessagesSidebar from "../Messages/MessagesSidebar/MessagesSidebar";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -61,9 +62,14 @@ const Layout = ({ children }: LayoutProps) => {
         </Script>
         {/* <Sidebar /> */}
         <ToastContainer />
-        <div className={styles.content}>
-          {!router.pathname.includes("/onboarding") && <Header />}
-          <main>{children}</main>
+        <div className={styles.container}>
+          {!router.pathname.includes("/onboarding") && (
+            <>
+              <MessagesSidebar conversations={[]} />
+              <Header />
+            </>
+          )}
+          <main className={styles.main}>{children}</main>
         </div>
       </div>
     </>
