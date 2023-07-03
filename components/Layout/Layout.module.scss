@@ -1,16 +1,16 @@
 .container {
-  min-height: 100dvh;
-  display: flex;
-  width: 100%;
+	min-height: 100dvh;
+	display: flex;
+	width: 100%;
 }
 
 .content {
-  flex: 1;
-  margin-top: calc(65px);
+	flex: 1;
+	margin-top: calc(65px);
 }
 
 .main {
-  margin-top: calc(64px + 3rem);
-  margin-left: 400px;
-  width: 100%;
+	margin-top: calc(64px + 3rem);
+	margin-left: 300px;
+	width: 100%;
 }

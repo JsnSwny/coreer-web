@@ -1,61 +1,61 @@
 @import "@/styles/_variables.scss";
 
 .container {
-  border: 1px solid $primary;
-  height: calc(100% - 3rem);
-  height: 100%;
-  background: white;
-  border-radius: 30px;
-  box-shadow: 0 0 20px 0px rgba($primary, 0.2);
+	border: 1px solid $primary;
+	height: calc(100% - 3rem);
+	height: 100%;
+	background: white;
+	border-radius: 30px;
+	box-shadow: 0 0 20px 0px rgba($primary, 0.2);
 
-  display: flex;
-  justify-content: space-between;
-  overflow: hidden;
+	display: flex;
+	justify-content: space-between;
+	overflow: hidden;
 }
 
 .main {
-  padding: 2rem;
-  max-width: 60%;
-  width: 100%;
-  overflow: auto;
-  &::-webkit-scrollbar {
-    width: 8px;
-    padding-left: 1rem;
-  }
+	padding: 2rem;
+	max-width: 60%;
+	width: 100%;
+	overflow: auto;
+	&::-webkit-scrollbar {
+		width: 8px;
+		padding-left: 1rem;
+	}
 
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
+	/* Track */
+	&::-webkit-scrollbar-track {
+		background: #f1f1f1;
+	}
 
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: $primary;
-    border-radius: 100px;
-    transition: 0.2s ease background;
-  }
+	/* Handle */
+	&::-webkit-scrollbar-thumb {
+		background: $primary;
+		border-radius: 100px;
+		transition: 0.2s ease background;
+	}
 
-  /* Handle on hover */
-  &::-webkit-scrollbar-thumb:hover {
-    background: darken($primary, 10%);
-  }
+	/* Handle on hover */
+	&::-webkit-scrollbar-thumb:hover {
+		background: darken($primary, 10%);
+	}
 }
 
 .section {
-  margin-bottom: 3rem;
-  &__heading {
-    margin-bottom: 1rem;
-    font-weight: 700;
-    font-size: 1.25rem;
-  }
+	margin-bottom: 3rem;
+	&__heading {
+		margin-bottom: 1rem;
+		// font-weight: 700;
+		font-size: 1.25rem;
+	}
 }
 
 .actions {
-  position: absolute;
-  bottom: -23px;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  gap: 1rem;
-  left: 0;
+	position: absolute;
+	bottom: -23px;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	gap: 1rem;
+	left: 0;
 }
