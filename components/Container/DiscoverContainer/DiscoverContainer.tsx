@@ -42,6 +42,7 @@ const DiscoverContainer = ({ openProjectModal }: DiscoverContainerProps) => {
 	}, []);
 
 	const [isAnimationActive, setIsAnimationActive] = useState(false);
+	const [toggleMessageBar, setToggleMessageBar] = useState(false);
 
 	const handlePreviousCard = () => {
 		setIsAnimationActive(true);

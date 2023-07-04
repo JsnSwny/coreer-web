@@ -14,9 +14,14 @@ import Projects from "../Projects/Projects/Projects";
 import { Project } from "@/interfaces/project.model";
 import { likeUser } from "@/utils/likeUser";
 import { chatHrefConstructor } from "@/utils/chatHrefConstructor";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { HiPaperAirplane } from "react-icons/hi";
+import { server } from "@/config";
+import axios from "axios";
+import { ConversationContext } from "@/contexts/ConversationContext";
+import { useContext } from "react";
+import { ImSpinner2 } from "react-icons/im";
 
 interface ProfilePreviewProps {
 	profile: Profile;
@@ -39,6 +44,13 @@ const ProfilePreview = ({
 
 	const [toggleMessageBar, setToggleMessageBar] = useState(false);
 	const [message, setMessage] = useState("");
+	const [actionLoading, setActionLoading] = useState(false);
+
+	const { setConversations, conversations } = useContext(ConversationContext);
+
+	useEffect(() => {
+		setToggleMessageBar(false);
+	}, [profile]);
 
 	return (
 		<div
@@ -87,6 +99,7 @@ const ProfilePreview = ({
 				<textarea
 					className={`${styles.messageBarTextarea}`}
 					onClick={() => message.length > 0 && setToggleMessageBar(true)}
+					value={message}
 					onChange={(e) => {
 						e.target.value.length == 0
 							? setToggleMessageBar(false)
@@ -96,9 +109,49 @@ const ProfilePreview = ({
 					}}
 					placeholder={`Start a conversation with ${profile.first_name}...`}
 				></textarea>
-				<div className={styles.messageBarLikeWrapper}>
-					<FontAwesomeIcon
-						onClick={() => {
+				<div
+					className={styles.messageBarLikeWrapper}
+					onClick={() => {
+						setActionLoading(true);
+						if (message.length > 0) {
+							axios
+								.post(
+									`${server}/api/conversations/`,
+									{
+										name: chatHrefConstructor(user!, profile),
+									},
+									{
+										headers: {
+											Authorization: `Token ${userToken}`,
+										},
+									}
+								)
+								.then((res) =>
+									axios
+										.post(`${server}/api/messages/`, {
+											from_user_id: user!.id,
+											to_user_id: profile.id,
+											content: message,
+											conversation_id: res.data.id,
+										})
+										.then((messageRes) => {
+											setShowLikeAnimation(true);
+											setToggleMessageBar(false);
+											setMessage("");
+											const newConvo = {
+												...res.data,
+												last_message: messageRes.data,
+											};
+
+											setConversations([newConvo, ...conversations]);
+											setTimeout(() => {
+												setShowLikeAnimation(false);
+												handleNextCard();
+											}, 900);
+											setActionLoading(false);
+										})
+								);
+						} else {
 							const followList = likeUser(user!, profile, userToken!);
 							setUser({ ...user!, following: followList });
 							setShowLikeAnimation(true);
@@ -106,10 +159,17 @@ const ProfilePreview = ({
 								setShowLikeAnimation(false);
 								handleNextCard();
 							}, 900);
-						}}
-						className={styles.messageBarLike}
-						icon={message.length > 0 ? faPaperPlane : faStar}
-					/>
+						}
+					}}
+				>
+					{actionLoading ? (
+						<ImSpinner2 className={styles.spinner} />
+					) : (
+						<FontAwesomeIcon
+							className={styles.messageBarLike}
+							icon={message.length > 0 ? faPaperPlane : faStar}
+						/>
+					)}
 				</div>
 			</div>
 		</div>

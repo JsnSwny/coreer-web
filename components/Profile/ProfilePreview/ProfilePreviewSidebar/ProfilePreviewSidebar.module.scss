@@ -3,8 +3,9 @@
 .sidebar {
 	flex: 1;
 	height: 100%;
-	background: rgba($primary, 0.05);
+	background: rgba($primary, 0);
 	padding: 2rem 2rem;
+	border-right: 1px solid $stroke;
 	h3 {
 		font-weight: 700;
 		// color: $dark-light;
@@ -18,10 +19,10 @@
 }
 
 .header {
-	border-bottom: 1px solid $stroke;
+	// border-bottom: 1px solid $stroke;
 	margin-bottom: 2rem;
 
-	padding-bottom: 2rem;
+	// padding-bottom: 2rem;
 }
 
 .profile {

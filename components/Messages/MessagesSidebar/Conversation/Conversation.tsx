@@ -3,39 +3,39 @@ import styles from "./Conversation.module.scss";
 import Link from "next/link";
 
 interface ConversationProps {
-  conversation: ConversationType;
-  isActive?: boolean;
+	conversation: ConversationType;
+	isActive?: boolean;
 }
 
 const Conversation = ({
-  conversation,
-  isActive = false,
+	conversation,
+	isActive = false,
 }: ConversationProps) => {
-  return (
-    <li className={`${styles.conversation} ${isActive ? styles.active : ""}`}>
-      <Link href={`/messages/${conversation.name}`} className={styles.link}>
-        <img
-          className={styles.image}
-          src={
-            conversation.other_user.profile_photo
-              ? conversation.other_user.profile_photo
-              : conversation.other_user.image
-          }
-        />
-        <div className={styles.content}>
-          <h4 className={styles.name}>
-            {conversation.other_user.first_name}{" "}
-            {conversation.other_user.last_name}
-          </h4>
-          {conversation.last_message && (
-            <p className={styles.last_message}>
-              {conversation.last_message?.content}
-            </p>
-          )}
-        </div>
-      </Link>
-    </li>
-  );
+	return (
+		<li className={`${styles.conversation} ${isActive ? styles.active : ""}`}>
+			<Link href={`/messages/${conversation.name}`} className={styles.link}>
+				<img
+					className={styles.image}
+					src={
+						conversation.other_user.profile_photo
+							? conversation.other_user.profile_photo
+							: conversation.other_user.image
+					}
+				/>
+				<div className={styles.content}>
+					<h4 className={styles.name}>
+						{conversation.other_user.first_name}{" "}
+						{conversation.other_user.last_name}
+					</h4>
+					{conversation.last_message && (
+						<p className={styles.last_message}>
+							{conversation.last_message?.content}
+						</p>
+					)}
+				</div>
+			</Link>
+		</li>
+	);
 };
 
 export default Conversation;
