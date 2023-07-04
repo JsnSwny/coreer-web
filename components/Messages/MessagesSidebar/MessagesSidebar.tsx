@@ -41,7 +41,9 @@ const MessagesSidebar = ({ currentConversation }: MessagesSidebarProps) => {
 				<ul className={styles.conversations}>
 					{activeSelector == "Conversations" ? (
 						conversations.length == 0 ? (
-							<p>You have no {activeSelector.toLowerCase()} to display.</p>
+							<p className={styles.conversationsText}>
+								You have no {activeSelector.toLowerCase()} to display.
+							</p>
 						) : (
 							conversations.map((conversation) => {
 								return (
@@ -53,6 +55,10 @@ const MessagesSidebar = ({ currentConversation }: MessagesSidebarProps) => {
 								);
 							})
 						)
+					) : likes.length == 0 ? (
+						<p className={styles.conversationsText}>
+							You have no likes to display.
+						</p>
 					) : (
 						likes.map((profile) => {
 							return <LikeProfile key={profile.id} profile={profile} />;

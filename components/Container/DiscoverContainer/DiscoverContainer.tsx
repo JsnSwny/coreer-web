@@ -64,13 +64,13 @@ const DiscoverContainer = ({ openProjectModal }: DiscoverContainerProps) => {
 
 	return (
 		<div className={styles.container}>
-			<FontAwesomeIcon
+			{/* <FontAwesomeIcon
 				icon={faArrowLeft}
 				className={`${styles.icon} ${
 					currentIndex == 0 ? styles.iconDisabled : ""
 				}`}
 				onClick={handlePreviousCard}
-			/>
+			/> */}
 			<Container>
 				{currentProfile && (
 					<ProfilePreview
@@ -80,15 +80,17 @@ const DiscoverContainer = ({ openProjectModal }: DiscoverContainerProps) => {
 						isAnimationActive={isAnimationActive}
 						setShowLikeAnimation={setShowLikeAnimation}
 						handleNextCard={handleNextCard}
+						handlePreviousCard={handlePreviousCard}
+						currentIndex={currentIndex}
 					/>
 				)}
 			</Container>
 
-			<FontAwesomeIcon
+			{/* <FontAwesomeIcon
 				icon={faArrowRight}
 				className={styles.icon}
 				onClick={handleNextCard}
-			/>
+			/> */}
 		</div>
 	);
 };

@@ -12,6 +12,9 @@
 	position: relative;
 	animation: profileContainerAnimation 0.15s ease-in-out forwards;
 	overflow: hidden;
+	&:focus {
+		outline: none;
+	}
 }
 
 .content {
@@ -134,7 +137,8 @@
 }
 
 .likeAnimationIcon {
-	max-width: 150px;
+	max-height: 150px;
+	height: 100%;
 	animation: tickAnimation 1s ease-in-out forwards;
 	color: white;
 	position: absolute;
@@ -180,9 +184,54 @@
 	}
 }
 
+.profile {
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+	//   margin-bottom: 2rem;
+
+	img {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		object-fit: cover;
+		object-position: center;
+	}
+	h2 {
+		font-size: 1.25rem;
+		font-weight: 700;
+	}
+	.level {
+		font-weight: 400;
+		font-size: 0.875rem;
+		margin-top: 0.125rem;
+	}
+}
+
+.header {
+	height: 80px;
+	background: white;
+	// color: white;
+	padding: 1rem 2rem;
+	border-bottom: 1px solid $stroke;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.navigationIcon {
+	width: 36px;
+	height: 36px;
+	padding: 0.5rem;
+	border-radius: 50%;
+	background: $primary;
+	color: white;
+	cursor: pointer;
+	box-sizing: border-box !important;
+}
+
 .main {
 	padding: 2rem;
-	max-width: 60%;
 	width: 100%;
 	overflow: auto;
 	&::-webkit-scrollbar {
@@ -209,11 +258,14 @@
 }
 
 .section {
-	margin-bottom: 3rem;
+	margin-bottom: 2.5rem;
 	&__heading {
-		margin-bottom: 1rem;
-		// font-weight: 700;
-		font-size: 1.25rem;
+		margin-bottom: 0.75rem;
+		font-weight: 700;
+		font-size: 1.175rem;
+		border-bottom: 0.5px solid $stroke;
+		padding-bottom: 0.75rem;
+		// color: $primary;
 	}
 }
 
@@ -221,6 +273,11 @@
 	animation: spin 1s linear infinite;
 	font-size: 24px;
 	color: white;
+}
+
+.navigation {
+	display: flex;
+	gap: 1rem;
 }
 
 @keyframes spin {

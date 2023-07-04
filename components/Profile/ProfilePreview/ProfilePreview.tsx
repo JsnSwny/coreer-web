@@ -3,6 +3,8 @@ import styles from "./ProfilePreview.module.scss";
 import { useAuth } from "@/contexts/AuthContext";
 import Button from "@/components/Button/Button";
 import {
+	faArrowLeft,
+	faArrowRight,
 	faCheck,
 	faMessage,
 	faPaperPlane,
@@ -14,7 +16,7 @@ import Projects from "../Projects/Projects/Projects";
 import { Project } from "@/interfaces/project.model";
 import { likeUser } from "@/utils/likeUser";
 import { chatHrefConstructor } from "@/utils/chatHrefConstructor";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { HiPaperAirplane } from "react-icons/hi";
 import { server } from "@/config";
@@ -22,6 +24,10 @@ import axios from "axios";
 import { ConversationContext } from "@/contexts/ConversationContext";
 import { useContext } from "react";
 import { ImSpinner2 } from "react-icons/im";
+import CardList from "@/components/Card/CardList/CardList";
+import { differenceInMonths } from "date-fns";
+import Card from "@/components/Card/Card/Card";
+import DiscoverCard from "./DiscoverCard/DiscoverCard";
 
 interface ProfilePreviewProps {
 	profile: Profile;
@@ -30,6 +36,8 @@ interface ProfilePreviewProps {
 	isAnimationActive: boolean;
 	setShowLikeAnimation: (value: boolean) => void;
 	handleNextCard: () => void;
+	handlePreviousCard: () => void;
+	currentIndex: number;
 }
 
 const ProfilePreview = ({
@@ -39,6 +47,8 @@ const ProfilePreview = ({
 	isAnimationActive,
 	setShowLikeAnimation,
 	handleNextCard,
+	handlePreviousCard,
+	currentIndex,
 }: ProfilePreviewProps) => {
 	const { user, userToken, setUser } = useAuth();
 
@@ -46,11 +56,15 @@ const ProfilePreview = ({
 	const [message, setMessage] = useState("");
 	const [actionLoading, setActionLoading] = useState(false);
 
-	const { setConversations, conversations } = useContext(ConversationContext);
+	const { setConversations, conversations, addLike, removeLike, likes } =
+		useContext(ConversationContext);
 
 	useEffect(() => {
+		ref.current && ref.current.focus();
 		setToggleMessageBar(false);
 	}, [profile]);
+
+	const ref = useRef(null);
 
 	return (
 		<div
@@ -58,6 +72,20 @@ const ProfilePreview = ({
 			className={`${styles.container} ${
 				isAnimationActive ? styles.scaleDown : styles.scaleUp
 			}`}
+			onKeyDown={(e) => {
+				switch (e.code) {
+					case "ArrowLeft":
+						handlePreviousCard();
+						break;
+					case "ArrowRight":
+						handleNextCard();
+						break;
+					default:
+						break;
+				}
+			}}
+			tabIndex={0}
+			ref={ref}
 		>
 			{showLikeAnimation && (
 				<div className={styles.likeAnimation}>
@@ -67,28 +95,155 @@ const ProfilePreview = ({
 					/>
 				</div>
 			)}
+			<div className={styles.header}>
+				<div className={styles.profile}>
+					<img src={profile?.image} />
+					<div>
+						<h2>
+							{profile?.first_name} {profile?.last_name}
+						</h2>
+						<p className={styles.level}>{profile?.current_level?.name}</p>
+						{/* <p className={styles.location}>{profile?.location}</p> */}
+					</div>
+				</div>
+				<div className={styles.navigation}>
+					<FontAwesomeIcon
+						icon={faArrowLeft}
+						className={`${styles.navigationIcon} ${
+							currentIndex == 0 ? styles.iconDisabled : ""
+						}`}
+						onClick={handlePreviousCard}
+					/>
+					<FontAwesomeIcon
+						icon={faArrowRight}
+						className={`${styles.navigationIcon} ${
+							currentIndex == 0 ? styles.iconDisabled : ""
+						}`}
+						onClick={handleNextCard}
+					/>
+				</div>
+			</div>
 			<div
 				className={`${styles.content} ${
 					toggleMessageBar ? styles.contentOverlay : ""
 				}`}
 				onClick={() => setToggleMessageBar(false)}
 			>
-				<ProfilePreviewSidebar profile={profile} />
+				{/* <ProfilePreviewSidebar profile={profile} /> */}
 				<div className={styles.main}>
+					{profile.bio && (
+						<section className={styles.section}>
+							<h3 className={styles.section__heading}>About</h3>
+							<p>{profile.bio}</p>
+						</section>
+					)}
+
 					<section className={styles.section}>
-						<h3 className={styles.section__heading}>Projects</h3>
-						<Projects
-							projects={profile.projects}
-							action={() => {}}
-							isProfile
-							showEdit={user ? profile.id == user!.id : false}
-							openProjectModal={openProjectModal}
-							sortByEndDate
+						<h3 className={styles.section__heading}>Skills</h3>
+						<TagsList
+							tags={profile!.languages.map((item) => ({
+								text: item.name,
+								highlight: user
+									? user?.languages.some((lang) => item.id == lang.id)
+									: true,
+							}))}
 						/>
 					</section>
 					<section className={styles.section}>
-						<h3 className={styles.section__heading}>Work Experience</h3>
+						<h3 className={styles.section__heading}>Interests</h3>
+						<TagsList
+							tags={profile!.interests.map((item) => ({
+								text: item.name,
+								color: item.interest_type == "C" ? "purple" : "orange",
+								highlight: user
+									? user?.interests.some((interest) => item.id == interest.id)
+									: true,
+							}))}
+						/>
 					</section>
+
+					{/* PROJECTS SECTION */}
+					{profile.projects.length > 0 && (
+						<section className={styles.section}>
+							<h3 className={styles.section__heading}>Projects</h3>
+							<Projects
+								projects={profile.projects}
+								action={() => {}}
+								isProfile
+								showEdit={user ? profile.id == user!.id : false}
+								openProjectModal={openProjectModal}
+								sortByEndDate
+							/>
+						</section>
+					)}
+
+					{/* WORK EXPERIENCE SECTION */}
+					{profile.work_experiences.length > 0 && (
+						<section className={styles.section}>
+							<h3 className={styles.section__heading}>Work Experience</h3>
+							<CardList>
+								{profile?.work_experiences
+									.slice()
+									.sort((a, b) => {
+										const endDateA = a.end_date ? new Date(a.end_date) : null;
+										const endDateB = b.end_date ? new Date(b.end_date) : null;
+
+										return differenceInMonths(
+											endDateB || new Date(),
+											endDateA || new Date()
+										);
+									})
+									.map((experience) => (
+										<DiscoverCard
+											key={experience.id}
+											image={null}
+											title={experience.job_title}
+											subtitle={experience.company}
+											body={experience.description}
+											start_date={experience.start_date}
+											end_date={experience.end_date}
+											size="large"
+											action={() => {}}
+											showEdit={false}
+										/>
+									))}
+							</CardList>
+						</section>
+					)}
+
+					{/* EDUCATION SECTION */}
+					{profile.educations.length > 0 && (
+						<section className={styles.section}>
+							<h3 className={styles.section__heading}>Education</h3>
+							<CardList>
+								{profile?.educations
+									.slice()
+									.sort((a, b) => {
+										const endDateA = a.end_date ? new Date(a.end_date) : null;
+										const endDateB = b.end_date ? new Date(b.end_date) : null;
+
+										return differenceInMonths(
+											endDateB || new Date(),
+											endDateA || new Date()
+										);
+									})
+									.map((education) => (
+										<DiscoverCard
+											key={education.id}
+											image={null}
+											title={education.school.name}
+											subtitle={education.degree}
+											body={education.description}
+											start_date={education.start_date}
+											end_date={education.end_date}
+											size="large"
+											action={() => {}}
+											showEdit={false}
+										/>
+									))}
+							</CardList>
+						</section>
+					)}
 				</div>
 			</div>
 			<div
@@ -112,8 +267,8 @@ const ProfilePreview = ({
 				<div
 					className={styles.messageBarLikeWrapper}
 					onClick={() => {
-						setActionLoading(true);
 						if (message.length > 0) {
+							setActionLoading(true);
 							axios
 								.post(
 									`${server}/api/conversations/`,
@@ -152,8 +307,11 @@ const ProfilePreview = ({
 										})
 								);
 						} else {
+							likes.some((item) => item.id == profile.id)
+								? removeLike(profile.id)
+								: addLike(profile);
 							const followList = likeUser(user!, profile, userToken!);
-							setUser({ ...user!, following: followList });
+
 							setShowLikeAnimation(true);
 							setTimeout(() => {
 								setShowLikeAnimation(false);

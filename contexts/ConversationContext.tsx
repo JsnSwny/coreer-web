@@ -1,7 +1,7 @@
 // ConversationContext.tsx
 
 import React, { createContext, useState, ReactNode, useEffect } from "react";
-import { Conversation } from "@/interfaces/conversation.model";
+import { Conversation, Like } from "@/interfaces/conversation.model";
 import { useAuth } from "./AuthContext";
 import axios from "axios";
 import { server } from "@/config";
@@ -13,7 +13,8 @@ interface ConversationContextProps {
 	setConversations: (conversations: Conversation[]) => void;
 	setCurrentConversation: (conversation: Conversation | null) => void;
 	likes: Profile[];
-	setLikes: (profiles: Profile[]) => void;
+	addLike: (like: Profile) => void;
+	removeLike: (id: number) => void;
 }
 
 export const ConversationContext = createContext<ConversationContextProps>({
@@ -21,16 +22,10 @@ export const ConversationContext = createContext<ConversationContextProps>({
 	likes: [],
 	currentConversation: null,
 	setConversations: () => {},
-	setLikes: () => {},
 	setCurrentConversation: () => {},
+	addLike: () => {},
+	removeLike: () => {},
 });
-
-interface Like {
-	id: number;
-	following: Profile;
-	follower: Profile;
-	followed_on: Date;
-}
 
 interface ConversationProviderProps {
 	children: ReactNode;
@@ -61,6 +56,14 @@ export const ConversationProvider: React.FC<ConversationProviderProps> = ({
 		} catch (error) {
 			setConversations([]);
 		}
+	};
+
+	const addLike = (profile: Profile) => {
+		setLikes([profile, ...likes]);
+	};
+
+	const removeLike = (id: number) => {
+		setLikes(likes.filter((item) => item.id != id));
 	};
 
 	const getLikes = async () => {
@@ -97,7 +100,8 @@ export const ConversationProvider: React.FC<ConversationProviderProps> = ({
 				setConversations,
 				setCurrentConversation,
 				likes,
-				setLikes,
+				addLike,
+				removeLike,
 			}}
 		>
 			{children}
