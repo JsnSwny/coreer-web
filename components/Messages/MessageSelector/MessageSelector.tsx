@@ -1,8 +1,8 @@
 import styles from "./MessageSelector.module.scss";
 
 interface MessageSelectorProps {
-	activeSelector: "Conversations" | "Requests";
-	setActiveSelector: (selector: "Conversations" | "Requests") => void;
+	activeSelector: "Conversations" | "Likes";
+	setActiveSelector: (selector: "Conversations" | "Likes") => void;
 }
 
 const MessageSelector = ({
@@ -21,11 +21,11 @@ const MessageSelector = ({
 			</li>
 			<li
 				className={`${styles.selectorItem} ${
-					activeSelector == "Requests" ? styles.active : ""
+					activeSelector == "Likes" ? styles.active : ""
 				}`}
-				onClick={() => setActiveSelector("Requests")}
+				onClick={() => setActiveSelector("Likes")}
 			>
-				Requests
+				Likes
 			</li>
 		</ul>
 	);

@@ -32,7 +32,7 @@ const ProfileBanner = ({
 	const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(
 		profile.profile_photo ? profile.profile_photo : profile.image
 	);
-	const { user, updateProfilePicture, userToken } = useAuth();
+	const { user, updateProfilePicture, userToken, setUser } = useAuth();
 
 	useEffect(() => {
 		setImagePreviewUrl(
@@ -110,7 +110,8 @@ const ProfileBanner = ({
 							text={user!.following.includes(profile!.id) ? "Remove" : "Like"}
 							alt={!user!.following.includes(profile!.id)}
 							onClick={() => {
-								likeUser(user!, profile, userToken!);
+								const followList = likeUser(user!, profile, userToken!);
+								setUser({ ...user, following: followList });
 							}}
 							onMouseEnter={() => setIsHovered(true)}
 							onMouseLeave={() => setIsHovered(false)}
