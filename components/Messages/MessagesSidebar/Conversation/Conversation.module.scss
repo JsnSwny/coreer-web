@@ -30,6 +30,12 @@
 	overflow: hidden;
 }
 
+.unread {
+	.last_message {
+		font-weight: bold;
+	}
+}
+
 .name {
 	font-size: 0.875rem;
 }

@@ -1,36 +1,36 @@
 @import "@/styles/_breakpoints.scss";
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  padding: 0 2rem;
-  @include breakpoint(sm, max) {
-    padding: 0 1rem;
-  }
+	max-width: 1200px;
+	margin: 0 auto;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 0 4rem;
+	@include breakpoint(sm, max) {
+		padding: 0 1rem;
+	}
 }
 
 .flex {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
+	display: flex;
+	justify-content: space-between;
+	gap: 2rem;
 }
 
 .large {
-  max-width: 1500px;
-  padding: 0 8rem;
-  @include breakpoint(sm, max) {
-    padding: 0 1rem;
-  }
+	max-width: 1500px;
+	padding: 0 8rem;
+	@include breakpoint(sm, max) {
+		padding: 0 1rem;
+	}
 }
 
 .margin {
-  //   padding-top: 3rem;
-  //   padding-bottom: 3rem;
-  @include breakpoint(sm, max) {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
+	//   padding-top: 3rem;
+	//   padding-bottom: 3rem;
+	@include breakpoint(sm, max) {
+		padding-top: 2rem;
+		padding-bottom: 2rem;
+	}
 }
