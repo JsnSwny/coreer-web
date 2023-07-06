@@ -194,7 +194,7 @@ const ProfilePreview = ({
 										);
 									})
 									.map((experience) => (
-										<DiscoverCard
+										<Card
 											key={experience.id}
 											image={null}
 											title={experience.job_title}
@@ -283,12 +283,20 @@ const ProfilePreview = ({
 								)
 								.then((res) =>
 									axios
-										.post(`${server}/api/messages/`, {
-											from_user_id: user!.id,
-											to_user_id: profile.id,
-											content: message,
-											conversation_id: res.data.id,
-										})
+										.post(
+											`${server}/api/messages/`,
+											{
+												from_user_id: user!.id,
+												to_user_id: profile.id,
+												content: message,
+												conversation_id: res.data.id,
+											},
+											{
+												headers: {
+													Authorization: `Token ${userToken}`,
+												},
+											}
+										)
 										.then((messageRes) => {
 											setShowLikeAnimation(true);
 											setToggleMessageBar(false);

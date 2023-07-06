@@ -112,47 +112,7 @@
 }
 
 .description {
-	// font-size: 16px;
-	color: $dark-light;
 	margin-top: 2rem;
-	// line-height: 1.5rem;
-	h3,
-	pre,
-	// p {
-	// 	margin: 1rem 0;
-	// }
-
-	p {
-		line-height: 1.6rem;
-	}
-
-	h1,
-	h2 {
-		margin-top: 2rem;
-	}
-
-	h3 {
-		margin-top: 1.5rem;
-	}
-	pre {
-		background-color: #23241f;
-		padding: 10px;
-		border-radius: 5px;
-		color: #f8f8f2;
-		overflow: auto;
-		margin: 1rem 0;
-	}
-
-	code {
-		font-family: "Courier New", monospace;
-		color: #333;
-	}
-
-	ol,
-	ul {
-		margin: 0.5rem 0;
-		margin-left: 1rem;
-	}
 }
 
 .profile {

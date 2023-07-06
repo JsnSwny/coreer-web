@@ -94,11 +94,13 @@ const Messages = () => {
 				</title>
 			</Head>
 			<MessagesContainer>
-				<ChatContainer
-					sendMessage={sendMessage}
-					messageHistory={messageHistory}
-					currentConversation={currentConversation}
-				/>
+				{currentConversation && (
+					<ChatContainer
+						sendMessage={sendMessage}
+						messageHistory={messageHistory}
+						currentConversation={currentConversation}
+					/>
+				)}
 			</MessagesContainer>
 		</>
 	);

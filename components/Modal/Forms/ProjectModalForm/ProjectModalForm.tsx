@@ -7,11 +7,7 @@ import { Project, ProjectRequest } from "@/interfaces/project.model";
 import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
 import { format, parseISO } from "date-fns";
 import { addProject, deleteProject, updateProject } from "@/api/projects";
-import "react-quill/dist/quill.snow.css";
-import dynamic from "next/dynamic";
-import Head from "next/head";
-import "highlight.js/styles/monokai-sublime.css";
-import hljs from "highlight.js";
+
 import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -23,28 +19,8 @@ import { useEffect } from "react";
 import { server } from "@/config";
 import GalleryInput from "../../Inputs/GalleryInput/GalleryInput";
 import { ProjectImage } from "@/interfaces/project.model";
+import DescriptionInput from "../../Inputs/DescriptionInput/DescriptionInput";
 
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-
-const quillModules = {
-	toolbar: [
-		[{ header: [2, 3, false] }],
-		["bold", "italic", "underline", "strike", "blockquote"],
-		[
-			{ script: "sub" },
-			{ script: "super" },
-			{ list: "ordered" },
-			{ list: "bullet" },
-			{ indent: "-1" },
-			{ indent: "+1" },
-		],
-		["link", "image"],
-		["code-block"],
-	],
-	syntax: {
-		highlight: (text: string) => hljs.highlightAuto(text).value,
-	},
-};
 interface ModalFormProps {
 	closeModal: () => void;
 	item: Project | null;
@@ -239,24 +215,6 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 		}
 	}, [reset]);
 
-	// image: yup.mixed(),
-	// video: yup.mixed(),
-	// title: yup.string().required("Title is required"),
-	// description: yup.string().required("Description is required"),
-	// start_date: yup.date(),
-	// end_date: yup.date(),
-	// project_link: yup.string(),
-	// repo_link: yup
-	// 	.string()
-	// 	.matches(
-	// 		/^(https?:\/\/)?(www\.)?github\.com\/[A-Za-z0-9_-]+\/[A-Za-z0-9_-]+$/,
-	// 		{ message: "Invalid GitHub Repo URL", excludeEmptyString: true }
-	// 	),
-	// languages: yup
-	// 	.array()
-	// 	.min(1, "At least one skill is required")
-	// 	.required("At least one skill is required"),
-
 	return (
 		<form onSubmit={handleSubmit(onSubmitHandler)}>
 			<div className={globalStyles.modalBody}>
@@ -277,7 +235,8 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 				</div>
 				<div className={globalStyles.formGroup}>
 					<label className={globalStyles.label}>Description</label>
-					<Controller
+					<DescriptionInput control={control} />
+					{/* <Controller
 						control={control}
 						name="description"
 						render={({ field }) => (
@@ -288,7 +247,7 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 								theme="snow"
 							/>
 						)}
-					></Controller>
+					></Controller> */}
 					<FormError message={errors.description?.message} />
 				</div>
 				<div className={globalStyles.formGroup}>
