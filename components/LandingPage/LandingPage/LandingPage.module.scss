@@ -42,5 +42,8 @@
 
 .video {
   width: 100%;
-  padding-top: 4rem;
+  max-width: 750px;
+  display: block;
+  margin: 4rem auto 0 auto;
+  border-radius: 20px;
 }

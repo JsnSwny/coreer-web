@@ -2,30 +2,31 @@
 @import "@/styles/_breakpoints.scss";
 
 .criteriaItem {
-	flex: 1;
-	background: white;
-	padding: 1.5rem 2rem;
-	border-radius: 10px;
-	border: 1px solid $stroke;
-	@include breakpoint(md, max) {
-		flex: none;
-		width: 100%;
-	}
+  flex: 1;
+  background: white;
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  border: 1px solid $stroke;
+  @include breakpoint(md, max) {
+    flex: none;
+    width: 100%;
+  }
 }
 
 .criteriaHeader {
-	display: flex;
-	justify-content: space-between;
-	svg {
-		height: 20px;
-		color: $primary;
-		cursor: pointer;
-	}
-	h2 {
-		font-size: 1.25rem;
-		@include breakpoint(sm, max) {
-			font-size: 1.25rem;
-		}
-	}
-	margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  svg {
+    height: 20px;
+    color: $primary;
+    cursor: pointer;
+  }
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    @include breakpoint(sm, max) {
+      font-size: 1.25rem;
+    }
+  }
+  margin-bottom: 1rem;
 }

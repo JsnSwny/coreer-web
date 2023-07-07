@@ -21,7 +21,6 @@ import Footer from "../Footer/Footer";
 const LandingPage = () => {
   return (
     <div className={styles.container}>
-      <Header />
       <Hero />
       <section className={`${styles.section} ${styles.sectionWhite}`}>
         <Container>

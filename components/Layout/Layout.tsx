@@ -22,10 +22,17 @@ const Layout = ({ children }: LayoutProps) => {
   const [showHeader, setShowHeader] = useState(user && user.onboarded);
 
   useEffect(() => {
-    setShowHeader(user && user.onboarded);
-  }, [user, router]);
+    if (user && !user.onboarded && !router.pathname.includes("/onboarding")) {
+      router.push("/onboarding/personal-details");
+    }
+  }, [user]);
 
   const isLanding = !user && router.pathname == "/";
+  const isOnboarded = user && user.onboarded;
+  const noHeader =
+    router.pathname == "/login" ||
+    router.pathname == "/signup" ||
+    router.pathname.includes("/onboarding");
 
   return (
     <>
@@ -67,18 +74,22 @@ const Layout = ({ children }: LayoutProps) => {
         <ToastContainer />
 
         <div className={styles.container}>
-          {user && user.onboarded && (
+          {isOnboarded ? (
             <>
               <NotificationContextProvider>
                 <MessagesSidebar conversations={[]} />
               </NotificationContextProvider>
-
-              <Header />
             </>
+          ) : (
+            !noHeader && <Header />
           )}
           <main
             className={`${styles.main} ${
-              user && user.onboarded && styles.authenticated
+              isOnboarded
+                ? styles.authenticated
+                : !noHeader
+                ? styles.unauthenticated
+                : ""
             } ${isLanding ? styles.landing : ""}`}
           >
             {children}

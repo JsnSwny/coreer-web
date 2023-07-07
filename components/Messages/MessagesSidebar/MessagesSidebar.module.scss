@@ -1,41 +1,95 @@
 @import "@/styles/_variables.scss";
 
 .sidebar {
-	width: 300px;
-	height: 100%;
-	// background: white;
-	border-right: 1px solid $stroke;
-	background: white;
-	// box-shadow: 0 0 15px -10px rgba(24, 21, 41, 0.3);
-	position: fixed;
-	top: 0;
-	left: 0;
+  width: 350px;
+  height: 100%;
+  // background: white;
+  border-right: 1px solid $stroke;
+  background: white;
+  // box-shadow: 0 0 15px -10px rgba(24, 21, 41, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .conversations {
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .conversationsText {
-	margin: 1rem 2rem;
-	font-weight: 700;
-	line-height: 1.4rem;
+  margin: 1rem 2rem;
+  font-weight: 700;
+  line-height: 1.4rem;
 }
 
 .contentContainer {
-	padding: 0.5rem 0;
+  padding: 0.5rem 0;
+  flex: 1;
 }
 
 .titleContainer {
-	// border-bottom: 1px solid $stroke;
-	height: 80px;
-	display: flex;
-	align-items: center;
-	padding: 0 2rem;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  gap: 1rem;
+
+  img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+  }
+  p {
+    font-size: 14px;
+    color: $dark-light;
+    margin-top: 0.25rem;
+  }
 }
 
 .title {
-	font-size: 24px;
+  font-size: 24px;
+}
+
+.discoverLink {
+  background-color: rgba($stroke, 0.1);
+  color: $black;
+  width: 100%;
+  display: block;
+
+  padding: 0rem 2rem;
+  font-weight: bold;
+  height: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  transition: 0.2s ease height;
+  font-size: 0.875rem;
+  &.discoverLinkActive {
+    height: 50px;
+  }
+  svg {
+    margin-right: 0.5rem;
+    height: 18px;
+  }
+}
+
+.logOut {
+  border: none;
+  text-align: left;
+  padding: 1rem 2rem;
+  font-size: 16px;
+  font-weight: 700;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  svg {
+    margin-right: 0.75rem;
+    height: 20px;
+  }
 }
