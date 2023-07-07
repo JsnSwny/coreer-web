@@ -1,16 +1,23 @@
 .container {
-	min-height: 100dvh;
-	display: flex;
-	width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  width: 100%;
 }
 
 .content {
-	flex: 1;
-	margin-top: calc(65px);
+  flex: 1;
+  margin-top: calc(65px);
 }
 
 .main {
-	margin-top: calc(64px + 2rem);
-	margin-left: 300px;
-	width: 100%;
+  width: 100%;
+}
+
+.authenticated {
+  margin-left: 300px;
+  margin-top: calc(64px + 2rem);
+}
+
+.landing {
+  margin-top: calc(64px);
 }

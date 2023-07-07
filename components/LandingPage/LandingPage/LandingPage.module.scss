@@ -1,0 +1,46 @@
+@import "@/styles/_variables.scss";
+
+.container {
+}
+
+.section {
+  padding: 10rem 0;
+}
+
+.sectionWhite {
+  background: white;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.sectionDescription {
+  text-align: center;
+  font-size: 1.125rem;
+  color: $dark-light;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 0.75rem;
+  line-height: 1.5rem;
+}
+
+.capacityList {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding-top: 4rem;
+}
+
+.featureList {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  padding-top: 4rem;
+}
+
+.video {
+  width: 100%;
+  padding-top: 4rem;
+}

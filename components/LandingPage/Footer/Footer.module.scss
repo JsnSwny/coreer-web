@@ -1,0 +1,27 @@
+@import "@/styles/_variables.scss";
+
+.footer {
+  background: $primary;
+  color: white;
+  padding: 1rem;
+}
+
+.footerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.links {
+  display: flex;
+  gap: 2rem;
+  list-style-type: none;
+  font-size: 14px;
+}
+
+.logo {
+  font-weight: 400;
+  span {
+    font-weight: 700;
+  }
+}

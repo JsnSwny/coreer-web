@@ -23,6 +23,7 @@ import ExploreBanner from "@/components/Layout/Explore/ExploreBanner/ExploreBann
 import MessagesSidebar from "@/components/Messages/MessagesSidebar/MessagesSidebar";
 import ProfilePreview from "@/components/Profile/ProfilePreview/ProfilePreview";
 import DiscoverContainer from "@/components/Container/DiscoverContainer/DiscoverContainer";
+import LandingPage from "@/components/LandingPage/LandingPage/LandingPage";
 
 const Home = () => {
   const { user, userToken } = useAuth();
@@ -50,14 +51,20 @@ const Home = () => {
         />
       </Head>
 
-      <ProjectModal
-        project={selectedProject!}
-        onClose={closeProjectModal}
-        isOpen={isProjectModalOpen}
-      />
-      <DiscoverContainer openProjectModal={openProjectModal} />
+      {user ? (
+        <>
+          <ProjectModal
+            project={selectedProject!}
+            onClose={closeProjectModal}
+            isOpen={isProjectModalOpen}
+          />
+          <DiscoverContainer openProjectModal={openProjectModal} />
+        </>
+      ) : (
+        <LandingPage />
+      )}
     </>
   );
 };
 
-export default withAuth(Home);
+export default Home;
