@@ -27,7 +27,7 @@ const Header = () => {
             <Link href="/" className={styles.logo}>
               {/* <img src="https://coreer-static.s3.eu-west-2.amazonaws.com/media/favicon/favicon.svg" /> */}
               <p className={styles.title}>
-                <span>co</span>reer
+                <span>Co</span>reer
               </p>
             </Link>
             {/* <Search /> */}

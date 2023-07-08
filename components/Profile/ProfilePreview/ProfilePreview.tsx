@@ -3,12 +3,12 @@ import styles from "./ProfilePreview.module.scss";
 import { useAuth } from "@/contexts/AuthContext";
 import Button from "@/components/Button/Button";
 import {
-	faArrowLeft,
-	faArrowRight,
-	faCheck,
-	faMessage,
-	faPaperPlane,
-	faStar,
+  faArrowLeft,
+  faArrowRight,
+  faCheck,
+  faMessage,
+  faPaperPlane,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { Profile } from "@/interfaces/profile.model";
 import ProfilePreviewSidebar from "./ProfilePreviewSidebar/ProfilePreviewSidebar";
@@ -30,43 +30,43 @@ import Card from "@/components/Card/Card/Card";
 import DiscoverCard from "./DiscoverCard/DiscoverCard";
 
 interface ProfilePreviewProps {
-	profile: Profile;
-	openProjectModal: (project: Project) => void;
-	showLikeAnimation: boolean;
-	isAnimationActive: boolean;
-	setShowLikeAnimation: (value: boolean) => void;
-	handleNextCard: () => void;
-	handlePreviousCard: () => void;
-	currentIndex: number;
+  profile: Profile;
+  openProjectModal: (project: Project) => void;
+  showLikeAnimation: boolean;
+  isAnimationActive: boolean;
+  setShowLikeAnimation: (value: boolean) => void;
+  handleNextCard: () => void;
+  handlePreviousCard: () => void;
+  currentIndex: number;
 }
 
 const ProfilePreview = ({
-	profile,
-	openProjectModal,
-	showLikeAnimation,
-	isAnimationActive,
-	setShowLikeAnimation,
-	handleNextCard,
-	handlePreviousCard,
-	currentIndex,
+  profile,
+  openProjectModal,
+  showLikeAnimation,
+  isAnimationActive,
+  setShowLikeAnimation,
+  handleNextCard,
+  handlePreviousCard,
+  currentIndex,
 }: ProfilePreviewProps) => {
-	const { user, userToken, setUser } = useAuth();
+  const { user, userToken, setUser } = useAuth();
 
-	const [toggleMessageBar, setToggleMessageBar] = useState(false);
-	const [message, setMessage] = useState("");
-	const [actionLoading, setActionLoading] = useState(false);
+  const [toggleMessageBar, setToggleMessageBar] = useState(false);
+  const [message, setMessage] = useState("");
+  const [actionLoading, setActionLoading] = useState(false);
 
-	const { setConversations, conversations, addLike, removeLike, likes } =
-		useContext(ConversationContext);
+  const { setConversations, conversations, addLike, removeLike, likes } =
+    useContext(ConversationContext);
 
-	useEffect(() => {
-		ref.current && ref.current.focus();
-		setToggleMessageBar(false);
-	}, [profile]);
+  useEffect(() => {
+    ref.current && ref.current.focus();
+    setToggleMessageBar(false);
+  }, [profile]);
 
-	const ref = useRef(null);
+  const ref = useRef(null);
 
-	return (
+  return (
     <div
       key={profile.id}
       className={`${styles.container} ${

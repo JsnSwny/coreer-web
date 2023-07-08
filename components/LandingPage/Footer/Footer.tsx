@@ -7,7 +7,7 @@ const Footer = () => {
       <Container>
         <div className={styles.footerTop}>
           <h4 className={styles.logo}>
-            co<span>reer</span>
+            Co<span>reer</span>
           </h4>
           <ul className={styles.links}>
             <li>Terms and Conditions</li>

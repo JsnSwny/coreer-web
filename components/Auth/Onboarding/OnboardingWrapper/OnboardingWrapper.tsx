@@ -15,7 +15,7 @@ const OnboardingWrapper = ({
   return (
     <div className={styles.wrapper}>
       <h3 className={styles.logo}>
-        co<span>reer</span>
+        Co<span>reer</span>
       </h3>
       <OnboardingNav />
       <div className={styles.content}>

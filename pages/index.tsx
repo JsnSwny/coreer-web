@@ -44,7 +44,11 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>Coreer | Discover Projects from Talented Students</title>
+        <title>
+          {!user
+            ? "Coreer | Personalised Professional Networking"
+            : "Discover | Coreer"}
+        </title>
         <meta
           name="description"
           content="Unlock the power of connection and collaboration at Coreer. Join our tech community to connect, collaborate, and curate. Start shaping your career today!"
