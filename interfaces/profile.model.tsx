@@ -13,6 +13,8 @@ export interface CareerLevel {
 export interface Profile {
 	id: number;
 	username: string;
+	email: string;
+	is_staff: boolean;
 	image: string;
 	first_name: string;
 	last_name: string;

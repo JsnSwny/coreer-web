@@ -13,7 +13,7 @@ import Languages from "@/components/Auth/Onboarding/Languages/Languages";
 import { Skill } from "@/interfaces/language.model";
 
 interface LanguagesProps {
-	languages: { languages: Skill[] };
+	languages: Skill[];
 }
 
 const LanguagesPage = ({ languages }: LanguagesProps) => {
@@ -31,7 +31,7 @@ const LanguagesPage = ({ languages }: LanguagesProps) => {
 			>
 				{user && (
 					<Languages
-						options={languages.languages}
+						options={languages}
 						defaultOptions={user.languages}
 						updateKey="languages_id"
 					/>
@@ -44,7 +44,7 @@ const LanguagesPage = ({ languages }: LanguagesProps) => {
 export const getServerSideProps = async (context: any) => {
 	let languagesRes: any = [];
 	await axios
-		.get(`${server}/most-popular-languages/`)
+		.get(`${server}/api/languages/`)
 		.then((res) => {
 			console.log(res.data);
 			languagesRes = res.data;

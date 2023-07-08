@@ -13,22 +13,22 @@ const CapacityList = () => {
 			<ProgressCard
 				title="Students"
 				icon={faUserGraduate}
-				currentNum={30}
+				currentNum={2}
 				maxNum={60}
 			/>
 			<ProgressCard
 				title="Professionals"
 				icon={faUserAstronaut}
-				currentNum={20}
+				currentNum={0}
 				maxNum={30}
 			/>
 			<ProgressCard
 				title="Recruiters"
 				icon={faUserSecret}
-				currentNum={5}
+				currentNum={0}
 				maxNum={10}
 			/>
-			<ProgressCard title="Total" icon={faUsers} currentNum={55} maxNum={100} />
+			<ProgressCard title="Total" icon={faUsers} currentNum={2} maxNum={100} />
 		</ul>
 	);
 };

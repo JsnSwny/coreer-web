@@ -6,6 +6,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 import { Interest } from "@/interfaces/interest.model";
 import globalStyles from "@/styles/globalStyles.module.scss";
+import InterestsInput from "@/components/Forms/Inputs/InterestsInput/InterestsInput";
 
 interface InterestsProps {
 	options: Interest[];
@@ -27,43 +28,11 @@ const Interests = ({ options, defaultOptions }: InterestsProps) => {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<div className={globalStyles.formGroup}>
-				<label className={globalStyles.label}>Career Interests</label>
-				<TagSelectorList>
-					{options
-						.filter((item) => item.interest_type == "C")
-						.map((option) => (
-							<TagSelector
-								key={option.id}
-								title={option.name}
-								active={selectedOptions.some((item) => item.id == option.id)}
-								selectedOptions={selectedOptions}
-								setSelectedOptions={setSelectedOptions}
-								option={option}
-								disabled={selectedOptions.length > 5}
-							/>
-						))}
-				</TagSelectorList>
-			</div>
-			<div className={globalStyles.formGroup}>
-				<label className={globalStyles.label}>Personal Interests</label>
-				<TagSelectorList>
-					{options
-						.filter((item) => item.interest_type == "P")
-						.map((option) => (
-							<TagSelector
-								key={option.id}
-								title={option.name}
-								active={selectedOptions.some((item) => item.id == option.id)}
-								selectedOptions={selectedOptions}
-								setSelectedOptions={setSelectedOptions}
-								option={option}
-								disabled={selectedOptions.length > 5}
-							/>
-						))}
-				</TagSelectorList>
-			</div>
-
+			<InterestsInput
+				options={options}
+				selectedOptions={selectedOptions}
+				setSelectedOptions={setSelectedOptions}
+			/>
 			<Actions
 				actionText={`Next Step (${selectedOptions.length} of 6)`}
 				// disabled={selectedOptions.length < 6}

@@ -75,10 +75,10 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 
 	useEffect(() => {
 		axios
-			.get(`${server}/most-popular-languages/`)
+			.get(`${server}/api/languages/`)
 			.then((res) => {
 				setOptions(
-					res.data.languages.map((item: Skill) => ({
+					res.data.map((item: Skill) => ({
 						value: item.id,
 						label: item.name,
 						group: item.category,

@@ -12,6 +12,7 @@ interface AuthContextType {
 	signOut: () => void;
 	signUp: (email: string, password1: string, password2: string) => void;
 	loading: boolean;
+	tokenLoading: boolean;
 	setUser: (profile: Profile | null) => void;
 	updateProfilePicture: (id: number, key: string, file: File) => void;
 	updateUser: (data: object) => void;
@@ -27,6 +28,7 @@ export const AuthContext = createContext<AuthContextType>({
 	signOut: () => {},
 	signUp: () => {},
 	loading: false,
+	tokenLoading: false,
 	setUser: () => {},
 	updateProfilePicture: () => {},
 	updateUser: () => {},
@@ -44,12 +46,12 @@ interface AuthProviderProps {
 const AuthProvider = ({ children }: AuthProviderProps) => {
 	const [user, setUser] = useState<Profile | null>(null);
 	const [userToken, setUserToken] = useState<string | null>(null);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
+	const [tokenLoading, setTokenLoading] = useState(true);
 	const [githubToken, setGithubToken] = useState<string | null>(null);
 
 	const fetchUser = async (accessToken: string) => {
 		try {
-			console.log(`Fetching user: ${accessToken}`);
 			const response = await axios.get(`${server}/api/auth/user/`, {
 				headers: {
 					Authorization: `Token ${accessToken}`,
@@ -61,7 +63,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 				localStorage.setItem("token", accessToken);
 				setUser(userData);
 				setUserToken(accessToken);
-				setLoading(false);
+				setTokenLoading(false);
 				return userData;
 			} else {
 				setUser(null);
@@ -157,17 +159,16 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 				},
 			};
 
-			console.log(user);
-
 			const formData = new FormData();
 			formData.append("image", file);
 
-			console.log("form data");
-			console.log(formData);
-
+			console.log(user);
 			await axios
-				.put(`${server}/api/user/${id}/`, formData, config)
-				.then((res) => setUser(res.data))
+				.patch(`${server}/api/auth/user/`, formData, config)
+				.then((res) => {
+					console.log(res.data);
+					setUser(res.data);
+				})
 				.catch((err) => console.log(err.response));
 		} catch (error: any) {
 			console.error(error);
@@ -181,8 +182,13 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 		setLoading(true);
 		try {
 			await axios
-				.put(`${server}/api/user/${user!.id}/`, data, getUserConfig())
+				.put(
+					`${server}/api/auth/user/`,
+					{ username: user!.username, email: user!.email, ...data },
+					getUserConfig()
+				)
 				.then((res) => {
+					console.log(res.data);
 					setUser(res.data);
 				})
 				.catch((err) => console.log(err.response));
@@ -197,7 +203,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 		const accessToken = localStorage.getItem("token");
 		if (accessToken) {
 			fetchUser(accessToken);
-		} else setLoading(false);
+		} else setTokenLoading(false);
 	}, []);
 
 	return (
@@ -215,6 +221,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 				fetchUser,
 				githubToken,
 				setGithubToken,
+				tokenLoading,
 			}}
 		>
 			{children}

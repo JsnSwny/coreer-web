@@ -18,7 +18,7 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
 	const apiKey = process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY;
-	const { user, loading } = useAuth();
+	const { user, tokenLoading } = useAuth();
 	const router = useRouter();
 	const [showHeader, setShowHeader] = useState(user && user.onboarded);
 
@@ -35,7 +35,7 @@ const Layout = ({ children }: LayoutProps) => {
 		router.pathname == "/signup" ||
 		router.pathname.includes("/onboarding");
 
-	if (loading) {
+	if (tokenLoading) {
 		return <LoadingOverlay />;
 	}
 

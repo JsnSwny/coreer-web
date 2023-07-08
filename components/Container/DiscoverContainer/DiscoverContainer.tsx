@@ -34,12 +34,19 @@ const DiscoverContainer = ({ openProjectModal }: DiscoverContainerProps) => {
 
 	const [loading, setLoading] = useState(true);
 	useEffect(() => {
-		axios.get(`${server}/api/user/`).then((res) => {
-			setProfiles(res.data.results);
-			setLoading(false);
-			setCurrentProfile(res.data.results[currentIndex]);
-			console.log(res.data);
-		});
+		axios
+			.get(`${server}/api/profiles/`, {
+				headers: {
+					Authorization: `Token ${userToken}`,
+				},
+			})
+			.then((res) => {
+				console.log(res);
+				setProfiles(res.data.results);
+				setLoading(false);
+				setCurrentProfile(res.data.results[currentIndex]);
+				console.log(res.data);
+			});
 	}, []);
 
 	const [isAnimationActive, setIsAnimationActive] = useState(false);
@@ -73,37 +80,34 @@ const DiscoverContainer = ({ openProjectModal }: DiscoverContainerProps) => {
 				onClick={handlePreviousCard}
 			/> */}
 			<Container>
-				<div className={styles.placeholderContainer}>
-					<h1 className={styles.title}>Discover Mode</h1>
-					<p className={styles.text}>
-						Discover mode will unlock once the beta 1.0 capacity has been
-						reached. Complete your profile and request for verification to join
-						the beta.
-					</p>
+				{!user!.is_staff ? (
+					<div className={styles.placeholderContainer}>
+						<h1 className={styles.title}>Discover Mode</h1>
+						<p className={styles.text}>
+							Discover mode will unlock once the beta 1.0 capacity has been
+							reached. Complete your profile and request for verification to
+							join the beta.
+						</p>
 
-					<CapacityList />
-					<div className={styles.actions}>
-						<Button alt text="Manage Profile" link={`/${user!.username}`} />
-						{/* <Button
-							alt
-							text="Request Verification"
-							link={`/${user!.username}`}
-						/> */}
+						<CapacityList />
+						<div className={styles.actions}>
+							<Button alt text="Manage Profile" link={`/${user!.username}`} />
+						</div>
 					</div>
-				</div>
-
-				{/* {currentProfile && (
-					<ProfilePreview
-						openProjectModal={openProjectModal}
-						profile={currentProfile}
-						showLikeAnimation={showLikeAnimation}
-						isAnimationActive={isAnimationActive}
-						setShowLikeAnimation={setShowLikeAnimation}
-						handleNextCard={handleNextCard}
-						handlePreviousCard={handlePreviousCard}
-						currentIndex={currentIndex}
-					/>
-				)} */}
+				) : (
+					currentProfile && (
+						<ProfilePreview
+							openProjectModal={openProjectModal}
+							profile={currentProfile}
+							showLikeAnimation={showLikeAnimation}
+							isAnimationActive={isAnimationActive}
+							setShowLikeAnimation={setShowLikeAnimation}
+							handleNextCard={handleNextCard}
+							handlePreviousCard={handlePreviousCard}
+							currentIndex={currentIndex}
+						/>
+					)
+				)}
 			</Container>
 
 			{/* <FontAwesomeIcon

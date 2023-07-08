@@ -4,15 +4,15 @@ import { useAuth } from "@/contexts/AuthContext";
 import AboutYou from "@/components/Auth/Onboarding/AboutYou/AboutYou";
 import axios from "axios";
 import { server } from "@/config";
-import { FC } from "react"
-import { GetServerSideProps, NextPage } from "next"
-import { CareerLevel } from "../../../interfaces/profile.model"
-import { Question } from "../../../interfaces/question.model"
+import { FC } from "react";
+import { GetServerSideProps, NextPage } from "next";
+import { CareerLevel } from "../../../interfaces/profile.model";
+import { Question } from "../../../interfaces/question.model";
 
 type Props = {
 	questions: Question[];
 	careerLevels: CareerLevel[];
-}
+};
 
 const AboutYouPage: NextPage<Props> = ({ questions, careerLevels }) => {
 	return (
@@ -37,11 +37,15 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
 	let careerLevels: CareerLevel[] = [];
 
 	try {
-		const questionsPromise = axios.get<Question[]>(`${server}/api/questions/`);
-		const careerLevelsPromise = axios.get<CareerLevel[]>(`${server}/api/career-levels/`);
+		// const questionsPromise = axios.get<Question[]>(`${server}/api/questions/`);
+		const careerLevelsPromise = axios.get<CareerLevel[]>(
+			`${server}/api/career-levels/`
+		);
 
-		questions = (await questionsPromise).data;
+		// questions = (await questionsPromise).data;
 		careerLevels = (await careerLevelsPromise).data;
+
+		console.log(careerLevels);
 	} catch (err: any) {
 		console.log(err.response);
 		// TODO(sean): Maybe want to respond with an error here, this will default to just rendering with empty questions / career levels
