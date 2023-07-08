@@ -1,4 +1,5 @@
 @import "@/styles/_variables.scss";
+@import "@/styles/_breakpoints.scss";
 
 .feature {
 	background: white;
@@ -21,5 +22,8 @@
 	p {
 		color: $dark-light;
 		line-height: 1.5rem;
+	}
+	@include breakpoint(md, max) {
+		width: 100%;
 	}
 }

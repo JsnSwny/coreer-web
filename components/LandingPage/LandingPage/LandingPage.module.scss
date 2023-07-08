@@ -1,10 +1,17 @@
 @import "@/styles/_variables.scss";
+@import "@/styles/_breakpoints.scss";
 
 .container {
 }
 
 .section {
 	padding: 10rem 0;
+	@include breakpoint(lg, max) {
+		padding: 6rem 0;
+	}
+	@include breakpoint(md, max) {
+		padding: 4rem 0;
+	}
 }
 
 .sectionWhite {
@@ -31,6 +38,7 @@
 	display: flex;
 	gap: 1rem;
 	padding-top: 4rem;
+	flex-wrap: wrap;
 }
 
 .video {

@@ -1,51 +1,58 @@
 @import "@/styles/_variables.scss";
+@import "@/styles/_breakpoints.scss";
 
 .progressContainer {
-  width: 25%;
+	width: calc((100% - 6rem) / 4);
+	@include breakpoint(md, max) {
+		width: calc((100% - 2rem) / 2);
+	}
+	@include breakpoint(sm, max) {
+		width: calc(100%);
+	}
 }
 
 .progressRing {
-  position: relative;
+	position: relative;
 }
 
 .backgroundCircle {
-  fill: transparent;
-  stroke: rgba($primary, 0.3);
+	fill: transparent;
+	stroke: rgba($primary, 0.3);
 }
 
 .progressCircle {
-  fill: transparent;
-  stroke: $primary;
-  stroke-linecap: round;
-  transform: rotate(-90deg);
-  transform-origin: center;
-  transition: stroke-dashoffset 1s linear;
+	fill: none;
+	stroke: $primary;
+	stroke-linecap: round;
+	transform: rotate(270deg);
+	transform-origin: center;
+	transition: stroke-dashoffset 1s linear;
 }
 
 .percent {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: $primary;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: $primary;
 }
 
 .content {
-  text-align: center;
-  h3 {
-    font-weight: 700;
-    margin-top: 1rem;
-    font-size: 1.5rem;
-  }
-  p {
-    margin-top: 0.5rem;
-    font-size: 1rem;
-  }
+	text-align: center;
+	h3 {
+		font-weight: 700;
+		margin-top: 1rem;
+		font-size: 1.5rem;
+	}
+	p {
+		margin-top: 0.5rem;
+		font-size: 1rem;
+	}
 }

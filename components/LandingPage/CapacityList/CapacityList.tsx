@@ -6,6 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import ProgressCard from "../ProgressCard/ProgressCard";
 import styles from "./CapacityList.module.scss";
+import { useRef } from "react";
 
 const CapacityList = () => {
 	return (

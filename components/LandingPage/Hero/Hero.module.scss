@@ -1,84 +1,115 @@
 @import "@/styles/_variables.scss";
 
+@import "@/styles/_breakpoints.scss";
+
 .hero {
-  background: linear-gradient(120deg, #3366cc, #1846a3);
-  padding: 8rem 0;
-  color: white;
-  height: calc(75vh);
-  position: relative;
+	background: linear-gradient(120deg, #3366cc, #1846a3);
+	padding: 8rem 0;
+	color: white;
+	height: calc(75vh);
+	position: relative;
+	@include breakpoint(lg, max) {
+		min-height: 80vh;
+		height: 100%;
+		padding: 4rem 0;
+	}
 }
 
 .videoBackground {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: none;
 }
 
 .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(120deg, rgba(#3366cc, 0.9), rgba(#1846a3, 1));
-  display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(120deg, rgba(#3366cc, 0.9), rgba(#1846a3, 1));
+	display: none;
 }
 
 .heroTitle {
-  font-size: 3.25rem;
-  font-weight: 700;
-  line-height: 4rem;
-  span {
-    font-weight: 900;
-  }
+	font-size: 3.25rem;
+	font-weight: 700;
+	line-height: 4rem;
+	span {
+		font-weight: 900;
+	}
+	@include breakpoint(sm, max) {
+		font-size: 2.25rem;
+		line-height: 3rem;
+	}
 }
 
 .heroLeft {
-  width: 65%;
+	width: 65%;
+	@include breakpoint(lg, max) {
+		width: 100%;
+	}
 }
 
 .heroWrapper {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  height: 100%;
-  align-items: center;
+	display: flex;
+	justify-content: space-between;
+	gap: 2rem;
+	height: 100%;
+	align-items: center;
+	@include breakpoint(lg, max) {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 }
 
 .heroTagline {
-  font-size: 1.5rem;
-  line-height: 2.25rem;
-  margin-top: 1.5rem;
-  max-width: 75%;
-  color: white;
+	font-size: 1.5rem;
+	line-height: 2.25rem;
+	margin-top: 1.5rem;
+	max-width: 75%;
+	color: white;
+	@include breakpoint(sm, max) {
+		font-size: 1.25rem;
+		line-height: 2rem;
+	}
 }
 
 .heroActions {
-  margin-top: 4rem;
-  display: flex;
-  gap: 1rem;
+	margin-top: 4rem;
+	display: flex;
+	gap: 1rem;
+	flex-wrap: wrap;
+	@include breakpoint(lg, max) {
+		margin-top: 2rem;
+	}
 }
 
 .button {
-  padding: 0.75rem 1.5rem;
-  border: 2px solid white;
-  background: white;
-  border-radius: 100px;
-  font-weight: 700;
-  font-size: 1rem;
-  cursor: pointer;
+	padding: 0.75rem 1.5rem;
+	border: 2px solid white;
+	background: white;
+	border-radius: 100px;
+	font-weight: 700;
+	font-size: 1rem;
+	cursor: pointer;
 }
 
 .buttonAlt {
-  background: transparent;
-  color: white;
+	background: transparent;
+	color: white;
 }
 
 .heroRight {
-  flex: 1;
-  max-width: 450px;
+	flex: 1;
+	max-width: 450px;
+	@include breakpoint(lg, max) {
+		max-width: 100%;
+		flex: none;
+		margin-top: 4rem;
+	}
 }
