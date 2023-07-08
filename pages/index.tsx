@@ -26,49 +26,49 @@ import DiscoverContainer from "@/components/Container/DiscoverContainer/Discover
 import LandingPage from "@/components/LandingPage/LandingPage/LandingPage";
 
 const Home = () => {
-  const { user, userToken } = useAuth();
+	const { user, userToken } = useAuth();
 
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
+	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+	const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
 
-  const openProjectModal = (project: Project) => {
-    setIsProjectModalOpen(true);
-    setSelectedProject(project);
-  };
+	const openProjectModal = (project: Project) => {
+		setIsProjectModalOpen(true);
+		setSelectedProject(project);
+	};
 
-  const closeProjectModal = () => {
-    setSelectedProject(null);
-    setIsProjectModalOpen(false);
-  };
+	const closeProjectModal = () => {
+		setSelectedProject(null);
+		setIsProjectModalOpen(false);
+	};
 
-  return (
-    <>
-      <Head>
-        <title>
-          {!user
-            ? "Coreer | Personalised Professional Networking"
-            : "Discover | Coreer"}
-        </title>
-        <meta
-          name="description"
-          content="Unlock the power of connection and collaboration at Coreer. Join our tech community to connect, collaborate, and curate. Start shaping your career today!"
-        />
-      </Head>
+	return (
+		<>
+			<Head>
+				<title>
+					{!user
+						? "Coreer | Personalised Professional Networking"
+						: "Discover | Coreer"}
+				</title>
+				<meta
+					name="description"
+					content="Unlock the power of connection and collaboration at Coreer. Join our tech community to connect, collaborate, and curate. Start shaping your career today!"
+				/>
+			</Head>
 
-      {user ? (
-        <>
-          <ProjectModal
-            project={selectedProject!}
-            onClose={closeProjectModal}
-            isOpen={isProjectModalOpen}
-          />
-          <DiscoverContainer openProjectModal={openProjectModal} />
-        </>
-      ) : (
-        <LandingPage />
-      )}
-    </>
-  );
+			{user ? (
+				<>
+					<ProjectModal
+						project={selectedProject!}
+						onClose={closeProjectModal}
+						isOpen={isProjectModalOpen}
+					/>
+					<DiscoverContainer openProjectModal={openProjectModal} />
+				</>
+			) : (
+				<LandingPage />
+			)}
+		</>
+	);
 };
 
 export default Home;

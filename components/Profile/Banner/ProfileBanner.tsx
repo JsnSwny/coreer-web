@@ -95,7 +95,8 @@ const ProfileBanner = ({
 				</div>
 
 				<p className={styles.subtitle}>
-					{profile.current_level?.name} {/*• BSc Computer Science*/}
+					{profile.current_level && profile.current_level?.name}{" "}
+					{/*• BSc Computer Science*/}
 				</p>
 				<p className={styles.location}>{profile.location}</p>
 				<p className={styles.bio}>{profile.bio}</p>
