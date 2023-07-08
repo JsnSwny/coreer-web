@@ -98,6 +98,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 			return response;
 		} catch (error) {
 			const axiosError = error as AxiosError;
+			console.log(axiosError.response);
 			setUser(null);
 			setLoading(false);
 			return axiosError.response;
