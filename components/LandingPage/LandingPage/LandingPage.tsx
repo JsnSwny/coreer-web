@@ -21,11 +21,11 @@ import CapacityList from "../CapacityList/CapacityList";
 import { useRef } from "react";
 
 const LandingPage = () => {
-	const demoSectionRef = useRef(null);
+	const demoSectionRef = useRef<HTMLDivElement | null>(null);
 
 	return (
 		<div className={styles.container}>
-			<Hero demoSectionRef={demoSectionRef} />
+			<Hero demoSectionRef={demoSectionRef.current} />
 			<section className={`${styles.section} ${styles.sectionWhite}`}>
 				<Container>
 					<h2 className={styles.sectionTitle}>Beta 1.0</h2>

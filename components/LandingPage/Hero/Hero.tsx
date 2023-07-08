@@ -2,7 +2,7 @@ import Container from "@/components/Container/Container";
 import styles from "./Hero.module.scss";
 
 interface HeroProps {
-	demoSectionRef: HTMLDivElement;
+	demoSectionRef: HTMLDivElement | null;
 }
 
 const Hero = ({ demoSectionRef }: HeroProps) => {
@@ -28,7 +28,8 @@ const Hero = ({ demoSectionRef }: HeroProps) => {
 							<button
 								className={`${styles.button} ${styles.buttonAlt}`}
 								onClick={() =>
-									demoSectionRef.current.scrollIntoView({ behavior: "smooth" })
+									demoSectionRef &&
+									demoSectionRef.scrollIntoView({ behavior: "smooth" })
 								}
 							>
 								Watch Demo
