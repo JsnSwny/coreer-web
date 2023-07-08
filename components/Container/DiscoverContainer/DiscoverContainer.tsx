@@ -19,6 +19,7 @@ import Button from "@/components/Button/Button";
 import { useAuth } from "@/contexts/AuthContext";
 import { likeUser } from "@/utils/likeUser";
 import { chatHrefConstructor } from "@/utils/chatHrefConstructor";
+import CapacityList from "@/components/LandingPage/CapacityList/CapacityList";
 
 interface DiscoverContainerProps {
 	openProjectModal: (project: Project) => void;
@@ -72,7 +73,26 @@ const DiscoverContainer = ({ openProjectModal }: DiscoverContainerProps) => {
 				onClick={handlePreviousCard}
 			/> */}
 			<Container>
-				{currentProfile && (
+				<div className={styles.placeholderContainer}>
+					<h1 className={styles.title}>Discover Mode</h1>
+					<p className={styles.text}>
+						Discover mode will unlock once the beta 1.0 capacity has been
+						reached. Complete your profile and request for verification to join
+						the beta.
+					</p>
+
+					<CapacityList />
+					<div className={styles.actions}>
+						<Button alt text="Manage Profile" link={`/${user!.username}`} />
+						{/* <Button
+							alt
+							text="Request Verification"
+							link={`/${user!.username}`}
+						/> */}
+					</div>
+				</div>
+
+				{/* {currentProfile && (
 					<ProfilePreview
 						openProjectModal={openProjectModal}
 						profile={currentProfile}
@@ -83,7 +103,7 @@ const DiscoverContainer = ({ openProjectModal }: DiscoverContainerProps) => {
 						handlePreviousCard={handlePreviousCard}
 						currentIndex={currentIndex}
 					/>
-				)}
+				)} */}
 			</Container>
 
 			{/* <FontAwesomeIcon
