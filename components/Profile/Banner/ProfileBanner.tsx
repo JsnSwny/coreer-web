@@ -16,6 +16,8 @@ import styles from "./ProfileBanner.module.scss";
 import globalStyles from "@/styles/globalStyles.module.scss";
 import Project from "../Projects/Project/Project";
 import { Project as ProjectModel } from "@/interfaces/project.model";
+import { useContext } from "react";
+import { ConversationContext } from "@/contexts/ConversationContext";
 
 interface ProfileBannerProps {
 	profile: Profile;
@@ -33,6 +35,7 @@ const ProfileBanner = ({
 		profile.profile_photo ? profile.profile_photo : profile.image
 	);
 	const { user, updateProfilePicture, userToken, setUser } = useAuth();
+	const { likes, addLike, removeLike } = useContext(ConversationContext);
 
 	useEffect(() => {
 		setImagePreviewUrl(
@@ -107,17 +110,20 @@ const ProfileBanner = ({
 							icon={faEnvelope}
 						/> */}
 						<Button
-							text={user!.following.includes(profile!.id) ? "Remove" : "Like"}
-							alt={!user!.following.includes(profile!.id)}
+							text={
+								likes.some((item) => item.id == profile.id) ? "Remove" : "Like"
+							}
+							alt={!likes.some((item) => item.id == profile.id)}
 							onClick={() => {
-								const followList = likeUser(user!, profile, userToken!);
-								setUser({ ...user, following: followList });
+								likes.some((item) => item.id == profile.id)
+									? removeLike(profile.id)
+									: addLike(profile);
 							}}
 							onMouseEnter={() => setIsHovered(true)}
 							onMouseLeave={() => setIsHovered(false)}
 							size="small"
 							icon={
-								isHovered || user!.following.includes(profile.id)
+								isHovered || likes.some((item) => item.id == profile.id)
 									? faStar
 									: farStar
 							}

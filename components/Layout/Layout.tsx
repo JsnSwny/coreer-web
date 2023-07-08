@@ -82,7 +82,7 @@ const Layout = ({ children }: LayoutProps) => {
 					{isOnboarded ? (
 						<>
 							<NotificationContextProvider>
-								<MessagesSidebar conversations={[]} />
+								<MessagesSidebar />
 							</NotificationContextProvider>
 						</>
 					) : (
