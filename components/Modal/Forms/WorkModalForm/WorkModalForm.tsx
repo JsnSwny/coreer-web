@@ -19,6 +19,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
 import FormError from "@/components/Forms/Error/FormError";
+import DescriptionInput from "../../Inputs/DescriptionInput/DescriptionInput";
 
 interface ModalFormProps {
 	closeModal: () => void;
@@ -154,11 +155,7 @@ const WorkModalForm = ({ closeModal, item }: ModalFormProps) => {
 				<DateRangeInput control={control} errors={errors} watch={watch} />
 				<div className={globalStyles.formGroup}>
 					<label className={globalStyles.label}>Description</label>
-					<textarea
-						className={globalStyles.input}
-						rows={4}
-						{...register("description")}
-					></textarea>
+					<DescriptionInput control={control} />
 					<FormError message={errors.description?.message} />
 				</div>
 			</div>

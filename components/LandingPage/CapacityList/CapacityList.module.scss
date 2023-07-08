@@ -1,0 +1,10 @@
+@import "@/styles/_breakpoints.scss";
+
+.capacityList {
+	display: flex;
+	justify-content: space-between;
+	list-style: none;
+	padding-top: 4rem;
+	flex-wrap: wrap;
+	gap: 2rem;
+}

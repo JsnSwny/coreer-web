@@ -1,48 +1,54 @@
 @import "@/styles/_variables.scss";
 
 .conversation {
-  width: 100%;
-  border-radius: 10px;
-  list-style: none;
-  transition: 0.2s ease background;
-  &:hover {
-    &:not(.active) {
-      background: rgba($primary, 0.05);
-    }
-  }
+	width: 100%;
+	border-radius: 10px;
+	list-style: none;
+	transition: 0.2s ease background;
+	&:hover {
+		&:not(.active) {
+			background: rgba($primary, 0.05);
+		}
+	}
 }
 
 .link {
-  padding: 0.75rem 1rem;
-  display: flex;
-  align-items: center;
+	padding: 0.75rem 2rem;
+	display: flex;
+	align-items: center;
 }
 
 .image {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  outline: none;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	outline: none;
 }
 
 .content {
-  margin-left: 0.75rem;
-  overflow: hidden;
+	margin-left: 0.75rem;
+	overflow: hidden;
+}
+
+.unread {
+	.last_message {
+		font-weight: bold;
+	}
 }
 
 .name {
-  font-size: 14px;
+	font-size: 0.875rem;
 }
 
 .last_message {
-  margin-top: 0.5rem;
-  font-size: 14px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+	margin-top: 0.5rem;
+	font-size: 14px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .active {
-  background: rgba($primary, 0.075);
-  // border-right: 3px solid $primary;
+	background: rgba($primary, 0.075);
+	// border-right: 3px solid $primary;
 }

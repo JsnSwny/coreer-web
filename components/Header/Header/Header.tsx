@@ -21,16 +21,16 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <Container size={largeContainer ? "large" : "medium"}>
+      <Container>
         <div className={styles.wrapper}>
           <Nav>
             <Link href="/" className={styles.logo}>
               {/* <img src="https://coreer-static.s3.eu-west-2.amazonaws.com/media/favicon/favicon.svg" /> */}
               <p className={styles.title}>
-                <span>co</span>reer
+                <span>Co</span>reer
               </p>
             </Link>
-            <Search />
+            {/* <Search /> */}
           </Nav>
 
           <div className={styles.right}>

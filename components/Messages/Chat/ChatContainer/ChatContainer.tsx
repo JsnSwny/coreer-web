@@ -6,33 +6,33 @@ import ChatHeader from "../ChatHeader/ChatHeader";
 import { Conversation } from "@/interfaces/conversation.model";
 
 interface ChatContainerProps {
-  messageHistory: MessageType[];
-  sendMessage?: (e: any, message: string) => void;
-  currentConversation?: Conversation;
+	messageHistory: MessageType[];
+	sendMessage?: (e: any, message: string) => void;
+	currentConversation?: Conversation;
 }
 
 const ChatContainer = ({
-  messageHistory,
-  sendMessage,
-  currentConversation,
+	messageHistory,
+	sendMessage,
+	currentConversation,
 }: ChatContainerProps) => {
-  return (
-    <section className={styles.container}>
-      {currentConversation && (
-        <>
-          <ChatHeader currentConversation={currentConversation} />
-          <div className={styles.messagesContainer}>
-            <ul className={styles.wrapper}>
-              {messageHistory.map((message) => (
-                <Message key={message.id} message={message} />
-              ))}
-            </ul>
-          </div>
-          {sendMessage && <SendMessage sendMessage={sendMessage} />}
-        </>
-      )}
-    </section>
-  );
+	return (
+		<section className={styles.container}>
+			{currentConversation && (
+				<>
+					<ChatHeader currentConversation={currentConversation} />
+					<div className={styles.messagesContainer}>
+						<ul className={styles.wrapper}>
+							{messageHistory.map((message) => (
+								<Message key={message.id} message={message} />
+							))}
+						</ul>
+					</div>
+					{sendMessage && <SendMessage sendMessage={sendMessage} />}
+				</>
+			)}
+		</section>
+	);
 };
 
 export default ChatContainer;

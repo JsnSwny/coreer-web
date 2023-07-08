@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import LoadingOverlay from "@/components/Layout/LoadingOverlay/LoadingOverlay";
 import { Skill } from "@/interfaces/language.model";
 import globalStyles from "@/styles/globalStyles.module.scss";
+import SkillsInput from "@/components/Forms/Inputs/SkillsInput/SkillsInput";
 
 interface LanguagesProps {
 	options: Skill[];
@@ -32,57 +33,11 @@ const Languages = ({ options, defaultOptions, updateKey }: LanguagesProps) => {
 		<>
 			{loading && <LoadingOverlay />}
 			<form onSubmit={handleSubmit}>
-				<div className={globalStyles.formGroup}>
-					<label className={globalStyles.label}>Languages</label>
-					<TagSelectorList>
-						{options
-							.filter((item) => item.category == "L")
-							.map((option) => (
-								<TagSelector
-									key={option.id}
-									title={option.name}
-									active={selectedOptions.some((item) => item.id == option.id)}
-									selectedOptions={selectedOptions}
-									setSelectedOptions={setSelectedOptions}
-									option={option}
-								/>
-							))}
-					</TagSelectorList>
-				</div>
-				<div className={globalStyles.formGroup}>
-					<label className={globalStyles.label}>Frameworks</label>
-					<TagSelectorList>
-						{options
-							.filter((item) => item.category == "F")
-							.map((option) => (
-								<TagSelector
-									key={option.id}
-									title={option.name}
-									active={selectedOptions.some((item) => item.id == option.id)}
-									selectedOptions={selectedOptions}
-									setSelectedOptions={setSelectedOptions}
-									option={option}
-								/>
-							))}
-					</TagSelectorList>
-				</div>
-				<div className={globalStyles.formGroup}>
-					<label className={globalStyles.label}>Other</label>
-					<TagSelectorList>
-						{options
-							.filter((item) => item.category == "O")
-							.map((option) => (
-								<TagSelector
-									key={option.id}
-									title={option.name}
-									active={selectedOptions.some((item) => item.id == option.id)}
-									selectedOptions={selectedOptions}
-									setSelectedOptions={setSelectedOptions}
-									option={option}
-								/>
-							))}
-					</TagSelectorList>
-				</div>
+				<SkillsInput
+					options={options}
+					selectedOptions={selectedOptions}
+					setSelectedOptions={setSelectedOptions}
+				/>
 				<Actions
 					actionText={`Get Started`}
 					// disabled={selectedOptions.length < 2}

@@ -8,6 +8,9 @@ import styles from "./Layout.module.scss";
 
 import "react-toastify/dist/ReactToastify.css";
 import Script from "next/script";
+import MessagesSidebar from "../Messages/MessagesSidebar/MessagesSidebar";
+import { NotificationContextProvider } from "@/contexts/NotificationContext";
+import LoadingOverlay from "./LoadingOverlay/LoadingOverlay";
 
 interface LayoutProps {
 	children: React.ReactNode;
@@ -15,13 +18,26 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
 	const apiKey = process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY;
-	const { user } = useAuth();
+	const { user, tokenLoading } = useAuth();
 	const router = useRouter();
 	const [showHeader, setShowHeader] = useState(user && user.onboarded);
 
 	useEffect(() => {
-		setShowHeader(user && user.onboarded);
-	}, [user, router]);
+		if (user && !user.onboarded && !router.pathname.includes("/onboarding")) {
+			router.push("/onboarding/personal-details");
+		}
+	}, [user]);
+
+	const isLanding = !user && router.pathname == "/";
+	const isOnboarded = user && user.onboarded;
+	const noHeader =
+		router.pathname == "/login" ||
+		router.pathname == "/signup" ||
+		router.pathname.includes("/onboarding");
+
+	if (tokenLoading) {
+		return <LoadingOverlay />;
+	}
 
 	return (
 		<>
@@ -49,11 +65,40 @@ const Layout = ({ children }: LayoutProps) => {
 
 					<meta name="viewport" content="width=device-width, initial-scale=1" />
 				</Head>
+				<Script src="https://www.googletagmanager.com/gtag/js?id=G-WR67K5QVL0" />
+				<Script id="google-analytics">
+					{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-WR67K5QVL0');
+        `}
+				</Script>
 				{/* <Sidebar /> */}
 				<ToastContainer />
-				<div className={styles.content}>
-					{!router.pathname.includes("/onboarding") && <Header />}
-					<main>{children}</main>
+
+				<div className={styles.container}>
+					{isOnboarded ? (
+						<>
+							<NotificationContextProvider>
+								<MessagesSidebar />
+							</NotificationContextProvider>
+						</>
+					) : (
+						!noHeader && <Header />
+					)}
+					<main
+						className={`${styles.main} ${
+							isOnboarded
+								? styles.authenticated
+								: !noHeader
+								? styles.unauthenticated
+								: ""
+						} ${isLanding ? styles.landing : ""}`}
+					>
+						{children}
+					</main>
 				</div>
 			</div>
 		</>

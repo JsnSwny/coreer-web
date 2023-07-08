@@ -1,0 +1,33 @@
+@import "@/styles/_variables.scss";
+@import "@/styles/_breakpoints.scss";
+
+.footer {
+	background: $primary;
+	color: white;
+	padding: 1rem;
+}
+
+.footerTop {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.links {
+	display: flex;
+	gap: 2rem;
+	list-style-type: none;
+	font-size: 14px;
+	@include breakpoint(lg, max) {
+		width: 100%;
+	}
+}
+
+.logo {
+	font-weight: 400;
+	span {
+		font-weight: 700;
+	}
+}

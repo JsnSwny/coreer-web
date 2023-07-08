@@ -15,6 +15,7 @@ import Link from "next/link";
 import axios from "axios";
 import { server } from "@/config";
 import { toast } from "react-toastify";
+import globalStyles from "@/styles/globalStyles.module.scss";
 
 interface ProjectModalProps {
 	project: Project;
@@ -104,7 +105,7 @@ const ProjectModal = ({ project, onClose, isOpen }: ProjectModalProps) => {
 
 						{project.description && (
 							<div
-								className={styles.description}
+								className={`${globalStyles.description} ${styles.description}`}
 								dangerouslySetInnerHTML={{ __html: project.description }}
 							></div>
 						)}

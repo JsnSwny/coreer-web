@@ -22,11 +22,11 @@ const schema = yup.object().shape({
 });
 
 interface AboutYouProps {
-	questions: Question[];
+	questions?: Question[];
 	careerLevels: CareerLevel[];
 }
 
-const AboutYou = ({ questions, careerLevels }: AboutYouProps) => {
+const AboutYou = ({ careerLevels }: AboutYouProps) => {
 	const {
 		register,
 		handleSubmit,
@@ -49,9 +49,8 @@ const AboutYou = ({ questions, careerLevels }: AboutYouProps) => {
 		current_level: string;
 		looking_for: string[];
 	}) => {
-		console.log(data);
-		const selectedQuestions = [questionOneOption, questionTwoOption];
-		const selectedAnswers = [questionOneAnswer, questionTwoAnswer];
+		// const selectedQuestions = [questionOneOption, questionTwoOption];
+		// const selectedAnswers = [questionOneAnswer, questionTwoAnswer];
 
 		updateUser({
 			current_level_id: parseInt(data.current_level),
@@ -83,44 +82,44 @@ const AboutYou = ({ questions, careerLevels }: AboutYouProps) => {
 		group: "S" | "P";
 	}
 
-	const questionOptions: Option[] = questions.map((item) => ({
-		value: String(item.id),
-		label: item.text,
-		group: "S",
-	}));
+	// const questionOptions: Option[] = questions.map((item) => ({
+	// 	value: String(item.id),
+	// 	label: item.text,
+	// 	group: "S",
+	// }));
 
 	const [careerLevel, setCareerLevel] = useState<Option | null>(null);
-	const [questionOneOption, setQuestionOneOption] = useState<
-		Option | null | undefined
-	>(null);
+	// const [questionOneOption, setQuestionOneOption] = useState<
+	// 	Option | null | undefined
+	// >(null);
 	const [lookingFor, setLookingFor] = useState<Option[]>([]);
-	const [questionOneAnswer, setQuestionOneAnswer] = useState("");
+	// const [questionOneAnswer, setQuestionOneAnswer] = useState("");
 
-	const [questionTwoOption, setQuestionTwoOption] = useState<
-		Option | null | undefined
-	>(null);
-	const [questionTwoAnswer, setQuestionTwoAnswer] = useState("");
+	// const [questionTwoOption, setQuestionTwoOption] = useState<
+	// 	Option | null | undefined
+	// >(null);
+	// const [questionTwoAnswer, setQuestionTwoAnswer] = useState("");
 
-	useEffect(() => {
-		if (user) {
-			if (user.user_answers) {
-				setQuestionOneOption(
-					questionOptions.find(
-						(item: Option) =>
-							parseInt(item.value) == user.user_answers[0]?.question.id
-					)
-				);
-				setQuestionTwoOption(
-					questionOptions.find(
-						(item: Option) =>
-							parseInt(item.value) == user.user_answers[1]?.question.id
-					)
-				);
-				setQuestionOneAnswer(user.user_answers[0]?.answer);
-				setQuestionTwoAnswer(user.user_answers[1]?.answer);
-			}
-		}
-	}, [user]);
+	// useEffect(() => {
+	// 	if (user) {
+	// 		if (user.user_answers) {
+	// 			setQuestionOneOption(
+	// 				questionOptions.find(
+	// 					(item: Option) =>
+	// 						parseInt(item.value) == user.user_answers[0]?.question.id
+	// 				)
+	// 			);
+	// 			setQuestionTwoOption(
+	// 				questionOptions.find(
+	// 					(item: Option) =>
+	// 						parseInt(item.value) == user.user_answers[1]?.question.id
+	// 				)
+	// 			);
+	// 			setQuestionOneAnswer(user.user_answers[0]?.answer);
+	// 			setQuestionTwoAnswer(user.user_answers[1]?.answer);
+	// 		}
+	// 	}
+	// }, [user]);
 
 	useEffect(() => {
 		if (user?.current_level && user?.looking_for) {
@@ -160,20 +159,9 @@ const AboutYou = ({ questions, careerLevels }: AboutYouProps) => {
 						name="current_level"
 						render={({ field }) => (
 							<Select
-								options={groupedOptions}
+								options={options}
 								onChange={(val) => {
-									if (
-										val?.group !=
-										options.find((item) => item.value == currentLevelValue)
-											?.group
-									) {
-										reset({
-											current_level: val?.value,
-											looking_for: [],
-										});
-									} else {
-										field.onChange(val?.value);
-									}
+									field.onChange(val?.value);
 								}}
 								value={
 									field.value
@@ -195,16 +183,12 @@ const AboutYou = ({ questions, careerLevels }: AboutYouProps) => {
 						name="looking_for"
 						render={({ field }) => (
 							<Select
-								options={groupedOptions}
+								options={options}
 								onChange={(val) => field.onChange(val.map((c) => c.value))}
 								isMulti
 								value={
 									field.value &&
 									options.filter((c) => field.value.includes(c.value))
-								}
-								isOptionDisabled={(option) =>
-									option.group ==
-									options.find((item) => item.value == currentLevelValue)?.group
 								}
 							/>
 						)}
