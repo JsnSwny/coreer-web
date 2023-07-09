@@ -67,12 +67,14 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 				return userData;
 			} else {
 				setUser(null);
+				setTokenLoading(false);
 			}
 		} catch (error) {
 			setUser(null);
+			setTokenLoading(false);
 		}
 
-		setLoading(false);
+		setTokenLoading(false);
 	};
 
 	const signIn = async (
