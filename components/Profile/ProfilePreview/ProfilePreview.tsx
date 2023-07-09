@@ -231,7 +231,7 @@ const ProfilePreview = ({
 										.map((education) => (
 											<DiscoverCard
 												key={education.id}
-												image={null}
+												image={education.school.logo}
 												title={education.school.name}
 												subtitle={education.degree}
 												body={education.description}
