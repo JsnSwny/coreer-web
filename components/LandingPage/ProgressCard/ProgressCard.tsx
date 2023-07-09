@@ -24,7 +24,7 @@ const ProgressCard = ({
 	currentNum,
 	maxNum,
 }: ProgressCardProps) => {
-	const containerRef = useRef<HTMLDivElement>(null);
+	const containerRef = useRef<HTMLLIElement | null>(null);
 	const [containerSize, setContainerSize] = useState<number>(0);
 	const [percentage, setPercentage] = useState<number>(0);
 	const [radius, setRadius] = useState<number>(0);
