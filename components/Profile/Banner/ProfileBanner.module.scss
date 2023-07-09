@@ -48,6 +48,9 @@
 
 .bio {
 	margin-top: 2rem;
+	white-space: pre-line;
+	line-height: 1.5rem;
+	color: $dark-light;
 }
 
 .titleIcon {
@@ -64,7 +67,6 @@
 }
 
 .location {
-	color: $dark-light;
 	margin-top: 0.5rem;
 }
 
