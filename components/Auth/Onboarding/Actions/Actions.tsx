@@ -5,15 +5,17 @@ import styles from "./Actions.module.scss";
 interface ActionsProps {
 	actionText?: string;
 	disabled?: boolean;
+	loading?: boolean;
 }
 
 const Actions = ({
 	actionText = "Next Step",
 	disabled = false,
+	loading = false,
 }: ActionsProps) => {
 	return (
 		<div className={styles.actions}>
-			<Button text={actionText} disabled={disabled} />
+			<Button loading={loading} text={actionText} disabled={disabled} />
 		</div>
 	);
 };

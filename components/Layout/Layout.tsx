@@ -58,10 +58,6 @@ const Layout = ({ children }: LayoutProps) => {
 						rel="shortcut icon"
 						href="https://coreer-static.s3.eu-west-2.amazonaws.com/media/favicon/favicon.svg"
 					/>
-					<script
-						async
-						src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`}
-					></script>
 
 					<meta name="viewport" content="width=device-width, initial-scale=1" />
 				</Head>
@@ -79,7 +75,7 @@ const Layout = ({ children }: LayoutProps) => {
 				<ToastContainer />
 
 				<div className={styles.container}>
-					{isOnboarded ? (
+					{isOnboarded && !noHeader ? (
 						<>
 							<NotificationContextProvider>
 								<MessagesSidebar />
@@ -90,7 +86,7 @@ const Layout = ({ children }: LayoutProps) => {
 					)}
 					<main
 						className={`${styles.main} ${
-							isOnboarded
+							isOnboarded && !noHeader
 								? styles.authenticated
 								: !noHeader
 								? styles.unauthenticated

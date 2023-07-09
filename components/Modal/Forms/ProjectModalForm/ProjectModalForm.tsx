@@ -72,6 +72,7 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 
 	const [options, setOptions] = useState<Option[]>([]);
 	const [galleryImages, setGalleryImages] = useState<ProjectImage[]>([]);
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		axios
@@ -125,41 +126,45 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 			languages_id: data.languages ? data.languages : [],
 		};
 
-		if (item) {
-			// Update existing project
-			const updatedProject = await updateProject(item.id, obj);
+		setLoading(true);
+		try {
+			if (item) {
+				// Update existing project
+				const updatedProject = await updateProject(item.id, obj);
 
-			const requests = galleryImages.map((image) =>
-				axios.put(`${server}/api/project-images/${image.id}/`, {
-					project: updatedProject.id,
-				})
-			);
-			const response = await Promise.all(requests);
+				const requests = galleryImages.map((image) =>
+					axios.put(`${server}/api/project-images/${image.id}/`, {
+						project: updatedProject.id,
+					})
+				);
+				const response = await Promise.all(requests);
 
-			updatedProject.images = response.map((item) => item.data.image);
+				updatedProject.images = response.map((item) => item.data.image);
 
-			setUser({
-				...user!,
-				projects: user!.projects.map((project) =>
-					project.id === updatedProject.id ? updatedProject : project
-				),
-			});
-		} else {
-			// Add new project
-			const newProject = await addProject(obj);
-			const requests = galleryImages.map((image) =>
-				axios.put(`${server}/api/project-images/${image.id}/`, {
-					project: newProject.id,
-				})
-			);
+				setUser({
+					...user!,
+					projects: user!.projects.map((project) =>
+						project.id === updatedProject.id ? updatedProject : project
+					),
+				});
+			} else {
+				// Add new project
+				const newProject = await addProject(obj);
+				const requests = galleryImages.map((image) =>
+					axios.put(`${server}/api/project-images/${image.id}/`, {
+						project: newProject.id,
+					})
+				);
 
-			const response = await Promise.all(requests);
+				const response = await Promise.all(requests);
 
-			newProject.images = response.map((item) => item.data.image);
+				newProject.images = response.map((item) => item.data.image);
 
-			setUser({ ...user!, projects: [...user!.projects, newProject] });
+				setUser({ ...user!, projects: [...user!.projects, newProject] });
+			}
+		} catch {
+			setLoading(false);
 		}
-
 		closeModal();
 	};
 
@@ -234,7 +239,7 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 					<FormError message={errors.title?.message} />
 				</div>
 				<div className={globalStyles.formGroup}>
-					<label className={globalStyles.label}>Description</label>
+					<label className={globalStyles.label}>Description*</label>
 					<DescriptionInput control={control} />
 					{/* <Controller
 						control={control}
@@ -251,7 +256,7 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 					<FormError message={errors.description?.message} />
 				</div>
 				<div className={globalStyles.formGroup}>
-					<label className={globalStyles.label}>Skills</label>
+					<label className={globalStyles.label}>Skills*</label>
 					<Controller
 						control={control}
 						name="languages"
@@ -386,7 +391,7 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 					/>
 				)}
 				<div className={globalStyles.modalFooterRight}>
-					<Button text="Save" />
+					<Button loading={loading} text="Save" />
 				</div>
 			</div>
 		</form>

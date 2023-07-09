@@ -27,6 +27,8 @@ const schema = yup.object().shape({
 const SignupForm = () => {
 	const { signUp } = useAuth();
 
+	const [loading, setLoading] = useState(false);
+
 	const {
 		register,
 		handleSubmit,
@@ -42,8 +44,11 @@ const SignupForm = () => {
 		password: string;
 		cpassword: string;
 	}) => {
+		setLoading(true);
 		await signUp(data.email, data.password, data.cpassword);
 		reset();
+
+		setLoading(false);
 	};
 
 	return (
@@ -59,6 +64,7 @@ const SignupForm = () => {
 					<input
 						{...register("email")}
 						type="email"
+						autoFocus
 						className={`${globalStyles.input} ${styles.input}`}
 					/>
 					<FormError message={errors.email?.message} />
@@ -93,7 +99,7 @@ const SignupForm = () => {
 					/>
 					<FormError message={errors.cpassword?.message} />
 				</div>
-				<Button text="Sign up" size="large" />
+				<Button loading={loading} text="Sign up" size="large" />
 				<GithubAuth />
 				<p className={styles.agreement}>
 					By signing up you agree to the Coreer{" "}

@@ -17,13 +17,19 @@ const Interests = ({ options, defaultOptions }: InterestsProps) => {
 	const { user, updateUser } = useAuth();
 	const router = useRouter();
 	const [selectedOptions, setSelectedOptions] = useState(defaultOptions);
+	const [loading, setLoading] = useState(false);
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
-		await updateUser({
-			interests_id: selectedOptions.map((item) => item.id),
-		});
-		router.push("/onboarding/languages");
+		setLoading(true);
+		try {
+			await updateUser({
+				interests_id: selectedOptions.map((item) => item.id),
+			});
+			router.push("/onboarding/languages");
+		} catch {
+			setLoading(false);
+		}
 	};
 
 	return (
@@ -34,6 +40,7 @@ const Interests = ({ options, defaultOptions }: InterestsProps) => {
 				setSelectedOptions={setSelectedOptions}
 			/>
 			<Actions
+				loading={loading}
 				actionText={`Next Step (${selectedOptions.length} of 6)`}
 				// disabled={selectedOptions.length < 6}
 			/>

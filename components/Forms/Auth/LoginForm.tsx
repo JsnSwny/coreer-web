@@ -15,74 +15,77 @@ import * as yup from "yup";
 import FormError from "../Error/FormError";
 
 const schema = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().min(8).max(32).required(),
+	email: yup.string().email().required(),
+	password: yup.string().min(8).max(32).required(),
 });
 
 const LoginForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-    setError,
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		reset,
+		setError,
+	} = useForm({
+		resolver: yupResolver(schema),
+	});
 
-  const { signIn } = useAuth();
+	const { signIn } = useAuth();
+	const [loading, setLoading] = useState(false);
 
-  const onSubmitHandler = async (data: { email: string; password: string }) => {
-    const result = await signIn(data.email, data.password);
-    reset();
-  };
+	const onSubmitHandler = async (data: { email: string; password: string }) => {
+		setLoading(true);
+		const result = await signIn(data.email, data.password);
+		reset();
+		setLoading(false);
+	};
 
-  return (
-    <>
-      <form onSubmit={handleSubmit(onSubmitHandler)} className={styles.form}>
-        <div className={globalStyles.formGroup}>
-          <label
-            htmlFor="email"
-            className={`${globalStyles.label} ${styles.label}`}
-          >
-            Email
-          </label>
-          <input
-            {...register("email")}
-            autoFocus
-            type="email"
-            name="email"
-            className={`${globalStyles.input} ${styles.input}`}
-          />
-          <FormError message={errors.email?.message} />
-        </div>
+	return (
+		<>
+			<form onSubmit={handleSubmit(onSubmitHandler)} className={styles.form}>
+				<div className={globalStyles.formGroup}>
+					<label
+						htmlFor="email"
+						className={`${globalStyles.label} ${styles.label}`}
+					>
+						Email
+					</label>
+					<input
+						{...register("email")}
+						autoFocus
+						type="email"
+						name="email"
+						className={`${globalStyles.input} ${styles.input}`}
+					/>
+					<FormError message={errors.email?.message} />
+				</div>
 
-        <div className={globalStyles.formGroup}>
-          <label
-            htmlFor="password"
-            className={`${globalStyles.label} ${styles.label}`}
-          >
-            Password
-          </label>
+				<div className={globalStyles.formGroup}>
+					<label
+						htmlFor="password"
+						className={`${globalStyles.label} ${styles.label}`}
+					>
+						Password
+					</label>
 
-          <input
-            {...register("password")}
-            type="password"
-            name="password"
-            required
-            className={`${globalStyles.input} ${styles.input}`}
-          />
-          <FormError message={errors.password?.message} />
-        </div>
-        <FormError message={errors.root?.message} margin />
-        <Button text="Login" size="large" />
-        <GithubAuth />
-      </form>
-      <p className={styles.altLink}>
-        Dont have an account? <Link href="/signup">Sign up</Link>
-      </p>
-    </>
-  );
+					<input
+						{...register("password")}
+						type="password"
+						name="password"
+						required
+						className={`${globalStyles.input} ${styles.input}`}
+					/>
+					<FormError message={errors.password?.message} />
+				</div>
+				<FormError message={errors.root?.message} margin />
+				<Button loading={loading} text="Login" size="large" />
+				<GithubAuth />
+			</form>
+			<p className={styles.altLink}>
+				Dont have an account? <Link href="/signup">Sign up</Link>
+			</p>
+		</>
+	);
 };
 
 export default LoginForm;

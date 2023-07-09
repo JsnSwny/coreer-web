@@ -8,6 +8,7 @@ import LoadingOverlay from "@/components/Layout/LoadingOverlay/LoadingOverlay";
 import { Skill } from "@/interfaces/language.model";
 import globalStyles from "@/styles/globalStyles.module.scss";
 import SkillsInput from "@/components/Forms/Inputs/SkillsInput/SkillsInput";
+import { toast } from "react-toastify";
 
 interface LanguagesProps {
 	options: Skill[];
@@ -16,22 +17,61 @@ interface LanguagesProps {
 }
 
 const Languages = ({ options, defaultOptions, updateKey }: LanguagesProps) => {
-	const { user, updateUser, loading } = useAuth();
+	const { user, updateUser } = useAuth();
 	const router = useRouter();
 	const [selectedOptions, setSelectedOptions] = useState(defaultOptions);
+	const [loading, setLoading] = useState(false);
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
-		await updateUser({
-			[updateKey]: selectedOptions.map((item) => item.id),
-			onboarded: true,
-		});
-		router.push("/");
+		setLoading(true);
+		try {
+			console.log(user);
+			let onboarded = false;
+
+			if (!user!.first_name || !user!.last_name) {
+				toast.error("You have not completed the Personal Details section", {
+					position: "bottom-left",
+					autoClose: 2000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: "light",
+				});
+			} else if (!user!.current_level || user!.looking_for.length == 0) {
+				toast.error("You have not completed the About You section", {
+					position: "bottom-left",
+					autoClose: 2000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: "light",
+				});
+			} else {
+				onboarded = true;
+			}
+			await updateUser({
+				[updateKey]: selectedOptions.map((item) => item.id),
+				onboarded,
+			});
+
+			setLoading(false);
+
+			if (onboarded) {
+				router.push("/");
+			}
+		} catch {
+			setLoading(false);
+		}
 	};
 
 	return (
 		<>
-			{loading && <LoadingOverlay />}
+			{/* {loading && <LoadingOverlay />} */}
 			<form onSubmit={handleSubmit}>
 				<SkillsInput
 					options={options}
@@ -39,6 +79,7 @@ const Languages = ({ options, defaultOptions, updateKey }: LanguagesProps) => {
 					setSelectedOptions={setSelectedOptions}
 				/>
 				<Actions
+					loading={loading}
 					actionText={`Get Started`}
 					// disabled={selectedOptions.length < 2}
 				/>

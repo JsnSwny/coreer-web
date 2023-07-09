@@ -14,12 +14,13 @@ import { useEffect } from "react";
 const schema = yup.object().shape({
 	first_name: yup.string().max(32).required("First name is required"),
 	last_name: yup.string().max(32).required("Last name is required"),
-	location: yup.string().required("Location is required"),
+	location: yup.string().optional(),
 });
 
 const PersonalDetails = () => {
 	const router = useRouter();
 	const { user, updateUser } = useAuth();
+	const [loading, setLoading] = useState(false);
 
 	const {
 		register,
@@ -43,14 +44,19 @@ const PersonalDetails = () => {
 	const onSubmitHandler = (data: {
 		first_name: string;
 		last_name: string;
-		location: string;
+		location?: string;
 	}) => {
-		updateUser({
-			first_name: data.first_name,
-			last_name: data.last_name,
-			location: data.location,
-		});
-		router.push("/onboarding/about-you");
+		setLoading(true);
+		try {
+			updateUser({
+				first_name: data.first_name,
+				last_name: data.last_name,
+				location: data.location ? data.location : "",
+			});
+			router.push("/onboarding/about-you");
+		} catch {
+			setLoading(false);
+		}
 	};
 
 	const [location, setLocation] = useState("");
@@ -99,7 +105,7 @@ const PersonalDetails = () => {
 				<FormError message={errors.location?.message} />
 			</div>
 
-			<Actions />
+			<Actions loading={loading} />
 		</form>
 	);
 };

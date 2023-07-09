@@ -32,7 +32,7 @@ const LocationSearchInput = ({ control, errors }: LocationSearchInputProps) => {
 			name="location"
 			render={({ field }) => (
 				<PlacesAutocomplete
-					value={field.value}
+					value={field.value ? field.value : ""}
 					onSelect={field.onChange}
 					onChange={field.onChange}
 					searchOptions={{ types: ["locality", "country"] }}

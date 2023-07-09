@@ -2,6 +2,7 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import styles from "./Button.module.scss";
+import { ImSpinner2 } from "react-icons/im";
 
 interface ButtonProps {
 	text: string;
@@ -17,6 +18,7 @@ interface ButtonProps {
 	disabled?: boolean;
 	submit?: boolean;
 	externalLink?: boolean;
+	loading?: boolean;
 }
 
 const Button = ({
@@ -33,6 +35,7 @@ const Button = ({
 	disabled = false,
 	submit = true,
 	externalLink = false,
+	loading = false,
 }: ButtonProps) => {
 	return (
 		<button
@@ -43,7 +46,7 @@ const Button = ({
 			} ${styles[size]} ${alt ? styles.alt : ""}`}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
-			disabled={disabled}
+			disabled={disabled || loading}
 			type={submit ? "submit" : "button"}
 		>
 			{link ? (
@@ -60,6 +63,7 @@ const Button = ({
 					{icon && <FontAwesomeIcon icon={icon} />} {text}
 				</>
 			)}
+			{loading && <ImSpinner2 className={styles.spinner} />}
 		</button>
 	);
 };
