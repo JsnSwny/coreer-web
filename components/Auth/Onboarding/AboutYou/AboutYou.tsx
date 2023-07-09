@@ -79,7 +79,7 @@ const AboutYou = ({ careerLevels }: AboutYouProps) => {
 	interface Option {
 		value: string;
 		label: string;
-		group: "S" | "P";
+		group: "S" | "P" | "R";
 	}
 
 	// const questionOptions: Option[] = questions.map((item) => ({
