@@ -50,8 +50,8 @@ const ProgressCard = ({
 				const { width } = containerRef.current.getBoundingClientRect();
 				setContainerSize(width);
 				let radius = width / 2;
-				if (radius > 110) {
-					radius = 110;
+				if (radius > 100) {
+					radius = 100;
 				}
 				setRadius(radius);
 			}
@@ -69,7 +69,7 @@ const ProgressCard = ({
 		};
 	}, [containerRef.current]);
 
-	const strokeWidth = 12; // Width of the ring
+	const strokeWidth = 10; // Width of the ring
 	const normalizedRadius = radius - strokeWidth;
 	const circumference = normalizedRadius * 2 * Math.PI;
 	const strokeDashoffset = circumference - (percentage / 100) * circumference;
