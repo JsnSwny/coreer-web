@@ -93,6 +93,10 @@ const SignupForm = () => {
 					<FormError message={errors.cpassword?.message} />
 				</div>
 				<Button text="Sign up" size="large" />
+				<p className={styles.agreement}>
+					By signing up you agree to the Coreer{" "}
+					<a href="/privacy-policy.html">Privacy Policy</a>
+				</p>
 			</form>
 			<p className={styles.altLink}>
 				Already have an account? <Link href="/login">Log in</Link>

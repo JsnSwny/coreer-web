@@ -1,24 +1,33 @@
 @import "@/styles/_variables.scss";
 
 .form {
-  width: 100%;
-  .input {
-    margin-top: 0.5rem;
-    height: 48px;
-  }
+	width: 100%;
+	.input {
+		margin-top: 0.5rem;
+		height: 48px;
+	}
 
-  // .label:not(:last-child) {
-  //   margin-bottom: 2rem;
-  // }
+	// .label:not(:last-child) {
+	//   margin-bottom: 2rem;
+	// }
 }
 
 .altLink {
-  color: $dark-light;
-  a {
-    color: $primary;
-    font-weight: bold;
-  }
-  margin-top: 2rem;
-  width: 100%;
-  text-align: center;
+	color: $dark-light;
+	a {
+		color: $primary;
+		font-weight: bold;
+	}
+	margin-top: 2rem;
+	width: 100%;
+	text-align: center;
+}
+
+.agreement {
+	font-size: 14px;
+	a {
+		color: $primary;
+	}
+	margin-top: 1rem;
+	text-align: center;
 }
