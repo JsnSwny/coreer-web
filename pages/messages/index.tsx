@@ -9,37 +9,37 @@ import { useAuth } from "@/contexts/AuthContext";
 import ChatContainer from "@/components/Messages/Chat/ChatContainer/ChatContainer";
 
 const Messages = () => {
-  const [conversationsList, setConversationsList] = useState([]);
-  const [messageHistory, setMessageHistory] = useState([]);
-  const { userToken } = useAuth();
+	const [conversationsList, setConversationsList] = useState([]);
+	const [messageHistory, setMessageHistory] = useState([]);
+	const { userToken } = useAuth();
 
-  useEffect(() => {
-    const config: any = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+	useEffect(() => {
+		const config: any = {
+			headers: {
+				"Content-Type": "application/json",
+			},
+		};
 
-    config.headers["Authorization"] = `Token ${userToken}`;
-    axios
-      .get(`${server}/api/conversations/`, config)
-      .then((res: any) => {
-        setConversationsList(res.data);
-      })
-      .catch((err: any) => console.log(err));
-  }, []);
+		config.headers["Authorization"] = `Token ${userToken}`;
+		axios
+			.get(`${server}/api/conversations/`, config)
+			.then((res: any) => {
+				setConversationsList(res.data);
+			})
+			.catch((err: any) => console.log(err));
+	}, []);
 
-  return (
-    <>
-      <Head>
-        <title>Messages</title>
-      </Head>
-      <MessagesContainer>
-        <MessagesSidebar conversations={conversationsList} />
-        <ChatContainer messageHistory={messageHistory} />
-      </MessagesContainer>
-    </>
-  );
+	return (
+		<>
+			<Head>
+				<title>Messages</title>
+			</Head>
+			<MessagesContainer>
+				<MessagesSidebar />
+				<ChatContainer messageHistory={messageHistory} />
+			</MessagesContainer>
+		</>
+	);
 };
 
 export default withAuth(Messages);

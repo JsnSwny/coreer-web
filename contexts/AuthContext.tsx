@@ -94,8 +94,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 			} else {
 				setUser(null);
 				setLoading(false);
-				console.log(response);
-				console.log("Returning response");
 			}
 			return response;
 		} catch (error) {
@@ -120,8 +118,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 					password2,
 				})
 				.then((res) => {
-					console.log("Registered!");
-					console.log(res.data);
 					signIn(email, password1);
 				});
 		} catch (error: any) {
@@ -134,7 +130,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
 	const signOut = () => {
 		const token = localStorage.getItem("token");
-		console.log(`Signing out: ${token}`);
 		if (token) {
 			axios
 				.post(`${server}/api/auth/logout/`, null, getUserConfig())
@@ -152,8 +147,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 	};
 
 	const updateProfilePicture = async (id: number, key: string, file: File) => {
-		console.log("Updating file");
-		console.log(file);
 		try {
 			const config = {
 				headers: {
@@ -165,11 +158,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 			const formData = new FormData();
 			formData.append("image", file);
 
-			console.log(user);
 			await axios
 				.patch(`${server}/api/auth/user/`, formData, config)
 				.then((res) => {
-					console.log(res.data);
 					setUser(res.data);
 				})
 				.catch((err) => console.log(err.response));
@@ -181,7 +172,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 	};
 
 	const updateUser = async (data: object) => {
-		console.log(data);
 		setLoading(true);
 		try {
 			await axios
@@ -191,7 +181,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 					getUserConfig()
 				)
 				.then((res) => {
-					console.log(res.data);
 					setUser(res.data);
 				})
 				.catch((err) => console.log(err.response));

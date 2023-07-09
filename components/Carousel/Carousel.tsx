@@ -30,7 +30,6 @@ const Carousel: React.FC<CarouselProps> = ({
 
 	const handleThumbnailClick = (index: number) => {
 		setActiveIndex(index);
-		console.log("Handle Click");
 		videoRef.current && videoRef.current.load();
 	};
 

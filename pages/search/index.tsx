@@ -51,7 +51,6 @@ const Results = ({ searchData, currentPage, perPage, query }: ResultsProps) => {
 		);
 
 		setLoading(true);
-		console.log(currentQuery.query);
 
 		const apiUrl = `${server}/api/user/?search=${currentQuery.query}&page=${
 			pageNumber.selected + 1

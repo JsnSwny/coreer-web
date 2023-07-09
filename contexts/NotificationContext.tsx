@@ -40,9 +40,6 @@ export const NotificationContextProvider: React.FC<{ children: ReactNode }> = ({
 			},
 			onMessage: (e) => {
 				const data = JSON.parse(e.data);
-				console.log("Message received");
-				console.log(conversations);
-
 				switch (data.type) {
 					case "read_messages":
 						setConversations(
@@ -63,7 +60,6 @@ export const NotificationContextProvider: React.FC<{ children: ReactNode }> = ({
 						break;
 
 					case "new_message_notification":
-						console.log(data);
 						setConversations([
 							data.conversation,
 							...conversations.filter(

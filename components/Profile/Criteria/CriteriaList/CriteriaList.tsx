@@ -12,7 +12,6 @@ interface CriteriaListProps {
 
 const CriteriaList = ({ profile, openModal }: CriteriaListProps) => {
 	const { user } = useAuth();
-	console.log(user);
 	return (
 		<ul className={styles.criteriaList}>
 			<CriteriaItem

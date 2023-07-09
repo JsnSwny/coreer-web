@@ -34,7 +34,6 @@ const Projects = ({
 	loading = false,
 }: ProjectsProps) => {
 	if (loading) {
-		console.log(loading);
 		return (
 			<div className={`${styles.container}`}>
 				<ProjectPlaceholder />

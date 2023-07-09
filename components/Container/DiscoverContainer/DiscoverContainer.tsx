@@ -41,11 +41,9 @@ const DiscoverContainer = ({ openProjectModal }: DiscoverContainerProps) => {
 				},
 			})
 			.then((res) => {
-				console.log(res);
 				setProfiles(res.data.results);
 				setLoading(false);
 				setCurrentProfile(res.data.results[currentIndex]);
-				console.log(res.data);
 			});
 	}, []);
 

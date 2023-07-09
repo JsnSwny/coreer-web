@@ -19,13 +19,10 @@ const convertDataToFormData = (data: ProjectRequest) => {
 
 	formData.append("user_id", data.user_id.toString());
 	data.content && formData.append("content", data.content);
-	console.log(formData);
 	return formData;
 };
 
 export const addProject = async (data: ProjectRequest) => {
-	console.log("Adding project");
-	console.log(data);
 	try {
 		const userToken = localStorage.getItem("token");
 		const config = {

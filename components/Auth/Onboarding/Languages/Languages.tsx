@@ -26,7 +26,6 @@ const Languages = ({ options, defaultOptions, updateKey }: LanguagesProps) => {
 		e.preventDefault();
 		setLoading(true);
 		try {
-			console.log(user);
 			let onboarded = false;
 
 			if (!user!.first_name || !user!.last_name) {

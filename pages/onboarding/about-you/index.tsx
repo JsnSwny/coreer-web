@@ -44,8 +44,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async () => {
 
 		// questions = (await questionsPromise).data;
 		careerLevels = (await careerLevelsPromise).data;
-
-		console.log(careerLevels);
 	} catch (err: any) {
 		console.log(err.response);
 		// TODO(sean): Maybe want to respond with an error here, this will default to just rendering with empty questions / career levels

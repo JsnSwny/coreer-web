@@ -46,7 +46,6 @@ export const getServerSideProps = async (context: any) => {
 	await axios
 		.get(`${server}/api/languages/`)
 		.then((res) => {
-			console.log(res.data);
 			languagesRes = res.data;
 		})
 		.catch((err) => {

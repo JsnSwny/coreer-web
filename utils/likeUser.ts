@@ -9,7 +9,6 @@ export const likeUser = (
 	profile: Profile,
 	userToken: string
 ) => {
-	console.log("Liking user");
 	let toastMessage = !user.following.includes(profile.id)
 		? `Added ${profile.first_name} ${profile.last_name} to your likes!`
 		: `Removed ${profile.first_name} ${profile.last_name} from your likes!`;

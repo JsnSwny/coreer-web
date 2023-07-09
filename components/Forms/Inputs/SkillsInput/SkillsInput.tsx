@@ -14,8 +14,6 @@ const SkillsInput = ({
 	selectedOptions,
 	setSelectedOptions,
 }: SkillsInputProps) => {
-	console.log("Skills");
-	console.log(options);
 	return (
 		<>
 			<div className={globalStyles.formGroup}>

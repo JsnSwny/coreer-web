@@ -30,7 +30,6 @@ const SkillsModalForm = ({ closeModal }: ModalFormProps) => {
 		axios
 			.get(`${server}/api/languages/`)
 			.then((res) => {
-				console.log(res.data);
 				setOptions(res.data);
 			})
 			.catch((err) => {
