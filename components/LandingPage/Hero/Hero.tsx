@@ -1,5 +1,6 @@
 import Container from "@/components/Container/Container";
 import styles from "./Hero.module.scss";
+import Link from "next/link";
 
 interface HeroProps {
 	demoSectionRef: HTMLDivElement | null;
@@ -24,7 +25,9 @@ const Hero = ({ demoSectionRef }: HeroProps) => {
 							tailored to your interests.
 						</p>
 						<div className={styles.heroActions}>
-							<button className={styles.button}>Join the Beta</button>
+							<Link href="/signup" className={styles.button}>
+								Join the Beta
+							</Link>
 							<button
 								className={`${styles.button} ${styles.buttonAlt}`}
 								onClick={() =>

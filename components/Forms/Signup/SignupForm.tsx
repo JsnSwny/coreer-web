@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import FormError from "../Error/FormError";
+import GithubAuth from "../Auth/GithubAuth/GithubAuth";
 
 const schema = yup.object().shape({
 	email: yup.string().email().required(),
@@ -93,6 +94,7 @@ const SignupForm = () => {
 					<FormError message={errors.cpassword?.message} />
 				</div>
 				<Button text="Sign up" size="large" />
+				<GithubAuth />
 				<p className={styles.agreement}>
 					By signing up you agree to the Coreer{" "}
 					<a href="/privacy-policy.html">Privacy Policy</a>
