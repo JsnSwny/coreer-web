@@ -1,298 +1,302 @@
 @import "@/styles/_variables.scss";
 
 .container {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &:focus {
-    outline: none;
-  }
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&:focus {
+		outline: none;
+	}
 }
 
 .box {
-  border: 0.5px solid $stroke;
-  height: 100%;
-  width: 100%;
-  max-height: 1000px;
-  background: white;
-  border-radius: 25px;
-  box-shadow: 0 0 25px 0px rgba($primary, 0.4);
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  animation: profileContainerAnimation 0.15s ease-in-out forwards;
-  overflow: hidden;
+	border: 0.5px solid $stroke;
+	height: 100%;
+	width: 100%;
+	max-height: 1000px;
+	background: white;
+	border-radius: 25px;
+	box-shadow: 0 0 25px 0px rgba($primary, 0.4);
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	animation: profileContainerAnimation 0.15s ease-in-out forwards;
+	overflow: hidden;
 }
 
 .content {
-  display: flex;
-  justify-content: space-between;
-  overflow: hidden;
-  flex: 1;
-  position: relative;
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(black, 0);
-    transition: 0.2s ease background-color;
-    pointer-events: none;
-  }
+	display: flex;
+	justify-content: space-between;
+	overflow: hidden;
+	flex: 1;
+	position: relative;
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(black, 0);
+		transition: 0.2s ease background-color;
+		pointer-events: none;
+	}
 }
 
 .contentOverlay {
-  &::after {
-    background-color: rgba(black, 0.4);
-  }
+	&::after {
+		background-color: rgba(black, 0.4);
+	}
+}
+
+.bio {
+	white-space: pre-line;
 }
 
 .messageBar {
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  background: white;
-  padding: 1rem 2rem;
-  transition: 0.2s ease height;
-  border-top: 1px solid $stroke;
+	height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	background: white;
+	padding: 1rem 2rem;
+	transition: 0.2s ease height;
+	border-top: 1px solid $stroke;
 }
 
 .messageBarLikeWrapper {
-  height: 50px;
-  width: 50px;
-  background-color: rgba($primary, 1);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.2s ease background-color;
-  cursor: pointer;
-  &:hover {
-    background-color: rgba($primary, 0.2);
-    .messageBarLike {
-      color: $primary;
-    }
-    .spinner {
-      color: $primary;
-    }
-  }
+	height: 50px;
+	width: 50px;
+	background-color: rgba($primary, 1);
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: 0.2s ease background-color;
+	cursor: pointer;
+	&:hover {
+		background-color: rgba($primary, 0.2);
+		.messageBarLike {
+			color: $primary;
+		}
+		.spinner {
+			color: $primary;
+		}
+	}
 }
 
 .messageBarLike {
-  height: 25px;
-  color: rgba(white, 0.9);
+	height: 25px;
+	color: rgba(white, 0.9);
 
-  transition: 0.2s ease color;
+	transition: 0.2s ease color;
 }
 
 .messageBarActive {
-  height: 220px;
+	height: 220px;
 }
 
 .messageBarTextarea {
-  height: 100%;
-  border: none;
-  background: rgba(black, 0.05);
-  padding: 1rem;
-  border-radius: 15px;
-  flex: 1;
-  margin-right: 2rem;
-  &:focus {
-    outline: none;
-  }
+	height: 100%;
+	border: none;
+	background: rgba(black, 0.05);
+	padding: 1rem;
+	border-radius: 15px;
+	flex: 1;
+	margin-right: 2rem;
+	&:focus {
+		outline: none;
+	}
 }
 
 .scaleDown {
-  animation: scaleDownAnimation 0.15s ease-in forwards;
+	animation: scaleDownAnimation 0.15s ease-in forwards;
 }
 
 @keyframes profileContainerAnimation {
-  0% {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+	0% {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
 }
 
 @keyframes scaleDownAnimation {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.95);
-  }
+	0% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	100% {
+		opacity: 0;
+		transform: scale(0.95);
+	}
 }
 
 .likeAnimation {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 10;
-  background: rgba(white, 0);
-  animation: tickBackgroundAnimation 1s ease-in-out forwards;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
+	background: rgba(white, 0);
+	animation: tickBackgroundAnimation 1s ease-in-out forwards;
 }
 
 .likeAnimationIcon {
-  max-height: 150px;
-  height: 100%;
-  animation: tickAnimation 1s ease-in-out forwards;
-  color: white;
-  position: absolute;
-  top: calc(50% - 75px);
-  left: calc(50% - 75px);
-  transform: translate(-50%, -50%);
+	max-height: 150px;
+	height: 100%;
+	animation: tickAnimation 1s ease-in-out forwards;
+	color: white;
+	position: absolute;
+	top: calc(50% - 75px);
+	left: calc(50% - 75px);
+	transform: translate(-50%, -50%);
 }
 
 @keyframes tickAnimation {
-  0% {
-    opacity: 0;
-    transform: scale(0.5) translateY(150px);
-  }
-  35% {
-    transform: translateY(0);
-  }
-  80% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0);
-  }
+	0% {
+		opacity: 0;
+		transform: scale(0.5) translateY(150px);
+	}
+	35% {
+		transform: translateY(0);
+	}
+	80% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	100% {
+		opacity: 0;
+		transform: scale(0);
+	}
 }
 
 @keyframes tickBackgroundAnimation {
-  0% {
-    background-color: rgba($primary, 0);
-    // transform: translateY(-150px);
-  }
-  25% {
-    background-color: rgba($primary, 0.95);
-  }
-  35% {
-    // transform: translateY(0);
-  }
-  90% {
-    background-color: rgba($primary, 0.95);
-  }
-  100% {
-    background-color: rgba($primary, 0);
-  }
+	0% {
+		background-color: rgba($primary, 0);
+		// transform: translateY(-150px);
+	}
+	25% {
+		background-color: rgba($primary, 0.95);
+	}
+	35% {
+		// transform: translateY(0);
+	}
+	90% {
+		background-color: rgba($primary, 0.95);
+	}
+	100% {
+		background-color: rgba($primary, 0);
+	}
 }
 
 .profile {
-  display: flex;
-  gap: 0.75rem;
-  align-items: center;
-  //   margin-bottom: 2rem;
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+	//   margin-bottom: 2rem;
 
-  img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center;
-  }
-  h2 {
-    font-size: 1.25rem;
-    font-weight: 700;
-  }
-  .level {
-    font-weight: 400;
-    font-size: 0.875rem;
-    margin-top: 0.125rem;
-  }
+	img {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		object-fit: cover;
+		object-position: center;
+	}
+	h2 {
+		font-size: 1.25rem;
+		font-weight: 700;
+	}
+	.level {
+		font-weight: 400;
+		font-size: 0.875rem;
+		margin-top: 0.125rem;
+	}
 }
 
 .header {
-  height: 80px;
-  background: white;
-  // color: white;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid $stroke;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+	height: 80px;
+	background: white;
+	// color: white;
+	padding: 1rem 2rem;
+	border-bottom: 1px solid $stroke;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .navigationIcon {
-  width: 36px;
-  height: 36px;
-  padding: 0.5rem;
-  border-radius: 50%;
-  background: $primary;
-  color: white;
-  cursor: pointer;
-  box-sizing: border-box !important;
+	width: 36px;
+	height: 36px;
+	padding: 0.5rem;
+	border-radius: 50%;
+	background: $primary;
+	color: white;
+	cursor: pointer;
+	box-sizing: border-box !important;
 }
 
 .main {
-  padding: 2rem;
-  width: 100%;
-  overflow: auto;
-  &::-webkit-scrollbar {
-    width: 8px;
-    padding-left: 1rem;
-  }
+	padding: 2rem;
+	width: 100%;
+	overflow: auto;
+	&::-webkit-scrollbar {
+		width: 8px;
+		padding-left: 1rem;
+	}
 
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
+	/* Track */
+	&::-webkit-scrollbar-track {
+		background: #f1f1f1;
+	}
 
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: $primary;
-    border-radius: 100px;
-    transition: 0.2s ease background;
-  }
+	/* Handle */
+	&::-webkit-scrollbar-thumb {
+		background: $primary;
+		border-radius: 100px;
+		transition: 0.2s ease background;
+	}
 
-  /* Handle on hover */
-  &::-webkit-scrollbar-thumb:hover {
-    background: darken($primary, 10%);
-  }
+	/* Handle on hover */
+	&::-webkit-scrollbar-thumb:hover {
+		background: darken($primary, 10%);
+	}
 }
 
 .section {
-  margin-bottom: 2.5rem;
-  &__heading {
-    margin-bottom: 0.75rem;
-    font-weight: 700;
-    font-size: 1.175rem;
-    border-bottom: 0.5px solid $stroke;
-    padding-bottom: 0.75rem;
-    // color: $primary;
-  }
+	margin-bottom: 2.5rem;
+	&__heading {
+		margin-bottom: 0.75rem;
+		font-weight: 700;
+		font-size: 1.175rem;
+		border-bottom: 0.5px solid $stroke;
+		padding-bottom: 0.75rem;
+		// color: $primary;
+	}
 }
 
 .spinner {
-  animation: spin 1s linear infinite;
-  font-size: 24px;
-  color: white;
+	animation: spin 1s linear infinite;
+	font-size: 24px;
+	color: white;
 }
 
 .navigation {
-  display: flex;
-  gap: 1rem;
+	display: flex;
+	gap: 1rem;
 }
 
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }

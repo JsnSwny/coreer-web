@@ -135,7 +135,7 @@ const ProfilePreview = ({
 						{profile.bio && (
 							<section className={styles.section}>
 								<h3 className={styles.section__heading}>About</h3>
-								<p>{profile.bio}</p>
+								<p className={styles.bio}>{profile.bio}</p>
 							</section>
 						)}
 
