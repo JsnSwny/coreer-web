@@ -24,7 +24,8 @@ const schema = yup.object().shape({
 		.string()
 		.oneOf([yup.ref("password")], "Passwords do not match")
 		.min(8, "Password length must be at least 8 characters")
-		.max(32, "Password cannot exceed more than 32 characters"),
+		.max(32, "Password cannot exceed more than 32 characters")
+		.required(),
 });
 
 const SignupForm = () => {
