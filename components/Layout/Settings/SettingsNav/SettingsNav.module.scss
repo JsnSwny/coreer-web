@@ -1,0 +1,34 @@
+@import "@/styles/_variables.scss";
+
+.nav {
+	margin-top: 2rem;
+	ul {
+		list-style: none;
+		border-bottom: 1px solid $stroke;
+	}
+	li {
+		font-weight: 700;
+		color: $dark-light;
+		padding: 1rem;
+		position: relative;
+		width: fit-content;
+		text-align: center;
+
+		&::after {
+			content: "";
+			display: block;
+			position: absolute;
+			background: $primary;
+			height: 2px;
+			width: 100%;
+			left: 0;
+			bottom: -1px;
+		}
+		&.active {
+			color: $primary;
+			&::after {
+				background: $primary;
+			}
+		}
+	}
+}
