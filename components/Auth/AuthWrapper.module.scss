@@ -1,4 +1,5 @@
 .wrapper {
-  display: flex;
-  height: 100vh;
+	display: flex;
+	min-height: calc(100vh - 64px);
+	margin-top: 64px;
 }

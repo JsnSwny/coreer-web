@@ -15,8 +15,12 @@ import * as yup from "yup";
 import FormError from "../Error/FormError";
 
 const schema = yup.object().shape({
-	email: yup.string().email().required(),
-	password: yup.string().min(8).max(32).required(),
+	email: yup.string().email().required("Email is required"),
+	password: yup
+		.string()
+		.required("Password is required")
+		.min(8, "Password length must be at least 8 characters")
+		.max(32, "Password length cannot exceed more than 32 characters"),
 });
 
 const LoginForm = () => {
@@ -72,7 +76,6 @@ const LoginForm = () => {
 						{...register("password")}
 						type="password"
 						name="password"
-						required
 						className={`${globalStyles.input} ${styles.input}`}
 					/>
 					<FormError message={errors.password?.message} />

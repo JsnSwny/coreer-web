@@ -14,14 +14,17 @@ import FormError from "../Error/FormError";
 import GithubAuth from "../Auth/GithubAuth/GithubAuth";
 
 const schema = yup.object().shape({
-	email: yup.string().email().required(),
-	password: yup.string().min(8).max(32).required(),
+	email: yup.string().email().required("Email is required"),
+	password: yup
+		.string()
+		.required("Password is required")
+		.min(8, "Password length must be at least 8 characters")
+		.max(32, "Password cannot exceed more than 32 characters"),
 	cpassword: yup
 		.string()
-		.required("Confirm Password is required")
-		.min(4, "Password length should be at least 4 characters")
-		.max(12, "Password cannot exceed more than 12 characters")
-		.oneOf([yup.ref("password")], "Passwords do not match"),
+		.oneOf([yup.ref("password")], "Passwords do not match")
+		.min(8, "Password length must be at least 8 characters")
+		.max(32, "Password cannot exceed more than 32 characters"),
 });
 
 const SignupForm = () => {
@@ -35,7 +38,6 @@ const SignupForm = () => {
 		formState: { errors },
 		reset,
 	} = useForm({
-		mode: "onTouched",
 		resolver: yupResolver(schema),
 	});
 
