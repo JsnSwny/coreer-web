@@ -1,4 +1,4 @@
-import styles from "./LoginForm.module.scss";
+import styles from "./ResetPasswordForm.module.scss";
 import axios, { AxiosResponse } from "axios";
 import { server } from "@/config";
 import { useState, useEffect } from "react";
@@ -8,22 +8,17 @@ import globalStyles from "@/styles/globalStyles.module.scss";
 import Button from "@/components/Button/Button";
 import Link from "next/link";
 import LoadingOverlay from "@/components/Layout/LoadingOverlay/LoadingOverlay";
-import GithubAuth from "./GithubAuth/GithubAuth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import FormError from "../Error/FormError";
+import FormError from "../../Error/FormError";
+import { toast } from "react-toastify";
 
 const schema = yup.object().shape({
 	email: yup.string().email().required("Email is required"),
-	password: yup
-		.string()
-		.required("Password is required")
-		.min(8, "Password length must be at least 8 characters")
-		.max(32, "Password length cannot exceed more than 32 characters"),
 });
 
-const LoginForm = () => {
+const ResetPasswordForm = () => {
 	const {
 		register,
 		handleSubmit,
@@ -37,10 +32,18 @@ const LoginForm = () => {
 	const { signIn } = useAuth();
 	const [loading, setLoading] = useState(false);
 
-	const onSubmitHandler = async (data: { email: string; password: string }) => {
+	const onSubmitHandler = async (data: { email: string }) => {
 		setLoading(true);
-		const result = await signIn(data.email, data.password);
-		reset();
+		try {
+			axios
+				.post(`${server}/api/auth/password/reset/`, { email: data.email })
+				.then((res) => console.log(res.data));
+			reset();
+			toast.success("Password reset email has been sent");
+		} catch {
+			toast.error("Error");
+		}
+
 		setLoading(false);
 	};
 
@@ -63,39 +66,10 @@ const LoginForm = () => {
 					/>
 					<FormError message={errors.email?.message} />
 				</div>
-
-				<div className={styles.absolute}>
-					<div className={globalStyles.formGroup}>
-						<div className={styles.password}>
-							<label
-								htmlFor="password"
-								className={`${globalStyles.label} ${styles.label}`}
-							>
-								Password
-							</label>
-						</div>
-
-						<input
-							{...register("password")}
-							type="password"
-							name="password"
-							className={`${globalStyles.input} ${styles.input}`}
-						/>
-						<FormError message={errors.password?.message} />
-					</div>
-					<FormError message={errors.root?.message} margin />
-					<Button loading={loading} text="Login" size="large" />
-					<GithubAuth />
-					<Link className={styles.forgotPassword} href="/password_reset">
-						Forgot password?
-					</Link>
-				</div>
+				<Button loading={loading} text="Reset" />
 			</form>
-			<p className={styles.altLink}>
-				Dont have an account? <Link href="/signup">Sign up</Link>
-			</p>
 		</>
 	);
 };
 
-export default LoginForm;
+export default ResetPasswordForm;

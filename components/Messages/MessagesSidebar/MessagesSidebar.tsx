@@ -13,7 +13,11 @@ import { useRouter } from "next/router";
 import LikeProfile from "./LikeProfile/LikeProfile";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faSignOut } from "@fortawesome/free-solid-svg-icons";
+import {
+	faArrowLeft,
+	faCog,
+	faSignOut,
+} from "@fortawesome/free-solid-svg-icons";
 
 interface MessagesSidebarProps {
 	currentConversation?: ConversationType;
@@ -86,6 +90,9 @@ const MessagesSidebar = ({ currentConversation }: MessagesSidebarProps) => {
 					)}
 				</ul>
 			</div>
+			<Link href="/settings/change-password" className={styles.logOut}>
+				<FontAwesomeIcon icon={faCog} /> Settings
+			</Link>
 			<button className={styles.logOut} onClick={() => signOut()}>
 				<FontAwesomeIcon icon={faSignOut} /> Log out
 			</button>
