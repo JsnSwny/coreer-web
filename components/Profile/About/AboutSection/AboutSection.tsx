@@ -23,7 +23,8 @@ const AboutSection = ({ profile, openModal }: AboutSectionProps) => {
 	return (
 		<section className={styles.container}>
 			<QuestionsList user_answers={profile.user_answers} showEdit={showEdit} />
-			{profile.work_experiences.length > 0 && (
+			{((user && user!.id == profile.id) ||
+				profile.work_experiences.length > 0) && (
 				<ProfileSection
 					title="Work Experience"
 					profile={profile}
@@ -61,7 +62,7 @@ const AboutSection = ({ profile, openModal }: AboutSectionProps) => {
 				</ProfileSection>
 			)}
 
-			{profile.educations.length > 0 && (
+			{((user && user!.id == profile.id) || profile.educations.length > 0) && (
 				<ProfileSection
 					title={"Education"}
 					profile={profile}

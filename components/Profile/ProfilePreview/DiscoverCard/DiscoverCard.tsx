@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { format, parseISO } from "date-fns";
 import React from "react";
 import styles from "./DiscoverCard.module.scss";
+import globalStyles from "@/styles/globalStyles.module.scss";
 
 interface CardProps {
 	image: string | null;
@@ -47,7 +48,12 @@ const DiscoverCard = ({
 					)}
 				</div>
 
-				{body && <p className={styles.body}>{body}</p>}
+				{body && (
+					<div
+						className={`${globalStyles.description} ${styles.description}`}
+						dangerouslySetInnerHTML={{ __html: body }}
+					></div>
+				)}
 			</div>
 			{showEdit && (
 				<FontAwesomeIcon

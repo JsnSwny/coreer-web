@@ -229,7 +229,7 @@ const ProfilePreview = ({
 											);
 										})
 										.map((education) => (
-											<DiscoverCard
+											<Card
 												key={education.id}
 												image={education.school.logo}
 												title={education.school.name}
