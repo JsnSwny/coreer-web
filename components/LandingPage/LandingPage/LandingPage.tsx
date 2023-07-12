@@ -69,12 +69,14 @@ const LandingPage = () => {
 				className={`${styles.section} ${styles.sectionWhite}`}
 			>
 				<Container>
-					<h2 className={styles.sectionTitle}>Demo</h2>
-					<p className={styles.sectionDescription}>Demo video coming soon!</p>
+					<h2 className={styles.sectionTitle}>Discover Mode</h2>
+					<p className={styles.sectionDescription}>
+						Personalised recommendations, unlocks at 100 users
+					</p>
 
-					{/* <video className={styles.video} controls muted loop>
-						<source src="/images/discover-demo.mp4" type="video/mp4" />
-					</video> */}
+					<video className={styles.video} controls muted loop>
+						<source src="/images/discover-demo.webm" type="video/webm" />
+					</video>
 				</Container>
 			</section>
 			<Footer />
