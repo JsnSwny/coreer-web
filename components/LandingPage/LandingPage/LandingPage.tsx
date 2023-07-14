@@ -25,7 +25,7 @@ const LandingPage = () => {
 
 	return (
 		<div className={styles.container}>
-			<Hero demoSectionRef={demoSectionRef.current} />
+			<Hero demoSectionRef={demoSectionRef} />
 			<section className={`${styles.section} ${styles.sectionWhite}`}>
 				<Container>
 					<h2 className={styles.sectionTitle}>Beta 1.0</h2>

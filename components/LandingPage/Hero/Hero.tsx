@@ -30,10 +30,12 @@ const Hero = ({ demoSectionRef }: HeroProps) => {
 							</Link>
 							<button
 								className={`${styles.button} ${styles.buttonAlt}`}
-								onClick={() =>
+								onClick={() => {
 									demoSectionRef &&
-									demoSectionRef.scrollIntoView({ behavior: "smooth" })
-								}
+										demoSectionRef.current.scrollIntoView({
+											behavior: "smooth",
+										});
+								}}
 							>
 								Watch Demo
 							</button>
