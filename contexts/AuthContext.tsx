@@ -51,27 +51,29 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 	const [githubToken, setGithubToken] = useState<string | null>(null);
 
 	const fetchUser = async (accessToken: string) => {
-		try {
-			const response = await axios.get(`${server}/api/auth/user/`, {
-				headers: {
-					Authorization: `Token ${accessToken}`,
-				},
-			});
+		if (accessToken) {
+			try {
+				const response = await axios.get(`${server}/api/auth/user/`, {
+					headers: {
+						Authorization: `Token ${accessToken}`,
+					},
+				});
 
-			if (response.status === 200) {
-				const userData = response.data;
-				localStorage.setItem("token", accessToken);
-				setUser(userData);
-				setUserToken(accessToken);
-				setTokenLoading(false);
-				return userData;
-			} else {
+				if (response.status === 200) {
+					const userData = response.data;
+					localStorage.setItem("token", accessToken);
+					setUser(userData);
+					setUserToken(accessToken);
+					setTokenLoading(false);
+					return userData;
+				} else {
+					setUser(null);
+					setTokenLoading(false);
+				}
+			} catch (error) {
 				setUser(null);
 				setTokenLoading(false);
 			}
-		} catch (error) {
-			setUser(null);
-			setTokenLoading(false);
 		}
 
 		setTokenLoading(false);
