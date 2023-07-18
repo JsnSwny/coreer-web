@@ -43,7 +43,9 @@ const ProfileBanner = ({
 		);
 	}, [profile]);
 
-	const pinnedProject = profile.projects.find((item) => item.is_pinned);
+	const pinnedProject =
+		profile.projects.length > 0 &&
+		profile.projects.find((item) => item.is_pinned);
 
 	const photoUpload = (e: ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();

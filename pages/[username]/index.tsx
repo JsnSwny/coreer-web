@@ -23,120 +23,112 @@ import Head from "next/head";
 import { useState } from "react";
 
 interface ProfileProps {
-  profile: Profile | null;
+	profile: Profile | null;
 }
 
 interface ActiveSectionProps {
-  title: string;
-  description?: string;
+	title: string;
+	description?: string;
 }
 
 const Profile = ({ profile }: ProfileProps) => {
-  const { user } = useAuth();
+	const { user } = useAuth();
 
-  if (user) {
-    profile = user!.id == profile?.id ? user : profile;
-  }
+	if (user) {
+		profile = user!.id == profile?.id ? user : profile;
+	}
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalItem, setModalItem] = useState(null);
-  const [activeSection, setActiveSection] = useState<ActiveSectionProps | null>(
-    null
-  );
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [modalItem, setModalItem] = useState(null);
+	const [activeSection, setActiveSection] = useState<ActiveSectionProps | null>(
+		null
+	);
 
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
+	const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+	const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
 
-  const openProjectModal = (project: Project) => {
-    setIsProjectModalOpen(true);
-    setSelectedProject(project);
-  };
+	const openProjectModal = (project: Project) => {
+		setIsProjectModalOpen(true);
+		setSelectedProject(project);
+	};
 
-  const closeProjectModal = () => {
-    setSelectedProject(null);
-    setIsProjectModalOpen(false);
-  };
+	const closeProjectModal = () => {
+		setSelectedProject(null);
+		setIsProjectModalOpen(false);
+	};
 
-  const [section, setSection] = useState("Projects");
+	const [section, setSection] = useState("Projects");
 
-  const openModal = (section: string, description: string = "", item?: any) => {
-    setActiveSection({ title: section, description });
-    if (item) setModalItem(item);
-    setIsModalOpen(true);
-  };
+	const openModal = (section: string, description: string = "", item?: any) => {
+		setActiveSection({ title: section, description });
+		if (item) setModalItem(item);
+		setIsModalOpen(true);
+	};
 
-  const closeModal = () => {
-    setModalItem(null);
-    setIsModalOpen(false);
-  };
+	const closeModal = () => {
+		setModalItem(null);
+		setIsModalOpen(false);
+	};
 
-  // useEffect(() => {
-  //   if (profile) {
-  //     axios
-  //       .get(`${server}/recommend/6/${profile.id}`)
-  //       .then((res) => setRecommendations(res.data.recommendations));
-  //   }
-  // }, []);
+	if (!profile) {
+		return <h1>Profile not found</h1>;
+	} else {
+		return (
+			<>
+				<Head>
+					<title>{`${profile.first_name} ${profile.last_name} | Coreer`}</title>
+				</Head>
+				<Container margin>
+					{activeSection && (
+						<Modal
+							title={activeSection.title}
+							description={activeSection.description}
+							isOpen={isModalOpen}
+							onClose={closeModal}
+						>
+							{activeSection.title === "Details" && (
+								<DetailsModalForm closeModal={closeModal} />
+							)}
+							{activeSection.title === "Project" && (
+								<ProjectModalForm closeModal={closeModal} item={modalItem} />
+							)}
+							{activeSection.title === "Education" && (
+								<EducationModalForm closeModal={closeModal} item={modalItem} />
+							)}
+							{activeSection.title === "Experience" && (
+								<WorkModalForm closeModal={closeModal} item={modalItem} />
+							)}
+							{activeSection.title === "Skills" && (
+								<SkillsModalForm closeModal={closeModal} />
+							)}
+							{activeSection.title === "Interests" && (
+								<InterestsModalForm closeModal={closeModal} />
+							)}
+						</Modal>
+					)}
 
-  if (!profile) {
-    return <h1>Profile not found</h1>;
-  } else {
-    return (
-      <>
-        <Head>
-          <title>{`${profile.first_name} ${profile.last_name} | Coreer`}</title>
-        </Head>
-        <Container margin>
-          {activeSection && (
-            <Modal
-              title={activeSection.title}
-              description={activeSection.description}
-              isOpen={isModalOpen}
-              onClose={closeModal}
-            >
-              {activeSection.title === "Details" && (
-                <DetailsModalForm closeModal={closeModal} />
-              )}
-              {activeSection.title === "Project" && (
-                <ProjectModalForm closeModal={closeModal} item={modalItem} />
-              )}
-              {activeSection.title === "Education" && (
-                <EducationModalForm closeModal={closeModal} item={modalItem} />
-              )}
-              {activeSection.title === "Experience" && (
-                <WorkModalForm closeModal={closeModal} item={modalItem} />
-              )}
-              {activeSection.title === "Skills" && (
-                <SkillsModalForm closeModal={closeModal} />
-              )}
-              {activeSection.title === "Interests" && (
-                <InterestsModalForm closeModal={closeModal} />
-              )}
-            </Modal>
-          )}
+					<ProjectModal
+						project={selectedProject!}
+						onClose={closeProjectModal}
+						isOpen={isProjectModalOpen}
+					/>
 
-          <ProjectModal
-            project={selectedProject!}
-            onClose={closeProjectModal}
-            isOpen={isProjectModalOpen}
-          />
+					<ProfileBanner
+						profile={profile}
+						openModal={openModal}
+						openProjectModal={openProjectModal}
+					/>
+					<CriteriaList profile={profile} openModal={openModal} />
+					<Nav section={section} setSection={setSection} />
 
-          <ProfileBanner
-            profile={profile}
-            openModal={openModal}
-            openProjectModal={openProjectModal}
-          />
-          <CriteriaList profile={profile} openModal={openModal} />
-          <Nav section={section} setSection={setSection} />
-
-          {section == "Projects" && (
-            <ProjectSection
-              openModal={openModal}
-              profile={profile}
-              openProjectModal={openProjectModal}
-            />
-          )}
-          {/* {section == "Similar Users" && (
+					{section == "Projects" && (
+						<ProjectSection
+							openModal={openModal}
+							profile={profile}
+							openProjectModal={openProjectModal}
+						/>
+					)}
+					{/* {section == "Similar Users" && (
             <ProfileCardList>
               {recommendations.slice(1, 5).map((item: Profile) => (
                 <ProfileCard profile={item} key={item.id} />
@@ -144,26 +136,35 @@ const Profile = ({ profile }: ProfileProps) => {
             </ProfileCardList>
           )} */}
 
-          {section == "About" && (
-            <AboutSection profile={profile} openModal={openModal} />
-          )}
-        </Container>
-      </>
-    );
-  }
+					{section == "About" && (
+						<AboutSection profile={profile} openModal={openModal} />
+					)}
+				</Container>
+			</>
+		);
+	}
 };
 
 export const getServerSideProps = async (context: any) => {
-  const res = await fetch(
-    `${server}/api/profiles/${context?.params?.username}/`
-  );
-  const profile = await res.json();
+	const res = await fetch(
+		`${server}/api/profiles/${context?.params?.username}/`
+	);
+	if (res.ok) {
+		const profile = await res.json();
 
-  return {
-    props: {
-      profile,
-    },
-  };
+		if (profile) {
+			return {
+				props: {
+					profile,
+				},
+			};
+		}
+	}
+
+	// Handle the case where the profile is not found
+	return {
+		notFound: true, // Returns a 404 page
+	};
 };
 
 export default Profile;
