@@ -149,10 +149,13 @@ export const getServerSideProps = async (context: any) => {
 	const res = await fetch(
 		`${server}/api/profiles/${context?.params?.username}/`
 	);
+	console.log(`Getting ${context?.params?.username}`);
 	if (res.ok) {
 		const profile = await res.json();
+		console.log("Successful res");
 
 		if (profile) {
+			console.log("Has profile");
 			return {
 				props: {
 					profile,
@@ -161,6 +164,7 @@ export const getServerSideProps = async (context: any) => {
 		}
 	}
 
+	console.log("Not found");
 	// Handle the case where the profile is not found
 	return {
 		notFound: true, // Returns a 404 page
