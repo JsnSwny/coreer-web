@@ -22,11 +22,11 @@ const Layout = ({ children }: LayoutProps) => {
 	const router = useRouter();
 	const [showHeader, setShowHeader] = useState(user && user.onboarded);
 
-	useEffect(() => {
-		if (user && !user.onboarded && !router.pathname.includes("/onboarding")) {
-			router.push("/onboarding/personal-details");
-		}
-	}, [user]);
+	// useEffect(() => {
+	// 	if (user && !user.onboarded && !router.pathname.includes("/onboarding")) {
+	// 		router.push("/onboarding/personal-details");
+	// 	}
+	// }, [user]);
 
 	const isLanding = !user && router.pathname == "/";
 	const isOnboarded = user && user.onboarded;
