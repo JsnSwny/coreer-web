@@ -38,6 +38,10 @@ const Profile = ({ profile }: ProfileProps) => {
 		profile = user!.id == profile?.id ? user : profile;
 	}
 
+	console.log("Profile:");
+
+	console.log(profile);
+
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [modalItem, setModalItem] = useState(null);
 	const [activeSection, setActiveSection] = useState<ActiveSectionProps | null>(
@@ -149,13 +153,15 @@ export const getServerSideProps = async (context: any) => {
 	const res = await fetch(
 		`${server}/api/profiles/${context?.params?.username}/`
 	);
-	console.log(`Getting ${context?.params?.username}`);
+
+	console.log("Params:");
+	console.log(context?.params?.username);
+
 	if (res.ok) {
 		const profile = await res.json();
-		console.log("Successful res");
-
 		if (profile) {
-			console.log("Has profile");
+			console.log("Found profile");
+			console.log(profile);
 			return {
 				props: {
 					profile,
@@ -164,7 +170,8 @@ export const getServerSideProps = async (context: any) => {
 		}
 	}
 
-	console.log("Not found");
+	console.log("Did not find profile");
+
 	// Handle the case where the profile is not found
 	return {
 		notFound: true, // Returns a 404 page

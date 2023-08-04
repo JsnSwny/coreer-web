@@ -196,6 +196,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 	useEffect(() => {
 		const accessToken = localStorage.getItem("token");
 		if (accessToken) {
+			console.log("Fetching user");
 			fetchUser(accessToken);
 		} else setTokenLoading(false);
 	}, []);
