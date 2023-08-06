@@ -17,7 +17,6 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-	console.log("Loading layout");
 	const { user, tokenLoading } = useAuth();
 	const router = useRouter();
 

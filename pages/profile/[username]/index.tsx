@@ -19,10 +19,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Profile } from "@/interfaces/profile.model";
 import { Project } from "@/interfaces/project.model";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface ProfileProps {
 	profile: Profile | null;
@@ -33,26 +31,16 @@ interface ActiveSectionProps {
 	description?: string;
 }
 
-const ProfilePage = () => {
+const ProfilePage = ({ profile }: ProfileProps) => {
 	const { user } = useAuth();
 
-	const router = useRouter();
+	if (user) {
+		profile = user!.id == profile?.id ? user : profile;
+	}
 
-	const [profile, setProfile] = useState<Profile | null>(null);
-	const [loading, setLoading] = useState(true);
+	console.log("Profile:");
 
-	useEffect(() => {
-		const { username } = router.query;
-		if (user && username == user.username) {
-			setProfile(user);
-		} else {
-			axios
-				.get(`${server}/api/profiles/${username}/`)
-				.then((res) => setProfile(res.data))
-				.catch((err) => console.log(err))
-				.finally(() => setLoading(false));
-		}
-	}, [user, router.query]);
+	console.log(profile);
 
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [modalItem, setModalItem] = useState(null);
@@ -87,7 +75,7 @@ const ProfilePage = () => {
 	};
 
 	if (!profile) {
-		return <h1>Loading profile</h1>;
+		return <h1>Profile not found</h1>;
 	} else {
 		return (
 			<>
@@ -159,6 +147,38 @@ const ProfilePage = () => {
 			</>
 		);
 	}
+};
+
+export const getServerSideProps = async (context: any) => {
+	console.log("Context:");
+	console.log(context);
+
+	const res = await fetch(
+		`${server}/api/profiles/${context?.params?.username}/`
+	);
+
+	console.log("Params:");
+	console.log(context?.params?.username);
+
+	if (res.ok) {
+		const profile = await res.json();
+		if (profile) {
+			console.log("Found profile");
+			console.log(profile);
+			return {
+				props: {
+					profile,
+				},
+			};
+		}
+	}
+
+	console.log("Did not find profile");
+
+	// Handle the case where the profile is not found
+	return {
+		notFound: true, // Returns a 404 page
+	};
 };
 
 export default ProfilePage;
