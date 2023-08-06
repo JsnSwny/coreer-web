@@ -17,16 +17,9 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-	const apiKey = process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY;
+	console.log("Loading layout");
 	const { user, tokenLoading } = useAuth();
 	const router = useRouter();
-	const [showHeader, setShowHeader] = useState(user && user.onboarded);
-
-	// useEffect(() => {
-	// 	if (user && !user.onboarded && !router.pathname.includes("/onboarding")) {
-	// 		router.push("/onboarding/personal-details");
-	// 	}
-	// }, [user]);
 
 	const isLanding = !user && router.pathname == "/";
 	const isOnboarded = user && user.onboarded;

@@ -6,10 +6,10 @@ export default function Document() {
 	return (
 		<Html lang="en">
 			<Head />
-			<script
+			{/* <script
 				async
 				src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`}
-			></script>
+			></script> */}
 			<body>
 				<Main />
 				<NextScript />
