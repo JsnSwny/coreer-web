@@ -31,7 +31,7 @@ interface ActiveSectionProps {
 	description?: string;
 }
 
-const Profile = ({ profile }: ProfileProps) => {
+const ProfilePage = ({ profile }: ProfileProps) => {
 	const { user } = useAuth();
 
 	if (user) {
@@ -149,7 +149,6 @@ const Profile = ({ profile }: ProfileProps) => {
 	}
 };
 
-console.log("Before get server side props");
 export const getServerSideProps = async (context: any) => {
 	console.log("Context:");
 	console.log(context);
@@ -182,4 +181,4 @@ export const getServerSideProps = async (context: any) => {
 	};
 };
 
-export default Profile;
+export default ProfilePage;
