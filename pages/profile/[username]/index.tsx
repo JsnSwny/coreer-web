@@ -149,6 +149,7 @@ const Profile = ({ profile }: ProfileProps) => {
 	}
 };
 
+console.log("Before get server side props");
 export const getServerSideProps = async (context: any) => {
 	console.log("Context:");
 	console.log(context);

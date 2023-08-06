@@ -6,8 +6,12 @@ import { ConversationProvider } from "@/contexts/ConversationContext";
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
-		<Layout>
-			<Component {...pageProps} />
-		</Layout>
+		<AuthProvider>
+			<ConversationProvider>
+				<Layout>
+					<Component {...pageProps} />
+				</Layout>
+			</ConversationProvider>
+		</AuthProvider>
 	);
 }
