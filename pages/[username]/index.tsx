@@ -150,6 +150,9 @@ const Profile = ({ profile }: ProfileProps) => {
 };
 
 export const getServerSideProps = async (context: any) => {
+	console.log("Context:");
+	console.log(context);
+
 	const res = await fetch(
 		`${server}/api/profiles/${context?.params?.username}/`
 	);
