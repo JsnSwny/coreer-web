@@ -19,8 +19,10 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Profile } from "@/interfaces/profile.model";
 import { Project } from "@/interfaces/project.model";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 import Head from "next/head";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 interface ProfileProps {
 	profile: Profile | null;
@@ -31,16 +33,26 @@ interface ActiveSectionProps {
 	description?: string;
 }
 
-const ProfilePage = ({ profile }: ProfileProps) => {
+const ProfilePage = () => {
 	const { user } = useAuth();
 
-	if (user) {
-		profile = user!.id == profile?.id ? user : profile;
-	}
+	const router = useRouter();
 
-	console.log("Profile:");
+	const [profile, setProfile] = useState<Profile | null>(null);
+	const [loading, setLoading] = useState(true);
 
-	console.log(profile);
+	useEffect(() => {
+		const { username } = router.query;
+		if (user && username == user.username) {
+			setProfile(user);
+		} else {
+			axios
+				.get(`${server}/api/profiles/${username}/`)
+				.then((res) => setProfile(res.data))
+				.catch((err) => console.log(err))
+				.finally(() => setLoading(false));
+		}
+	}, [user, router.query]);
 
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [modalItem, setModalItem] = useState(null);
@@ -75,7 +87,7 @@ const ProfilePage = ({ profile }: ProfileProps) => {
 	};
 
 	if (!profile) {
-		return <h1>Profile not found</h1>;
+		return <h1>Loading profile</h1>;
 	} else {
 		return (
 			<>
@@ -147,38 +159,6 @@ const ProfilePage = ({ profile }: ProfileProps) => {
 			</>
 		);
 	}
-};
-
-export const getServerSideProps = async (context: any) => {
-	console.log("Context:");
-	console.log(context);
-
-	const res = await fetch(
-		`${server}/api/profiles/${context?.params?.username}/`
-	);
-
-	console.log("Params:");
-	console.log(context?.params?.username);
-
-	if (res.ok) {
-		const profile = await res.json();
-		if (profile) {
-			console.log("Found profile");
-			console.log(profile);
-			return {
-				props: {
-					profile,
-				},
-			};
-		}
-	}
-
-	console.log("Did not find profile");
-
-	// Handle the case where the profile is not found
-	return {
-		notFound: true, // Returns a 404 page
-	};
 };
 
 export default ProfilePage;
