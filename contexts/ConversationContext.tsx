@@ -87,12 +87,12 @@ export const ConversationProvider: React.FC<ConversationProviderProps> = ({
 		}
 	};
 
-	useEffect(() => {
-		if (userToken) {
-			getConversations();
-			getLikes();
-		}
-	}, [userToken]);
+	// useEffect(() => {
+	// 	if (userToken) {
+	// 		getConversations();
+	// 		getLikes();
+	// 	}
+	// }, [userToken]);
 
 	return (
 		<ConversationContext.Provider
