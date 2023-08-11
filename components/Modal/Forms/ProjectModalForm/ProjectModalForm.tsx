@@ -118,7 +118,7 @@ const ProjectModalForm = ({ closeModal, item }: ModalFormProps) => {
 			project_link:
 				data.project_link && !/^https?:\/\//i.test(data.project_link)
 					? `https://${data.project_link}` // Prepend 'https://' if URL does not have a protocol
-					: data.repo_link,
+					: data.project_link,
 			repo_link:
 				data.repo_link && !/^https?:\/\//i.test(data.repo_link)
 					? `https://${data.repo_link}` // Prepend 'https://' if URL does not have a protocol
