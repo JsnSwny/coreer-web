@@ -1,4 +1,4 @@
-import Container from "@/components/Container/Container";
+import Container from "@/components/Container/Container/Container";
 import styles from "./SettingsWrapper.module.scss";
 import SettingsSection from "../SettingsSection/SettingsSection";
 import SettingsNav from "../SettingsNav/SettingsNav";

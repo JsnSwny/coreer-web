@@ -6,7 +6,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import globalStyles from "@/styles/globalStyles.module.scss";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button/Button/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";

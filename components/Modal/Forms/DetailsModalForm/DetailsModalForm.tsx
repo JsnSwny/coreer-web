@@ -1,7 +1,7 @@
 import globalStyles from "@/styles/globalStyles.module.scss";
 import { useAuth } from "@/contexts/AuthContext";
-import Button from "@/components/Button/Button";
-import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput";
+import Button from "@/components/Button/Button/Button";
+import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput/LocationSearchInput";
 import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";

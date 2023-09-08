@@ -1,4 +1,4 @@
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button/Button/Button";
 import { useAuth } from "@/contexts/AuthContext";
 import { Profile } from "@/interfaces/profile.model";
 import { chatHrefConstructor } from "@/utils/chatHrefConstructor";

@@ -1,4 +1,4 @@
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button/Button/Button";
 import globalStyles from "@/styles/globalStyles.module.scss";
 import styles from "./Actions.module.scss";
 

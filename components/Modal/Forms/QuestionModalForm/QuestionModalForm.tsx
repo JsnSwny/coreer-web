@@ -2,14 +2,14 @@ import globalStyles from "@/styles/globalStyles.module.scss";
 import Modal from "../../Modal/Modal";
 import { ChangeEvent, useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button/Button/Button";
 import PlacesAutocomplete from "react-places-autocomplete";
 import {
 	geocodeByAddress,
 	geocodeByPlaceId,
 	getLatLng,
 } from "react-places-autocomplete";
-import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput";
+import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput/LocationSearchInput";
 import Select from "react-select";
 import { server } from "@/config";
 import axios from "axios";

@@ -21,7 +21,7 @@ const TagsList = ({
 			className={`${styles.container} ${className} ${fade ? styles.fade : ""}`}
 		>
 			{tags
-				.sort((a, b) => b.highlight - a.highlight)
+				.sort((a, b) => (b.highlight ? 1 : -1))
 				.map((tag, idx) => (
 					<Tag key={idx} tag={tag} small={small} />
 				))}

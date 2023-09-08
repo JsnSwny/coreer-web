@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 import globalStyles from "@/styles/globalStyles.module.scss";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button/Button/Button";
 import Link from "next/link";
 import LoadingOverlay from "@/components/Layout/LoadingOverlay/LoadingOverlay";
 import { useForm } from "react-hook-form";

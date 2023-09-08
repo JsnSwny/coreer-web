@@ -4,7 +4,7 @@ import styles from "./PersonalDetails.module.scss";
 import { useRouter } from "next/router";
 import Actions from "../Actions/Actions";
 import { useAuth } from "@/contexts/AuthContext";
-import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput";
+import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput/LocationSearchInput";
 import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";

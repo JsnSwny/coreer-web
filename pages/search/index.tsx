@@ -1,15 +1,13 @@
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { server } from "@/config";
-import Container from "@/components/Container/Container";
+import Container from "@/components/Container/Container/Container";
 import ProfileCardList from "@/components/Card/ProfileCardList/ProfileCardList";
 import ProfileCard from "@/components/Card/ProfileCard/ProfileCard";
 import { Profile } from "@/interfaces/profile.model";
-import SearchFilters from "@/components/Search/SearchFilters/SearchFilters";
 import styles from "./index.module.scss";
 import Pagination from "@/components/Pagination/Pagination";
 import Head from "next/head";
-import withAuth from "@/components/Route/withAuth";
 
 interface SearchResult {
 	results: Profile[];

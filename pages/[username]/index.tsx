@@ -1,5 +1,5 @@
-import Button from "@/components/Button/Button";
-import Container from "@/components/Container/Container";
+import Button from "@/components/Button/Button/Button";
+import Container from "@/components/Container/Container/Container";
 import DetailsModalForm from "@/components/Modal/Forms/DetailsModalForm/DetailsModalForm";
 import EducationModalForm from "@/components/Modal/Forms/EducationModalForm/EducationModalForm";
 import InterestsModalForm from "@/components/Modal/Forms/InterestsModalForm/InterestsModalForm";

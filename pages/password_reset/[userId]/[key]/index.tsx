@@ -1,4 +1,4 @@
-import Container from "@/components/Container/Container";
+import Container from "@/components/Container/Container/Container";
 import ChangePasswordForm from "@/components/Layout/Settings/ChangePasswordForm/ChangePasswordForm";
 import { useRouter } from "next/router";
 

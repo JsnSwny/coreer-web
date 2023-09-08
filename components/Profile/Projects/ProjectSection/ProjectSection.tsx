@@ -1,4 +1,4 @@
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button/Button/Button";
 import Projects from "../Projects/Projects";
 import { Profile } from "@/interfaces/profile.model";
 import { useAuth } from "@/contexts/AuthContext";

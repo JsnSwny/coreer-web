@@ -2,24 +2,24 @@ import globalStyles from "@/styles/globalStyles.module.scss";
 import Modal from "../../Modal/Modal";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button/Button/Button";
 import {
 	WorkExperience,
 	WorkExperienceRequest,
 } from "@/interfaces/work_experiences.model";
-import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
+import DateRangeInput from "../../../Forms/Inputs/DateRangeInput/DateRangeInput";
 import { format, parseISO } from "date-fns";
 import {
 	addExperience,
 	deleteExperience,
 	updateExperience,
 } from "@/api/experiences";
-import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput";
+import LocationSearchInput from "@/components/Forms/Inputs/LocationSearchInput/LocationSearchInput";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
 import FormError from "@/components/Forms/Error/FormError";
-import DescriptionInput from "../../Inputs/DescriptionInput/DescriptionInput";
+import DescriptionInput from "../../../Forms/Inputs/DescriptionInput/DescriptionInput";
 
 interface ModalFormProps {
 	closeModal: () => void;

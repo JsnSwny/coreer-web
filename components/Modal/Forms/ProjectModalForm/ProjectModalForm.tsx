@@ -2,9 +2,9 @@ import globalStyles from "@/styles/globalStyles.module.scss";
 import Modal from "../../Modal/Modal";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button/Button/Button";
 import { Project, ProjectRequest } from "@/interfaces/project.model";
-import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
+import DateRangeInput from "../../../Forms/Inputs/DateRangeInput/DateRangeInput";
 import { format, parseISO } from "date-fns";
 import { addProject, deleteProject, updateProject } from "@/api/projects";
 
@@ -17,9 +17,9 @@ import { Skill } from "@/interfaces/language.model";
 import axios from "axios";
 import { useEffect } from "react";
 import { server } from "@/config";
-import GalleryInput from "../../Inputs/GalleryInput/GalleryInput";
+import GalleryInput from "@/components/Forms/Inputs/GalleryInput/GalleryInput";
 import { ProjectImage } from "@/interfaces/project.model";
-import DescriptionInput from "../../Inputs/DescriptionInput/DescriptionInput";
+import DescriptionInput from "../../../Forms/Inputs/DescriptionInput/DescriptionInput";
 
 interface ModalFormProps {
 	closeModal: () => void;

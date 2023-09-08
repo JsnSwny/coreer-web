@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ImageUploadButton from "../ImageUploadButton/ImageUploadButton";
 import globalStyles from "@/styles/globalStyles.module.scss";
 import styles from "./GalleryInput.module.scss";

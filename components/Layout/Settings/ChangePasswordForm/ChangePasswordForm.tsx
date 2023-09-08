@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button/Button/Button";
 import axios from "axios";
 import { server } from "@/config";
 import { useAuth } from "@/contexts/AuthContext";

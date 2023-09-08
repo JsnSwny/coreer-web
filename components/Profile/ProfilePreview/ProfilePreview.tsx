@@ -1,7 +1,7 @@
 import TagsList from "@/components/Tags/TagsList/TagsList";
 import styles from "./ProfilePreview.module.scss";
 import { useAuth } from "@/contexts/AuthContext";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button/Button/Button";
 import {
 	faArrowLeft,
 	faArrowRight,

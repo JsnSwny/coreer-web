@@ -1,4 +1,4 @@
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button/Button/Button";
 import { Project } from "@/interfaces/project.model";
 import {
 	faMapPin,

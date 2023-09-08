@@ -1,8 +1,6 @@
 import { Controller } from "react-hook-form";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
-import Head from "next/head";
 import "highlight.js/styles/monokai-sublime.css";
 import hljs from "highlight.js";
 

@@ -1,6 +1,6 @@
 import Header from "@/components/Header/Header/Header";
 import styles from "./LandingPage.module.scss";
-import Container from "@/components/Container/Container";
+import Container from "@/components/Container/Container/Container";
 import Hero from "../Hero/Hero";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

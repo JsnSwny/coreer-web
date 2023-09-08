@@ -9,13 +9,13 @@ import {
 	faMessage,
 	faStar,
 } from "@fortawesome/free-solid-svg-icons";
-import Container from "../Container";
+import Container from "../Container/Container";
 import { Profile } from "@/interfaces/profile.model";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { server } from "@/config";
 import { Project } from "@/interfaces/project.model";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button/Button/Button";
 import { useAuth } from "@/contexts/AuthContext";
 import { likeUser } from "@/utils/likeUser";
 import { chatHrefConstructor } from "@/utils/chatHrefConstructor";

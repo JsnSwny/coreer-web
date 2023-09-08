@@ -2,7 +2,7 @@ import globalStyles from "@/styles/globalStyles.module.scss";
 import Modal from "../../Modal/Modal";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button/Button/Button";
 import AsyncSelect from "react-select/async";
 import { server } from "@/config";
 import axios from "axios";
@@ -12,7 +12,7 @@ import {
 	School,
 } from "@/interfaces/education.model";
 import { ActionMeta } from "react-select";
-import DateRangeInput from "../../Inputs/DateRangeInput/DateRangeInput";
+import DateRangeInput from "../../../Forms/Inputs/DateRangeInput/DateRangeInput";
 import { format, parseISO } from "date-fns";
 import {
 	addEducation,
@@ -23,7 +23,7 @@ import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from "@/components/Forms/Error/FormError";
-import DescriptionInput from "../../Inputs/DescriptionInput/DescriptionInput";
+import DescriptionInput from "../../../Forms/Inputs/DescriptionInput/DescriptionInput";
 
 interface ModalFormProps {
 	closeModal: () => void;

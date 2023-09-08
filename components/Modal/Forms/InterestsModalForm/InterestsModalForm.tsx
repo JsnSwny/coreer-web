@@ -1,7 +1,7 @@
 import globalStyles from "@/styles/globalStyles.module.scss";
 import { useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button/Button/Button";
 import { server } from "@/config";
 import axios from "axios";
 import TagSelector from "@/components/Auth/Onboarding/TagSelector/TagSelector/TagSelector";

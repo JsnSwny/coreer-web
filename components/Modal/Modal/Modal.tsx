@@ -3,7 +3,7 @@ import styles from "./Modal.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import globalStyles from "@/styles/globalStyles.module.scss";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button/Button/Button";
 import { useAuth } from "@/contexts/AuthContext";
 
 type ModalProps = {
