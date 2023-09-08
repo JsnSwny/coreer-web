@@ -12,7 +12,7 @@ import ProjectPlaceholder from "../Project/ProjectPlaceholder";
 
 interface ProjectsProps {
 	projects: ProjectModel[];
-	action: (title: string, description?: string, item?: ProjectModel) => void;
+	action?: (title: string, description?: string, item?: ProjectModel) => void;
 	isProfile?: boolean;
 	showEdit: boolean;
 	margin?: boolean;
