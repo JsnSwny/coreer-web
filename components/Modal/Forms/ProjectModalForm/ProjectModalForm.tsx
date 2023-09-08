@@ -1,24 +1,23 @@
-import globalStyles from "@/styles/globalStyles.module.scss";
-import Modal from "../../Modal/Modal";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { useAuth } from "@/contexts/AuthContext";
-import Button from "@/components/Button/Button/Button";
-import { Project, ProjectRequest } from "@/interfaces/project.model";
-import DateRangeInput from "../../../Forms/Inputs/DateRangeInput/DateRangeInput";
-import { format, parseISO } from "date-fns";
 import { addProject, deleteProject, updateProject } from "@/api/projects";
+import Button from "@/components/Button/Button/Button";
+import { useAuth } from "@/contexts/AuthContext";
+import { Project, ProjectRequest } from "@/interfaces/project.model";
+import globalStyles from "@/styles/globalStyles.module.scss";
+import { format, parseISO } from "date-fns";
+import { useState } from "react";
+import DateRangeInput from "../../../Forms/Inputs/DateRangeInput/DateRangeInput";
 
-import * as yup from "yup";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from "@/components/Forms/Error/FormError";
-import Select from "react-select";
+import GalleryInput from "@/components/Forms/Inputs/GalleryInput/GalleryInput";
+import { server } from "@/config";
 import { Skill } from "@/interfaces/language.model";
+import { ProjectImage } from "@/interfaces/project.model";
+import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import { useEffect } from "react";
-import { server } from "@/config";
-import GalleryInput from "@/components/Forms/Inputs/GalleryInput/GalleryInput";
-import { ProjectImage } from "@/interfaces/project.model";
+import { Controller, useForm } from "react-hook-form";
+import Select from "react-select";
+import * as yup from "yup";
 import DescriptionInput from "../../../Forms/Inputs/DescriptionInput/DescriptionInput";
 
 interface ModalFormProps {
