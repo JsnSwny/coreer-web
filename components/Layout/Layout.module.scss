@@ -11,7 +11,6 @@
 
 .main {
 	width: 100%;
-	margin-top: 2rem;
 	margin-bottom: 2rem;
 }
 
@@ -22,7 +21,7 @@
 }
 
 .unauthenticated {
-	margin-top: calc(64px + 2rem);
+	margin-top: calc(64px + 2rem) !important;
 }
 
 .landing {
